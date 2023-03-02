@@ -51,6 +51,13 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
-    "dotenv": "^16.0.3"
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@hookform/resolvers": "^2.9.11",
+    "@mui/icons-material": "^5.11.11",
+    "@mui/material": "^5.11.11",
+    "dotenv": "^16.0.3",
+    "react-hook-form": "^7.43.3",
+    "yup": "^1.0.2"
   }
 }
