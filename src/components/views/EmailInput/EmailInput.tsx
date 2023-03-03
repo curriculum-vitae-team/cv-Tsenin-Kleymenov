@@ -1,7 +1,7 @@
 import { forwardRef } from 'react'
 import { TextField } from '@mui/material'
 
-import { IEmailInputProps } from './EmailInput.interface'
+import { IEmailInputProps } from './EmailInput.interfaces'
 
 export const EmailInput = forwardRef((props: IEmailInputProps, ref) => {
   return (

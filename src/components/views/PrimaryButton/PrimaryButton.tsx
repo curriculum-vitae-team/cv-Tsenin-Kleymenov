@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { Button } from '@mui/material'
 
-import { IPrimaryButtonProps } from './PrimaryButton.interface'
+import { IPrimaryButtonProps } from './PrimaryButton.interfaces'
 
 export const PrimaryButton: FC<IPrimaryButtonProps> = ({ children }) => {
   return (

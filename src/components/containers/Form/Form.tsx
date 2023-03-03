@@ -11,7 +11,7 @@ import { PasswordInput } from '../../views/PasswordInput/PasswordInput'
 import { PrimaryButton } from '../../views/PrimaryButton/PrimaryButton'
 import { FormContainer } from '../Form/Form.styles'
 
-import { IFormProps, IFormValues } from './Form.interface'
+import { IFormProps, IFormValues } from './Form.interfaces'
 
 export const Form: FC<IFormProps> = ({ signFlag }) => {
   const {

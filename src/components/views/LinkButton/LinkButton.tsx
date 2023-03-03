@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from '@mui/material'
 
-import { ILinkButtonProps } from './LinkButton.interface'
+import { ILinkButtonProps } from './LinkButton.interfaces'
 
 export const LinkButton: FC<ILinkButtonProps> = ({ children, to }) => {
   return (
