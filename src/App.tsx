@@ -1,12 +1,17 @@
-import { FC } from 'react'
+import React, { FC, Suspense } from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
-import SignUpPage from './pages/SignUpPage'
+const UnauthenticatedApp = React.lazy(async () => await import('./UnauthenticatedApp'))
 
 const App: FC = () => {
   return (
-    <div>
-      <SignUpPage />
-    </div>
+    <Suspense>
+      <BrowserRouter>
+        <Routes>
+          <Route path="*" element={<UnauthenticatedApp />} />
+        </Routes>
+      </BrowserRouter>
+    </Suspense>
   )
 }
 

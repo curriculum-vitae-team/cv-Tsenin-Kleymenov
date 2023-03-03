@@ -3,7 +3,7 @@ import { FC } from 'react'
 import { AuthHeader } from '../../components/containers/AuthHeader'
 import HeaderWrapper from '../../components/views/HeaderWrapper'
 
-const SignUpPage: FC = () => {
+const SignInPage: FC = () => {
   return (
     <HeaderWrapper>
       <AuthHeader />
@@ -11,4 +11,4 @@ const SignUpPage: FC = () => {
   )
 }
 
-export default SignUpPage
+export default SignInPage
