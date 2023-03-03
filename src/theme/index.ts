@@ -23,6 +23,24 @@ export const theme = createTheme({
           height: `${sizes.headerSize}px`
         }
       }
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          color: '#fff',
+          fontSize: '14px'
+        }
+      }
+    },
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          color: '#fff',
+          fontSize: '14px',
+          padding: '12px 16px',
+          minWidth: '150px'
+        }
+      }
     }
   }
 })
