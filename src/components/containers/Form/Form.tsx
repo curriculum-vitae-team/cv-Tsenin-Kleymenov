@@ -48,7 +48,11 @@ export const Form: FC<IFormProps> = ({ signFlag }) => {
         />
         <PrimaryButton>{signFlag ? 'SIGN UP' : 'SIGN IN'}</PrimaryButton>
       </form>
-      <LinkButton>{signFlag ? 'I have an account' : 'RESET PASSWORD'}</LinkButton>
+      {signFlag ? (
+        <LinkButton to={'/login'}>I have an account</LinkButton>
+      ) : (
+        <LinkButton to={'/signup'}>RESET PASSWORD</LinkButton>
+      )}
     </FormContainer>
   )
 }

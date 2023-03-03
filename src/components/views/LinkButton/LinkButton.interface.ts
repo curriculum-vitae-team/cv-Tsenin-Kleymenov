@@ -1,3 +1,4 @@
 export interface ILinkButtonProps {
-   children: string
- }
+  children: string
+  to: string
+}
