@@ -1,4 +1,4 @@
-export interface IPrimaryButtonProps{
-   children: string
- }
- 
+export interface IPrimaryButtonProps {
+  children: string
+  disabled?: boolean
+}

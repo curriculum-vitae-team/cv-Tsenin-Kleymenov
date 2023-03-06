@@ -3,9 +3,16 @@ import { Button } from '@mui/material'
 
 import { IPrimaryButtonProps } from './PrimaryButton.interfaces'
 
-export const PrimaryButton: FC<IPrimaryButtonProps> = ({ children }) => {
+export const PrimaryButton: FC<IPrimaryButtonProps> = ({ children, disabled }) => {
   return (
-    <Button sx={{ my: 2, p: 1 }} type="submit" fullWidth variant="contained" color="primary">
+    <Button
+      disabled={disabled}
+      sx={{ my: 2, p: 1 }}
+      type="submit"
+      fullWidth
+      variant="contained"
+      color="primary"
+    >
       {children}
     </Button>
   )

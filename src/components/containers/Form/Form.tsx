@@ -3,9 +3,9 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import { schema } from '../../../constants/formShemaOptions'
-import { EmailInput } from '../../views/EmailInput/EmailInput'
 import { FormSubtitle } from '../../views/FormSubtitle/FormSubtitle'
 import { FormTitle } from '../../views/FormTitle/FormTitle'
+import { Input } from '../../views/Input/Input'
 import { LinkButton } from '../../views/LinkButton/LinkButton'
 import { PasswordInput } from '../../views/PasswordInput/PasswordInput'
 import { PrimaryButton } from '../../views/PrimaryButton/PrimaryButton'
@@ -21,7 +21,7 @@ export const Form: FC<IFormProps> = ({ signFlag }) => {
   } = useForm<IFormValues>({ mode: 'onBlur', resolver: yupResolver(schema) })
 
   const onSubmit: SubmitHandler<IFormValues> = data => {
-    return data
+    console.log(data)
   }
 
   return (
@@ -31,7 +31,7 @@ export const Form: FC<IFormProps> = ({ signFlag }) => {
         {signFlag ? 'Welcome! Sign up to continue' : 'Hello again! Sign in to continue'}
       </FormSubtitle>
       <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
-        <EmailInput
+        <Input
           type="email"
           label="Email"
           error={!!errors.email}
