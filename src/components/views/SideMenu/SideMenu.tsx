@@ -11,7 +11,7 @@ import { SideMenuItem } from '../SideMenuItem/SideMenuItem'
 
 import { SideMenu, SideMenuBurgerButton, SideMenuCloseButton } from './SideMenu.styles'
 
-export const AppDrawer: FC = () => {
+export const AppSideMenu: FC = () => {
   const [open, setOpen] = useState<boolean>(false)
 
   const handleClose = (): void => {
@@ -24,8 +24,8 @@ export const AppDrawer: FC = () => {
 
   return (
     <>
-      <SideMenuBurgerButton>
-        <MenuIcon onClick={handleOpen} />
+      <SideMenuBurgerButton onClick={handleOpen}>
+        <MenuIcon />
       </SideMenuBurgerButton>
 
       <Drawer anchor="left" open={open}>
@@ -37,8 +37,16 @@ export const AppDrawer: FC = () => {
           </AppBar>
           <List>
             {Object.values(SIDE_MENU_ITEMS).map(item => {
-              const { text, icon: Icon } = item
-              return <SideMenuItem key={text} onClick={handleClose} text={text} Icon={Icon} />
+              const { text, route, icon: Icon } = item
+              return (
+                <SideMenuItem
+                  key={text}
+                  onClick={handleClose}
+                  text={text}
+                  route={route}
+                  Icon={Icon}
+                />
+              )
             })}
           </List>
           <Divider />

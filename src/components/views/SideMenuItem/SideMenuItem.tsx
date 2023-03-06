@@ -7,10 +7,10 @@ import ListItemText from '@mui/material/ListItemText'
 
 import { ISideMenuItem } from './SideMenuItem.interfaces'
 
-export const SideMenuItem: FC<ISideMenuItem> = ({ onClick, Icon, text }) => {
+export const SideMenuItem: FC<ISideMenuItem> = ({ onClick, Icon, route ,text}) => {
   return (
     <ListItem onClick={onClick} key={text} disablePadding>
-      <ListItemButton component={Link} to={`/${text}`}>
+      <ListItemButton component={Link} to={route}>
         <ListItemIcon>
           <Icon />
         </ListItemIcon>
