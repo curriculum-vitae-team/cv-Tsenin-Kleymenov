@@ -3,27 +3,20 @@ import { NavLink } from 'react-router-dom'
 import { Tab } from '@mui/material'
 
 import { AppNavigationRoutes } from '../../../constants/paths'
+import AppTabs from '../AppTabs'
 
-import { HeaderTabs } from './index.styles'
+import { HeaderTabsWrapper } from './index.styles'
 
 const AuthHeader: FC = () => {
-  const [value, setValue] = useState<string>('login')
-
-  const handleChange = (_: React.SyntheticEvent, newValue: string): void => {
-    setValue(newValue)
-  }
+  const [tab, setTab] = useState<string>('login')
 
   return (
-    <HeaderTabs
-      value={value}
-      onChange={handleChange}
-      aria-label="Navigation"
-      indicatorColor="secondary"
-      textColor="secondary"
-    >
-      <Tab label="Login" value="login" component={NavLink} to={AppNavigationRoutes.SignIn} />
-      <Tab label="SignUp" value="signUp" component={NavLink} to={AppNavigationRoutes.SignUp} />
-    </HeaderTabs>
+    <HeaderTabsWrapper>
+      <AppTabs textColor="secondary" tab={tab} setTab={setTab}>
+        <Tab label="Login" value="login" component={NavLink} to={AppNavigationRoutes.SignIn} />
+        <Tab label="SignUp" value="signUp" component={NavLink} to={AppNavigationRoutes.SignUp} />
+      </AppTabs>
+    </HeaderTabsWrapper>
   )
 }
 

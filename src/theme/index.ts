@@ -4,7 +4,7 @@ import { sizes } from '../constants/sizes'
 
 export const theme = createTheme({
   typography: {
-    fontFamily: 'Poppins, sans-serif',
+    fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
     fontSize: 16
   },
   palette: {
@@ -37,8 +37,15 @@ export const theme = createTheme({
         root: {
           color: '#fff',
           fontSize: '14px',
-          padding: '12px 16px',
-          minWidth: '150px'
+          minWidth: '150px',
+
+          '&.Mui-selected': {
+            fontWeight: '600'
+          }
+        },
+        textColorInherit: {
+          opacity: 0.9,
+          color: 'rgb(46, 46, 46)'
         }
       }
     }
