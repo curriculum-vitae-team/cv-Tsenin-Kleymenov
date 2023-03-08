@@ -3,9 +3,9 @@ import { NavLink } from 'react-router-dom'
 import { Tab } from '@mui/material'
 
 import { AppNavigationRoutes } from '../../../constants/paths'
-import AppTabs from '../AppTabs'
+import AppTabs from '../AppTabs/AppTabs'
 
-import { HeaderTabsWrapper } from './index.styles'
+import { HeaderTabsWrapper } from './AuthHeader.styles'
 
 const AuthHeader: FC = () => {
   const [tab, setTab] = useState<string>('login')

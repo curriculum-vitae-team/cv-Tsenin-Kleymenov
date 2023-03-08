@@ -1,7 +1,7 @@
 import { FC } from 'react'
 
-import { Header } from './index.styles'
-import { IProps } from './type'
+import { IProps } from './HeaderWrapper.interfaces'
+import { Header } from './HeaderWrapper.styles'
 
 const HeaderWrapper: FC<IProps> = ({ children }) => {
   return <Header color="primary">{children}</Header>

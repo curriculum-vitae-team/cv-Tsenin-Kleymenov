@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Tab } from '@mui/material'
 
 import { AppNavigationRoutes } from '../../../constants/paths'
-import AppTabs from '../AppTabs'
+import AppTabs from '../AppTabs/AppTabs'
 
 const ProfileTabs: FC = () => {
   const [tab, setTab] = useState<string>('profile')
