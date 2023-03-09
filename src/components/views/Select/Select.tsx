@@ -1,9 +1,9 @@
-import { forwardRef } from 'react'
+import { FC, forwardRef } from 'react'
 import { MenuItem, TextField } from '@mui/material'
 
 import { IAppSelectProps } from './Select.interfaces'
 
-export const AppSelect = forwardRef((props: IAppSelectProps, ref) => {
+export const AppSelect: FC<IAppSelectProps> = forwardRef((props, ref) => {
   return (
     <TextField
       variant="outlined"
