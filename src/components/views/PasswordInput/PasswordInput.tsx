@@ -1,11 +1,11 @@
-import { forwardRef, useState } from 'react'
+import { FC, forwardRef, useState } from 'react'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import { IconButton, InputAdornment, TextField } from '@mui/material'
 
 import { IPasswordInputProps } from './PasswordInput.interfaces'
 
-export const PasswordInput = forwardRef((props: IPasswordInputProps, ref) => {
+export const PasswordInput:FC<IPasswordInputProps> = forwardRef((props, ref) => {
   const [showPassword, setShowPassword] = useState<boolean>(false)
 
   const handleClickShowPassword = (): void => setShowPassword(show => !show)
