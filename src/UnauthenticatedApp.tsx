@@ -2,8 +2,8 @@ import React, { FC } from 'react'
 import { Route, Routes } from 'react-router'
 import { Navigate } from 'react-router-dom'
 
-import AuthHeader from './components/containers/AuthHeader'
-import HeaderWrapper from './components/views/HeaderWrapper'
+import AuthHeader from './components/containers/AuthHeader/AuthHeader'
+import HeaderWrapper from './components/views/HeaderWrapper/HeaderWrapper'
 import { AppNavigationRoutes } from './constants/paths'
 
 const SignInPage = React.lazy(async () => await import('./pages/SignInPage'))
