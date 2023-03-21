@@ -4,8 +4,8 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { Container, Grid, Typography } from '@mui/material'
 
 import { ProfileSchema } from '../../../constants/profileShemaOptions'
+import { Button } from '../../views/Button/Button'
 import { Input } from '../../views/Input/Input'
-import { PrimaryButton } from '../../views/PrimaryButton/PrimaryButton'
 import { AppSelect } from '../../views/Select/Select'
 
 import { IFormValues } from './EmployeeProfileForm.interfaces'
@@ -22,50 +22,56 @@ export const EmployeeProfile: FC = () => {
   }
 
   return (
-    <>
-      <Container maxWidth="md">
-        <Typography>Arthur Tsenin</Typography>
-        <Typography>dgdgdgdggdgd.@gmail.com</Typography>
-        <Typography>23/12/2022</Typography>
-        <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
-          <Grid container spacing={2}>
-            <Grid item xs={6}>
-              <Input
-                type="text"
-                label="First Name"
-                placeholder=" Enter your First Name"
-                error={!!errors.firstName}
-                helperText={errors?.firstName?.message}
-                {...register('firstName')}
-              />
-              <AppSelect
-                label="Departmant"
-                error={!!errors.department}
-                helperText={errors?.department?.message}
-                {...register('department')}
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <Input
-                type="text"
-                label="Last Name"
-                placeholder=" Enter your Last Name"
-                error={!!errors.lastName}
-                helperText={errors?.lastName?.message}
-                {...register('lastName')}
-              />
-
-              <AppSelect
-                label="Position"
-                error={!!errors.position}
-                helperText={errors?.position?.message}
-                {...register('position')}
-              />
-              <PrimaryButton disabled={!isDirty && !isValid}>Confirm</PrimaryButton>
-            </Grid>
+    <Container maxWidth="md">
+      <Typography>Arthur Tsenin</Typography>
+      <Typography>dgdgdgdggdgd.@gmail.com</Typography>
+      <Typography>23/12/2022</Typography>
+      <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <Input
+              variant="outlined"
+              type="text"
+              label="First Name"
+              placeholder=" Enter your First Name"
+              error={!!errors.firstName}
+              helperText={errors?.firstName?.message}
+              {...register('firstName')}
+            />
+            <AppSelect
+              items={['Unit 1(JavaScript)', 'Unit 2(Java)', 'Unit 3(Python)']}
+              label="Departmant"
+              variant="standard"
+              error={!!errors.department}
+              helperText={errors?.department?.message}
+              {...register('department')}
+            />
           </Grid>
-        </form>
-      </Container>
-    </>
+          <Grid item xs={6}>
+            <Input
+              variant="outlined"
+              type="text"
+              label="Last Name"
+              placeholder=" Enter your Last Name"
+              error={!!errors.lastName}
+              helperText={errors?.lastName?.message}
+              {...register('lastName')}
+            />
+
+            <AppSelect
+              items={['Unit 1(JavaScript)', 'Unit 2(Java)', 'Unit 3(Python)']}
+              label="Position"
+              variant="outlined"
+              error={!!errors.position}
+              helperText={errors?.position?.message}
+              {...register('position')}
+            />
+            <Button type="submit" variant="contained" disabled={!isDirty && !isValid}>
+              Confirm
+            </Button>
+          </Grid>
+        </Grid>
+      </form>
+    </Container>
   )
 }

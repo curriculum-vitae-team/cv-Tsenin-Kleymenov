@@ -1,26 +1,27 @@
 import { FC, forwardRef } from 'react'
-import { MenuItem, TextField } from '@mui/material'
+import { MenuItem, TextField, TextFieldProps } from '@mui/material'
 
-import { IAppSelectProps } from './Select.interfaces'
-
-export const AppSelect: FC<IAppSelectProps> = forwardRef((props, ref) => {
-  return (
-    <TextField
-      variant="outlined"
-      margin="normal"
-      color="primary"
-      select
-      fullWidth
-      defaultValue={''}
-      inputRef={ref}
-      {...props}
-    >
-      <MenuItem disabled value={''}>
-        {props.label}
-      </MenuItem>
-      <MenuItem value={'Unit 1(JavaScript)'}>Unit 1(JavaScript)</MenuItem>
-      <MenuItem value={'Unit 2(Java)'}>Unit 2(Java)</MenuItem>
-      <MenuItem value={'Unit 3(Python)'}>Unit 3(Python)</MenuItem>
-    </TextField>
-  )
-})
+export const AppSelect: FC<TextFieldProps & { items: Array<string> }> = forwardRef(
+  ({ items, ...props }, ref) => {
+    return (
+      <TextField
+        margin="normal"
+        color="primary"
+        select
+        fullWidth
+        defaultValue={''}
+        inputRef={ref}
+        {...props}
+      >
+        <MenuItem disabled value={''}>
+          {props.label}
+        </MenuItem>
+        {items.map(item => (
+          <MenuItem key={item} value={item}>
+            {item}
+          </MenuItem>
+        ))}
+      </TextField>
+    )
+  }
+)
