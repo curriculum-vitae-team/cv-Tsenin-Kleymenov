@@ -46,12 +46,12 @@ export const Form: FC<IFormProps> = ({ signFlag }) => {
           helperText={errors?.password?.message}
           {...register('password')}
         />
-        <PrimaryButton>{signFlag ? 'SIGN UP' : 'SIGN IN'}</PrimaryButton>
+        <PrimaryButton>{signFlag ? 'Sign up' : 'Sign in'}</PrimaryButton>
       </form>
       {signFlag ? (
-        <LinkButton to={'/login'}>I have an account</LinkButton>
+        <LinkButton to="/login">I have an account</LinkButton>
       ) : (
-        <LinkButton to={'/signup'}>RESET PASSWORD</LinkButton>
+        <LinkButton to="/signup">Reset password</LinkButton>
       )}
     </FormContainer>
   )

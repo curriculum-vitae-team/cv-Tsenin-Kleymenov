@@ -1,9 +1,8 @@
 import { FC, forwardRef } from 'react'
 import { TextField } from '@mui/material'
+import { TextFieldProps } from '@mui/material'
 
-import { IInputProps } from './Input.interfaces'
-
-export const Input: FC<IInputProps> = forwardRef((props, ref) => {
+export const Input: FC<TextFieldProps> = forwardRef((props, ref) => {
   return (
     <TextField
       variant="outlined"

@@ -1,11 +1,11 @@
 import { FC, forwardRef, useState } from 'react'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
-import { IconButton, InputAdornment, TextField } from '@mui/material'
+import { IconButton, InputAdornment, TextFieldProps } from '@mui/material'
 
-import { IPasswordInputProps } from './PasswordInput.interfaces'
+import { Input } from '../Input/Input'
 
-export const PasswordInput:FC<IPasswordInputProps> = forwardRef((props, ref) => {
+export const PasswordInput: FC<TextFieldProps> = forwardRef((props, ref) => {
   const [showPassword, setShowPassword] = useState<boolean>(false)
 
   const handleClickShowPassword = (): void => setShowPassword(show => !show)
@@ -14,14 +14,9 @@ export const PasswordInput:FC<IPasswordInputProps> = forwardRef((props, ref) => 
   }
 
   return (
-    <TextField
-      variant="outlined"
-      margin="normal"
-      color="primary"
-      inputRef={ref}
-      fullWidth
+    <Input
       type={showPassword ? 'text' : 'password'}
-      {...props}
+      inputRef={ref}
       InputProps={{
         endAdornment: (
           <InputAdornment position="end">
@@ -35,6 +30,7 @@ export const PasswordInput:FC<IPasswordInputProps> = forwardRef((props, ref) => 
           </InputAdornment>
         )
       }}
+      {...props}
     />
   )
 })
