@@ -1,8 +1,6 @@
 import React, { FC, useState } from 'react'
-import Logout from '@mui/icons-material/Logout'
-import Divider from '@mui/material/Divider'
-import Menu from '@mui/material/Menu'
-import Typography from '@mui/material/Typography'
+import { Logout } from '@mui/icons-material'
+import { Divider, Menu, Typography } from '@mui/material'
 
 import { USER_MENU_ITEMS } from '../../../constants/userMenuItems'
 import { UserAvatar } from '../UserAvatar/UserAvatar'
@@ -12,7 +10,6 @@ import { PaperPropsUserMenu, UserMenuInfo } from './UserMenu.styles'
 
 export const UserMenu: FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
-  const open = Boolean(anchorEl)
 
   const handleOpen = (event: React.MouseEvent<HTMLElement>): void => {
     setAnchorEl(event.currentTarget)
@@ -30,9 +27,8 @@ export const UserMenu: FC = () => {
       </UserMenuInfo>
 
       <Menu
-        id="account-menu"
         anchorEl={anchorEl}
-        open={open}
+        open={!!anchorEl}
         onClose={handleClose}
         onClick={handleClose}
         PaperProps={{
@@ -42,12 +38,11 @@ export const UserMenu: FC = () => {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        {Object.values(USER_MENU_ITEMS).map(item => {
-          const { text, icon: Icon } = item
-          return <UserMenuItem key={text} onClick={handleClose} text={text} Icon={Icon} />
+        {Object.values(USER_MENU_ITEMS).map(({ route, text, icon: Icon }) => {
+          return <UserMenuItem key={text} route={route} text={text} Icon={Icon} />
         })}
         <Divider />
-        <UserMenuItem onClick={handleClose} text="Logout" Icon={Logout} />
+        <UserMenuItem route={USER_MENU_ITEMS.settings.route} text="Logout" Icon={Logout} />
       </Menu>
     </>
   )
