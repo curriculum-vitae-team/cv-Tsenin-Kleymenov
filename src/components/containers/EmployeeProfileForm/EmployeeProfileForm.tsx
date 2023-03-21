@@ -3,7 +3,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Container, Grid, Typography } from '@mui/material'
 
-import { ProfileSchema } from '../../../constants/profileShemaOptions'
+import { ProfileSchema } from '../../../constants/profileSchemaOptions'
 import { Button } from '../../views/Button/Button'
 import { Input } from '../../views/Input/Input'
 import { AppSelect } from '../../views/Select/Select'

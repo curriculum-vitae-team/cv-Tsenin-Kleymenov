@@ -12,7 +12,7 @@ const AuthHeader: FC = () => {
 
   return (
     <HeaderTabsWrapper>
-      <AppTabs textColor="secondary" tab={tab} setTab={setTab}>
+      <AppTabs textColor="primary" tab={tab} setTab={setTab}>
         <Tab label="Login" value="login" component={NavLink} to={AppNavigationRoutes.SignIn} />
         <Tab label="SignUp" value="signUp" component={NavLink} to={AppNavigationRoutes.SignUp} />
       </AppTabs>

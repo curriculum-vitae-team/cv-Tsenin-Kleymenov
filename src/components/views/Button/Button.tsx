@@ -1,10 +1,12 @@
 import { FC } from 'react'
-import { Button as MuiButton, ButtonProps } from '@mui/material'
+import { Button as MuiButton, Typography } from '@mui/material'
 
-export const Button: FC<ButtonProps> = ({ children, ...props }) => {
+import { IButtonProps } from './Button.interfaces'
+
+export const Button: FC<IButtonProps> = ({ children, ...props }) => {
   return (
-    <MuiButton sx={{ my: 2, p: 1 }} fullWidth color="primary" {...props}>
-      {children}
+    <MuiButton sx={{ my: 2, p: 1 }} fullWidth {...props}>
+      <Typography>{children}</Typography>
     </MuiButton>
   )
 }

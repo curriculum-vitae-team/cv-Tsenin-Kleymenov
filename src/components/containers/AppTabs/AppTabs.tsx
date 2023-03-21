@@ -9,7 +9,7 @@ const AppTabs: FC<IProps> = ({ children, textColor, tab, setTab }) => {
   }
 
   return (
-    <Tabs value={tab} onChange={handleChange} indicatorColor="secondary" textColor={textColor}>
+    <Tabs value={tab} onChange={handleChange} indicatorColor="primary" textColor={textColor}>
       {children}
     </Tabs>
   )
