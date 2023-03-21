@@ -6,7 +6,7 @@ import { IUserMenuItem } from './UserMenuItem.interfaces'
 
 export const UserMenuItem: FC<IUserMenuItem> = ({ route, Icon, text }) => {
   return (
-    <MenuItem component={Link} to={`/${route}`}>
+    <MenuItem component={Link} to={route}>
       <ListItemIcon>
         <Icon />
       </ListItemIcon>
