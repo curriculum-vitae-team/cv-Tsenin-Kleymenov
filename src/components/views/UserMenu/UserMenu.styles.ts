@@ -1,5 +1,5 @@
 import { styled } from '@mui/material'
-import Box from '@mui/material/Box'
+import { Box } from '@mui/material'
 
 export const UserMenuInfo = styled(Box)({
   display: 'flex',
@@ -9,8 +9,12 @@ export const UserMenuInfo = styled(Box)({
   }
 })
 
+export const MenuContainer = styled('div')({
+  display: 'flex'
+})
+
 export const PaperPropsUserMenu = {
-  minWidth: 200,
+  minWidth: 170,
   overflow: 'visible',
   filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
   mt: 1.5,
@@ -33,4 +37,3 @@ export const PaperPropsUserMenu = {
     zIndex: 0
   }
 }
-

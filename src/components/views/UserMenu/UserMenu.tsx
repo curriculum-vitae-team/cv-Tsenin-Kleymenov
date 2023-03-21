@@ -6,7 +6,7 @@ import { USER_MENU_ITEMS } from '../../../constants/userMenuItems'
 import { UserAvatar } from '../UserAvatar/UserAvatar'
 import { UserMenuItem } from '../UserMenuItem/UserMenuItem'
 
-import { PaperPropsUserMenu, UserMenuInfo } from './UserMenu.styles'
+import { MenuContainer, PaperPropsUserMenu, UserMenuInfo } from './UserMenu.styles'
 
 export const UserMenu: FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
@@ -20,12 +20,11 @@ export const UserMenu: FC = () => {
   }
 
   return (
-    <>
+    <MenuContainer>
       <UserMenuInfo onClick={handleOpen}>
         <Typography variant="h6">USER_EMAIL</Typography>
         <UserAvatar />
       </UserMenuInfo>
-
       <Menu
         anchorEl={anchorEl}
         open={!!anchorEl}
@@ -43,6 +42,6 @@ export const UserMenu: FC = () => {
         <Divider />
         <UserMenuItem route={USER_MENU_ITEMS.settings.route} text="Logout" Icon={Logout} />
       </Menu>
-    </>
+    </MenuContainer>
   )
 }
