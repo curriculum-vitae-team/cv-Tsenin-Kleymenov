@@ -2,14 +2,14 @@ import { FC, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import CloseIcon from '@mui/icons-material/Close'
 import FileUploadIcon from '@mui/icons-material/FileUpload'
-import { Avatar, Box, Grid, Typography } from '@mui/material'
-import { IconButton } from '@mui/material'
+import { Avatar, Box, Grid, IconButton, Typography } from '@mui/material'
 
 import { EmployeeAvatarAlert } from './EmployeeAvatarAlert/EmployeeAvatarAlert'
 import { AvatarWrapper, DropZone } from './EmployeeAvatarUpload.styles'
 
 export const EmployeeAvatarUpload: FC = () => {
   const [files, setFiles] = useState<(File & { preview: string })[]>([])
+
   const { getRootProps, getInputProps, fileRejections } = useDropzone({
     accept: {
       'image/*': ['.png', '.jpg', '.gif']
@@ -27,10 +27,8 @@ export const EmployeeAvatarUpload: FC = () => {
     }
   })
 
-  const removeFile = (file: File & { preview: string }) => () => {
-    const newFiles = [...files]
-    newFiles.splice(newFiles.indexOf(file), 1)
-    setFiles(newFiles)
+  const handleFileRemove = (file: File & { preview: string }) => () => {
+    setFiles(prevFiles => prevFiles.filter(prevFile => prevFile !== file))
   }
 
   const fileRejectionItems = fileRejections.map(({ file, errors }) => {
@@ -51,7 +49,7 @@ export const EmployeeAvatarUpload: FC = () => {
             files.map(file => (
               <AvatarWrapper key={file.name}>
                 <Avatar src={file.preview} sx={{ width: 150, height: 150, mb: 5 }} />
-                <IconButton onClick={removeFile(file)}>
+                <IconButton onClick={handleFileRemove(file)}>
                   <CloseIcon />
                 </IconButton>
               </AvatarWrapper>
