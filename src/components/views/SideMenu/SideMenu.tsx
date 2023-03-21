@@ -1,10 +1,7 @@
 import { FC, useState } from 'react'
 import CloseIcon from '@mui/icons-material/Close'
 import MenuIcon from '@mui/icons-material/Menu'
-import AppBar from '@mui/material/AppBar'
-import Divider from '@mui/material/Divider'
-import Drawer from '@mui/material/Drawer'
-import List from '@mui/material/List'
+import { AppBar, Divider, Drawer, List } from '@mui/material'
 
 import { SIDE_MENU_ITEMS } from '../../../constants/sideMenuItems'
 import { SideMenuItem } from '../SideMenuItem/SideMenuItem'
