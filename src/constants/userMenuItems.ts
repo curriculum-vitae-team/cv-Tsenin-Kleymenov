@@ -4,11 +4,15 @@ import Settings from '@mui/icons-material/Settings'
 export const USER_MENU_ITEMS = {
   profile: {
     text: 'Profile',
-    icon: AccountCircleIcon
+    route:'/profile',
+    icon: AccountCircleIcon,
+
   },
   settings: {
     text: 'Settings',
-    icon: Settings
+    route:'/settings',
+    icon: Settings,
+
   },
 
 }
