@@ -29,7 +29,7 @@ export const UserMenu: FC = () => {
       <Menu
         anchorEl={anchorEl}
         open={!!anchorEl}
-        onClick={handleClose}
+        onClose={handleClose}
         PaperProps={{
           elevation: 0,
           sx: PaperPropsUserMenu
