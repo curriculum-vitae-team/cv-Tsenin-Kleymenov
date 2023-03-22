@@ -9,10 +9,10 @@ export const theme = createTheme({
   },
   palette: {
     primary: {
-      main: '#2e2e2e'
+      main: '#c63031'
     },
     secondary: {
-      main: '#c63031'
+      main: '#2e2e2e'
     }
   },
   components: {
@@ -29,6 +29,9 @@ export const theme = createTheme({
         root: {
           color: '#fff',
           fontSize: '14px'
+        },
+        text: {
+          color: '#c63031'
         }
       }
     },
@@ -43,6 +46,7 @@ export const theme = createTheme({
             fontWeight: '600'
           }
         },
+
         textColorInherit: {
           opacity: 0.9,
           color: 'rgb(46, 46, 46)'

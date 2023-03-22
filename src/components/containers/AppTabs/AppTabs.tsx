@@ -1,15 +1,9 @@
 import { FC } from 'react'
-import { Tabs } from '@mui/material'
+import { Tabs, TabsProps } from '@mui/material'
 
-import { IProps } from './AppTabs.interfaces'
-
-const AppTabs: FC<IProps> = ({ children, textColor, tab, setTab }) => {
-  const handleChange = (_: React.SyntheticEvent, newTab: string): void => {
-    setTab(newTab)
-  }
-
+const AppTabs: FC<TabsProps> = ({ children, textColor, ...props }) => {
   return (
-    <Tabs value={tab} onChange={handleChange} indicatorColor="secondary" textColor={textColor}>
+    <Tabs indicatorColor="primary" textColor={textColor} {...props}>
       {children}
     </Tabs>
   )
