@@ -1,4 +1,4 @@
-import { Box, Paper, styled } from '@/mui/material'
+import { Box, Paper, styled } from '@mui/material'
 
 export const DropZone = styled(Paper)({
   '&:hover': {

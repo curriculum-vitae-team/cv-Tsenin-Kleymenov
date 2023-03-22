@@ -1,5 +1,5 @@
-import { styled } from '@/mui/material'
-import { Box } from '@/mui/material'
+import { styled } from '@mui/material'
+import { Box } from '@mui/material'
 
 export const UserMenuInfo = styled(Box)({
   display: 'flex',

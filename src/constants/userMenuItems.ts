@@ -1,5 +1,5 @@
-import AccountCircleIcon from '@/mui/icons-material/AccountCircle'
-import Settings from '@/mui/icons-material/Settings'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
+import Settings from '@mui/icons-material/Settings'
 
 export const USER_MENU_ITEMS = {
   profile: {
