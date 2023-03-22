@@ -3,8 +3,8 @@ import CloseIcon from '@mui/icons-material/Close'
 import MenuIcon from '@mui/icons-material/Menu'
 import { AppBar, Divider, Drawer, List } from '@mui/material'
 
-import { SIDE_MENU_ITEMS } from '../../../constants/sideMenuItems'
-import { SideMenuItem } from '../SideMenuItem/SideMenuItem'
+import { SideMenuItem } from '@/components/views/SideMenuItem/SideMenuItem'
+import { SIDE_MENU_ITEMS } from '@/constants/sideMenuItems'
 
 import { SideMenu, SideMenuBurgerButton, SideMenuCloseButton } from './SideMenu.styles'
 

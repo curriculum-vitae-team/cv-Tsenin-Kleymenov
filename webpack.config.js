@@ -3,6 +3,7 @@ require('dotenv').config()
 const Dotenv = require('dotenv-webpack')
 const HtmlWebPackPlugin = require('html-webpack-plugin')
 const ESLintPlugin = require('eslint-webpack-plugin')
+const path = require('path')
 
 module.exports = {
   entry: './src/index.tsx',
@@ -42,6 +43,9 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js']
+    extensions: ['.tsx', '.ts', '.js'],
+    alias: {
+      '@': resolve(__dirname, 'src/')
+    }
   }
 }

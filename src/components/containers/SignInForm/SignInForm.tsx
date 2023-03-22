@@ -2,11 +2,11 @@ import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
-import { schema } from '../../../constants/formSchemaOptions'
-import { IAuthFormValues } from '../../../types/AuthForm.interfaces'
-import { Button } from '../../views/Button/Button'
-import { Input } from '../../views/Input/Input'
-import { PasswordInput } from '../../views/PasswordInput/PasswordInput'
+import { IAuthFormValues } from '@/appTypes/AuthForm.interfaces'
+import { Button } from '@/components/views/Button/Button'
+import { Input } from '@/components/views/Input/Input'
+import { PasswordInput } from '@/components/views/PasswordInput/PasswordInput'
+import { schema } from '@/constants/formSchemaOptions'
 
 export const SignInForm: FC = () => {
   const {

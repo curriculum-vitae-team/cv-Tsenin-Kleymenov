@@ -1,6 +1,6 @@
 import { createTheme } from '@mui/material'
 
-import { sizes } from '../constants/sizes'
+import { sizes } from '@/constants/sizes'
 
 export const theme = createTheme({
   typography: {

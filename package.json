@@ -8,7 +8,8 @@
     "build": "webpack --config webpack.prod",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "format": "prettier --write ./**/*.{js,jsx,ts,tsx,css,md,json,html} --config ./.prettierrc"
   },
   "keywords": [],
   "author": "",
@@ -40,6 +41,7 @@
     "html-webpack-plugin": "^5.5.0",
     "husky": "^8.0.0",
     "lint-staged": "^13.1.2",
+    "prettier": "^2.8.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "style-loader": "^3.3.1",
@@ -57,9 +59,15 @@
     "@mui/icons-material": "^5.11.11",
     "@mui/material": "^5.11.11",
     "dotenv": "^16.0.3",
+    "react-dropzone": "^14.2.3",
     "react-hook-form": "^7.43.3",
-    "react-router-dom": "^6.8.2",
     "react-router": "^6.8.2",
+    "react-router-dom": "^6.8.2",
     "yup": "^1.0.2"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx,css,md,json,html}": [
+      "npm run lint"
+    ]
   }
 }

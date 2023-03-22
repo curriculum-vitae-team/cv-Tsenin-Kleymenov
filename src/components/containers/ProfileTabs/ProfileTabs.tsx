@@ -2,8 +2,8 @@ import { FC } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Tab } from '@mui/material'
 
-import { AppNavigationRoutes } from '../../../constants/paths'
-import AppTabs from '../AppTabs/AppTabs'
+import AppTabs from '@/components/views/AppTabs/AppTabs'
+import { AppNavigationRoutes } from '@/constants/paths'
 
 const ProfileTabs: FC = () => {
   const location = useLocation()

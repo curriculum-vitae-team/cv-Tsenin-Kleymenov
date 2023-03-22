@@ -4,7 +4,8 @@ import CloseIcon from '@mui/icons-material/Close'
 import FileUploadIcon from '@mui/icons-material/FileUpload'
 import { Avatar, Box, Grid, IconButton, Typography } from '@mui/material'
 
-import { EmployeeAvatarAlert } from './EmployeeAvatarAlert/EmployeeAvatarAlert'
+import { EmployeeAvatarAlert } from '@/components/views/EmployeeAvatarAlert/EmployeeAvatarAlert'
+
 import { AvatarWrapper, DropZone } from './EmployeeAvatarUpload.styles'
 
 export const EmployeeAvatarUpload: FC = () => {

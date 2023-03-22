@@ -6,7 +6,7 @@ import { IEmployeeAvatarAlert } from './EmployeeAvatarAlert.interfaces'
 
 export const EmployeeAvatarAlert: FC<IEmployeeAvatarAlert> = ({ children }) => {
   const [open, setOpen] = useState(true)
-  
+
   return (
     <Collapse in={open}>
       <Alert

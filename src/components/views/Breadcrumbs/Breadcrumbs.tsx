@@ -4,7 +4,7 @@ import HomeIcon from '@mui/icons-material/Home'
 import NavigateNextIcon from '@mui/icons-material/NavigateNext'
 import { Breadcrumbs } from '@mui/material'
 
-import { SIDE_MENU_ITEMS } from '../../../constants/sideMenuItems'
+import { SIDE_MENU_ITEMS } from '@/constants/sideMenuItems'
 
 import { BreadcrumbsLink, StartCrumb } from './Breadcrumbs.styles'
 

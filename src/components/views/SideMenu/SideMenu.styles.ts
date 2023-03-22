@@ -18,5 +18,3 @@ export const SideMenuBurgerButton = styled(IconButton)({
   margin: '5px',
   padding: '10px'
 })
-
-
