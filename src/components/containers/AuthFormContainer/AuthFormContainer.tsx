@@ -1,8 +1,7 @@
 import { FC } from 'react'
-
-import { IAuthFormProps } from '../../../types/AuthForm.interfaces'
-import { FormSubtitle } from '../../views/FormSubtitle/FormSubtitle'
-import { FormTitle } from '../../views/FormTitle/FormTitle'
+import { FormSubtitle } from '@components/views/FormSubtitle/FormSubtitle'
+import { FormTitle } from '@components/views/FormTitle/FormTitle'
+import { IAuthFormProps } from 'appTypes/AuthForm.interfaces'
 
 import { FormContainer } from './AuthFormContainer.styles'
 

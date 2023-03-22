@@ -1,8 +1,8 @@
 import React, { FC, useState } from 'react'
+import { USER_MENU_ITEMS } from '@constants/userMenuItems'
 import { Logout } from '@mui/icons-material'
 import { Divider, Menu, Typography } from '@mui/material'
 
-import { USER_MENU_ITEMS } from '../../../constants/userMenuItems'
 import { UserAvatar } from '../UserAvatar/UserAvatar'
 import { UserMenuItem } from '../UserMenuItem/UserMenuItem'
 

@@ -1,9 +1,9 @@
 import { FC, useState } from 'react'
+import { SIDE_MENU_ITEMS } from '@constants/sideMenuItems'
 import CloseIcon from '@mui/icons-material/Close'
 import MenuIcon from '@mui/icons-material/Menu'
 import { AppBar, Divider, Drawer, List } from '@mui/material'
 
-import { SIDE_MENU_ITEMS } from '../../../constants/sideMenuItems'
 import { SideMenuItem } from '../SideMenuItem/SideMenuItem'
 
 import { SideMenu, SideMenuBurgerButton, SideMenuCloseButton } from './SideMenu.styles'

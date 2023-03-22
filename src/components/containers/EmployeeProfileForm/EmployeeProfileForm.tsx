@@ -1,12 +1,11 @@
 import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { Button } from '@components/views/Button/Button'
+import { Input } from '@components/views/Input/Input'
+import { AppSelect } from '@components/views/Select/Select'
+import { ProfileSchema } from '@constants/profileSchemaOptions'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Container, Grid, Typography } from '@mui/material'
-
-import { ProfileSchema } from '../../../constants/profileSchemaOptions'
-import { Button } from '../../views/Button/Button'
-import { Input } from '../../views/Input/Input'
-import { AppSelect } from '../../views/Select/Select'
 
 import { IFormValues } from './EmployeeProfileForm.interfaces'
 
