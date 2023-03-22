@@ -1,8 +1,9 @@
 import { FC } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
-import AppTabs from '@components/views/AppTabs/AppTabs'
-import { AppNavigationRoutes } from '@constants/paths'
 import { Tab } from '@mui/material'
+
+import AppTabs from '@/components/views/AppTabs/AppTabs'
+import { AppNavigationRoutes } from '@/constants/paths'
 
 import { HeaderTabsWrapper } from './AuthHeader.styles'
 

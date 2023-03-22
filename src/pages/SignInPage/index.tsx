@@ -1,9 +1,10 @@
 import { FC } from 'react'
 import { Link } from 'react-router-dom'
-import { AuthFormContainer } from '@components/containers/AuthFormContainer/AuthFormContainer'
-import { SignInForm } from '@components/containers/SignInForm/SignInForm'
-import { Button } from '@components/views/Button/Button'
-import { AppNavigationRoutes } from '@constants/paths'
+
+import { AuthFormContainer } from '@/components/containers/AuthFormContainer/AuthFormContainer'
+import { SignInForm } from '@/components/containers/SignInForm/SignInForm'
+import { Button } from '@/components/views/Button/Button'
+import { AppNavigationRoutes } from '@/constants/paths'
 
 const SignInPage: FC = () => {
   return (

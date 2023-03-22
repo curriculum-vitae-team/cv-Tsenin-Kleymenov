@@ -1,10 +1,10 @@
 import React, { FC, useState } from 'react'
-import { USER_MENU_ITEMS } from '@constants/userMenuItems'
 import { Logout } from '@mui/icons-material'
 import { Divider, Menu, Typography } from '@mui/material'
 
-import { UserAvatar } from '../UserAvatar/UserAvatar'
-import { UserMenuItem } from '../UserMenuItem/UserMenuItem'
+import { UserAvatar } from '@/components/views/UserAvatar/UserAvatar'
+import { UserMenuItem } from '@/components/views/UserMenuItem/UserMenuItem'
+import { USER_MENU_ITEMS } from '@/constants/userMenuItems'
 
 import { MenuContainer, PaperPropsUserMenu, UserMenuInfo } from './UserMenu.styles'
 

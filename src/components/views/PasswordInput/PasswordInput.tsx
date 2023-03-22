@@ -3,7 +3,7 @@ import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import { IconButton, InputAdornment, TextFieldProps } from '@mui/material'
 
-import { Input } from '../Input/Input'
+import { Input } from '@/components/views/Input/Input'
 
 export const PasswordInput: FC<TextFieldProps> = forwardRef((props, ref) => {
   const [showPassword, setShowPassword] = useState<boolean>(false)

@@ -45,19 +45,7 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
     alias: {
-      '@api': resolve(__dirname, 'src/api/'),
-      '@assets': resolve(__dirname, 'src/assets/'),
-      '@components': resolve(__dirname, 'src/components/'),
-      '@config': resolve(__dirname, 'src/config/'),
-      '@constants': resolve(__dirname, 'src/constants/'),
-      '@context': resolve(__dirname, 'src/context/'),
-      '@hooks': resolve(__dirname, 'src/hooks/'),
-      '@pages': resolve(__dirname, 'src/pages/'),
-      '@router': resolve(__dirname, 'src/router/'),
-      '@styles': resolve(__dirname, 'src/styles/'),
-      '@theme': resolve(__dirname, 'src/theme/'),
-      '@appTypes': resolve(__dirname, 'src/appTypes/'),
-      '@utils': resolve(__dirname, 'src/utils/')
+      '@': resolve(__dirname, 'src/')
     }
   }
 }
