@@ -1,15 +1,17 @@
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import Settings from '@mui/icons-material/Settings'
 
+import { AppNavigationRoutes } from '@/router/paths'
+
 export const USER_MENU_ITEMS = {
   profile: {
     text: 'Profile',
-    route: '/profile',
+    route: AppNavigationRoutes.PROFILE,
     icon: AccountCircleIcon
   },
   settings: {
     text: 'Settings',
-    route: '/settings',
+    route: AppNavigationRoutes.SETTINGS,
     icon: Settings
   }
 }

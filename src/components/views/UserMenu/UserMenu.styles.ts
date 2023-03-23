@@ -10,7 +10,7 @@ export const UserMenuInfo = styled(Box)({
 })
 
 export const MenuContainer = styled('div')({
-  display: 'flex'
+  display: 'flex',
 })
 
 export const PaperPropsUserMenu = {

@@ -6,7 +6,7 @@ import { Container, Grid, Typography } from '@mui/material'
 import { Button } from '@/components/views/Button/Button'
 import { Input } from '@/components/views/Input/Input'
 import { AppSelect } from '@/components/views/Select/Select'
-import { ProfileSchema } from '@/constants/profileSchemaOptions'
+import { PROFILE_SCHEMA } from '@/constants/profileSchemaOptions'
 
 import { IFormValues } from './EmployeeProfileForm.interfaces'
 
@@ -15,7 +15,7 @@ export const EmployeeProfile: FC = () => {
     register,
     handleSubmit,
     formState: { errors, isDirty, isValid }
-  } = useForm<IFormValues>({ mode: 'onBlur', resolver: yupResolver(ProfileSchema) })
+  } = useForm<IFormValues>({ mode: 'onBlur', resolver: yupResolver(PROFILE_SCHEMA) })
 
   const onSubmit: SubmitHandler<IFormValues> = data => {
     console.log(data)

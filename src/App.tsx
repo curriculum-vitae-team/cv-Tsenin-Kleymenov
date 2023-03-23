@@ -1,17 +1,24 @@
-import React, { FC, Suspense } from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { FC, Suspense } from 'react'
+import { useReactiveVar } from '@apollo/client'
 
-const UnauthenticatedApp = React.lazy(async () => await import('./UnauthenticatedApp'))
+import Header from '@/components/containers/Header/Header'
+import { authService } from '@/graphql/auth/authService'
+import { AppRouter } from '@/router/AppRouter'
+
+import { AppBreadcrumbs } from './components/views/Breadcrumbs/Breadcrumbs'
+import { Loader } from './components/views/Loader/Loader'
 
 const App: FC = () => {
+  const isAuth = useReactiveVar(authService.access_token$)
+
   return (
-    <Suspense>
-      <BrowserRouter>
-        <Routes>
-          <Route path="*" element={<UnauthenticatedApp />} />
-        </Routes>
-      </BrowserRouter>
-    </Suspense>
+    <>
+      <Suspense fallback={<Loader color="primary" />}>
+        <Header />
+        {isAuth && <AppBreadcrumbs />}
+        <AppRouter />
+      </Suspense>
+    </>
   )
 }
 

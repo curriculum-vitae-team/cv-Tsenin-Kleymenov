@@ -6,42 +6,43 @@ import ManageAccountsIcon from '@mui/icons-material/ManageAccounts'
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt'
 import TranslateIcon from '@mui/icons-material/Translate'
 
-import { ISideMenuItems } from '../components/views/SideMenu/SideMenu.interfaces'
+import { ISideMenuItems } from '@/components/views/SideMenu/SideMenu.interfaces'
+import { AppNavigationRoutes } from '@/router/paths'
 
 export const SIDE_MENU_ITEMS: ISideMenuItems = {
   employees: {
     text: 'Employees',
-    route: '/employees',
+    route: AppNavigationRoutes.EMPLOYEES,
     icon: PeopleAltIcon
   },
   projects: {
     text: 'Projects',
-    route: '/projects',
+    route: AppNavigationRoutes.PROJECTS,
     icon: FolderCopyIcon
   },
   CVs: {
     text: 'CVs',
-    route: '/cvs',
+    route: AppNavigationRoutes.CVS,
     icon: InsertDriveFileIcon
   },
   departments: {
     text: 'Departments',
-    route: '/departments',
+    route: AppNavigationRoutes.DEPARTMENTS,
     icon: Groups3Icon
   },
   positions: {
     text: 'Positions',
-    route: '/positions',
+    route: AppNavigationRoutes.POSITIONS,
     icon: FormatListNumberedRtlIcon
   },
   skills: {
     text: 'Skills',
-    route: '/skills',
+    route: AppNavigationRoutes.SKILLS,
     icon: ManageAccountsIcon
   },
   Languages: {
     text: 'Languages',
-    route: '/languages',
+    route: AppNavigationRoutes.LANGUAGES,
     icon: TranslateIcon
   }
 }

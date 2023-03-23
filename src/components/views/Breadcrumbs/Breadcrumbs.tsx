@@ -13,7 +13,7 @@ export const AppBreadcrumbs: FC = () => {
   const { id } = useParams()
 
   return (
-    <Breadcrumbs color="primary" separator={<NavigateNextIcon />}>
+    <Breadcrumbs color="secondary" separator={<NavigateNextIcon />}>
       <StartCrumb>
         <HomeIcon /> Home
       </StartCrumb>

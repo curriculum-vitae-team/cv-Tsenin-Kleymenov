@@ -16,5 +16,5 @@ export const SideMenuCloseButton = styled(IconButton)({
 
 export const SideMenuBurgerButton = styled(IconButton)({
   margin: '5px',
-  padding: '10px'
+  padding: '10px',
 })

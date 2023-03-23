@@ -21,20 +21,19 @@ export const AppSideMenu: FC = () => {
 
   return (
     <>
-      <SideMenuBurgerButton onClick={handleOpen}>
+      <SideMenuBurgerButton color="primary" onClick={handleOpen}>
         <MenuIcon />
       </SideMenuBurgerButton>
 
       <Drawer anchor="left" open={open}>
         <SideMenu>
-          <AppBar color="primary" position="static">
-            <SideMenuCloseButton onClick={handleClose}>
+          <AppBar color="secondary" position="static">
+            <SideMenuCloseButton color="primary" onClick={handleClose}>
               <CloseIcon />
             </SideMenuCloseButton>
           </AppBar>
           <List>
-            {Object.values(SIDE_MENU_ITEMS).map(item => {
-              const { text, route, icon: Icon } = item
+            {Object.values(SIDE_MENU_ITEMS).map(({ text, route, icon: Icon }) => {
               return (
                 <SideMenuItem
                   key={text}

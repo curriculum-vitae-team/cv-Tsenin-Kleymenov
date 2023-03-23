@@ -1,6 +1,6 @@
 import * as yup from 'yup'
 
-export const ProfileSchema = yup.object().shape({
+export const PROFILE_SCHEMA = yup.object().shape({
   firstName: yup
     .string()
     .matches(/^([^0-9]*)$/, 'First name should not contain numbers')
