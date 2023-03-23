@@ -8,3 +8,7 @@ export interface IAuthFormProps {
   subtitle: string
   children: React.ReactNode
 }
+
+export interface IKeys {
+  [key: string]: string
+}

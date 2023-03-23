@@ -24,7 +24,7 @@ export const UserMenu: FC = () => {
     setAnchorEl(null)
   }
 
-  const LogoutHandler = (): void => {
+  const handleLogout = (): void => {
     authService.clearStorage()
   }
 
@@ -50,7 +50,7 @@ export const UserMenu: FC = () => {
         })}
         <Divider />
         <UserMenuItem
-          onClick={LogoutHandler}
+          onClick={handleLogout}
           route={AppNavigationRoutes.LOGIN}
           text="Logout"
           Icon={Logout}

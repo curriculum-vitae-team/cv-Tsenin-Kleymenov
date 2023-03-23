@@ -6,9 +6,9 @@ import { AppBar, Divider, Drawer, List } from '@mui/material'
 import { SideMenuItem } from '@/components/views/SideMenuItem/SideMenuItem'
 import { SIDE_MENU_ITEMS } from '@/constants/sideMenuItems'
 
-import { SideMenu, SideMenuBurgerButton, SideMenuCloseButton } from './SideMenu.styles'
+import { AppSideMenu, SideMenuBurgerButton, SideMenuCloseButton } from './SideMenu.styles'
 
-export const AppSideMenu: FC = () => {
+export const SideMenu: FC = () => {
   const [open, setOpen] = useState<boolean>(false)
 
   const handleClose = (): void => {
@@ -24,9 +24,8 @@ export const AppSideMenu: FC = () => {
       <SideMenuBurgerButton color="primary" onClick={handleOpen}>
         <MenuIcon />
       </SideMenuBurgerButton>
-
       <Drawer anchor="left" open={open}>
-        <SideMenu>
+        <AppSideMenu>
           <AppBar color="secondary" position="static">
             <SideMenuCloseButton color="primary" onClick={handleClose}>
               <CloseIcon />
@@ -46,7 +45,7 @@ export const AppSideMenu: FC = () => {
             })}
           </List>
           <Divider />
-        </SideMenu>
+        </AppSideMenu>
       </Drawer>
     </>
   )

@@ -6,10 +6,10 @@ import ManageAccountsIcon from '@mui/icons-material/ManageAccounts'
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt'
 import TranslateIcon from '@mui/icons-material/Translate'
 
-import { ISideMenuItems } from '@/components/views/SideMenu/SideMenu.interfaces'
+import { IMenuItems } from '@/components/views/SideMenu/SideMenu.interfaces'
 import { AppNavigationRoutes } from '@/router/paths'
 
-export const SIDE_MENU_ITEMS: ISideMenuItems = {
+export const SIDE_MENU_ITEMS: IMenuItems = {
   employees: {
     text: 'Employees',
     route: AppNavigationRoutes.EMPLOYEES,

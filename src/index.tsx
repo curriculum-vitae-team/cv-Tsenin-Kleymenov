@@ -4,8 +4,9 @@ import { BrowserRouter } from 'react-router-dom'
 import { ApolloProvider } from '@apollo/client'
 import { ThemeProvider } from '@mui/material'
 
-import { client } from './graphql/auth/client'
-import { theme } from './theme/theme'
+import { client } from '@/graphql/auth/client'
+import { theme } from '@/theme/theme'
+
 import App from './App'
 
 import './styles/index.css'

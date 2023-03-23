@@ -40,7 +40,7 @@ export const EmployeeProfile: FC = () => {
             />
             <AppSelect
               items={['Unit 1(JavaScript)', 'Unit 2(Java)', 'Unit 3(Python)']}
-              label="Departmant"
+              label="Department"
               variant="standard"
               error={!!errors.department}
               helperText={errors?.department?.message}

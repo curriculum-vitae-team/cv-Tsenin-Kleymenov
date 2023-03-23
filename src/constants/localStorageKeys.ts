@@ -1,6 +1,4 @@
-interface IKeys {
-  [key: string]: string
-}
+import { IKeys } from '@/appTypes/AuthForm.interfaces'
 
 export const LOCAL_STORAGE_KEYS: IKeys = {
   user: 'user',

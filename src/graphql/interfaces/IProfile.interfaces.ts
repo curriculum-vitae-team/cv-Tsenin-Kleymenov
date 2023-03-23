@@ -8,6 +8,6 @@ export interface IProfile {
   last_name?: string
   full_name?: string
   avatar?: string
-  skills: ISkillMastery[]
-  languages: ILanguageProficiency[]
+  skills:Array<ISkillMastery>
+  languages: Array<ILanguageProficiency>
 }

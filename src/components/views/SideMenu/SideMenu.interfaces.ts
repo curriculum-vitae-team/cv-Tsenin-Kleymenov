@@ -1,6 +1,6 @@
 import { SvgIconProps } from '@mui/material/SvgIcon'
 
-export interface ISideMenuItems {
+export interface IMenuItems {
   [key: string]: {
     text: string
     route: string

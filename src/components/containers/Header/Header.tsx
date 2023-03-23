@@ -3,15 +3,15 @@ import { NavLink, useLocation } from 'react-router-dom'
 import { useReactiveVar } from '@apollo/client'
 import { Tab } from '@mui/material'
 
-import AppTabs from '@/components/views/AppTabs/AppTabs'
-import { AppSideMenu } from '@/components/views/SideMenu/SideMenu'
+import { AppTabs } from '@/components/views/AppTabs/AppTabs'
+import { SideMenu } from '@/components/views/SideMenu/SideMenu'
 import { UserMenu } from '@/components/views/UserMenu/UserMenu'
 import { authService } from '@/graphql/auth/authService'
 import { AppNavigationRoutes } from '@/router/paths'
 
 import { HeaderAuthWrapper, HeaderTabsWrapper, HeaderWrapper } from './Header.styles'
 
-const Header: FC = () => {
+export const Header: FC = () => {
   const isAuth = useReactiveVar(authService.access_token$)
   const location = useLocation()
 
@@ -19,7 +19,7 @@ const Header: FC = () => {
     <HeaderWrapper color="secondary">
       {isAuth ? (
         <HeaderAuthWrapper>
-          <AppSideMenu />
+          <SideMenu />
           <UserMenu />
         </HeaderAuthWrapper>
       ) : (
@@ -43,5 +43,3 @@ const Header: FC = () => {
     </HeaderWrapper>
   )
 }
-
-export default Header
