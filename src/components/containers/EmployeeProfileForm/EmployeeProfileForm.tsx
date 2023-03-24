@@ -6,7 +6,7 @@ import { Container, Grid, Typography } from '@mui/material'
 import { Button } from '@/components/views/Button/Button'
 import { Input } from '@/components/views/Input/Input'
 import { AppSelect } from '@/components/views/Select/Select'
-import { ProfileSchema } from '@/constants/profileSchemaOptions'
+import { PROFILE_SCHEMA } from '@/constants/profileSchemaOptions'
 
 import { IFormValues } from './EmployeeProfileForm.interfaces'
 
@@ -15,7 +15,7 @@ export const EmployeeProfile: FC = () => {
     register,
     handleSubmit,
     formState: { errors, isDirty, isValid }
-  } = useForm<IFormValues>({ mode: 'onBlur', resolver: yupResolver(ProfileSchema) })
+  } = useForm<IFormValues>({ mode: 'onBlur', resolver: yupResolver(PROFILE_SCHEMA) })
 
   const onSubmit: SubmitHandler<IFormValues> = data => {
     console.log(data)
@@ -23,8 +23,8 @@ export const EmployeeProfile: FC = () => {
 
   return (
     <Container maxWidth="md">
-      <Typography>Arthur Tsenin</Typography>
-      <Typography>dgdgdgdggdgd.@/gmail.com</Typography>
+      <Typography>User</Typography>
+      <Typography>userEmail.@/gmail.com</Typography>
       <Typography>23/12/2022</Typography>
       <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
         <Grid container spacing={2}>
@@ -40,7 +40,7 @@ export const EmployeeProfile: FC = () => {
             />
             <AppSelect
               items={['Unit 1(JavaScript)', 'Unit 2(Java)', 'Unit 3(Python)']}
-              label="Departmant"
+              label="Department"
               variant="standard"
               error={!!errors.department}
               helperText={errors?.department?.message}

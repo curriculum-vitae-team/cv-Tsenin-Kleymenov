@@ -6,17 +6,23 @@ import { IAuthFormValues } from '@/appTypes/AuthForm.interfaces'
 import { Button } from '@/components/views/Button/Button'
 import { Input } from '@/components/views/Input/Input'
 import { PasswordInput } from '@/components/views/PasswordInput/PasswordInput'
-import { schema } from '@/constants/formSchemaOptions'
+import { AUTH_SCHEMA } from '@/constants/authSchemaOptions'
+import { authService } from '@/graphql/auth/authService'
 
-export const SignUpForm: FC = () => {
+import { ISignUpFormProps } from './SignUpForm.interfaces'
+
+export const SignUpForm: FC<ISignUpFormProps> = ({ signUp }) => {
   const {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm<IAuthFormValues>({ mode: 'onBlur', resolver: yupResolver(schema) })
+  } = useForm<IAuthFormValues>({ mode: 'onSubmit', resolver: yupResolver(AUTH_SCHEMA) })
 
-  const onSubmit: SubmitHandler<IAuthFormValues> = data => {
-    console.log(data)
+  const onSubmit: SubmitHandler<IAuthFormValues> = async formData => {
+    const { data } = await signUp({ variables: formData })
+    if (data) {
+      authService.addUserToStorage(data.signUp.user, data.signUp.access_token)
+    }
   }
 
   return (
@@ -36,7 +42,9 @@ export const SignUpForm: FC = () => {
         helperText={errors?.password?.message}
         {...register('password')}
       />
-      <Button variant="contained">Sign up</Button>
+      <Button type="submit" variant="contained">
+        Sign up
+      </Button>
     </form>
   )
 }

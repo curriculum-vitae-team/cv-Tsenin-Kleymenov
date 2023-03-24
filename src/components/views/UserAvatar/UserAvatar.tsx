@@ -1,13 +1,16 @@
 import { FC } from 'react'
-import { Avatar, IconButton, Tooltip } from '@mui/material'
+import { IconButton, Tooltip } from '@mui/material'
 
 import { IUserAvatarProps } from './UserAvatar.interfaces'
+import { Avatar } from './UserAvatar.styles'
 
-export const UserAvatar: FC<IUserAvatarProps> = ({ handleClick }) => {
+export const UserAvatar: FC<IUserAvatarProps> = ({ handleClick, userEmail }) => {
+  const firstLetter = userEmail?.charAt(0).toUpperCase()
+
   return (
     <Tooltip title="User account ">
       <IconButton onClick={handleClick} sx={{ ml: 2 }}>
-        <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+        <Avatar>{firstLetter}</Avatar>
       </IconButton>
     </Tooltip>
   )

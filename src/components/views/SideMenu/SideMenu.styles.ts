@@ -1,8 +1,7 @@
-import { styled } from '@mui/material'
+import { Box, styled } from '@mui/material'
 import { IconButton } from '@mui/material'
-import Box from '@mui/material/Box'
 
-export const SideMenu = styled(Box)({
+export const AppSideMenu = styled(Box)({
   width: '250px',
   display: 'flex',
   flexDirection: 'column'

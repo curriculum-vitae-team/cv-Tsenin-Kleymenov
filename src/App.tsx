@@ -1,17 +1,15 @@
-import React, { FC, Suspense } from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { FC, Suspense } from 'react'
 
-const UnauthenticatedApp = React.lazy(async () => await import('./UnauthenticatedApp'))
+import { Loader } from '@/components/views/Loader/Loader'
+import { AppRouter } from '@/router/AppRouter'
 
 const App: FC = () => {
   return (
-    <Suspense>
-      <BrowserRouter>
-        <Routes>
-          <Route path="*" element={<UnauthenticatedApp />} />
-        </Routes>
-      </BrowserRouter>
-    </Suspense>
+    <>
+      <Suspense fallback={<Loader color="primary" />}>
+        <AppRouter />
+      </Suspense>
+    </>
   )
 }
 

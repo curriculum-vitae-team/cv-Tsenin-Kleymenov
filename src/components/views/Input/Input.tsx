@@ -1,6 +1,5 @@
 import { FC, forwardRef } from 'react'
-import { TextField } from '@mui/material'
-import { TextFieldProps } from '@mui/material'
+import { TextField, TextFieldProps } from '@mui/material'
 
 export const Input: FC<TextFieldProps> = forwardRef((props, ref) => {
   return (

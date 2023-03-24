@@ -4,9 +4,9 @@ import { ListItemIcon, ListItemText, MenuItem } from '@mui/material'
 
 import { IUserMenuItem } from './UserMenuItem.interfaces'
 
-export const UserMenuItem: FC<IUserMenuItem> = ({ route, Icon, text }) => {
+export const UserMenuItem: FC<IUserMenuItem> = ({ onClick, route, Icon, text }) => {
   return (
-    <MenuItem component={Link} to={route}>
+    <MenuItem onClick={onClick} component={Link} to={route}>
       <ListItemIcon>
         <Icon />
       </ListItemIcon>
