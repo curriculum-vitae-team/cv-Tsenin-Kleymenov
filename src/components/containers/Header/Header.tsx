@@ -33,9 +33,9 @@ export const Header: FC = () => {
             />
             <Tab
               label="SignUp"
-              value={AppNavigationRoutes.SIGNUP}
+              value={AppNavigationRoutes.SIGN_UP}
               component={NavLink}
-              to={AppNavigationRoutes.SIGNUP}
+              to={AppNavigationRoutes.SIGN_UP}
             />
           </AppTabs>
         </HeaderTabsWrapper>

@@ -9,6 +9,6 @@ export interface ILoginResult {
   login: IAuthResult
 }
 
-export interface ISignupResult {
-  signup: IAuthResult
+export interface ISignUpResult {
+  signUp: IAuthResult
 }

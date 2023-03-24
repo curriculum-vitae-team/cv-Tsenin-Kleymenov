@@ -11,7 +11,7 @@ import { authService } from '@/graphql/auth/authService'
 
 import { ISignUpFormProps } from './SignUpForm.interfaces'
 
-export const SignUpForm: FC<ISignUpFormProps> = ({ signup }) => {
+export const SignUpForm: FC<ISignUpFormProps> = ({ signUp }) => {
   const {
     register,
     handleSubmit,
@@ -19,9 +19,9 @@ export const SignUpForm: FC<ISignUpFormProps> = ({ signup }) => {
   } = useForm<IAuthFormValues>({ mode: 'onSubmit', resolver: yupResolver(AUTH_SCHEMA) })
 
   const onSubmit: SubmitHandler<IAuthFormValues> = async formData => {
-    const { data } = await signup({ variables: formData })
+    const { data } = await signUp({ variables: formData })
     if (data) {
-      authService.addUserToStorage(data.signup.user, data.signup.access_token)
+      authService.addUserToStorage(data.signUp.user, data.signUp.access_token)
     }
   }
 

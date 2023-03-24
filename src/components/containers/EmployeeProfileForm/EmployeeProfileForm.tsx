@@ -23,8 +23,8 @@ export const EmployeeProfile: FC = () => {
 
   return (
     <Container maxWidth="md">
-      <Typography>Arthur Tsenin</Typography>
-      <Typography>dgdgdgdggdgd.@/gmail.com</Typography>
+      <Typography>User</Typography>
+      <Typography>userEmail.@/gmail.com</Typography>
       <Typography>23/12/2022</Typography>
       <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
         <Grid container spacing={2}>

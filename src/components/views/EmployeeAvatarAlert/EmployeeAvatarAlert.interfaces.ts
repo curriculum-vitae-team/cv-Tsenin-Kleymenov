@@ -1,6 +1,5 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react'
 
 export interface IEmployeeAvatarAlert {
-   children: ReactNode
- }
- 
+  children: ReactNode
+}

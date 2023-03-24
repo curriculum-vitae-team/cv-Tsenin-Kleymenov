@@ -2,6 +2,8 @@ import { ApolloClient, from, HttpLink, InMemoryCache } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
 import { onError } from '@apollo/client/link/error'
 
+import { UNAUTHORIZED } from '@/constants/apolloUserStatus'
+
 import { authService } from './authService'
 
 const httpLink = new HttpLink({
@@ -9,7 +11,7 @@ const httpLink = new HttpLink({
 })
 
 const authLink = setContext((_, { headers }) => {
-    return {
+  return {
     headers: {
       ...headers,
       authorization: `Bearer ${authService.access_token$()}`
@@ -21,7 +23,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
     graphQLErrors.forEach(({ message }) => {
       console.error(message)
-      if (message === 'Unauthorized') {
+      if (message === UNAUTHORIZED) {
         authService.clearStorage()
       }
     })

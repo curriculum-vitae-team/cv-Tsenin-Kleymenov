@@ -10,7 +10,7 @@ const EmployeesPage = React.lazy(async () => await import('@/pages/EmployeesPage
 export const AppNavigationRoutes = {
   INDEX: '/',
   LOGIN: '/login',
-  SIGNUP: '/signup',
+  SIGN_UP: '/sign-up',
   EMPLOYEES: '/employees',
   PROJECTS: '/projects',
   DEPARTMENTS: '/departments',
@@ -23,9 +23,9 @@ export const AppNavigationRoutes = {
   PAGE_NOT_FOUND: '*'
 }
 
-export const PUBLICK_ROUTES: IRoute[] = [
+export const PUBLIC_ROUTES: IRoute[] = [
   { path: AppNavigationRoutes.LOGIN, element: <LoginPage /> },
-  { path: AppNavigationRoutes.SIGNUP, element: <SignUpPage /> },
+  { path: AppNavigationRoutes.SIGN_UP, element: <SignUpPage /> },
   {
     path: AppNavigationRoutes.PAGE_NOT_FOUND,
     element: <Navigate to={AppNavigationRoutes.LOGIN} replace />

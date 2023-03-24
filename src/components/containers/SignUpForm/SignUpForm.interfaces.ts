@@ -6,11 +6,15 @@ import {
   OperationVariables
 } from '@apollo/client'
 
-import { ISignupResult } from '@/graphql/auth/authResult.interfaces'
+import { ISignUpResult } from '@/graphql/auth/authResult.interfaces'
 
 export interface ISignUpFormProps {
-  signup: (
-    options?:
-      | MutationFunctionOptions<ISignupResult, OperationVariables, DefaultContext, ApolloCache<unknown>>
-  ) => Promise<FetchResult<ISignupResult, Record<string, unknown>, Record<string, unknown>>>
+  signUp: (
+    options?: MutationFunctionOptions<
+      ISignUpResult,
+      OperationVariables,
+      DefaultContext,
+      ApolloCache<unknown>
+    >
+  ) => Promise<FetchResult<ISignUpResult, Record<string, unknown>, Record<string, unknown>>>
 }

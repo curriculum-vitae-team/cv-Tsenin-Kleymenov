@@ -15,7 +15,7 @@ const SignInPage: FC = () => {
   return (
     <AuthFormContainer title="Welcome Back" subtitle="Hello again! Sign in to continue.">
       <SignInForm login={login} />
-      <Button component={Link} to={AppNavigationRoutes.SIGNUP} variant="text">
+      <Button component={Link} to={AppNavigationRoutes.SIGN_UP} variant="text">
         I don't have an account yet
       </Button>
     </AuthFormContainer>

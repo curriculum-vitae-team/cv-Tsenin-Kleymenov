@@ -5,16 +5,16 @@ import { useMutation } from '@apollo/client'
 import { AuthFormContainer } from '@/components/containers/AuthFormContainer/AuthFormContainer'
 import { SignUpForm } from '@/components/containers/SignUpForm/SignUpForm'
 import { Button } from '@/components/views/Button/Button'
-import { SIGNUP } from '@/graphql/auth/authMutation'
-import { ISignupResult } from '@/graphql/auth/authResult.interfaces'
+import { SIGN_UP } from '@/graphql/auth/authMutation'
+import { ISignUpResult } from '@/graphql/auth/authResult.interfaces'
 import { AppNavigationRoutes } from '@/router/paths'
 
 const SignUpPage: FC = () => {
-  const [signup] = useMutation<ISignupResult>(SIGNUP)
+  const [signUp] = useMutation<ISignUpResult>(SIGN_UP)
 
   return (
     <AuthFormContainer title="Register Now" subtitle="Welcome! Sign up to continue.">
-      <SignUpForm signup={signup} />
+      <SignUpForm signUp={signUp} />
       <Button component={Link} to={AppNavigationRoutes.LOGIN} variant="text">
         I have an account
       </Button>

@@ -4,11 +4,11 @@ import { useReactiveVar } from '@apollo/client'
 
 import { authService } from '@/graphql/auth/authService'
 
-import { PRIVATE_ROUTES, PUBLICK_ROUTES } from './paths'
+import { PRIVATE_ROUTES, PUBLIC_ROUTES } from './paths'
 
 export const AppRouter: FC = () => {
   const isAuth = useReactiveVar(authService.access_token$)
-  const authRoutes = isAuth ? PRIVATE_ROUTES : PUBLICK_ROUTES
+  const authRoutes = isAuth ? PRIVATE_ROUTES : PUBLIC_ROUTES
 
   return (
     <Routes>

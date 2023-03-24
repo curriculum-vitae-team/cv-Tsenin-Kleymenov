@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "prepare": "husky install",
-    "format": "prettier --write ./**/*.{js,jsx,ts,tsx,css,md,json,html} --config ./.prettierrc"
+    "format": "prettier --write ./**/*.{js,jsx,ts,tsx,css,md,json} --config ./.prettierrc"
   },
   "keywords": [],
   "author": "",
@@ -68,7 +68,7 @@
     "yup": "^1.0.2"
   },
   "lint-staged": {
-    "**/*.{js,jsx,ts,tsx,css,md,json,html}": [
+    "**/*.{js,jsx,ts,tsx,css,md,json}": [
       "npm run lint"
     ]
   }
