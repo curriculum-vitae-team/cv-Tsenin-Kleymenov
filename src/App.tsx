@@ -5,11 +5,9 @@ import { AppRouter } from '@/router/AppRouter'
 
 const App: FC = () => {
   return (
-    <>
-      <Suspense fallback={<Loader color="primary" />}>
-        <AppRouter />
-      </Suspense>
-    </>
+    <Suspense fallback={<Loader color="primary" />}>
+      <AppRouter />
+    </Suspense>
   )
 }
 

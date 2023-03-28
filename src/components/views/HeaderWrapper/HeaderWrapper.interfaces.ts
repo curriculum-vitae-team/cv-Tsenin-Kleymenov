@@ -1,5 +1,5 @@
 import { AppBarProps } from '@mui/material'
 
-export interface IProps extends AppBarProps {
+export interface IHeaderWrapperProps extends AppBarProps {
   children: React.ReactNode
 }

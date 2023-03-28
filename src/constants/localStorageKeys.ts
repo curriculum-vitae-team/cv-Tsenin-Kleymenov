@@ -1,6 +1,6 @@
-import { IKeys } from '@/appTypes/AuthForm.interfaces'
+import { IStorageKeys } from '@/appTypes/IStorageKeys.interfaces'
 
-export const LOCAL_STORAGE_KEYS: IKeys = {
+export const LOCAL_STORAGE_KEYS: IStorageKeys = {
   user: 'user',
   accessToken: 'access_token'
 }
