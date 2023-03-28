@@ -1,31 +1,62 @@
 import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { useMutation } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Container, Grid, Typography } from '@mui/material'
 
+import { EmployeeAvatarUpload } from '@/components/containers/EmployeeAvatarUpload/EmployeeAvatarUpload'
 import { Button } from '@/components/views/Button/Button'
 import { Input } from '@/components/views/Input/Input'
 import { AppSelect } from '@/components/views/Select/Select'
 import { PROFILE_SCHEMA } from '@/constants/profileSchemaOptions'
+import { UPDATE_USER } from '@/graphql/user/updateUserMutation'
 
-import { IFormValues } from './EmployeeProfileForm.interfaces'
+import { IEmployeeProfileFormProps, IProfileFormValues } from './EmployeeProfileForm.interfaces'
 
-export const EmployeeProfile: FC = () => {
+export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({
+  currentUser,
+  departments,
+  positions
+}) => {
+  const [updateUser] = useMutation(UPDATE_USER)
+
   const {
     register,
     handleSubmit,
     formState: { errors, isDirty, isValid }
-  } = useForm<IFormValues>({ mode: 'onBlur', resolver: yupResolver(PROFILE_SCHEMA) })
+  } = useForm<IProfileFormValues>({
+    defaultValues: {
+      firstName: currentUser?.profile.first_name || '',
+      lastName: currentUser?.profile.last_name || '',
+      position: currentUser?.position?.id || '',
+      department: currentUser?.department?.id || ''
+    },
+    mode: 'onSubmit',
+    resolver: yupResolver(PROFILE_SCHEMA)
+  })
 
-  const onSubmit: SubmitHandler<IFormValues> = data => {
-    console.log(data)
+  const onSubmit: SubmitHandler<IProfileFormValues> = async formData => {
+    await updateUser({
+      variables: {
+        id: currentUser?.id,
+        user: {
+          profile: {
+            first_name: formData.firstName,
+            last_name: formData.lastName
+          },
+          departmentId: formData.department,
+          positionId: formData.position
+        }
+      }
+    })
   }
 
   return (
     <Container maxWidth="md">
-      <Typography>User</Typography>
-      <Typography>userEmail.@/gmail.com</Typography>
-      <Typography>23/12/2022</Typography>
+      <EmployeeAvatarUpload />
+      <Typography>{currentUser?.profile.full_name}</Typography>
+      <Typography>{currentUser?.email}</Typography>
+      <Typography>{currentUser?.created_at}</Typography>
       <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
         <Grid container spacing={2}>
           <Grid item xs={6}>
@@ -39,9 +70,10 @@ export const EmployeeProfile: FC = () => {
               {...register('firstName')}
             />
             <AppSelect
-              items={['Unit 1(JavaScript)', 'Unit 2(Java)', 'Unit 3(Python)']}
+              variant="outlined"
               label="Department"
-              variant="standard"
+              items={departments}
+              defaultValue={currentUser?.department?.id || ''}
               error={!!errors.department}
               helperText={errors?.department?.message}
               {...register('department')}
@@ -52,21 +84,21 @@ export const EmployeeProfile: FC = () => {
               variant="outlined"
               type="text"
               label="Last Name"
-              placeholder=" Enter your Last Name"
+              placeholder="Enter your Last Name"
               error={!!errors.lastName}
               helperText={errors?.lastName?.message}
               {...register('lastName')}
             />
-
             <AppSelect
-              items={['Unit 1(JavaScript)', 'Unit 2(Java)', 'Unit 3(Python)']}
-              label="Position"
               variant="outlined"
+              label="Position"
+              items={positions}
+              defaultValue={currentUser?.position?.id || ''}
               error={!!errors.position}
               helperText={errors?.position?.message}
               {...register('position')}
             />
-            <Button type="submit" variant="contained" disabled={!isDirty && !isValid}>
+            <Button type="submit" variant="contained" disabled={!isDirty && isValid}>
               Confirm
             </Button>
           </Grid>

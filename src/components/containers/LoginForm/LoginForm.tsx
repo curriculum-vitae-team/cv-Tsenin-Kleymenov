@@ -1,17 +1,20 @@
 import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
 
-import { IAuthFormValues } from '@/appTypes/AuthForm.interfaces'
+import { IAuthFormValues } from '@/appTypes/IAuthFormValues.interfaces'
 import { Button } from '@/components/views/Button/Button'
 import { Input } from '@/components/views/Input/Input'
 import { PasswordInput } from '@/components/views/PasswordInput/PasswordInput'
 import { AUTH_SCHEMA } from '@/constants/authSchemaOptions'
 import { authService } from '@/graphql/auth/authService'
+import { AppNavigationRoutes } from '@/router/paths'
 
 import { ILoginFormProps } from './LoginForm.interfaces'
 
 export const SignInForm: FC<ILoginFormProps> = ({ login }) => {
+  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
@@ -20,8 +23,10 @@ export const SignInForm: FC<ILoginFormProps> = ({ login }) => {
 
   const onSubmit: SubmitHandler<IAuthFormValues> = async formData => {
     const { data } = await login({ variables: formData })
+
     if (data) {
       authService.addUserToStorage(data.login.user, data.login.access_token)
+      navigate(AppNavigationRoutes.EMPLOYEES)
     }
   }
 
