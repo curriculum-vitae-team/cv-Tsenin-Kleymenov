@@ -6,6 +6,10 @@ const ESLintPlugin = require('eslint-webpack-plugin')
 const path = require('path')
 
 module.exports = {
+  output: {
+    filename: 'main.js',
+    publicPath: '/'
+  },
   entry: './src/index.tsx',
   plugins: [
     new Dotenv(),

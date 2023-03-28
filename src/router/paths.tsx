@@ -1,13 +1,14 @@
 import React from 'react'
 import { Navigate } from 'react-router'
 
-import { IRoute } from '@/router/paths.interfaces'
+import EmployeesPage from '@/pages/EmployeesPage/EmployeesPage'
+import ProfilePage from '@/pages/ProfilePage/ProfilePage'
+import { IPath, IRoute } from '@/router/paths.interfaces'
 
 const LoginPage = React.lazy(async () => await import('@/pages/LoginPage/LoginPage'))
 const SignUpPage = React.lazy(async () => await import('@/pages/SignUpPage/SignUpPage'))
-const EmployeesPage = React.lazy(async () => await import('@/pages/EmployeesPage/EmployeesPage'))
 
-export const AppNavigationRoutes = {
+export const AppNavigationRoutes: IPath = {
   INDEX: '/',
   LOGIN: '/login',
   SIGN_UP: '/sign-up',
@@ -15,11 +16,15 @@ export const AppNavigationRoutes = {
   PROJECTS: '/projects',
   DEPARTMENTS: '/departments',
   POSITIONS: '/positions',
-  PROFILE: '/profile',
   SKILLS: '/skills',
   LANGUAGES: '/languages',
   SETTINGS: '/settings',
   CVS: '/cvs',
+  PROFILE: '/employees/:id/profile',
+  SKILLS_PROFILE: '/employees/:id/skills',
+  LANGUAGES_PROFILE: '/employees/:id/languages',
+  SETTINGS_PROFILE: '/employees/:id/settings',
+  CVS_PROFILE: '/employees/:id/cvs',
   PAGE_NOT_FOUND: '*'
 }
 
@@ -34,6 +39,12 @@ export const PUBLIC_ROUTES: IRoute[] = [
 
 export const PRIVATE_ROUTES: IRoute[] = [
   { path: AppNavigationRoutes.EMPLOYEES, element: <EmployeesPage /> },
+  { path: AppNavigationRoutes.PROFILE, element: <ProfilePage /> },
+  { path: AppNavigationRoutes.SKILLS_PROFILE, element: <ProfilePage /> },
+  { path: AppNavigationRoutes.LANGUAGES_PROFILE, element: <ProfilePage /> },
+  { path: AppNavigationRoutes.SETTINGS_PROFILE, element: <ProfilePage /> },
+  { path: AppNavigationRoutes.CVS_PROFILE, element: <ProfilePage /> },
+
   {
     path: AppNavigationRoutes.PAGE_NOT_FOUND,
     element: <Navigate to={AppNavigationRoutes.EMPLOYEES} replace />

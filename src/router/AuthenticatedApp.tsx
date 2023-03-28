@@ -1,10 +1,9 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { Route, Routes } from 'react-router'
 
 import { HeaderAuthenticated } from '@/components/containers/HeaderAuthenticated/HeaderAuthenticated'
 import { AppBreadcrumbs } from '@/components/views/Breadcrumbs/Breadcrumbs'
-
-import { PRIVATE_ROUTES } from './paths'
+import { PRIVATE_ROUTES } from '@/router/paths'
 
 const AuthenticatedApp: FC = () => {
   return (
