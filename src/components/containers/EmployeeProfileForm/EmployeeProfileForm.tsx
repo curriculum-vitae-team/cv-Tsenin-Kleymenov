@@ -1,25 +1,29 @@
 import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { useMutation } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Container, Grid, Typography } from '@mui/material'
 
+import { IDepartmentResult, IPositionResult } from '@/appTypes/IResult.interfaces'
 import { EmployeeAvatarUpload } from '@/components/containers/EmployeeAvatarUpload/EmployeeAvatarUpload'
 import { Button } from '@/components/views/Button/Button'
 import { Input } from '@/components/views/Input/Input'
 import { AppSelect } from '@/components/views/Select/Select'
 import { PROFILE_SCHEMA } from '@/constants/profileSchemaOptions'
+import { DEPARTMENTS } from '@/graphql/departments/departmentsQuery'
+import { POSITIONS } from '@/graphql/positions/positionsQuery'
 import { UPDATE_USER } from '@/graphql/user/updateUserMutation'
 import { convertCreatedAtDate } from '@/utils/createdAtFormat'
 
 import { IEmployeeProfileFormProps, IProfileFormValues } from './EmployeeProfileForm.interfaces'
+import { FORM_KEYS } from './formKeys'
 
-export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({
-  currentUser,
-  departments,
-  positions
-}) => {
-  const [updateUser] = useMutation(UPDATE_USER)
+export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser }) => {
+  const { loading: departmentsLoading, data: departmentsData } =
+    useQuery<IDepartmentResult>(DEPARTMENTS)
+
+  const { loading: positionsLoading, data: positionsData } = useQuery<IPositionResult>(POSITIONS)
+  const [updateUser, { loading: userLoading }] = useMutation(UPDATE_USER)
 
   const {
     register,
@@ -27,10 +31,10 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({
     formState: { errors, isDirty, isValid }
   } = useForm<IProfileFormValues>({
     defaultValues: {
-      firstName: currentUser?.profile.first_name || '',
-      lastName: currentUser?.profile.last_name || '',
-      position: currentUser?.position?.id || '',
-      department: currentUser?.department?.id || ''
+      [FORM_KEYS.firstName]: currentUser?.profile.first_name || '',
+      [FORM_KEYS.lastName]: currentUser?.profile.last_name || '',
+      [FORM_KEYS.position]: currentUser?.position?.id || '',
+      [FORM_KEYS.department]: currentUser?.department?.id || ''
     },
     mode: 'onSubmit',
     resolver: yupResolver(PROFILE_SCHEMA)
@@ -52,10 +56,6 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({
     })
   }
 
- 
-
-
-
   return (
     <Container maxWidth="md">
       <EmployeeAvatarUpload />
@@ -72,16 +72,17 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({
               placeholder=" Enter your First Name"
               error={!!errors.firstName}
               helperText={errors?.firstName?.message}
-              {...register('firstName')}
+              {...register(FORM_KEYS.firstName)}
             />
             <AppSelect
               variant="outlined"
               label="Department"
-              items={departments}
+              loading={departmentsLoading || positionsLoading}
+              items={departmentsData?.departments}
               defaultValue={currentUser?.department?.id || ''}
               error={!!errors.department}
               helperText={errors?.department?.message}
-              {...register('department')}
+              {...register(FORM_KEYS.department)}
             />
           </Grid>
           <Grid item xs={6}>
@@ -92,18 +93,24 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({
               placeholder="Enter your Last Name"
               error={!!errors.lastName}
               helperText={errors?.lastName?.message}
-              {...register('lastName')}
+              {...register(FORM_KEYS.lastName)}
             />
             <AppSelect
               variant="outlined"
               label="Position"
-              items={positions}
+              loading={departmentsLoading || positionsLoading}
+              items={positionsData?.positions}
               defaultValue={currentUser?.position?.id || ''}
               error={!!errors.position}
               helperText={errors?.position?.message}
-              {...register('position')}
+              {...register(FORM_KEYS.position)}
             />
-            <Button type="submit" variant="contained" disabled={!isDirty && isValid}>
+            <Button
+              type="submit"
+              variant="contained"
+              loading={userLoading}
+              disabled={!isDirty && isValid}
+            >
               Confirm
             </Button>
           </Grid>

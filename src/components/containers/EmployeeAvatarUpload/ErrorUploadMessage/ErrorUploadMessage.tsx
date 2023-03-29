@@ -3,9 +3,9 @@ import { Box, Typography } from '@mui/material'
 
 import { IErrorUploadMessageProps } from './ErrorUploadMessage.interfaces'
 
-export const ErrorUploadMessage: FC<IErrorUploadMessageProps> = ({ file, errors }) => {
+export const ErrorUploadMessage: FC<IErrorUploadMessageProps> = ({ errors }) => {
   return (
-    <Box key={file.name}>
+    <Box>
       {errors.map(error => (
         <Typography key={error.code}>{error.message}</Typography>
       ))}

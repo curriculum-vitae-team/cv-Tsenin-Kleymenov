@@ -54,7 +54,7 @@ export const UserMenu: FC = () => {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         {Object.values(USER_MENU_ITEMS).map(({ route, text, icon: Icon }) => {
-          return <UserMenuItem user={user} key={text} route={route} text={text} Icon={Icon} />
+          return <UserMenuItem userId={user?.id} key={text} route={route} text={text} Icon={Icon} />
         })}
         <Divider />
         <UserMenuItem

@@ -1,13 +1,35 @@
 import { FC, forwardRef } from 'react'
-import { MenuItem, TextField, TextFieldProps } from '@mui/material'
+import { InputAdornment, MenuItem, TextField, TextFieldProps } from '@mui/material'
 
+import { Loader } from '@/components/views/Loader/Loader'
 import { IDepartment } from '@/graphql/interfaces/IDepartment.interfaces'
 import { IPosition } from '@/graphql/interfaces/IPosition.interfaces'
 
-export const AppSelect: FC<TextFieldProps & { items: undefined | IPosition[] | IDepartment[] }> =
-  forwardRef(({ items, ...props }, ref) => {
+import { IAppSelectProps } from './Select.interfaces'
+
+
+export const AppSelect: FC<TextFieldProps & IAppSelectProps<IDepartment | IPosition>> = forwardRef(
+  ({ loading, items, ...props }, ref) => {
     return (
-      <TextField margin="normal" color="primary" select fullWidth inputRef={ref} {...props}>
+      <TextField
+        margin="normal"
+        color="primary"
+        select
+        fullWidth
+        inputRef={ref}
+        {...props}
+        InputProps={{
+          endAdornment: loading && (
+            <InputAdornment position="end">
+              <Loader
+                size={20}
+                sx={{ position: 'static', backgroundColor: 'white' }}
+                color="primary"
+              />
+            </InputAdornment>
+          )
+        }}
+      >
         <MenuItem disabled>{props.label}</MenuItem>
         {items &&
           items.map(item => (
@@ -17,4 +39,6 @@ export const AppSelect: FC<TextFieldProps & { items: undefined | IPosition[] | I
           ))}
       </TextField>
     )
-  })
+  }
+)
+

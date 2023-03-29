@@ -7,6 +7,7 @@ import { Avatar, Box, Grid, IconButton, Typography } from '@mui/material'
 
 import { IUserResult } from '@/appTypes/IResult.interfaces'
 import { EmployeeAvatarAlert } from '@/components/views/EmployeeAvatarAlert/EmployeeAvatarAlert'
+import { Loader } from '@/components/views/Loader/Loader'
 import { DROP_ZONE_ACCEPT_FILES } from '@/constants/dropZoneAcceptFile'
 import { authService } from '@/graphql/auth/authService'
 import { DELETE_AVATAR } from '@/graphql/user/deleteUserAvatarMutation'
@@ -25,7 +26,7 @@ export const EmployeeAvatarUpload: FC = () => {
     variables: { id: user?.id }
   })
 
-  const [uploadAvatarMutation] = useMutation(UPLOAD_AVATAR, {
+  const [uploadAvatarMutation, { loading: uploadLoading }] = useMutation(UPLOAD_AVATAR, {
     refetchQueries: () => [{ query: USER, variables: { id: user?.id } }]
   })
 
@@ -66,22 +67,29 @@ export const EmployeeAvatarUpload: FC = () => {
 
   return (
     <Grid sx={{ mt: 2 }} container spacing={2}>
-      <Grid item xs={5}>
-        {userData?.user.profile.avatar ? (
-          <AvatarWrapper>
-            <Avatar src={userData?.user.profile.avatar} sx={{ width: 150, height: 150, mb: 5 }} />
-            <IconButton onClick={handleFileRemove}>
-              <CloseIcon />
-            </IconButton>
-          </AvatarWrapper>
-        ) : (
-          <Avatar sx={{ width: 150, height: 150, mb: 5 }}>
-            <Typography variant="h3">
-              {getFirstChars(userData?.user.profile.full_name || userData?.user.email)}
-            </Typography>
-          </Avatar>
-        )}
+      <Grid item xs={6}>
+        <AvatarWrapper>
+          {userData?.user.profile.avatar ? (
+            <>
+              <Avatar src={userData?.user.profile.avatar} sx={{ width: 200, height: 200, mb: 5 }} />
+              <IconButton onClick={handleFileRemove}>
+                <CloseIcon />
+              </IconButton>
+            </>
+          ) : (
+            <Avatar sx={{ width: 200, height: 200, mb: 5 }}>
+              {uploadLoading ? (
+                <Loader sx={{ position: 'static' }} color="primary" />
+              ) : (
+                <Typography variant="h3">
+                  {getFirstChars(userData?.user.profile.full_name || userData?.user.email)}
+                </Typography>
+              )}
+            </Avatar>
+          )}
+        </AvatarWrapper>
       </Grid>
+
       <Grid item xs={6}>
         <DropZone {...getRootProps()} sx={{ p: 1 }} variant="outlined">
           <input {...getInputProps()} />
@@ -96,7 +104,7 @@ export const EmployeeAvatarUpload: FC = () => {
         {fileRejections.length > 0 && (
           <EmployeeAvatarAlert>
             {fileRejections.map(({ file, errors }) => (
-              <ErrorUploadMessage key={file.name} file={file} errors={errors} />
+              <ErrorUploadMessage key={file.name} errors={errors} />
             ))}
           </EmployeeAvatarAlert>
         )}

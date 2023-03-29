@@ -6,10 +6,6 @@ export interface IUserResult {
   user: IUser
 }
 
-export interface IUserResult {
-  user: IUser
-}
-
 export interface IDepartmentResult {
   departments: IDepartment[]
 }
