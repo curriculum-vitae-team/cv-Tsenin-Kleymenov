@@ -70,7 +70,7 @@
     "yup": "^1.0.2"
   },
   "lint-staged": {
-    "**/*.{js,jsx,ts,tsx,css,md,json}": [
+    "**/*.{js,jsx,ts,tsx,md,json}": [
       "npm run lint"
     ]
   }
