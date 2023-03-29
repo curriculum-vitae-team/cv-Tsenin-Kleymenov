@@ -33,7 +33,10 @@ export const PUBLIC_ROUTES: IRoute[] = [
 ]
 
 export const PRIVATE_ROUTES: IRoute[] = [
-  { path: AppNavigationRoutes.EMPLOYEES, element: <EmployeesPage /> },
+  {
+    path: AppNavigationRoutes.EMPLOYEES,
+    element: <EmployeesPage />
+  },
   {
     path: AppNavigationRoutes.PAGE_NOT_FOUND,
     element: <Navigate to={AppNavigationRoutes.EMPLOYEES} replace />

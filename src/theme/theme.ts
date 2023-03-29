@@ -5,7 +5,11 @@ import { sizes } from '@/constants/sizes'
 export const theme = createTheme({
   typography: {
     fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
-    fontSize: 16
+    fontSize: 16,
+
+    h5: {
+      fontSize: '16px'
+    }
   },
   palette: {
     primary: {
@@ -35,6 +39,13 @@ export const theme = createTheme({
         }
       }
     },
+    MuiContainer: {
+      styleOverrides: {
+        root: {
+          height: '100%'
+        }
+      }
+    },
     MuiTab: {
       styleOverrides: {
         root: {
@@ -50,6 +61,27 @@ export const theme = createTheme({
         textColorInherit: {
           opacity: 0.9,
           color: 'rgb(46, 46, 46)'
+        }
+      }
+    },
+    MuiTable: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#fff'
+        }
+      }
+    },
+    MuiTableHead: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#fff'
+        }
+      }
+    },
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          fontSize: '14px'
         }
       }
     }

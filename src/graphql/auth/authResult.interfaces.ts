@@ -1,4 +1,4 @@
-import { IUser } from '../interfaces/IUser.interfaces'
+import { IUser } from '@/graphql/interfaces/IUser.interfaces'
 
 export interface IAuthResult {
   user: IUser
@@ -10,5 +10,5 @@ export interface ILoginResult {
 }
 
 export interface ISignUpResult {
-  signUp: IAuthResult
+  signup: IAuthResult
 }

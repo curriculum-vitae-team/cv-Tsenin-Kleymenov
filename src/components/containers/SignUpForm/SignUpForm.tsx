@@ -21,7 +21,7 @@ export const SignUpForm: FC<ISignUpFormProps> = ({ signUp }) => {
   const onSubmit: SubmitHandler<IAuthFormValues> = async formData => {
     const { data } = await signUp({ variables: formData })
     if (data) {
-      authService.addUserToStorage(data.signUp.user, data.signUp.access_token)
+      authService.addUserToStorage(data.signup.user, data.signup.access_token)
     }
   }
 

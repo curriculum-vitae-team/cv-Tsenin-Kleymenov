@@ -31,7 +31,7 @@ export const UserMenu: FC = () => {
   return (
     <MenuContainer>
       <UserMenuInfo onClick={handleOpen}>
-        <Typography variant="h6">{user?.email}</Typography>
+        <Typography variant="h5">{user?.email}</Typography>
         <UserAvatar userEmail={user?.email} />
       </UserMenuInfo>
       <Menu
