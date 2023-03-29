@@ -10,6 +10,7 @@ import { Input } from '@/components/views/Input/Input'
 import { AppSelect } from '@/components/views/Select/Select'
 import { PROFILE_SCHEMA } from '@/constants/profileSchemaOptions'
 import { UPDATE_USER } from '@/graphql/user/updateUserMutation'
+import { convertCreatedAtDate } from '@/utils/createdAtFormat'
 
 import { IEmployeeProfileFormProps, IProfileFormValues } from './EmployeeProfileForm.interfaces'
 
@@ -51,12 +52,16 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({
     })
   }
 
+ 
+
+
+
   return (
     <Container maxWidth="md">
       <EmployeeAvatarUpload />
       <Typography>{currentUser?.profile.full_name}</Typography>
       <Typography>{currentUser?.email}</Typography>
-      <Typography>{currentUser?.created_at}</Typography>
+      <Typography>{`A member since ${convertCreatedAtDate(currentUser?.created_at)}`}</Typography>
       <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
         <Grid container spacing={2}>
           <Grid item xs={6}>
