@@ -32,9 +32,7 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
   } = useForm<IProfileFormValues>({
     defaultValues: {
       [FORM_KEYS.firstName]: currentUser?.profile.first_name || '',
-      [FORM_KEYS.lastName]: currentUser?.profile.last_name || '',
-      [FORM_KEYS.position]: currentUser?.position?.id || '',
-      [FORM_KEYS.department]: currentUser?.department?.id || ''
+      [FORM_KEYS.lastName]: currentUser?.profile.last_name || ''
     },
     mode: 'onSubmit',
     resolver: yupResolver(PROFILE_SCHEMA)
@@ -61,6 +59,8 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
       <EmployeeAvatarUpload />
       <Typography>{currentUser?.profile.full_name}</Typography>
       <Typography>{currentUser?.email}</Typography>
+      <Typography>{`Department: ${currentUser?.department_name || '-'}`}</Typography>
+      <Typography>{`Position: ${currentUser?.position_name || '-'}`}</Typography>
       <Typography>{`A member since ${convertCreatedAtDate(currentUser?.created_at)}`}</Typography>
       <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
         <Grid container spacing={2}>
@@ -77,9 +77,9 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
             <AppSelect
               variant="outlined"
               label="Department"
-              loading={departmentsLoading || positionsLoading}
+              loading={departmentsLoading}
               items={departmentsData?.departments}
-              defaultValue={currentUser?.department?.id || ''}
+              defaultValue={''}
               error={!!errors.department}
               helperText={errors?.department?.message}
               {...register(FORM_KEYS.department)}
@@ -98,9 +98,9 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
             <AppSelect
               variant="outlined"
               label="Position"
-              loading={departmentsLoading || positionsLoading}
+              loading={positionsLoading}
               items={positionsData?.positions}
-              defaultValue={currentUser?.position?.id || ''}
+              defaultValue={''}
               error={!!errors.position}
               helperText={errors?.position?.message}
               {...register(FORM_KEYS.position)}
@@ -109,7 +109,7 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
               type="submit"
               variant="contained"
               loading={userLoading}
-              disabled={!isDirty && isValid}
+              disabled={!isDirty && !isValid}
             >
               Confirm
             </Button>

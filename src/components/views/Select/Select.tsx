@@ -7,7 +7,6 @@ import { IPosition } from '@/graphql/interfaces/IPosition.interfaces'
 
 import { IAppSelectProps } from './Select.interfaces'
 
-
 export const AppSelect: FC<TextFieldProps & IAppSelectProps<IDepartment | IPosition>> = forwardRef(
   ({ loading, items, ...props }, ref) => {
     return (
@@ -41,4 +40,3 @@ export const AppSelect: FC<TextFieldProps & IAppSelectProps<IDepartment | IPosit
     )
   }
 )
-
