@@ -17,7 +17,7 @@ export const AppBreadcrumbs: FC<IAppBreadcrumbsProps> = ({ userId }) => {
     variables: { id: userId }
   })
   const location = useLocation()
-  const pathnameArray = useMemo(() => location.pathname.split('/').filter(item => item), [location])
+  const pathnameArray = location.pathname.split('/').filter(item => item)
   const profileLink = useMemo(
     () => `/${AppNavigationRoutes.EMPLOYEES}/${userId}/${AppNavigationRoutes.PROFILE}`,
     [userId]

@@ -9,11 +9,12 @@ import { authService } from '@/graphql/auth/authService'
 export const AppLayout: FC = () => {
   const { id } = useParams()
   const user = useReactiveVar(authService.user$)
+  const currentId = id || user?.id
 
   return (
     <>
       <HeaderAuthenticated />
-      <AppBreadcrumbs userId={id || user?.id} />
+      <AppBreadcrumbs userId={currentId} />
       <Outlet />
     </>
   )
