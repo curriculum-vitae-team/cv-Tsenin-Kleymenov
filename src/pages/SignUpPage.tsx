@@ -9,7 +9,7 @@ import { SIGN_UP } from '@/graphql/auth/authMutation'
 import { ISignUpResult } from '@/graphql/auth/authResult.interfaces'
 import { AppNavigationRoutes } from '@/router/paths'
 
-const SignUpPage: FC = () => {
+export const SignUpPage: FC = () => {
   const [signUp] = useMutation<ISignUpResult>(SIGN_UP)
 
   return (
@@ -21,5 +21,3 @@ const SignUpPage: FC = () => {
     </AuthFormContainer>
   )
 }
-
-export default SignUpPage

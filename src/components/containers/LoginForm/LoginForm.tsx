@@ -26,7 +26,7 @@ export const SignInForm: FC<ILoginFormProps> = ({ login }) => {
 
     if (data) {
       authService.addUserToStorage(data.login.user, data.login.access_token)
-      navigate(AppNavigationRoutes.EMPLOYEES)
+      navigate(`/${AppNavigationRoutes.EMPLOYEES}`)
     }
   }
 

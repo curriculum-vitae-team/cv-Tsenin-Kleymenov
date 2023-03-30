@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useQuery, useReactiveVar } from '@apollo/client'
 import { Logout } from '@mui/icons-material'
 import { Divider, Menu, Typography } from '@mui/material'
@@ -17,6 +18,8 @@ import { MenuContainer, PaperPropsUserMenu, UserMenuInfo } from './UserMenu.styl
 export const UserMenu: FC = () => {
   const user = useReactiveVar<IUser | null>(authService.user$)
 
+  const navigate = useNavigate()
+
   const { data } = useQuery<IUserResult>(USER, {
     variables: { id: user?.id }
   })
@@ -31,8 +34,9 @@ export const UserMenu: FC = () => {
     setAnchorEl(null)
   }
 
-  const handleLogout = (): void => {
-    authService.clearStorage()
+  const handleLogout = async (): Promise<void> => {
+    await authService.clearStorage()
+    navigate(`/${AppNavigationRoutes.LOGIN}`)
   }
 
   return (
@@ -57,12 +61,7 @@ export const UserMenu: FC = () => {
           return <UserMenuItem userId={user?.id} key={text} route={route} text={text} Icon={Icon} />
         })}
         <Divider />
-        <UserMenuItem
-          onClick={handleLogout}
-          route={AppNavigationRoutes.LOGIN}
-          text="Logout"
-          Icon={Logout}
-        />
+        <UserMenuItem onClick={handleLogout} text="Logout" Icon={Logout} />
       </Menu>
     </MenuContainer>
   )

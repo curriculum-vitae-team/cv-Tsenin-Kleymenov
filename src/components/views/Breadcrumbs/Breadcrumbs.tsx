@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useMemo } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
@@ -8,19 +8,20 @@ import { Breadcrumbs } from '@mui/material'
 
 import { USER } from '@/graphql/user/userQuery'
 import { AppNavigationRoutes } from '@/router/paths'
-import { getUserProfilePath } from '@/utils/getUserProfilePath'
 
+import { IAppBreadcrumbsProps } from './Breadcrumbs.interfaces'
 import { BreadcrumbsLink, UserBreadcrumbText } from './Breadcrumbs.styles'
 
-export const AppBreadcrumbs: FC = () => {
-  const location = useLocation()
-  const splitedPath = location.pathname.split('/')
-  const pathnameArray = splitedPath.filter(item => item)
-  const userId = splitedPath.filter(item => +item)[0]
-
+export const AppBreadcrumbs: FC<IAppBreadcrumbsProps> = ({ userId }) => {
   const { data: userData } = useQuery(USER, {
     variables: { id: userId }
   })
+  const location = useLocation()
+  const pathnameArray = useMemo(() => location.pathname.split('/').filter(item => item), [location])
+  const profileLink = useMemo(
+    () => `/${AppNavigationRoutes.EMPLOYEES}/${userId}/${AppNavigationRoutes.PROFILE}`,
+    [userId]
+  )
 
   return (
     <Breadcrumbs sx={{ my: 2 }} color="secondary" separator={<NavigateNextIcon />}>
@@ -31,10 +32,7 @@ export const AppBreadcrumbs: FC = () => {
       {pathnameArray.map((item, index, arr) => {
         if (item === userId) {
           return (
-            <BreadcrumbsLink
-              to={getUserProfilePath(AppNavigationRoutes.PROFILE, userData?.user)}
-              key={item}
-            >
+            <BreadcrumbsLink to={profileLink} key={item}>
               <UserBreadcrumbText>
                 <AccountCircleIcon sx={{ mr: 1 }} />
                 {userData?.user.profile.full_name || userData?.user.email}
@@ -44,7 +42,9 @@ export const AppBreadcrumbs: FC = () => {
         }
         return (
           <BreadcrumbsLink
-            to={getUserProfilePath(AppNavigationRoutes[item.toUpperCase()], userData?.user)}
+            to={
+              index === arr.length - 1 ? location.pathname : AppNavigationRoutes[item.toUpperCase()]
+            }
             key={item}
             color={index === arr.length - 1 ? 'info' : 'primary'}
           >

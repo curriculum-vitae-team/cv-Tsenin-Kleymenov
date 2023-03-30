@@ -12,7 +12,7 @@ export const USER_MENU_ITEMS: IMenuItems = {
   },
   settings: {
     text: 'Settings',
-    route: AppNavigationRoutes.SETTINGS_PROFILE,
+    route: AppNavigationRoutes.SETTINGS,
     icon: Settings
   }
 }
