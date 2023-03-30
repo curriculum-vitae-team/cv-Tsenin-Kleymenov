@@ -2,11 +2,17 @@ import { FC } from 'react'
 import { Link } from 'react-router-dom'
 import { ListItemIcon, ListItemText, MenuItem } from '@mui/material'
 
-import { IUserMenuItem } from './UserMenuItem.interfaces'
+import { AppNavigationRoutes } from '@/router/paths'
 
-export const UserMenuItem: FC<IUserMenuItem> = ({ onClick, route, Icon, text }) => {
+import { IUserMenuItemProps } from './UserMenuItem.interfaces'
+
+export const UserMenuItem: FC<IUserMenuItemProps> = ({ userId, onClick, route, Icon, text }) => {
   return (
-    <MenuItem onClick={onClick} component={Link} to={route}>
+    <MenuItem
+      onClick={onClick}
+      component={Link}
+      to={`/${AppNavigationRoutes.EMPLOYEES}/${userId}/${route}`}
+    >
       <ListItemIcon>
         <Icon />
       </ListItemIcon>

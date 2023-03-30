@@ -10,5 +10,5 @@ export interface ILoginResult {
 }
 
 export interface ISignUpResult {
-  signUp: IAuthResult
+  signup: IAuthResult
 }

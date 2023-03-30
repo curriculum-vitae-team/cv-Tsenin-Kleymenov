@@ -1,72 +1,121 @@
 import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { useMutation, useQuery } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Container, Grid, Typography } from '@mui/material'
+import { Box, Container, Grid, Typography } from '@mui/material'
 
+import { IDepartmentResult, IPositionResult } from '@/appTypes/IResult.interfaces'
+import { EmployeeAvatarUpload } from '@/components/containers/EmployeeAvatarUpload/EmployeeAvatarUpload'
 import { Button } from '@/components/views/Button/Button'
 import { Input } from '@/components/views/Input/Input'
 import { AppSelect } from '@/components/views/Select/Select'
-import { PROFILE_SCHEMA } from '@/constants/profileSchemaOptions'
+import { FORM_PROFILE_SCHEMA } from '@/constants/schemaOptions'
+import { DEPARTMENTS } from '@/graphql/departments/departmentsQuery'
+import { POSITIONS } from '@/graphql/positions/positionsQuery'
+import { UPDATE_USER } from '@/graphql/user/updateUserMutation'
+import { convertCreatedAtDate } from '@/utils/createdAtFormat'
 
-import { IFormValues } from './EmployeeProfileForm.interfaces'
+import {
+  FORM_PROFILE_KEYS,
+  IEmployeeProfileFormProps,
+  IProfileFormValues
+} from './EmployeeProfileForm.interfaces'
 
-export const EmployeeProfile: FC = () => {
+export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser }) => {
+  const { loading: departmentsLoading, data: departmentsData } =
+    useQuery<IDepartmentResult>(DEPARTMENTS)
+
+  const { loading: positionsLoading, data: positionsData } = useQuery<IPositionResult>(POSITIONS)
+  const [updateUser, { loading: userLoading }] = useMutation(UPDATE_USER)
+
   const {
     register,
     handleSubmit,
     formState: { errors, isDirty, isValid }
-  } = useForm<IFormValues>({ mode: 'onBlur', resolver: yupResolver(PROFILE_SCHEMA) })
+  } = useForm<IProfileFormValues>({
+    defaultValues: {
+      [FORM_PROFILE_KEYS.firstName]: currentUser?.profile.first_name || '',
+      [FORM_PROFILE_KEYS.lastName]: currentUser?.profile.last_name || ''
+    },
+    mode: 'onSubmit',
+    resolver: yupResolver(FORM_PROFILE_SCHEMA)
+  })
 
-  const onSubmit: SubmitHandler<IFormValues> = data => {
-    console.log(data)
+  const onSubmit: SubmitHandler<IProfileFormValues> = async formData => {
+    await updateUser({
+      variables: {
+        id: currentUser?.id,
+        user: {
+          profile: {
+            first_name: formData[FORM_PROFILE_KEYS.firstName],
+            last_name: formData[FORM_PROFILE_KEYS.lastName]
+          },
+          departmentId: formData[FORM_PROFILE_KEYS.department],
+          positionId: formData[FORM_PROFILE_KEYS.position]
+        }
+      }
+    })
   }
 
   return (
     <Container maxWidth="md">
-      <Typography>User</Typography>
-      <Typography>userEmail.@/gmail.com</Typography>
-      <Typography>23/12/2022</Typography>
+      <EmployeeAvatarUpload />
+      <Box sx={{ my: 1 }}>
+        <Typography>{currentUser?.profile.full_name}</Typography>
+        <Typography>{currentUser?.email}</Typography>
+        <Typography>{`Department: ${currentUser?.department_name || '-'}`}</Typography>
+        <Typography>{`Position: ${currentUser?.position_name || '-'}`}</Typography>
+        <Typography>{`A member since ${convertCreatedAtDate(currentUser?.created_at)}`}</Typography>
+      </Box>
       <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
         <Grid container spacing={2}>
           <Grid item xs={6}>
             <Input
-              variant="outlined"
               type="text"
+              variant="outlined"
               label="First Name"
               placeholder=" Enter your First Name"
-              error={!!errors.firstName}
-              helperText={errors?.firstName?.message}
-              {...register('firstName')}
+              error={!!errors[FORM_PROFILE_KEYS.firstName]}
+              helperText={errors?.[FORM_PROFILE_KEYS.firstName]?.message}
+              {...register(FORM_PROFILE_KEYS.firstName)}
             />
             <AppSelect
-              items={['Unit 1(JavaScript)', 'Unit 2(Java)', 'Unit 3(Python)']}
+              variant="outlined"
               label="Department"
-              variant="standard"
-              error={!!errors.department}
-              helperText={errors?.department?.message}
-              {...register('department')}
+              defaultValue={''}
+              loading={departmentsLoading}
+              items={departmentsData?.departments}
+              error={!!errors[FORM_PROFILE_KEYS.department]}
+              helperText={errors?.[FORM_PROFILE_KEYS.department]?.message}
+              {...register(FORM_PROFILE_KEYS.department)}
             />
           </Grid>
           <Grid item xs={6}>
             <Input
-              variant="outlined"
               type="text"
-              label="Last Name"
-              placeholder=" Enter your Last Name"
-              error={!!errors.lastName}
-              helperText={errors?.lastName?.message}
-              {...register('lastName')}
-            />
-
-            <AppSelect
-              items={['Unit 1(JavaScript)', 'Unit 2(Java)', 'Unit 3(Python)']}
-              label="Position"
               variant="outlined"
-              error={!!errors.position}
-              helperText={errors?.position?.message}
-              {...register('position')}
+              label="Last Name"
+              placeholder="Enter your Last Name"
+              error={!!errors[FORM_PROFILE_KEYS.lastName]}
+              helperText={errors?.[FORM_PROFILE_KEYS.lastName]?.message}
+              {...register(FORM_PROFILE_KEYS.lastName)}
             />
-            <Button type="submit" variant="contained" disabled={!isDirty && !isValid}>
+            <AppSelect
+              variant="outlined"
+              label="Position"
+              defaultValue={''}
+              loading={positionsLoading}
+              items={positionsData?.positions}
+              error={!!errors[FORM_PROFILE_KEYS.position]}
+              helperText={errors?.[FORM_PROFILE_KEYS.position]?.message}
+              {...register(FORM_PROFILE_KEYS.position)}
+            />
+            <Button
+              type="submit"
+              variant="contained"
+              loading={userLoading}
+              disabled={!isDirty && !isValid}
+            >
               Confirm
             </Button>
           </Grid>

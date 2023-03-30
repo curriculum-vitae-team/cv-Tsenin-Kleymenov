@@ -8,5 +8,7 @@ export const DropZone = styled(Paper)({
 
 export const AvatarWrapper = styled(Box)({
   display: 'flex',
-  alignItems: 'flex-start'
+  alignItems: 'flex-start',
+  justifyContent: 'flex-start',
+  position: 'relative'
 })
