@@ -1,25 +1,18 @@
 import { NavLink } from 'react-router-dom'
-import { Box, styled } from '@mui/material'
+import { styled } from '@mui/material'
 
-export const BreadcrumbsLink = styled(NavLink)({
+export const BreadcrumbsLink = styled(NavLink)(({ theme, color }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
   textDecoration: 'none',
-  color: 'inherit',
-  '&:active': {
-    color: 'red'
-  }
-})
+  fontSize: color === 'info' ? '1.1rem' : '1rem',
+  color: color === 'info' ? theme.palette.secondary.main : theme.palette.info.main
+}))
 
-export const StartCrumb = styled(Box)({
-  cursor: 'pointer',
+export const UserBreadcrumbText = styled('span')(({ theme }) => ({
+  color: theme.palette.primary.main,
+  opacity: 1,
   display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  textDecoration: 'none',
-  color: 'inherit',
-  '&:active': {
-    color: 'red'
-  }
-})
+  alignItems: 'center'
+}))

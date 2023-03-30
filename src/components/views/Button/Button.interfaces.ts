@@ -5,4 +5,5 @@ import { ButtonProps } from '@mui/material'
 export interface IButtonProps extends ButtonProps {
   component?: ForwardRefExoticComponent<LinkProps & RefAttributes<HTMLAnchorElement>>
   to?: string
+  loading?: boolean
 }

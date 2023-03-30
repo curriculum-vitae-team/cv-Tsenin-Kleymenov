@@ -2,10 +2,10 @@ import { FC, useState } from 'react'
 import CloseIcon from '@mui/icons-material/Close'
 import { Alert, Collapse, IconButton } from '@mui/material'
 
-import { IEmployeeAvatarAlert } from './EmployeeAvatarAlert.interfaces'
+import { IEmployeeAvatarAlertProps } from './EmployeeAvatarAlert.interfaces'
 
-export const EmployeeAvatarAlert: FC<IEmployeeAvatarAlert> = ({ children }) => {
-  const [open, setOpen] = useState(true)
+export const EmployeeAvatarAlert: FC<IEmployeeAvatarAlertProps> = ({ children }) => {
+  const [open, setOpen] = useState<boolean>(true)
 
   const handleClose = (): void => {
     setOpen(false)

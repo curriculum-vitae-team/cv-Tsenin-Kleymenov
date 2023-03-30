@@ -1,5 +1,6 @@
+import { IUser } from '@/graphql/interfaces/IUser.interfaces'
+
 export interface IUserAvatarProps {
   handleClick?: (event: React.MouseEvent<HTMLElement>) => void
-  userEmail?: string
-  src?: string
+  user?: IUser
 }

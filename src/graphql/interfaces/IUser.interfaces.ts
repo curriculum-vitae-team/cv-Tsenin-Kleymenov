@@ -9,7 +9,7 @@ export interface IUser {
   email: string
   is_verified?: boolean
   profile: IProfile
-  cvs?: Array<ICv>
+  cvs?: ICv[]
   department?: IDepartment
   department_name?: string
   position?: IPosition

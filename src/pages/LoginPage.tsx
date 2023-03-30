@@ -9,7 +9,7 @@ import { LOGIN } from '@/graphql/auth/authQuery'
 import { ILoginResult } from '@/graphql/auth/authResult.interfaces'
 import { AppNavigationRoutes } from '@/router/paths'
 
-const SignInPage: FC = () => {
+export const LoginPage: FC = () => {
   const [login] = useLazyQuery<ILoginResult>(LOGIN)
 
   return (
@@ -21,5 +21,3 @@ const SignInPage: FC = () => {
     </AuthFormContainer>
   )
 }
-
-export default SignInPage

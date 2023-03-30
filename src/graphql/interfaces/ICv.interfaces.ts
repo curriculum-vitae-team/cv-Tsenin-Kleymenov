@@ -9,8 +9,8 @@ export interface ICv {
   name: string
   description: string
   user: Omit<IUser, 'cvs'>
-  projects: Array<IProject>
-  skills: Array<ISkillMastery>
-  languages: Array<ILanguageProficiency>
+  projects: IProject[]
+  skills: ISkillMastery[]
+  languages: ILanguageProficiency[]
   is_template: boolean
 }

@@ -1,28 +1,39 @@
 import { FC } from 'react'
-import { Route, Routes } from 'react-router'
-import { Container } from '@mui/material'
+import { Navigate, Outlet, Route, Routes } from 'react-router'
 
-import { HeaderAuthenticated } from '@/components/containers/HeaderAuthenticated/HeaderAuthenticated'
-import { AppBreadcrumbs } from '@/components/views/Breadcrumbs/Breadcrumbs'
-import { ContentWrapper } from '@/components/views/ContentWrapper/ContentWrapper'
+import { EmployeesPage } from '@/pages/EmployeesPage'
+import { AppLayout } from '@/pages/Layouts/AppLayoutAuth'
+import { ProfileCVsPage } from '@/pages/ProfileCVsPage'
+import { ProfileEmployeePage } from '@/pages/ProfileEmployeePage'
+import { ProfileLanguagePage } from '@/pages/ProfileLanguagePage'
+import { ProfilePage } from '@/pages/ProfilePage'
+import { ProfileSkillsPage } from '@/pages/ProfileSkillsPage'
+import { ProjectsPage } from '@/pages/ProjectsPage'
 
-import { PRIVATE_ROUTES } from './paths'
+import { AppNavigationRoutes } from './paths'
 
 const AuthenticatedApp: FC = () => {
   return (
-    <>
-      <HeaderAuthenticated />
-      <ContentWrapper>
-        <Container maxWidth="xl">
-          <AppBreadcrumbs />
-          <Routes>
-            {PRIVATE_ROUTES.map(route => (
-              <Route path={route.path} element={route.element} key={route.path} />
-            ))}
-          </Routes>
-        </Container>
-      </ContentWrapper>
-    </>
+    <Routes>
+      <Route path={AppNavigationRoutes.INDEX} element={<AppLayout />}>
+        <Route index element={<Navigate to={`/${AppNavigationRoutes.EMPLOYEES}`} replace />} />
+
+        <Route path={AppNavigationRoutes.EMPLOYEES} element={<Outlet />}>
+          <Route index element={<EmployeesPage />} />
+
+          <Route path=":id" element={<ProfilePage />}>
+            <Route index element={<ProfilePage />} />
+            <Route path={AppNavigationRoutes.PROFILE} element={<ProfileEmployeePage />} />
+            <Route path={AppNavigationRoutes.SKILLS} element={<ProfileSkillsPage />} />
+            <Route path={AppNavigationRoutes.LANGUAGES} element={<ProfileLanguagePage />} />
+            <Route path={AppNavigationRoutes.CVS} element={<ProfileCVsPage />} />
+          </Route>
+        </Route>
+
+        <Route path={AppNavigationRoutes.PROJECTS} element={<ProjectsPage />} />
+      </Route>
+      <Route path="*" element={<Navigate to={`/${AppNavigationRoutes.EMPLOYEES}`} replace />} />
+    </Routes>
   )
 }
 

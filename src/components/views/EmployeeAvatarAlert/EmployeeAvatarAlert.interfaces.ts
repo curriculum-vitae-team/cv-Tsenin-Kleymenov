@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
 
-export interface IEmployeeAvatarAlert {
+export interface IEmployeeAvatarAlertProps {
   children: ReactNode
 }

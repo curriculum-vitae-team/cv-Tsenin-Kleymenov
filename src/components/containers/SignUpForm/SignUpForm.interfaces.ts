@@ -18,3 +18,8 @@ export interface ISignUpFormProps {
     >
   ) => Promise<FetchResult<ISignUpResult, Record<string, unknown>, Record<string, unknown>>>
 }
+
+export enum FORM_SIGNUP_KEYS {
+  email = 'email',
+  password = 'password'
+}

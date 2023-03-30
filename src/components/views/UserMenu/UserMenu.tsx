@@ -1,18 +1,28 @@
 import React, { FC, useState } from 'react'
-import { useReactiveVar } from '@apollo/client'
+import { useNavigate } from 'react-router-dom'
+import { useQuery, useReactiveVar } from '@apollo/client'
 import { Logout } from '@mui/icons-material'
 import { Divider, Menu, Typography } from '@mui/material'
 
+import { IUserResult } from '@/appTypes/IResult.interfaces'
 import { UserAvatar } from '@/components/views/UserAvatar/UserAvatar'
 import { UserMenuItem } from '@/components/views/UserMenuItem/UserMenuItem'
 import { USER_MENU_ITEMS } from '@/constants/userMenuItems'
 import { authService } from '@/graphql/auth/authService'
+import { IUser } from '@/graphql/interfaces/IUser.interfaces'
+import { USER } from '@/graphql/user/userQuery'
 import { AppNavigationRoutes } from '@/router/paths'
 
 import { MenuContainer, PaperPropsUserMenu, UserMenuInfo } from './UserMenu.styles'
 
 export const UserMenu: FC = () => {
-  const user = useReactiveVar(authService.user$)
+  const user = useReactiveVar<IUser | null>(authService.user$)
+
+  const navigate = useNavigate()
+
+  const { data } = useQuery<IUserResult>(USER, {
+    variables: { id: user?.id }
+  })
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 
@@ -24,20 +34,22 @@ export const UserMenu: FC = () => {
     setAnchorEl(null)
   }
 
-  const handleLogout = (): void => {
-    authService.clearStorage()
+  const handleLogout = async (): Promise<void> => {
+    await authService.clearStorage()
+    navigate(`/${AppNavigationRoutes.LOGIN}`)
   }
 
   return (
     <MenuContainer>
       <UserMenuInfo onClick={handleOpen}>
-        <Typography variant="h5">{user?.email}</Typography>
-        <UserAvatar userEmail={user?.email} />
+        <Typography variant="h5">{data?.user.profile.full_name || data?.user.email}</Typography>
+        <UserAvatar user={data?.user} />
       </UserMenuInfo>
       <Menu
         anchorEl={anchorEl}
         open={!!anchorEl}
         onClose={handleClose}
+        onClick={handleClose}
         PaperProps={{
           elevation: 0,
           sx: PaperPropsUserMenu
@@ -46,15 +58,10 @@ export const UserMenu: FC = () => {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         {Object.values(USER_MENU_ITEMS).map(({ route, text, icon: Icon }) => {
-          return <UserMenuItem key={text} route={route} text={text} Icon={Icon} />
+          return <UserMenuItem userId={user?.id} key={text} route={route} text={text} Icon={Icon} />
         })}
         <Divider />
-        <UserMenuItem
-          onClick={handleLogout}
-          route={AppNavigationRoutes.LOGIN}
-          text="Logout"
-          Icon={Logout}
-        />
+        <UserMenuItem onClick={handleLogout} text="Logout" Icon={Logout} />
       </Menu>
     </MenuContainer>
   )
