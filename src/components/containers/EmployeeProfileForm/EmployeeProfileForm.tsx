@@ -2,21 +2,24 @@ import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useMutation, useQuery } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Container, Grid, Typography } from '@mui/material'
+import { Box, Container, Grid, Typography } from '@mui/material'
 
 import { IDepartmentResult, IPositionResult } from '@/appTypes/IResult.interfaces'
 import { EmployeeAvatarUpload } from '@/components/containers/EmployeeAvatarUpload/EmployeeAvatarUpload'
 import { Button } from '@/components/views/Button/Button'
 import { Input } from '@/components/views/Input/Input'
 import { AppSelect } from '@/components/views/Select/Select'
-import { PROFILE_SCHEMA } from '@/constants/profileSchemaOptions'
+import { FORM_PROFILE_SCHEMA } from '@/constants/schemaOptions'
 import { DEPARTMENTS } from '@/graphql/departments/departmentsQuery'
 import { POSITIONS } from '@/graphql/positions/positionsQuery'
 import { UPDATE_USER } from '@/graphql/user/updateUserMutation'
 import { convertCreatedAtDate } from '@/utils/createdAtFormat'
 
-import { IEmployeeProfileFormProps, IProfileFormValues } from './EmployeeProfileForm.interfaces'
-import { FORM_KEYS } from './formKeys'
+import {
+  FORM_PROFILE_KEYS,
+  IEmployeeProfileFormProps,
+  IProfileFormValues
+} from './EmployeeProfileForm.interfaces'
 
 export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser }) => {
   const { loading: departmentsLoading, data: departmentsData } =
@@ -31,11 +34,11 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
     formState: { errors, isDirty, isValid }
   } = useForm<IProfileFormValues>({
     defaultValues: {
-      [FORM_KEYS.firstName]: currentUser?.profile.first_name || '',
-      [FORM_KEYS.lastName]: currentUser?.profile.last_name || ''
+      [FORM_PROFILE_KEYS.firstName]: currentUser?.profile.first_name || '',
+      [FORM_PROFILE_KEYS.lastName]: currentUser?.profile.last_name || ''
     },
     mode: 'onSubmit',
-    resolver: yupResolver(PROFILE_SCHEMA)
+    resolver: yupResolver(FORM_PROFILE_SCHEMA)
   })
 
   const onSubmit: SubmitHandler<IProfileFormValues> = async formData => {
@@ -44,11 +47,11 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
         id: currentUser?.id,
         user: {
           profile: {
-            first_name: formData.firstName,
-            last_name: formData.lastName
+            first_name: formData[FORM_PROFILE_KEYS.firstName],
+            last_name: formData[FORM_PROFILE_KEYS.lastName]
           },
-          departmentId: formData.department,
-          positionId: formData.position
+          departmentId: formData[FORM_PROFILE_KEYS.department],
+          positionId: formData[FORM_PROFILE_KEYS.position]
         }
       }
     })
@@ -57,53 +60,55 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
   return (
     <Container maxWidth="md">
       <EmployeeAvatarUpload />
-      <Typography>{currentUser?.profile.full_name}</Typography>
-      <Typography>{currentUser?.email}</Typography>
-      <Typography>{`Department: ${currentUser?.department_name || '-'}`}</Typography>
-      <Typography>{`Position: ${currentUser?.position_name || '-'}`}</Typography>
-      <Typography>{`A member since ${convertCreatedAtDate(currentUser?.created_at)}`}</Typography>
+      <Box sx={{ my: 1 }}>
+        <Typography>{currentUser?.profile.full_name}</Typography>
+        <Typography>{currentUser?.email}</Typography>
+        <Typography>{`Department: ${currentUser?.department_name || '-'}`}</Typography>
+        <Typography>{`Position: ${currentUser?.position_name || '-'}`}</Typography>
+        <Typography>{`A member since ${convertCreatedAtDate(currentUser?.created_at)}`}</Typography>
+      </Box>
       <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
         <Grid container spacing={2}>
           <Grid item xs={6}>
             <Input
-              variant="outlined"
               type="text"
+              variant="outlined"
               label="First Name"
               placeholder=" Enter your First Name"
-              error={!!errors.firstName}
-              helperText={errors?.firstName?.message}
-              {...register(FORM_KEYS.firstName)}
+              error={!!errors[FORM_PROFILE_KEYS.firstName]}
+              helperText={errors?.[FORM_PROFILE_KEYS.firstName]?.message}
+              {...register(FORM_PROFILE_KEYS.firstName)}
             />
             <AppSelect
               variant="outlined"
               label="Department"
+              defaultValue={''}
               loading={departmentsLoading}
               items={departmentsData?.departments}
-              defaultValue={''}
-              error={!!errors.department}
-              helperText={errors?.department?.message}
-              {...register(FORM_KEYS.department)}
+              error={!!errors[FORM_PROFILE_KEYS.department]}
+              helperText={errors?.[FORM_PROFILE_KEYS.department]?.message}
+              {...register(FORM_PROFILE_KEYS.department)}
             />
           </Grid>
           <Grid item xs={6}>
             <Input
-              variant="outlined"
               type="text"
+              variant="outlined"
               label="Last Name"
               placeholder="Enter your Last Name"
-              error={!!errors.lastName}
-              helperText={errors?.lastName?.message}
-              {...register(FORM_KEYS.lastName)}
+              error={!!errors[FORM_PROFILE_KEYS.lastName]}
+              helperText={errors?.[FORM_PROFILE_KEYS.lastName]?.message}
+              {...register(FORM_PROFILE_KEYS.lastName)}
             />
             <AppSelect
               variant="outlined"
               label="Position"
+              defaultValue={''}
               loading={positionsLoading}
               items={positionsData?.positions}
-              defaultValue={''}
-              error={!!errors.position}
-              helperText={errors?.position?.message}
-              {...register(FORM_KEYS.position)}
+              error={!!errors[FORM_PROFILE_KEYS.position]}
+              helperText={errors?.[FORM_PROFILE_KEYS.position]?.message}
+              {...register(FORM_PROFILE_KEYS.position)}
             />
             <Button
               type="submit"

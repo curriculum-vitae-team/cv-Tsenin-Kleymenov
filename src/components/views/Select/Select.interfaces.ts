@@ -1,5 +1,5 @@
 export interface IAppSelectProps<T> {
   loading: boolean
   label: string
-  items: T[] | undefined
+  items?: T[]
 }

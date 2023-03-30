@@ -1,8 +1,8 @@
 import { ITab } from '@/constants/tabs'
 
-export const filterRoutPath = (tabsLocation: string, tabs: ITab[]): string | undefined => {
+export const filterRoutPath = (path: string, tabs: ITab[]): string | undefined => {
   const tabsPathArray = tabs.map(tab => tab.path)
-  return tabsLocation
+  return path
     .split('/')
     .filter(item => tabsPathArray.includes(item))
     .toString()
