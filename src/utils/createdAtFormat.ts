@@ -1,4 +1,4 @@
-import { monthArray,weekDayArray } from '@/constants/date'
+import { monthArray, weekDayArray } from '@/constants/date'
 
 export const convertCreatedAtDate = (data: string | undefined): string => {
   const date = new Date(Number(data))
