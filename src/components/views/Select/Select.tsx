@@ -5,10 +5,10 @@ import { Loader } from '@/components/views/Loader/Loader'
 import { IDepartment } from '@/graphql/interfaces/IDepartment.interfaces'
 import { IPosition } from '@/graphql/interfaces/IPosition.interfaces'
 
-import { IAppSelectProps } from './Select.interfaces'
+import { IAppSelectProps, IMastery } from './Select.interfaces'
 
-export const AppSelect: FC<TextFieldProps & IAppSelectProps<IDepartment | IPosition>> = forwardRef(
-  ({ loading, items, ...props }, ref) => {
+export const AppSelect: FC<TextFieldProps & IAppSelectProps<IDepartment | IPosition | IMastery>> =
+  forwardRef(({ loading, items, ...props }, ref) => {
     return (
       <TextField
         margin="normal"
@@ -29,14 +29,13 @@ export const AppSelect: FC<TextFieldProps & IAppSelectProps<IDepartment | IPosit
           )
         }}
       >
-        <MenuItem disabled>{props.label}</MenuItem>
+        <MenuItem disabled value={props.label}></MenuItem>
         {items &&
           items.map(item => (
-            <MenuItem key={item.id} value={item.id}>
+            <MenuItem key={item.id} value={props.label === 'Skills' ? item.name : item.id}>
               {item.name}
             </MenuItem>
           ))}
       </TextField>
     )
-  }
-)
+  })
