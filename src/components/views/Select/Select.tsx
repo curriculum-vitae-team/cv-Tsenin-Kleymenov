@@ -5,38 +5,41 @@ import { Loader } from '@/components/views/Loader/Loader'
 import { IDepartment } from '@/graphql/interfaces/IDepartment.interfaces'
 import { IPosition } from '@/graphql/interfaces/IPosition.interfaces'
 
-import { IAppSelectProps } from './Select.interfaces'
+import { IAppSelectProps, IMastery, IProficiency } from './Select.interfaces'
 
-export const AppSelect: FC<TextFieldProps & IAppSelectProps<IDepartment | IPosition>> = forwardRef(
-  ({ loading, items, ...props }, ref) => {
-    return (
-      <TextField
-        margin="normal"
-        color="primary"
-        select
-        fullWidth
-        inputRef={ref}
-        {...props}
-        InputProps={{
-          endAdornment: loading && (
-            <InputAdornment position="end">
-              <Loader
-                size={20}
-                sx={{ position: 'static', backgroundColor: 'white' }}
-                color="primary"
-              />
-            </InputAdornment>
-          )
-        }}
-      >
-        <MenuItem disabled>{props.label}</MenuItem>
-        {items &&
-          items.map(item => (
-            <MenuItem key={item.id} value={item.id}>
-              {item.name}
-            </MenuItem>
-          ))}
-      </TextField>
-    )
-  }
-)
+export const AppSelect: FC<
+  TextFieldProps & IAppSelectProps<IDepartment | IPosition | IMastery | IProficiency>
+> = forwardRef(({ loading, items, ...props }, ref) => {
+  return (
+    <TextField
+      margin="normal"
+      color="primary"
+      select
+      fullWidth
+      inputRef={ref}
+      {...props}
+      InputProps={{
+        endAdornment: loading && (
+          <InputAdornment position="end">
+            <Loader
+              size={20}
+              sx={{ position: 'static', backgroundColor: 'white' }}
+              color="primary"
+            />
+          </InputAdornment>
+        )
+      }}
+    >
+      <MenuItem disabled>{props.label}</MenuItem>
+      {items &&
+        items.map(item => (
+          <MenuItem
+            key={item.id}
+            value={props.label === 'Skills' || props.label === 'Languages' ? item.name : item.id}
+          >
+            {item.name}
+          </MenuItem>
+        ))}
+    </TextField>
+  )
+})

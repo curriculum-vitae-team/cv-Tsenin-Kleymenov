@@ -1,5 +1,7 @@
 import { FC } from 'react'
 
+import { EmployeeLanguagesProfileForm } from '@/components/containers/EmployeeLanguagesProfileForm/EmployeeLanguagesProfileForm'
+
 export const ProfileLanguagePage: FC = () => {
-  return <div>ProfileLanguagesPage</div>
+  return <EmployeeLanguagesProfileForm/>
 }
