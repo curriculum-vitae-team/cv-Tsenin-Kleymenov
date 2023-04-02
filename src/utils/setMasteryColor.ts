@@ -1,4 +1,4 @@
-import { SKILLS_MASTERY } from '@/components/containers/EmployeeSkillsProfileForm/EmployeeSkillsProfileForm.styles'
+import { SKILLS_MASTERY } from '@/components/containers/EmployeeSkillsProfileForm/EmployeeSkillsProfileForm.interfaces'
 import { theme } from '@/theme/theme'
 
 export const setMasteryColor = (mastery: string): string => {

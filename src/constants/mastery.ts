@@ -1,4 +1,4 @@
-import { SKILLS_MASTERY } from '@/components/containers/EmployeeSkillsProfileForm/EmployeeSkillsProfileForm.styles'
+import { SKILLS_MASTERY } from '@/components/containers/EmployeeSkillsProfileForm/EmployeeSkillsProfileForm.interfaces'
 
 export const MASTERY_ARRAY = [
   { id: SKILLS_MASTERY.NOVICE, name: SKILLS_MASTERY.NOVICE },

@@ -12,7 +12,7 @@ import { createSkillsArray } from '@/utils/createSkillsArray'
 import { setMasteryColor } from '@/utils/setMasteryColor'
 
 import { ISkillItemProps } from './SkillItem.interfaces'
-import { MasteryBox, SkillBox } from './SkillItem.styles'
+import { MasteryBox, SkillBox, SkillItemContainer } from './SkillItem.styles'
 
 export const SkillItem: FC<ISkillItemProps> = ({ skillName, skillMastery }) => {
   const { id: userId } = useParams()
@@ -44,7 +44,7 @@ export const SkillItem: FC<ISkillItemProps> = ({ skillName, skillMastery }) => {
   }
 
   return (
-    <Box sx={{ m: 1, display: 'inline-flex', alignItems: 'center' }}>
+    <SkillItemContainer>
       <SkillBox>
         <Typography>{skillName}</Typography>
         <MasteryBox mastery_color={setMasteryColor(skillMastery)}>
@@ -62,6 +62,6 @@ export const SkillItem: FC<ISkillItemProps> = ({ skillName, skillMastery }) => {
           <ClearIcon sx={{ '&:hover': { cursor: 'pointer' } }} />
         )}
       </Box>
-    </Box>
+    </SkillItemContainer>
   )
 }

@@ -108,7 +108,6 @@ export const EmployeeSkillsProfileForm: FC = () => {
           You don't have any skills
         </Typography>
       )}
-
       <ModalWindow modalOpen={open} closeModal={handleClose}>
         <Container sx={{ minWidth: '500px' }}>
           <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">

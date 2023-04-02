@@ -2,6 +2,12 @@ import { Box, styled } from '@mui/material'
 
 import { IBadgeStyled } from './SkillItem.interfaces'
 
+export const SkillItemContainer = styled(Box)(() => ({
+  margin: '5px',
+  display: 'inline-flex',
+  alignItems: 'center'
+}))
+
 export const SkillBox = styled(Box)(({ theme }) => ({
   display: 'inline-flex',
   alignItems: 'center',
