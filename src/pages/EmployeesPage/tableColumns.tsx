@@ -43,7 +43,7 @@ export const tableColumns: IColumn<IUser>[] = [
   {
     id: 7,
     header: '',
-    render: item => <EmployeesDropdown item={item} />,
+    render: item => <EmployeesDropdown userId={item.id} />,
     sortable: false
   }
 ]

@@ -8,12 +8,12 @@ import { BasicMenu } from '../BasicMenu/BasicMenu'
 
 import { IEmployeesDropdownProps } from './EmployeesDropdown.interfaces'
 
-export const EmployeesDropdown: FC<IEmployeesDropdownProps> = ({ item }) => {
+export const EmployeesDropdown: FC<IEmployeesDropdownProps> = ({ userId }) => {
   return (
     <BasicMenu>
       <MenuItem>
         <Link
-          to={`${item.id}/${AppNavigationRoutes.PROFILE}`}
+          to={`${userId}/${AppNavigationRoutes.PROFILE}`}
           style={{ color: 'inherit', textDecoration: 'none' }}
         >
           Profile

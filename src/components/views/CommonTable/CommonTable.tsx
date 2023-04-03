@@ -8,7 +8,7 @@ import {
   TableRow,
   TableSortLabel
 } from '@mui/material'
-import get from 'lodash.get'
+import get from 'lodash/get'
 
 import { Loader } from '../Loader/Loader'
 
