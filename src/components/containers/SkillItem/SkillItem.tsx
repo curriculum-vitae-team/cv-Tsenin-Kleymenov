@@ -6,10 +6,10 @@ import { Box, Typography } from '@mui/material'
 
 import { IUserResult } from '@/appTypes/IResult.interfaces'
 import { Loader } from '@/components/views/Loader/Loader'
+import { MASTERY_COLORS } from '@/constants/mastery'
 import { UPDATE_USER } from '@/graphql/user/updateUserMutation'
 import { USER } from '@/graphql/user/userQuery'
 import { createSkillsArray } from '@/utils/createSkillsArray'
-import { setMasteryColor } from '@/utils/setMasteryColor'
 
 import { ISkillItemProps } from './SkillItem.interfaces'
 import { MasteryBox, SkillBox, SkillItemContainer } from './SkillItem.styles'
@@ -47,7 +47,7 @@ export const SkillItem: FC<ISkillItemProps> = ({ skillName, skillMastery }) => {
     <SkillItemContainer>
       <SkillBox>
         <Typography>{skillName}</Typography>
-        <MasteryBox mastery_color={setMasteryColor(skillMastery)}>
+        <MasteryBox mastery_color={MASTERY_COLORS[skillMastery]}>
           <Typography>{skillMastery}</Typography>
         </MasteryBox>
       </SkillBox>

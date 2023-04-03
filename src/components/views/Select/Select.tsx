@@ -32,7 +32,7 @@ export const AppSelect: FC<TextFieldProps & IAppSelectProps<IDepartment | IPosit
         <MenuItem disabled value={props.label}></MenuItem>
         {items &&
           items.map(item => (
-            <MenuItem key={item.id} value={props.label === 'Skills' ? item.name : item.id}>
+            <MenuItem key={item.id} value={item.id}>
               {item.name}
             </MenuItem>
           ))}

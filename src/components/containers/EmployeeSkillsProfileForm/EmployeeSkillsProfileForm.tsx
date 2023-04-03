@@ -1,92 +1,35 @@
-import { FC, useEffect, useState } from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { FC, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { useMutation, useQuery } from '@apollo/client'
-import { yupResolver } from '@hookform/resolvers/yup'
+import { useQuery } from '@apollo/client'
 import { Container, Divider, Typography } from '@mui/material'
 
-import { ISkillsResult, IUserResult } from '@/appTypes/IResult.interfaces'
+import { IUserResult } from '@/appTypes/IResult.interfaces'
 import { Button } from '@/components/views/Button/Button'
-import { AppSelect } from '@/components/views/Select/Select'
+import { SkillRow } from '@/components/views/SkillRow/SkillRow'
 import { MASTERY_ARRAY } from '@/constants/mastery'
-import { FORM_PROFILE_SKILLS_SCHEMA } from '@/constants/schemaOptions'
-import { SKILLS } from '@/graphql/skills/skillsQuery'
-import { UPDATE_USER } from '@/graphql/user/updateUserMutation'
+import { ISkillMastery } from '@/graphql/interfaces/ISkillMastery.interfaces'
 import { USER } from '@/graphql/user/userQuery'
-import { createSkillsArray } from '@/utils/createSkillsArray'
 
-import { ModalWindow } from '../../views/ModalWindow/ModalWindow'
-import { SkillRow } from '../../views/SkillRow/SkillRow'
-
-import {
-  FORM_PROFILE_SKILLS_KEYS,
-  IProfileSkillFormValues
-} from './EmployeeSkillsProfileForm.interfaces'
+import { SkillsModal } from './SkillsModal/SkillsModal'
 
 export const EmployeeSkillsProfileForm: FC = () => {
-  const { id: userId } = useParams()
   const [open, setOpen] = useState(false)
+  const { id: userId } = useParams()
   const { data: userData } = useQuery<IUserResult>(USER, {
     variables: { id: userId }
   })
-  const { loading: loadingSkills, data: skillsData } = useQuery<ISkillsResult>(SKILLS)
-  const [updateUser, { loading: userLoading }] = useMutation(UPDATE_USER, {
-    refetchQueries: () => [{ query: USER, variables: { id: userId } }]
-  })
-  
-  const skillsNameArray = userData?.user.profile.skills.map(item => item.skill_name)
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors, isSubmitSuccessful, isValid }
-  } = useForm<IProfileSkillFormValues>({
-    defaultValues: {
-      [FORM_PROFILE_SKILLS_KEYS.skills]: '',
-      [FORM_PROFILE_SKILLS_KEYS.mastery]: ''
-    },
-    mode: 'onSubmit',
-    resolver: yupResolver(FORM_PROFILE_SKILLS_SCHEMA)
+  const masteryArrayWithSkills = MASTERY_ARRAY.map(mastery => {
+    return {
+      name: mastery.name,
+      [mastery.name]: userData?.user?.profile?.skills.filter(
+        skill => skill.mastery === mastery.name
+      )
+    }
   })
 
-  const onSubmit: SubmitHandler<IProfileSkillFormValues> = async formData => {
-    await updateUser({
-      variables: {
-        id: userId,
-        user: {
-          profile: {
-            first_name: userData?.user?.profile.first_name || '',
-            last_name: userData?.user?.profile.last_name || '',
-            skills: [
-              {
-                skill_name: formData[FORM_PROFILE_SKILLS_KEYS.skills],
-                mastery: formData[FORM_PROFILE_SKILLS_KEYS.mastery]
-              },
-              ...createSkillsArray(userData?.user?.profile.skills)
-            ]
-          },
-          departmentId: userData?.user?.department?.id || '',
-          positionId: userData?.user?.position?.id || ''
-        }
-      }
-    })
-    setOpen(false)
-  }
-
-  useEffect(() => {
-    reset({
-      [FORM_PROFILE_SKILLS_KEYS.skills]: '',
-      [FORM_PROFILE_SKILLS_KEYS.mastery]: ''
-    })
-  }, [isSubmitSuccessful])
-
-  const handleClickOpen = (): void => {
-    setOpen(true)
-  }
-
-  const handleClose = (): void => {
-    setOpen(false)
+  const handleSkillModalClose = (): void => {
+    setOpen(prev => !prev)
   }
 
   return (
@@ -94,48 +37,23 @@ export const EmployeeSkillsProfileForm: FC = () => {
       <Button
         sx={{ maxWidth: 170, my: 3, alignSelf: 'flex-end' }}
         variant="contained"
-        onClick={handleClickOpen}
+        onClick={handleSkillModalClose}
       >
         + Add skills
       </Button>
       <Divider />
-      {skillsNameArray?.length ? (
-        MASTERY_ARRAY.map(item => (
-          <SkillRow key={item.id} skills={userData?.user?.profile?.skills} mastery={item.name} />
+      {userData?.user?.profile.skills.length ? (
+        masteryArrayWithSkills.map(item => (
+          <SkillRow key={item.name} filteredSkills={item[item.name] as ISkillMastery[]} />
         ))
       ) : (
         <Typography sx={{ my: 2 }} variant="h5">
           You don't have any skills
         </Typography>
       )}
-      <ModalWindow modalOpen={open} closeModal={handleClose}>
-        <Container sx={{ minWidth: '500px' }}>
-          <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
-            <AppSelect
-              variant="outlined"
-              label="Skills"
-              defaultValue={''}
-              loading={loadingSkills}
-              items={skillsData?.skills.filter(element => !skillsNameArray?.includes(element.name))}
-              error={!!errors[FORM_PROFILE_SKILLS_KEYS.skills]}
-              helperText={errors?.[FORM_PROFILE_SKILLS_KEYS.skills]?.message}
-              {...register(FORM_PROFILE_SKILLS_KEYS.skills)}
-            />
-            <AppSelect
-              variant="outlined"
-              label="Mastery"
-              defaultValue={''}
-              items={MASTERY_ARRAY}
-              error={!!errors[FORM_PROFILE_SKILLS_KEYS.mastery]}
-              helperText={errors?.[FORM_PROFILE_SKILLS_KEYS.mastery]?.message}
-              {...register(FORM_PROFILE_SKILLS_KEYS.mastery)}
-            />
-            <Button loading={userLoading} type="submit" variant="contained" disabled={!isValid}>
-              Save
-            </Button>
-          </form>
-        </Container>
-      </ModalWindow>
+      {open && (
+        <SkillsModal open={open} userData={userData?.user} handleClose={handleSkillModalClose} />
+      )}
     </Container>
   )
 }

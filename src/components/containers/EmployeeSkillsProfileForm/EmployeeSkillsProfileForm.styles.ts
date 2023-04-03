@@ -10,4 +10,3 @@ export const Badge = styled(MUIBadge)<IBadgeStyled>(({ theme, mastery }) => ({
     color: theme.palette.secondary.main
   }
 }))
-
