@@ -1,5 +1,7 @@
 import { FC, forwardRef } from 'react'
-import { TextField, TextFieldProps } from '@mui/material'
+import { InputAdornment, TextField, TextFieldProps } from '@mui/material'
+
+import { IInputWithIcon } from './Input.interfaces'
 
 export const Input: FC<TextFieldProps> = forwardRef((props, ref) => {
   return (
@@ -13,3 +15,14 @@ export const Input: FC<TextFieldProps> = forwardRef((props, ref) => {
     />
   )
 })
+
+export const InputWithIcon: FC<IInputWithIcon> = ({ icon, position, ...props }) => {
+  return (
+    <TextField
+      InputProps={{
+        startAdornment: <InputAdornment position={position}>{icon}</InputAdornment>
+      }}
+      {...props}
+    />
+  )
+}

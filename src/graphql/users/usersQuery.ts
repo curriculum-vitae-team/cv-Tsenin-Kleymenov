@@ -8,6 +8,7 @@ export const GET_EMPLOYEES = gql`
       profile {
         first_name
         last_name
+        full_name
         avatar
       }
       department_name
