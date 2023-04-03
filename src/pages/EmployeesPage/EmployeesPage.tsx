@@ -38,6 +38,7 @@ export const EmployeesPage: FC = () => {
         style={{ marginBottom: '20px' }}
         value={searchedName}
         onChange={handleSearchUser}
+        placeholder="Search"
       />
       <CommonTable<IUser>
         label="employees"
