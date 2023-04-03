@@ -12,7 +12,7 @@ import { USER } from '@/graphql/user/userQuery'
 
 import { SkillsModal } from './SkillsModal/SkillsModal'
 
-export const EmployeeSkillsProfileForm: FC = () => {
+export const EmployeeSkillsProfile: FC = () => {
   const [open, setOpen] = useState(false)
   const { id: userId } = useParams()
   const { data: userData } = useQuery<IUserResult>(USER, {

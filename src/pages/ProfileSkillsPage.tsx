@@ -1,7 +1,7 @@
 import { FC } from 'react'
 
-import { EmployeeSkillsProfileForm } from '@/components/containers/EmployeeSkillsProfileForm/EmployeeSkillsProfileForm'
+import { EmployeeSkillsProfile } from '@/components/containers/EmployeeSkillsProfile/EmployeeSkillsProfile'
 
 export const ProfileSkillsPage: FC = () => {
-  return <EmployeeSkillsProfileForm />
+  return <EmployeeSkillsProfile />
 }

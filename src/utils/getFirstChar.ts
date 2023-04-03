@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 
-export const getFirstChars = (string: string | undefined): string | ReactNode => {
+export const getFirstChars = (string?: string): string | ReactNode => {
   if (string) {
     return string
       .split(' ')

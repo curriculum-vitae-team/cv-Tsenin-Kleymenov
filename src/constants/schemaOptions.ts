@@ -1,7 +1,7 @@
 import * as yup from 'yup'
 
 import { FORM_PROFILE_KEYS } from '@/components/containers/EmployeeProfileForm/EmployeeProfileForm.interfaces'
-import { FORM_PROFILE_SKILLS_KEYS } from '@/components/containers/EmployeeSkillsProfileForm/SkillsModal/SkillsModal.interfaces'
+import { FORM_PROFILE_SKILLS_KEYS } from '@/components/containers/EmployeeSkillsProfile/SkillsModal/SkillsModal.interfaces'
 import { FORM_LOGIN_KEYS } from '@/components/containers/LoginForm/LoginForm.interfaces'
 import { FORM_SIGNUP_KEYS } from '@/components/containers/SignUpForm/SignUpForm.interfaces'
 

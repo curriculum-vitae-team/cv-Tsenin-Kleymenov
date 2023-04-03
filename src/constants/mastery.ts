@@ -1,4 +1,4 @@
-import { SKILLS_MASTERY } from '@/components/containers/EmployeeSkillsProfileForm/EmployeeSkillsProfileForm.interfaces'
+import { SKILLS_MASTERY } from '@/components/containers/EmployeeSkillsProfile/EmployeeSkillsProfile.interfaces'
 
 interface IMastery {
   id: string
