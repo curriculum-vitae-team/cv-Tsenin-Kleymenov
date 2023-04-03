@@ -5,10 +5,10 @@ import { Loader } from '@/components/views/Loader/Loader'
 import { IDepartment } from '@/graphql/interfaces/IDepartment.interfaces'
 import { IPosition } from '@/graphql/interfaces/IPosition.interfaces'
 
-import { IAppSelectProps, IMastery, IProficiency } from './Select.interfaces'
+import { IAppSelectProps, IProficiency } from './Select.interfaces'
 
 export const AppSelect: FC<
-  TextFieldProps & IAppSelectProps<IDepartment | IPosition | IMastery | IProficiency>
+  TextFieldProps & IAppSelectProps<IDepartment | IPosition | IProficiency>
 > = forwardRef(({ loading, items, ...props }, ref) => {
   return (
     <TextField
@@ -33,10 +33,7 @@ export const AppSelect: FC<
       <MenuItem disabled>{props.label}</MenuItem>
       {items &&
         items.map(item => (
-          <MenuItem
-            key={item.id}
-            value={props.label === 'Skills' || props.label === 'Languages' ? item.name : item.id}
-          >
+          <MenuItem key={item.id} value={item.id}>
             {item.name}
           </MenuItem>
         ))}

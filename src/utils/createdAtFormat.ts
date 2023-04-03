@@ -1,6 +1,6 @@
 import { monthArray, weekDayArray } from '@/constants/date'
 
-export const convertCreatedAtDate = (data: string | undefined): string => {
+export const convertCreatedAtDate = (data?: string): string => {
   const date = new Date(Number(data))
   const createdAtWeekDay = date.getDay()
   const createdAtMonthDay = date.getDate()

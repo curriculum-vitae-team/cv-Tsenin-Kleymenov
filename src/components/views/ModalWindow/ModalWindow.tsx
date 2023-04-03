@@ -3,12 +3,12 @@ import ClearIcon from '@mui/icons-material/Clear'
 import { DialogContent } from '@mui/material'
 
 import { IModalWindowProps } from './ModalWindow.interfaces'
-import { CloseButton,Dialog } from './ModalWindow.styles'
+import { CloseButton, Dialog } from './ModalWindow.styles'
 
-export const ModalWindow: FC<IModalWindowProps> = ({ children, modalOpen, closeModal }) => {
+export const ModalWindow: FC<IModalWindowProps> = ({ children, open, onClose }) => {
   return (
-    <Dialog onClose={closeModal} open={modalOpen}>
-      <CloseButton onClick={closeModal}>
+    <Dialog open={open} onClose={onClose}>
+      <CloseButton onClick={onClose}>
         <ClearIcon />
       </CloseButton>
       <DialogContent>{children}</DialogContent>
