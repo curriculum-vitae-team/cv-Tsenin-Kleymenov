@@ -4,7 +4,7 @@ import { useMutation, useQuery } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Container } from '@mui/material'
 
-import { ILanguagesResult} from '@/appTypes/IResult.interfaces'
+import { ILanguagesResult } from '@/appTypes/IResult.interfaces'
 import { Button } from '@/components/views/Button/Button'
 import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
 import { AppSelect } from '@/components/views/Select/Select'
@@ -14,10 +14,14 @@ import { LANGUAGES } from '@/graphql/languages/languagesQuery'
 import { UPDATE_USER } from '@/graphql/user/updateUserMutation'
 import { createLanguagesArray } from '@/utils/createLanguagesArray'
 
-import { FORM_PROFILE_LANGUAGES_KEYS, ILanguagesModalProps, IProfileLanguagesFormValues } from './LanguagesModal.interfaces'
+import {
+  FORM_PROFILE_LANGUAGES_KEYS,
+  ILanguagesModalProps,
+  IProfileLanguagesFormValues
+} from './LanguagesModal.interfaces'
 
 export const LanguagesModal: FC<ILanguagesModalProps> = ({ userData, open, handleClose }) => {
-   const { loading: loadingLanguages, data: languagesData } = useQuery<ILanguagesResult>(LANGUAGES)
+  const { loading: loadingLanguages, data: languagesData } = useQuery<ILanguagesResult>(LANGUAGES)
   const [updateUser, { loading: userLoading }] = useMutation(UPDATE_USER)
 
   const languagesNameArray = userData?.profile.languages.map(item => item.language_name)
@@ -30,50 +34,50 @@ export const LanguagesModal: FC<ILanguagesModalProps> = ({ userData, open, handl
       }
     })
 
-    const {
-      register,
-      handleSubmit,
-      reset,
-      formState: { errors, isSubmitSuccessful, isValid }
-    } = useForm<IProfileLanguagesFormValues>({
-      defaultValues: {
-        [FORM_PROFILE_LANGUAGES_KEYS.languages]: '',
-        [FORM_PROFILE_LANGUAGES_KEYS.proficiency]: ''
-      },
-      mode: 'onSubmit',
-      resolver: yupResolver(FORM_PROFILE_LANGUAGES_SCHEMA)
-    })
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitSuccessful, isValid }
+  } = useForm<IProfileLanguagesFormValues>({
+    defaultValues: {
+      [FORM_PROFILE_LANGUAGES_KEYS.languages]: '',
+      [FORM_PROFILE_LANGUAGES_KEYS.proficiency]: ''
+    },
+    mode: 'onSubmit',
+    resolver: yupResolver(FORM_PROFILE_LANGUAGES_SCHEMA)
+  })
 
-    const onSubmit: SubmitHandler<IProfileLanguagesFormValues> = async formData => {
-      await updateUser({
-        variables: {
-          id: userData?.id,
-          user: {
-            profile: {
-              first_name: userData?.profile.first_name || '',
-              last_name: userData?.profile.last_name || '',
-              languages: [
-                {
-                  language_name: formData[FORM_PROFILE_LANGUAGES_KEYS.languages],
-                  proficiency: formData[FORM_PROFILE_LANGUAGES_KEYS.proficiency]
-                },
-                ...createLanguagesArray(userData?.profile.languages)
-              ]
-            },
-            departmentId: userData?.department?.id || '',
-            positionId: userData?.position?.id || ''
-          }
+  const onSubmit: SubmitHandler<IProfileLanguagesFormValues> = async formData => {
+    await updateUser({
+      variables: {
+        id: userData?.id,
+        user: {
+          profile: {
+            first_name: userData?.profile.first_name || '',
+            last_name: userData?.profile.last_name || '',
+            languages: [
+              {
+                language_name: formData[FORM_PROFILE_LANGUAGES_KEYS.languages],
+                proficiency: formData[FORM_PROFILE_LANGUAGES_KEYS.proficiency]
+              },
+              ...createLanguagesArray(userData?.profile.languages)
+            ]
+          },
+          departmentId: userData?.department?.id || '',
+          positionId: userData?.position?.id || ''
         }
-      })
-      handleClose()
-    }
+      }
+    })
+    handleClose()
+  }
 
-    useEffect(() => {
-      reset({
-        [FORM_PROFILE_LANGUAGES_KEYS.languages]: '',
-        [FORM_PROFILE_LANGUAGES_KEYS.proficiency]: ''
-      })
-    }, [isSubmitSuccessful])
+  useEffect(() => {
+    reset({
+      [FORM_PROFILE_LANGUAGES_KEYS.languages]: '',
+      [FORM_PROFILE_LANGUAGES_KEYS.proficiency]: ''
+    })
+  }, [isSubmitSuccessful])
 
   return (
     <ModalWindow open={open} onClose={handleClose}>

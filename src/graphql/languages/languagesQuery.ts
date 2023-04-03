@@ -2,7 +2,7 @@ import { gql } from '@apollo/client'
 
 export const LANGUAGES = gql`
   query Languages {
-   languages {
+    languages {
       id
       created_at
       iso2

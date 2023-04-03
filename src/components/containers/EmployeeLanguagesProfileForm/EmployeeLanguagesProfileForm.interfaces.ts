@@ -6,4 +6,3 @@ export enum PROFICIENCY {
   C1 = 'c1',
   C2 = 'c2'
 }
-

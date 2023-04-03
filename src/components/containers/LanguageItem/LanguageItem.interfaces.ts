@@ -1,4 +1,4 @@
 export interface ILanguageItemProps {
-   languageName: string
-   languageProficiency: string
- }
+  languageName: string
+  languageProficiency: string
+}

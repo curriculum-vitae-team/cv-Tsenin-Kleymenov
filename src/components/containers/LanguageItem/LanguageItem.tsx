@@ -10,7 +10,7 @@ import { USER } from '@/graphql/user/userQuery'
 import { createLanguagesArray } from '@/utils/createLanguagesArray'
 
 import { ILanguageItemProps } from './LanguageItem.interfaces'
-import { CloseButton,LanguageItemContainer } from './LanguageItem.styles'
+import { CloseButton, LanguageItemContainer } from './LanguageItem.styles'
 
 export const LanguageItem: FC<ILanguageItemProps> = ({ languageName, languageProficiency }) => {
   const { id: userId } = useParams()

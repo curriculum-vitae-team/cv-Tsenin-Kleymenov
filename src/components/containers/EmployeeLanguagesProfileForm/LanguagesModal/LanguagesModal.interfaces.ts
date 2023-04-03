@@ -15,4 +15,3 @@ export interface IProfileLanguagesFormValues {
   [FORM_PROFILE_LANGUAGES_KEYS.languages]: string
   [FORM_PROFILE_LANGUAGES_KEYS.proficiency]: string
 }
-
