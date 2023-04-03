@@ -3,4 +3,5 @@ export interface IColumn<Row> {
   header?: string
   field?: string
   render?: (item: Row) => React.ReactNode
+  sortable: boolean
 }

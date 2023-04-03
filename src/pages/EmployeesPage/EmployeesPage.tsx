@@ -8,7 +8,7 @@ import { IUsersResult } from '@/graphql/users/usersResult.interface'
 
 import { tableColumns } from './tableColumns'
 
-const EmployeesPage: FC = () => {
+export const EmployeesPage: FC = () => {
   const { data, loading, error } = useQuery<IUsersResult>(GET_EMPLOYEES)
 
   return (
@@ -21,5 +21,3 @@ const EmployeesPage: FC = () => {
     />
   )
 }
-
-export default EmployeesPage

@@ -1,4 +1,13 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
+import { useState } from 'react'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TableSortLabel
+} from '@mui/material'
 import get from 'lodash.get'
 
 import { Loader } from '../Loader/Loader'
@@ -13,6 +22,33 @@ export const CommonTable = <T extends { id: string }>({
   isLoading,
   error
 }: ICommonTableProps<T>): JSX.Element => {
+  const [orderBy, setOrderBy] = useState<string | null>('department_name')
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
+
+  const handleSortColumnClick = (path: string): void => {
+    if (path === orderBy) {
+      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')
+    } else {
+      setOrderBy(path)
+      setSortOrder('asc')
+    }
+  }
+
+  const sortedData = data?.slice().sort((a, b) => {
+    if (!orderBy) return 0
+    const valueA = get(a, orderBy) as string
+    const valueB = get(b, orderBy) as string
+
+    if (valueA === valueB) return 0
+
+    if (valueA === null || valueA === '') return 1
+
+    if (valueB === null || valueB === '') return -1
+
+    if (sortOrder === 'asc') return valueA < valueB ? -1 : 1
+    else return valueA > valueB ? -1 : 1
+  })
+
   return isLoading ? (
     <Loader />
   ) : (
@@ -21,7 +57,19 @@ export const CommonTable = <T extends { id: string }>({
         <TableHead>
           <TableRow>
             {tableColumns.map(column => (
-              <TableCell key={column.id}>{column.header}</TableCell>
+              <TableCell key={column.id}>
+                {!column.sortable ? (
+                  column.header
+                ) : (
+                  <TableSortLabel
+                    active={column.field === orderBy}
+                    direction={column.field === orderBy ? sortOrder : 'asc'}
+                    onClick={() => handleSortColumnClick(column.field as string)}
+                  >
+                    {column.header}
+                  </TableSortLabel>
+                )}
+              </TableCell>
             ))}
           </TableRow>
         </TableHead>
@@ -36,7 +84,7 @@ export const CommonTable = <T extends { id: string }>({
               </TableCell>
             </TableRow>
           ) : (
-            data?.map(item => (
+            sortedData?.map(item => (
               <StyledTableRow key={item.id}>
                 {tableColumns.map(column => {
                   return (
