@@ -1,4 +1,4 @@
-import { PROFICIENCY } from '@/components/containers/EmployeeLanguagesProfileForm/EmployeeLanguagesProfileForm.interfaces'
+import { PROFICIENCY } from '@/components/containers/EmployeeLanguagesProfile/EmployeeLanguagesProfile.interfaces'
 
 export const PROFICIENCY_ARRAY = [
   { id: PROFICIENCY.A1, name: PROFICIENCY.A1 },

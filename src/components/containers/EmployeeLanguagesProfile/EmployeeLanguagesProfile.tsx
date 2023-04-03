@@ -10,7 +10,7 @@ import { USER } from '@/graphql/user/userQuery'
 
 import { LanguagesModal } from './LanguagesModal/LanguagesModal'
 
-export const EmployeeLanguagesProfileForm: FC = () => {
+export const EmployeeLanguagesProfile: FC = () => {
   const { id: userId } = useParams()
   const [open, setOpen] = useState(false)
   const { data: userData } = useQuery<IUserResult>(USER, {
