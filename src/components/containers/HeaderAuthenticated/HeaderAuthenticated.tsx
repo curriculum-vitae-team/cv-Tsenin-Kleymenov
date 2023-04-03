@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { Container } from '@mui/material'
 
 import { HeaderWrapper } from '@/components/views/HeaderWrapper/HeaderWrapper'
 import { SideMenu } from '@/components/views/SideMenu/SideMenu'
@@ -9,10 +10,12 @@ import { HeaderMenuWrapper } from './HeaderAuthenticated.styles'
 export const HeaderAuthenticated: FC = () => {
   return (
     <HeaderWrapper color="secondary">
-      <HeaderMenuWrapper>
-        <SideMenu />
-        <UserMenu />
-      </HeaderMenuWrapper>
+      <Container maxWidth="xl">
+        <HeaderMenuWrapper>
+          <SideMenu />
+          <UserMenu />
+        </HeaderMenuWrapper>
+      </Container>
     </HeaderWrapper>
   )
 }

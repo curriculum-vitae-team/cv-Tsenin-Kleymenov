@@ -62,6 +62,11 @@ module.exports = {
       { allowExpressions: true, allowTypedFunctionExpressions: true }
     ]
   },
+  settings: {
+    react: {
+      version: '^18.2.0'
+    }
+  },
   overrides: [
     // override "simple-import-sort" config
     {
