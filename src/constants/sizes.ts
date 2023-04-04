@@ -1,3 +1,3 @@
-export const sizes = {
+export const SIZES = {
   headerSize: 65
 }

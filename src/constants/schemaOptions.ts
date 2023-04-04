@@ -1,6 +1,7 @@
 import * as yup from 'yup'
 
 import { FORM_PROFILE_KEYS } from '@/components/containers/EmployeeProfileForm/EmployeeProfileForm.interfaces'
+import { FORM_PROFILE_SKILLS_KEYS } from '@/components/containers/EmployeeSkillsProfile/SkillsModal/SkillsModal.interfaces'
 import { FORM_LOGIN_KEYS } from '@/components/containers/LoginForm/LoginForm.interfaces'
 import { FORM_SIGNUP_KEYS } from '@/components/containers/SignUpForm/SignUpForm.interfaces'
 
@@ -37,4 +38,9 @@ export const FORM_PROFILE_SCHEMA = yup.object().shape({
     .required('Last Name is a required field'),
   [FORM_PROFILE_KEYS.department]: yup.string().required('Department is a required field'),
   [FORM_PROFILE_KEYS.position]: yup.string().required('Position is a required field')
+})
+
+export const FORM_PROFILE_SKILLS_SCHEMA = yup.object().shape({
+  [FORM_PROFILE_SKILLS_KEYS.skills]: yup.string().required('Skills is a required field'),
+  [FORM_PROFILE_SKILLS_KEYS.mastery]: yup.string().required('Mastery is a required field')
 })
