@@ -19,14 +19,12 @@ export const EmployeeSkillsProfile: FC = () => {
     variables: { id: userId }
   })
 
-  const masteryArrayWithSkills = MASTERY_ARRAY.map(mastery => {
-    return {
-      name: mastery.name,
-      [mastery.name]: userData?.user?.profile?.skills.filter(
-        skill => skill.mastery === mastery.name
-      )
-    }
-  })
+  const masteryObject = MASTERY_ARRAY.reduce((acc: { [key: string]: ISkillMastery[] }, item) => {
+    acc[item.name] =
+      userData?.user?.profile?.skills.filter(skill => skill.mastery === item.name) || []
+
+    return acc
+  }, {})
 
   const handleSkillModalClose = (): void => {
     setOpen(prev => !prev)
@@ -43,9 +41,9 @@ export const EmployeeSkillsProfile: FC = () => {
       </Button>
       <Divider />
       {userData?.user?.profile.skills.length ? (
-        masteryArrayWithSkills.map(item => (
-          <SkillRow key={item.name} filteredSkills={item[item.name] as ISkillMastery[]} />
-        ))
+        Object.keys(masteryObject).map(key => {
+          return <SkillRow key={key} filteredSkills={masteryObject[key]} />
+        })
       ) : (
         <Typography sx={{ my: 2 }} variant="h5">
           You don't have any skills
