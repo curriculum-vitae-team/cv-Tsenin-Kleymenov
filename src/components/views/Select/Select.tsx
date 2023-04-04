@@ -5,10 +5,10 @@ import { Loader } from '@/components/views/Loader/Loader'
 import { IDepartment } from '@/graphql/interfaces/IDepartment.interfaces'
 import { IPosition } from '@/graphql/interfaces/IPosition.interfaces'
 
-import { IAppSelectProps, IProficiency } from './Select.interfaces'
+import { IAppSelectProps, IProficiency, IMastery } from './Select.interfaces'
 
 export const AppSelect: FC<
-  TextFieldProps & IAppSelectProps<IDepartment | IPosition | IProficiency>
+  TextFieldProps & IAppSelectProps<IDepartment | IPosition | IProficiency | IMastery>
 > = forwardRef(({ loading, items, ...props }, ref) => {
   return (
     <TextField
@@ -40,3 +40,4 @@ export const AppSelect: FC<
     </TextField>
   )
 })
+

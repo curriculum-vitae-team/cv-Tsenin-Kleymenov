@@ -1,11 +1,15 @@
 import { createTheme } from '@mui/material'
 
-import { sizes } from '@/constants/sizes'
+import { SIZES } from '@/constants/sizes'
 
 export const theme = createTheme({
   typography: {
     fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
-    fontSize: 16
+    fontSize: 16,
+
+    h5: {
+      fontSize: '16px'
+    }
   },
   palette: {
     primary: {
@@ -23,7 +27,7 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           width: '100%',
-          height: `${sizes.headerSize}px`
+          height: `${SIZES.headerSize}px`
         }
       }
     },
@@ -35,6 +39,13 @@ export const theme = createTheme({
         },
         text: {
           color: '#c63031'
+        }
+      }
+    },
+    MuiContainer: {
+      styleOverrides: {
+        root: {
+          height: '100%'
         }
       }
     },
@@ -53,6 +64,27 @@ export const theme = createTheme({
         textColorInherit: {
           opacity: 0.9,
           color: 'rgb(46, 46, 46)'
+        }
+      }
+    },
+    MuiTable: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#fff'
+        }
+      }
+    },
+    MuiTableHead: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#fff'
+        }
+      }
+    },
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          fontSize: '14px'
         }
       }
     }

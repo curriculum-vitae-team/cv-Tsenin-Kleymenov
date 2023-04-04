@@ -1,4 +1,4 @@
-export const weekDayArray = [
+export const WEEK_DAY_ARRAY = [
   'Monday',
   'Tuesday',
   'Wednesday',
@@ -7,7 +7,7 @@ export const weekDayArray = [
   'Saturday',
   'Sunday'
 ]
-export const monthArray = [
+export const MONTH_ARRAY = [
   'January ',
   'February ',
   'March ',

@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { useDropzone } from 'react-dropzone'
-import { useMutation, useQuery, useReactiveVar } from '@apollo/client'
+import { useParams } from 'react-router-dom'
+import { useMutation, useQuery } from '@apollo/client'
 import CloseIcon from '@mui/icons-material/Close'
 import FileUploadIcon from '@mui/icons-material/FileUpload'
 import { Avatar, Box, Grid, IconButton, Typography } from '@mui/material'
@@ -9,7 +10,6 @@ import { IUserResult } from '@/appTypes/IResult.interfaces'
 import { EmployeeAvatarAlert } from '@/components/views/EmployeeAvatarAlert/EmployeeAvatarAlert'
 import { Loader } from '@/components/views/Loader/Loader'
 import { DROP_ZONE_ACCEPT_FILES } from '@/constants/dropZoneAcceptFile'
-import { authService } from '@/graphql/auth/authService'
 import { DELETE_AVATAR } from '@/graphql/user/deleteUserAvatarMutation'
 import { UPLOAD_AVATAR } from '@/graphql/user/uploadUserAvatarMutation'
 import { USER } from '@/graphql/user/userQuery'
@@ -20,18 +20,18 @@ import { ErrorUploadMessage } from './ErrorUploadMessage/ErrorUploadMessage'
 import { AvatarWrapper, DropZone } from './EmployeeAvatarUpload.styles'
 
 export const EmployeeAvatarUpload: FC = () => {
-  const user = useReactiveVar(authService.user$)
+  const { id } = useParams()
 
   const { data: userData } = useQuery<IUserResult>(USER, {
-    variables: { id: user?.id }
+    variables: { id }
   })
 
   const [uploadAvatarMutation, { loading: uploadLoading }] = useMutation(UPLOAD_AVATAR, {
-    refetchQueries: () => [{ query: USER, variables: { id: user?.id } }]
+    refetchQueries: () => [{ query: USER, variables: { id } }]
   })
 
   const [deleteAvatarMutation] = useMutation(DELETE_AVATAR, {
-    refetchQueries: () => [{ query: USER, variables: { id: user?.id } }]
+    refetchQueries: () => [{ query: USER, variables: { id } }]
   })
 
   const { getRootProps, getInputProps, fileRejections } = useDropzone({

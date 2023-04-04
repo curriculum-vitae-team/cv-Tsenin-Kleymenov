@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { Navigate, Outlet, Route, Routes } from 'react-router'
 
-import { EmployeesPage } from '@/pages/EmployeesPage'
+import { EmployeesPage } from '@/pages/EmployeesPage/EmployeesPage'
 import { AppLayout } from '@/pages/Layouts/AppLayoutAuth'
 import { ProfileCVsPage } from '@/pages/ProfileCVsPage'
 import { ProfileEmployeePage } from '@/pages/ProfileEmployeePage'

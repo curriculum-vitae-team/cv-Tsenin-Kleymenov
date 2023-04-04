@@ -24,7 +24,7 @@ export const SideMenu: FC = () => {
       <SideMenuBurgerButton color="primary" onClick={handleOpen}>
         <MenuIcon />
       </SideMenuBurgerButton>
-      <Drawer anchor="left" open={open}>
+      <Drawer onClose={handleClose} anchor="left" open={open}>
         <AppSideMenu>
           <AppBar color="secondary" position="static">
             <SideMenuCloseButton color="primary" onClick={handleClose}>
