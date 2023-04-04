@@ -42,7 +42,7 @@ export const EmployeeSkillsProfile: FC = () => {
       <Divider />
       {userData?.user?.profile.skills.length ? (
         Object.keys(masteryObject).map(key => {
-          return <SkillRow key={key} filteredSkills={masteryObject[key]} />
+          return <SkillRow key={key} skills={masteryObject[key]} />
         })
       ) : (
         <Typography sx={{ my: 2 }} variant="h5">
