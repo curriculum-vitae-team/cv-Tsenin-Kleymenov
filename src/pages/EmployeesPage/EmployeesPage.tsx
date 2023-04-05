@@ -2,11 +2,11 @@ import { FC, useMemo, useState } from 'react'
 import { useQuery } from '@apollo/client'
 import SearchIcon from '@mui/icons-material/Search'
 
+import { IUsersResult } from '@/appTypes/IResult.interfaces'
 import { CommonTable } from '@/components/views/CommonTable/CommonTable'
 import { InputWithIcon } from '@/components/views/Input/Input'
 import { IUser } from '@/graphql/interfaces/IUser.interfaces'
 import { GET_EMPLOYEES } from '@/graphql/users/usersQuery'
-import { IUsersResult } from '@/graphql/users/usersResult.interface'
 
 import { tableColumns } from './tableColumns'
 

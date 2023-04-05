@@ -31,3 +31,7 @@ export interface ILanguagesResult {
 export interface ISkillsResult {
   skills: ISkill[]
 }
+
+export interface IProjectsResult {
+  projects: IProject[]
+}

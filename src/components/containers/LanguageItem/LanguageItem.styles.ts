@@ -4,7 +4,7 @@ export const LanguageItemContainer = styled(Card)(({ theme }) => ({
   margin: '5px',
   padding: '15px',
   maxWidth: '300px',
-  backgroundColor: theme.palette.primary.main,
+  backgroundColor: theme.palette.secondary.main,
   color: 'white',
   display: 'flex',
   justifyContent: 'space-between'
@@ -12,6 +12,7 @@ export const LanguageItemContainer = styled(Card)(({ theme }) => ({
 
 export const CloseButton = styled(IconButton)(({ theme }) => ({
   alignSelf: 'flex-start',
-  backgroundColor: theme.palette.primary.main,
-  color: 'white'
+  backgroundColor: theme.palette.secondary.main,
+  color: 'white',
+  marginLeft: '16px'
 }))

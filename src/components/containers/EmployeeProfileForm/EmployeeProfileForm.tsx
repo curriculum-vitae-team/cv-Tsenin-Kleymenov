@@ -1,6 +1,6 @@
 import { FC, useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { useMutation, useQuery } from '@apollo/client'
+import { useMutation, useQuery, useReactiveVar } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Box, Container, Grid, Typography } from '@mui/material'
 
@@ -11,6 +11,7 @@ import { Input } from '@/components/views/Input/Input'
 import { Loader } from '@/components/views/Loader/Loader'
 import { AppSelect } from '@/components/views/Select/Select'
 import { FORM_PROFILE_SCHEMA } from '@/constants/schemaOptions'
+import { authService } from '@/graphql/auth/authService'
 import { DEPARTMENTS } from '@/graphql/departments/departmentsQuery'
 import { POSITIONS } from '@/graphql/positions/positionsQuery'
 import { UPDATE_USER } from '@/graphql/user/updateUserMutation'
@@ -24,6 +25,8 @@ import {
 } from './EmployeeProfileForm.interfaces'
 
 export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser }) => {
+  const user = useReactiveVar(authService.user$)
+  const userCheck = currentUser?.id === user?.id
   const { loading: departmentsLoading, data: departmentsData } =
     useQuery<IDepartmentResult>(DEPARTMENTS)
 
@@ -91,60 +94,62 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
           </>
         )}
       </Box>
-      <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
-        <Grid container spacing={2}>
-          <Grid item xs={6}>
-            <Input
-              type="text"
-              variant="outlined"
-              label="First Name"
-              placeholder=" Enter your First Name"
-              error={!!errors[FORM_PROFILE_KEYS.firstName]}
-              helperText={errors?.[FORM_PROFILE_KEYS.firstName]?.message}
-              {...register(FORM_PROFILE_KEYS.firstName)}
-            />
-            <AppSelect
-              variant="outlined"
-              label="Department"
-              defaultValue={''}
-              loading={departmentsLoading}
-              items={departmentsData?.departments}
-              error={!!errors[FORM_PROFILE_KEYS.department]}
-              helperText={errors?.[FORM_PROFILE_KEYS.department]?.message}
-              {...register(FORM_PROFILE_KEYS.department)}
-            />
+      {userCheck && (
+        <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
+          <Grid container spacing={2}>
+            <Grid item xs={6}>
+              <Input
+                type="text"
+                variant="outlined"
+                label="First Name"
+                placeholder=" Enter your First Name"
+                error={!!errors[FORM_PROFILE_KEYS.firstName]}
+                helperText={errors?.[FORM_PROFILE_KEYS.firstName]?.message}
+                {...register(FORM_PROFILE_KEYS.firstName)}
+              />
+              <AppSelect
+                variant="outlined"
+                label="Department"
+                defaultValue={''}
+                loading={departmentsLoading}
+                items={departmentsData?.departments}
+                error={!!errors[FORM_PROFILE_KEYS.department]}
+                helperText={errors?.[FORM_PROFILE_KEYS.department]?.message}
+                {...register(FORM_PROFILE_KEYS.department)}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <Input
+                type="text"
+                variant="outlined"
+                label="Last Name"
+                placeholder="Enter your Last Name"
+                error={!!errors[FORM_PROFILE_KEYS.lastName]}
+                helperText={errors?.[FORM_PROFILE_KEYS.lastName]?.message}
+                {...register(FORM_PROFILE_KEYS.lastName)}
+              />
+              <AppSelect
+                variant="outlined"
+                label="Position"
+                defaultValue={''}
+                loading={positionsLoading}
+                items={positionsData?.positions}
+                error={!!errors[FORM_PROFILE_KEYS.position]}
+                helperText={errors?.[FORM_PROFILE_KEYS.position]?.message}
+                {...register(FORM_PROFILE_KEYS.position)}
+              />
+              <Button
+                type="submit"
+                variant="contained"
+                loading={userLoading}
+                disabled={!isDirty && isValid}
+              >
+                Confirm
+              </Button>
+            </Grid>
           </Grid>
-          <Grid item xs={6}>
-            <Input
-              type="text"
-              variant="outlined"
-              label="Last Name"
-              placeholder="Enter your Last Name"
-              error={!!errors[FORM_PROFILE_KEYS.lastName]}
-              helperText={errors?.[FORM_PROFILE_KEYS.lastName]?.message}
-              {...register(FORM_PROFILE_KEYS.lastName)}
-            />
-            <AppSelect
-              variant="outlined"
-              label="Position"
-              defaultValue={''}
-              loading={positionsLoading}
-              items={positionsData?.positions}
-              error={!!errors[FORM_PROFILE_KEYS.position]}
-              helperText={errors?.[FORM_PROFILE_KEYS.position]?.message}
-              {...register(FORM_PROFILE_KEYS.position)}
-            />
-            <Button
-              type="submit"
-              variant="contained"
-              loading={userLoading}
-              disabled={!isDirty && isValid}
-            >
-              Confirm
-            </Button>
-          </Grid>
-        </Grid>
-      </form>
+        </form>
+      )}
     </Container>
   )
 }
