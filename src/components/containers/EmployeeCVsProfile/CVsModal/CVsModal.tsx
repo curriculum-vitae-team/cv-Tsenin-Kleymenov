@@ -51,8 +51,8 @@ export const CVsModal: FC<ICVsModalProps> = ({ CVData, userData, open, handleClo
           description: formData[FORM_PROFILE_CVS_KEYS.description],
           userId: userData?.id,
           projectsIds: projectsData?.projects.map(({ id: projectId }) => projectId) || [],
-          skills: [...createSkillsArray(userData?.profile.skills)],
-          languages: [...createLanguagesArray(userData?.profile.languages)],
+          skills: createSkillsArray(userData?.profile.skills),
+          languages: createLanguagesArray(userData?.profile.languages),
           is_template: formData[FORM_PROFILE_CVS_KEYS.template]
         }
       }
