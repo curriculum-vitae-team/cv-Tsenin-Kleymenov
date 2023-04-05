@@ -5,7 +5,7 @@ export interface ITab {
   path: string
 }
 
-export const profileTabs: ITab[] = [
+export const PROFILE_TABS: ITab[] = [
   {
     label: 'Profile',
     path: AppNavigationRoutes.PROFILE
@@ -25,7 +25,7 @@ export const profileTabs: ITab[] = [
   }
 ]
 
-export const headerTabs: ITab[] = [
+export const HEADER_TABS: ITab[] = [
   {
     label: 'Login',
     path: AppNavigationRoutes.LOGIN

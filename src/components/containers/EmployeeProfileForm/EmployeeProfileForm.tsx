@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useMutation, useQuery } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -8,11 +8,13 @@ import { IDepartmentResult, IPositionResult } from '@/appTypes/IResult.interface
 import { EmployeeAvatarUpload } from '@/components/containers/EmployeeAvatarUpload/EmployeeAvatarUpload'
 import { Button } from '@/components/views/Button/Button'
 import { Input } from '@/components/views/Input/Input'
+import { Loader } from '@/components/views/Loader/Loader'
 import { AppSelect } from '@/components/views/Select/Select'
 import { FORM_PROFILE_SCHEMA } from '@/constants/schemaOptions'
 import { DEPARTMENTS } from '@/graphql/departments/departmentsQuery'
 import { POSITIONS } from '@/graphql/positions/positionsQuery'
 import { UPDATE_USER } from '@/graphql/user/updateUserMutation'
+import { USER } from '@/graphql/user/userQuery'
 import { convertCreatedAtDate } from '@/utils/createdAtFormat'
 
 import {
@@ -26,16 +28,21 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
     useQuery<IDepartmentResult>(DEPARTMENTS)
 
   const { loading: positionsLoading, data: positionsData } = useQuery<IPositionResult>(POSITIONS)
-  const [updateUser, { loading: userLoading }] = useMutation(UPDATE_USER)
+  const [updateUser, { loading: userLoading }] = useMutation(UPDATE_USER, {
+    refetchQueries: () => [{ query: USER, variables: { id: currentUser?.id } }]
+  })
 
   const {
     register,
     handleSubmit,
-    formState: { errors, isDirty, isValid }
+    reset,
+    formState: { errors, isDirty, isValid, isSubmitSuccessful }
   } = useForm<IProfileFormValues>({
     defaultValues: {
       [FORM_PROFILE_KEYS.firstName]: currentUser?.profile.first_name || '',
-      [FORM_PROFILE_KEYS.lastName]: currentUser?.profile.last_name || ''
+      [FORM_PROFILE_KEYS.lastName]: currentUser?.profile.last_name || '',
+      [FORM_PROFILE_KEYS.position]: currentUser?.position?.id || '',
+      [FORM_PROFILE_KEYS.department]: currentUser?.department?.id || ''
     },
     mode: 'onSubmit',
     resolver: yupResolver(FORM_PROFILE_SCHEMA)
@@ -57,15 +64,32 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
     })
   }
 
+  useEffect(() => {
+    reset({
+      [FORM_PROFILE_KEYS.position]: currentUser?.position?.id,
+      [FORM_PROFILE_KEYS.department]: currentUser?.department?.id
+    })
+  }, [isSubmitSuccessful])
+
   return (
     <Container maxWidth="md">
       <EmployeeAvatarUpload />
-      <Box sx={{ my: 1 }}>
-        <Typography>{currentUser?.profile.full_name}</Typography>
-        <Typography>{currentUser?.email}</Typography>
-        <Typography>{`Department: ${currentUser?.department_name || '-'}`}</Typography>
-        <Typography>{`Position: ${currentUser?.position_name || '-'}`}</Typography>
-        <Typography>{`A member since ${convertCreatedAtDate(currentUser?.created_at)}`}</Typography>
+      <Box sx={{ my: 1, minHeight: 150 }}>
+        {userLoading ? (
+          <Box sx={{ position: 'relative' }}>
+            <Loader color="primary" />
+          </Box>
+        ) : (
+          <>
+            <Typography>{currentUser?.profile.full_name}</Typography>
+            <Typography>{currentUser?.email}</Typography>
+            <Typography>{`Department: ${currentUser?.department_name || '-'}`}</Typography>
+            <Typography>{`Position: ${currentUser?.position_name || '-'}`}</Typography>
+            <Typography>{`A member since ${convertCreatedAtDate(
+              currentUser?.created_at
+            )}`}</Typography>
+          </>
+        )}
       </Box>
       <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
         <Grid container spacing={2}>
@@ -114,7 +138,7 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
               type="submit"
               variant="contained"
               loading={userLoading}
-              disabled={!isDirty && !isValid}
+              disabled={!isDirty && isValid}
             >
               Confirm
             </Button>
