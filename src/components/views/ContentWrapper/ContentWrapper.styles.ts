@@ -1,9 +1,9 @@
 import { styled } from '@mui/material'
 
-import { sizes } from '@/constants/sizes'
+import { SIZES } from '@/constants/sizes'
 
 export const Content = styled('div')(() => ({
-  height: `calc(100vh - ${sizes.headerSize}px)`,
+  height: `calc(100vh - ${SIZES.headerSize}px)`,
   overflow: 'auto',
 
   '&::-webkit-scrollbar': {
