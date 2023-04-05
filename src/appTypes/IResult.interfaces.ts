@@ -21,6 +21,9 @@ export interface IPositionResult {
   positions: IPosition[]
 }
 
+export interface IProjectsResult {
+  projects: IProject[]
+}
 export interface ILanguagesResult {
   languages: ILanguage[]
 }
