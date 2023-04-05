@@ -8,7 +8,7 @@ import { ProfileEmployeePage } from '@/pages/ProfileEmployeePage'
 import { ProfileLanguagePage } from '@/pages/ProfileLanguagePage'
 import { ProfilePage } from '@/pages/ProfilePage'
 import { ProfileSkillsPage } from '@/pages/ProfileSkillsPage'
-import { ProjectsPage } from '@/pages/ProjectsPage'
+import { ProjectsPage } from '@/pages/ProjectsPage/ProjectsPage'
 
 import { AppNavigationRoutes } from './paths'
 

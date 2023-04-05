@@ -1,6 +1,6 @@
 import { createTheme } from '@mui/material'
 
-import { sizes } from '@/constants/sizes'
+import { SIZES } from '@/constants/sizes'
 
 export const theme = createTheme({
   typography: {
@@ -27,7 +27,7 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           width: '100%',
-          height: `${sizes.headerSize}px`
+          height: `${SIZES.headerSize}px`
         }
       }
     },

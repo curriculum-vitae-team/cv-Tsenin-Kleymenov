@@ -22,7 +22,7 @@ export const CommonTable = <T extends { id: string }>({
   isLoading,
   error
 }: ICommonTableProps<T>): JSX.Element => {
-  const [orderBy, setOrderBy] = useState<string | null>('department_name')
+  const [orderBy, setOrderBy] = useState<string | null>('')
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
 
   const handleSortColumnClick = (path: string): void => {
