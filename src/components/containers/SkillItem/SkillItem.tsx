@@ -1,12 +1,13 @@
 import { FC } from 'react'
 import { useParams } from 'react-router-dom'
-import { useMutation, useQuery } from '@apollo/client'
+import { useMutation, useQuery, useReactiveVar } from '@apollo/client'
 import ClearIcon from '@mui/icons-material/Clear'
 import { Box, Typography } from '@mui/material'
 
 import { IUserResult } from '@/appTypes/IResult.interfaces'
 import { Loader } from '@/components/views/Loader/Loader'
 import { MASTERY_COLORS } from '@/constants/mastery'
+import { authService } from '@/graphql/auth/authService'
 import { UPDATE_USER } from '@/graphql/user/updateUserMutation'
 import { USER } from '@/graphql/user/userQuery'
 import { createSkillsArray } from '@/utils/createSkillsArray'
@@ -16,6 +17,8 @@ import { MasteryBox, SkillBox, SkillItemContainer } from './SkillItem.styles'
 
 export const SkillItem: FC<ISkillItemProps> = ({ skillName, skillMastery }) => {
   const { id: userId } = useParams()
+  const user = useReactiveVar(authService.user$)
+  const userCheck = userId === user?.id
   const { data: userData } = useQuery<IUserResult>(USER, {
     variables: { id: userId }
   })
@@ -51,17 +54,19 @@ export const SkillItem: FC<ISkillItemProps> = ({ skillName, skillMastery }) => {
           <Typography>{skillMastery}</Typography>
         </MasteryBox>
       </SkillBox>
-      <Box onClick={() => handleDelete(skillName, skillMastery)}>
-        {userLoading ? (
-          <Loader
-            size={20}
-            sx={{ position: 'static', backgroundColor: 'white', borderRadius: '50%' }}
-            color="secondary"
-          />
-        ) : (
-          <ClearIcon sx={{ '&:hover': { cursor: 'pointer' } }} />
-        )}
-      </Box>
+      {userCheck && (
+        <Box onClick={() => handleDelete(skillName, skillMastery)}>
+          {userLoading ? (
+            <Loader
+              size={20}
+              sx={{ position: 'static', backgroundColor: 'white', borderRadius: '50%' }}
+              color="secondary"
+            />
+          ) : (
+            <ClearIcon sx={{ '&:hover': { cursor: 'pointer' } }} />
+          )}
+        </Box>
+      )}
     </SkillItemContainer>
   )
 }

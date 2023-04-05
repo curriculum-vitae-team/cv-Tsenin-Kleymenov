@@ -1,12 +1,13 @@
 import { FC, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { useQuery } from '@apollo/client'
+import { useQuery, useReactiveVar } from '@apollo/client'
 import { Container, Divider, Typography } from '@mui/material'
 
 import { IUserResult } from '@/appTypes/IResult.interfaces'
 import { Button } from '@/components/views/Button/Button'
 import { SkillRow } from '@/components/views/SkillRow/SkillRow'
 import { MASTERY_ARRAY } from '@/constants/mastery'
+import { authService } from '@/graphql/auth/authService'
 import { ISkillMastery } from '@/graphql/interfaces/ISkillMastery.interfaces'
 import { USER } from '@/graphql/user/userQuery'
 
@@ -15,6 +16,8 @@ import { SkillsModal } from './SkillsModal/SkillsModal'
 export const EmployeeSkillsProfile: FC = () => {
   const [open, setOpen] = useState(false)
   const { id: userId } = useParams()
+  const user = useReactiveVar(authService.user$)
+  const userCheck = userId === user?.id
   const { data: userData } = useQuery<IUserResult>(USER, {
     variables: { id: userId }
   })
@@ -32,13 +35,15 @@ export const EmployeeSkillsProfile: FC = () => {
 
   return (
     <Container sx={{ display: 'flex', flexDirection: 'column' }} maxWidth="lg">
-      <Button
-        sx={{ maxWidth: 170, my: 3, alignSelf: 'flex-end' }}
-        variant="contained"
-        onClick={handleSkillModalClose}
-      >
-        + Add skills
-      </Button>
+      {userCheck && (
+        <Button
+          sx={{ maxWidth: 170, my: 3, alignSelf: 'flex-end' }}
+          variant="contained"
+          onClick={handleSkillModalClose}
+        >
+          + Add skills
+        </Button>
+      )}
       <Divider />
       {userData?.user?.profile.skills.length ? (
         Object.keys(masteryObject).map(key => {

@@ -1,17 +1,20 @@
 import { FC, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { useQuery } from '@apollo/client'
+import { useQuery, useReactiveVar } from '@apollo/client'
 import { Box, Container, Divider, Typography } from '@mui/material'
 
 import { IUserResult } from '@/appTypes/IResult.interfaces'
 import { LanguageItem } from '@/components/containers/LanguageItem/LanguageItem'
 import { Button } from '@/components/views/Button/Button'
+import { authService } from '@/graphql/auth/authService'
 import { USER } from '@/graphql/user/userQuery'
 
 import { LanguagesModal } from './LanguagesModal/LanguagesModal'
 
 export const EmployeeLanguagesProfile: FC = () => {
   const { id: userId } = useParams()
+  const user = useReactiveVar(authService.user$)
+  const userCheck = userId === user?.id
   const [open, setOpen] = useState(false)
   const { data: userData } = useQuery<IUserResult>(USER, {
     variables: { id: userId }
@@ -23,13 +26,15 @@ export const EmployeeLanguagesProfile: FC = () => {
 
   return (
     <Container sx={{ display: 'flex', flexDirection: 'column' }} maxWidth="lg">
-      <Button
-        sx={{ maxWidth: 210, my: 3, alignSelf: 'flex-end' }}
-        variant="contained"
-        onClick={handleLanguageModalClose}
-      >
-        + Add Languages
-      </Button>
+      {userCheck && (
+        <Button
+          sx={{ maxWidth: 210, my: 3, alignSelf: 'flex-end' }}
+          variant="contained"
+          onClick={handleLanguageModalClose}
+        >
+          + Add Languages
+        </Button>
+      )}
       <Divider />
       {userData?.user?.profile.languages.length ? (
         <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>

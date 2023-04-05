@@ -1,10 +1,11 @@
 import { FC } from 'react'
 import { useParams } from 'react-router-dom'
-import { useMutation, useQuery } from '@apollo/client'
+import { useMutation, useQuery, useReactiveVar } from '@apollo/client'
 import ClearIcon from '@mui/icons-material/Clear'
 import { Box, Typography } from '@mui/material'
 
 import { IUserResult } from '@/appTypes/IResult.interfaces'
+import { authService } from '@/graphql/auth/authService'
 import { UPDATE_USER } from '@/graphql/user/updateUserMutation'
 import { USER } from '@/graphql/user/userQuery'
 import { createLanguagesArray } from '@/utils/createLanguagesArray'
@@ -14,6 +15,8 @@ import { CloseButton, LanguageItemContainer } from './LanguageItem.styles'
 
 export const LanguageItem: FC<ILanguageItemProps> = ({ languageName, languageProficiency }) => {
   const { id: userId } = useParams()
+  const user = useReactiveVar(authService.user$)
+  const userCheck = userId === user?.id
   const { data: userData } = useQuery<IUserResult>(USER, {
     variables: { id: userId }
   })
@@ -47,9 +50,11 @@ export const LanguageItem: FC<ILanguageItemProps> = ({ languageName, languagePro
         <Typography sx={{ fontWeight: 'bold' }}>{languageName}</Typography>
         <Typography>{`Level of language:${languageProficiency.toUpperCase()}`}</Typography>
       </Box>
-      <CloseButton onClick={() => handleDelete(languageName, languageProficiency)}>
-        <ClearIcon />
-      </CloseButton>
+      {userCheck && (
+        <CloseButton onClick={() => handleDelete(languageName, languageProficiency)}>
+          <ClearIcon />
+        </CloseButton>
+      )}
     </LanguageItemContainer>
   )
 }
