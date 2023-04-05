@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { Navigate, Outlet, Route, Routes } from 'react-router'
 
+import { DepartmentsPage } from '@/pages/DepartmentsPage/DepartmentsPage'
 import { EmployeesPage } from '@/pages/EmployeesPage/EmployeesPage'
 import { AppLayout } from '@/pages/Layouts/AppLayoutAuth'
 import { ProfileCVsPage } from '@/pages/ProfileCVsPage'
@@ -31,6 +32,7 @@ const AuthenticatedApp: FC = () => {
         </Route>
 
         <Route path={AppNavigationRoutes.PROJECTS} element={<ProjectsPage />} />
+        <Route path={AppNavigationRoutes.DEPARTMENTS} element={<DepartmentsPage />} />
       </Route>
       <Route path="*" element={<Navigate to={`/${AppNavigationRoutes.EMPLOYEES}`} replace />} />
     </Routes>

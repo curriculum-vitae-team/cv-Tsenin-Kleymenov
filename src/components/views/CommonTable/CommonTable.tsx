@@ -57,7 +57,7 @@ export const CommonTable = <T extends { id: string }>({
         <TableHead>
           <TableRow>
             {tableColumns.map(column => (
-              <TableCell key={column.id}>
+              <TableCell key={column.id} sx={{ fontWeight: '700' }}>
                 {!column.sortable ? (
                   column.header
                 ) : (
