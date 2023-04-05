@@ -1,4 +1,4 @@
-import { ICv } from './ICv.interfaces'
+import { ICV } from './ICV.interfaces'
 import { IDepartment } from './IDepartment.interfaces'
 import { IPosition } from './IPosition.interfaces'
 import { IProfile } from './IProfile.interfaces'
@@ -9,7 +9,7 @@ export interface IUser {
   email: string
   is_verified?: boolean
   profile: IProfile
-  cvs?: ICv[]
+  cvs?: ICV[]
   department?: IDepartment
   department_name?: string
   position?: IPosition

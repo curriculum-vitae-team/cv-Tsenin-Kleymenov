@@ -3,7 +3,7 @@ import { IProject } from './IProject.interfaces'
 import { ISkillMastery } from './ISkillMastery.interfaces'
 import { IUser } from './IUser.interfaces'
 
-export interface ICv {
+export interface ICV {
   id: string
   created_at: string
   name: string
