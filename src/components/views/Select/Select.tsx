@@ -5,7 +5,7 @@ import { Loader } from '@/components/views/Loader/Loader'
 import { IDepartment } from '@/graphql/interfaces/IDepartment.interfaces'
 import { IPosition } from '@/graphql/interfaces/IPosition.interfaces'
 
-import { IAppSelectProps, IProficiency, IMastery } from './Select.interfaces'
+import { IAppSelectProps, IMastery, IProficiency } from './Select.interfaces'
 
 export const AppSelect: FC<
   TextFieldProps & IAppSelectProps<IDepartment | IPosition | IProficiency | IMastery>
@@ -40,4 +40,3 @@ export const AppSelect: FC<
     </TextField>
   )
 })
-
