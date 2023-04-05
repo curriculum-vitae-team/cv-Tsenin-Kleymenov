@@ -11,7 +11,7 @@ import { Input } from '@/components/views/Input/Input'
 import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
 import { FORM_PROFILE_CVS_SCHEMA } from '@/constants/schemaOptions'
 import { UPDATE_CV } from '@/graphql/cvs/updateCVMutation'
-import { PROJECTS } from '@/graphql/projects/projectsQuery'
+import { GET_PROJECTS } from '@/graphql/projects/projectsQuery'
 import { USER } from '@/graphql/user/userQuery'
 import { createLanguagesArray } from '@/utils/createLanguagesArray'
 import { createSkillsArray } from '@/utils/createSkillsArray'
@@ -24,7 +24,7 @@ export const CVsModal: FC<ICVsModalProps> = ({ CVData, userData, open, handleClo
   const [updateCVMutation, { loading: updateCVLoading }] = useMutation(UPDATE_CV, {
     refetchQueries: [{ query: USER, variables: { id } }]
   })
-  const { data: projectsData } = useQuery<IProjectsResult>(PROJECTS)
+  const { data: projectsData } = useQuery<IProjectsResult>(GET_PROJECTS)
 
   const {
     register,
