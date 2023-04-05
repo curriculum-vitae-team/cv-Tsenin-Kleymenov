@@ -15,7 +15,7 @@ export const SignUpPage: FC = () => {
   return (
     <AuthFormContainer title="Register Now" subtitle="Welcome! Sign up to continue.">
       <SignUpForm signUp={signUp} />
-      <Button component={Link} to={AppNavigationRoutes.LOGIN} variant="text">
+      <Button component={Link} to={`/${AppNavigationRoutes.LOGIN}`} variant="text">
         I have an account
       </Button>
     </AuthFormContainer>
