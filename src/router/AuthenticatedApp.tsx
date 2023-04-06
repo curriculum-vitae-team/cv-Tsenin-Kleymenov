@@ -3,6 +3,7 @@ import { Navigate, Outlet, Route, Routes } from 'react-router'
 
 import { DepartmentsPage } from '@/pages/DepartmentsPage/DepartmentsPage'
 import { EmployeesPage } from '@/pages/EmployeesPage/EmployeesPage'
+import { LanguagesPage } from '@/pages/LanguagesPage/LanguagesPage'
 import { AppLayout } from '@/pages/Layouts/AppLayoutAuth'
 import { ProfileCVsPage } from '@/pages/ProfileCVsPage'
 import { ProfileEmployeePage } from '@/pages/ProfileEmployeePage'
@@ -10,6 +11,7 @@ import { ProfileLanguagePage } from '@/pages/ProfileLanguagePage'
 import { ProfilePage } from '@/pages/ProfilePage'
 import { ProfileSkillsPage } from '@/pages/ProfileSkillsPage'
 import { ProjectsPage } from '@/pages/ProjectsPage/ProjectsPage'
+import { SkillsPage } from '@/pages/SkillsPage/SkillsPage'
 
 import { AppNavigationRoutes } from './paths'
 
@@ -33,6 +35,9 @@ const AuthenticatedApp: FC = () => {
 
         <Route path={AppNavigationRoutes.PROJECTS} element={<ProjectsPage />} />
         <Route path={AppNavigationRoutes.DEPARTMENTS} element={<DepartmentsPage />} />
+        <Route path={AppNavigationRoutes.LANGUAGES} element={<LanguagesPage />} />
+        <Route path={AppNavigationRoutes.SKILLS} element={<SkillsPage />} />
+
       </Route>
       <Route path="*" element={<Navigate to={`/${AppNavigationRoutes.EMPLOYEES}`} replace />} />
     </Routes>
