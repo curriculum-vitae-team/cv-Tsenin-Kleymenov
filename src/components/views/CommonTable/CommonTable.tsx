@@ -42,9 +42,9 @@ export const CommonTable = <T extends { id: string }>({
 
     if (valueA === valueB) return 0
 
-    if (valueA === null || valueA === '' || valueA === undefined) return 1
+    if (!valueA) return 1
 
-    if (valueB === null || valueB === '' || valueB === undefined) return -1
+    if (!valueB) return -1
 
     if (sortOrder === 'asc') return valueA < valueB ? -1 : 1
     else return valueA > valueB ? -1 : 1
