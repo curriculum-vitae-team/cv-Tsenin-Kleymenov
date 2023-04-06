@@ -21,13 +21,13 @@ export const EmployeeCVsProfile: FC = () => {
     variables: { id: user?.id }
   })
 
-  const handleСVsModalClose = (): void => {
+  const handleCVsModalClose = (): void => {
     setOpen(prev => !prev)
   }
 
   const handleSetCurrentCV = (CV: ICV): void => {
     setSelectedCV(CV)
-    handleСVsModalClose()
+    handleCVsModalClose()
   }
 
   return (
@@ -41,7 +41,7 @@ export const EmployeeCVsProfile: FC = () => {
           {open && (
             <CVsModal
               open={open}
-              handleClose={handleСVsModalClose}
+              handleClose={handleCVsModalClose}
               userData={userData?.user}
               CVData={selectedCV}
             />

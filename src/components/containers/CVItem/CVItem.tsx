@@ -5,7 +5,7 @@ import { Accordion, AccordionSummary, Box, Typography } from '@mui/material'
 
 import { Button } from '@/components/views/Button/Button'
 import { authService } from '@/graphql/auth/authService'
-import { UNBIND_CV } from '@/graphql/cvs/unbindCVMutation'
+import { UNBIND_CV } from '@/graphql/cv/unbindCVMutation'
 import { USER } from '@/graphql/user/userQuery'
 import { theme } from '@/theme/theme'
 
