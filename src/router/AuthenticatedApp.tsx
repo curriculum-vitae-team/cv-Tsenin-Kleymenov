@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { Navigate, Outlet, Route, Routes } from 'react-router'
 
+import { DepartmentsPage } from '@/pages/DepartmentsPage/DepartmentsPage'
 import { EmployeesPage } from '@/pages/EmployeesPage/EmployeesPage'
 import { LanguagesPage } from '@/pages/LanguagesPage/LanguagesPage'
 import { AppLayout } from '@/pages/Layouts/AppLayoutAuth'
@@ -33,6 +34,7 @@ const AuthenticatedApp: FC = () => {
         </Route>
 
         <Route path={AppNavigationRoutes.PROJECTS} element={<ProjectsPage />} />
+        <Route path={AppNavigationRoutes.DEPARTMENTS} element={<DepartmentsPage />} />
         <Route path={AppNavigationRoutes.LANGUAGES} element={<LanguagesPage />} />
         <Route path={AppNavigationRoutes.SKILLS} element={<SkillsPage />} />
 
