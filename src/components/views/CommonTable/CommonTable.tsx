@@ -36,14 +36,15 @@ export const CommonTable = <T extends { id: string }>({
 
   const sortedData = data?.slice().sort((a, b) => {
     if (!orderBy) return 0
+
     const valueA = get(a, orderBy) as string
     const valueB = get(b, orderBy) as string
 
     if (valueA === valueB) return 0
 
-    if (valueA === null || valueA === '') return 1
+    if (valueA === null || valueA === '' || valueA === undefined) return 1
 
-    if (valueB === null || valueB === '') return -1
+    if (valueB === null || valueB === '' || valueB === undefined) return -1
 
     if (sortOrder === 'asc') return valueA < valueB ? -1 : 1
     else return valueA > valueB ? -1 : 1
@@ -57,7 +58,7 @@ export const CommonTable = <T extends { id: string }>({
         <TableHead>
           <TableRow>
             {tableColumns.map(column => (
-              <TableCell key={column.id}>
+              <TableCell key={column.id} sx={{ fontWeight: '700' }}>
                 {!column.sortable ? (
                   column.header
                 ) : (

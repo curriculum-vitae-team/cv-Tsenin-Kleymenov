@@ -3,11 +3,11 @@ import { MenuItem } from '@mui/material'
 
 import { BasicMenu } from '../BasicMenu/BasicMenu'
 
-export const ProjectsDropdown: FC = () => {
+export const CVsDropdown: FC = () => {
   return (
     <BasicMenu>
-      <MenuItem>Project</MenuItem>
-      <MenuItem>Delete project</MenuItem>
+      <MenuItem>CV</MenuItem>
+      <MenuItem>Delete CV</MenuItem>
     </BasicMenu>
   )
 }
