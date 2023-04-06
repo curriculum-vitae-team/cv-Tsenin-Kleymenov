@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { Navigate, Outlet, Route, Routes } from 'react-router'
 
+import { CVsPage } from '@/pages/CVsPage/CVsPage'
 import { DepartmentsPage } from '@/pages/DepartmentsPage/DepartmentsPage'
 import { EmployeesPage } from '@/pages/EmployeesPage/EmployeesPage'
 import { LanguagesPage } from '@/pages/LanguagesPage/LanguagesPage'
@@ -44,11 +45,11 @@ const AuthenticatedApp: FC = () => {
         </Route>
 
         <Route path={AppNavigationRoutes.PROJECTS} element={<ProjectsPage />} />
+        <Route path={AppNavigationRoutes.CVS} element={<CVsPage />} />
         <Route path={AppNavigationRoutes.POSITIONS} element={<PositionsPage />} />
         <Route path={AppNavigationRoutes.DEPARTMENTS} element={<DepartmentsPage />} />
         <Route path={AppNavigationRoutes.LANGUAGES} element={<LanguagesPage />} />
         <Route path={AppNavigationRoutes.SKILLS} element={<SkillsPage />} />
-
       </Route>
       <Route path="*" element={<Navigate to={`/${AppNavigationRoutes.EMPLOYEES}`} replace />} />
     </Routes>
