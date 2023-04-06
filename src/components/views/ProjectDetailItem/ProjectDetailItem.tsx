@@ -1,13 +1,8 @@
 import React, { FC } from 'react'
 import { Card, CardContent } from '@mui/material'
 
-import { IProject } from '@/graphql/interfaces/IProject.interfaces'
-
 import { RowInfo } from './RowInfo/RowInfo'
-
-export interface IProjectDetailItemProps {
-  project: IProject
-}
+import { IProjectDetailItemProps } from './ProjectDetailItem.interfaces'
 
 export const ProjectDetailItem: FC<IProjectDetailItemProps> = ({ project }) => {
   return (
