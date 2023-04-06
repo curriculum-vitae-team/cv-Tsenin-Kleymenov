@@ -12,6 +12,7 @@ export const UserMenuItem: FC<IUserMenuItemProps> = ({ userId, onClick, route, I
       onClick={onClick}
       component={Link}
       to={`/${AppNavigationRoutes.EMPLOYEES}/${userId}/${route}`}
+      state={AppNavigationRoutes.EMPLOYEES}
     >
       <ListItemIcon>
         <Icon />

@@ -1,3 +1,9 @@
+import { DocumentNode } from '@apollo/client'
+
 export interface IAppBreadcrumbsProps {
-  userId?: string
+  id?: string
+}
+
+export interface IBreadcrumbsQuery {
+  [key: string]: DocumentNode
 }
