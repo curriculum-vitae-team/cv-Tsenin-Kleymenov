@@ -11,6 +11,7 @@ import { ProfileEmployeePage } from '@/pages/ProfileEmployeePage'
 import { ProfileLanguagePage } from '@/pages/ProfileLanguagePage'
 import { ProfilePage } from '@/pages/ProfilePage'
 import { ProfileSkillsPage } from '@/pages/ProfileSkillsPage'
+import { ProjectDetailPage } from '@/pages/ProjectDetailPage'
 import { ProjectsPage } from '@/pages/ProjectsPage/ProjectsPage'
 import { SkillsPage } from '@/pages/SkillsPage/SkillsPage'
 
@@ -31,6 +32,14 @@ const AuthenticatedApp: FC = () => {
             <Route path={AppNavigationRoutes.SKILLS} element={<ProfileSkillsPage />} />
             <Route path={AppNavigationRoutes.LANGUAGES} element={<ProfileLanguagePage />} />
             <Route path={AppNavigationRoutes.CVS} element={<ProfileCVsPage />} />
+          </Route>
+        </Route>
+
+        <Route path={AppNavigationRoutes.PROJECTS} element={<Outlet />}>
+          <Route index element={<ProjectsPage />} />
+
+          <Route path=":id" element={<ProjectDetailPage />}>
+            <Route index element={<ProjectDetailPage />} />
           </Route>
         </Route>
 

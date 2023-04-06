@@ -11,16 +11,19 @@ import { AppNavigationRoutes } from '@/router/paths'
 
 import { IAppBreadcrumbsProps } from './Breadcrumbs.interfaces'
 import { BreadcrumbsLink, UserBreadcrumbText } from './Breadcrumbs.styles'
+import { BreadcrumbsQuery } from './queries'
 
-export const AppBreadcrumbs: FC<IAppBreadcrumbsProps> = ({ userId }) => {
-  const { data: userData } = useQuery(USER, {
-    variables: { id: userId }
-  })
+export const AppBreadcrumbs: FC<IAppBreadcrumbsProps> = ({ id }) => {
   const location = useLocation()
+
+  const { data } = useQuery(BreadcrumbsQuery[location.state] || USER, {
+    variables: { id }
+  })
+
   const pathnameArray = location.pathname.split('/').filter(item => item)
   const profileLink = useMemo(
-    () => `/${AppNavigationRoutes.EMPLOYEES}/${userId}/${AppNavigationRoutes.PROFILE}`,
-    [userId]
+    () => `/${AppNavigationRoutes.EMPLOYEES}/${id}/${AppNavigationRoutes.PROFILE}`,
+    [id]
   )
 
   return (
@@ -30,25 +33,26 @@ export const AppBreadcrumbs: FC<IAppBreadcrumbsProps> = ({ userId }) => {
         Home
       </BreadcrumbsLink>
       {pathnameArray.map((item, index, arr) => {
-        if (item === userId) {
+        if (item === id && index !== arr.length - 1) {
           return (
-            <BreadcrumbsLink to={profileLink} key={item}>
+            <BreadcrumbsLink key={item} to={profileLink}>
               <UserBreadcrumbText>
-                <AccountCircleIcon sx={{ mr: 1 }} />
-                {userData?.user.profile.full_name || userData?.user.email}
+                {data?.user && <AccountCircleIcon sx={{ mr: 1 }} />}
+                {data?.user.profile.full_name || data?.user.email || data?.Cv.name}
               </UserBreadcrumbText>
             </BreadcrumbsLink>
           )
         }
         return (
           <BreadcrumbsLink
-            to={
-              index === arr.length - 1 ? location.pathname : AppNavigationRoutes[item.toUpperCase()]
-            }
             key={item}
+            to={AppNavigationRoutes[item.toUpperCase()]}
+            style={{ pointerEvents: index === arr.length - 1 ? 'none' : 'auto' }}
             color={index === arr.length - 1 ? 'info' : 'primary'}
           >
-            {item.charAt(0).toUpperCase() + item.slice(1, item.length)}
+            {item === id && index === arr.length - 1
+              ? data?.project.name
+              : item.charAt(0).toUpperCase() + item.slice(1, item.length)}
           </BreadcrumbsLink>
         )
       })}

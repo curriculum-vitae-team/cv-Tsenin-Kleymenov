@@ -42,7 +42,7 @@ export const tableColumns: IColumn<IProject>[] = [
   {
     id: 7,
     header: '',
-    render: () => <ProjectsDropdown />,
+    render: project => <ProjectsDropdown projectId={project.id} />,
     sortable: false
   }
 ]

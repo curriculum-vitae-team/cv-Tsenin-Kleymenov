@@ -18,7 +18,7 @@ export const AppLayout: FC = () => {
       <HeaderAuthenticated />
       <ContentWrapper>
         <Container maxWidth="xl">
-          <AppBreadcrumbs userId={currentId} />
+          <AppBreadcrumbs id={currentId} />
           <Outlet />
         </Container>
       </ContentWrapper>
