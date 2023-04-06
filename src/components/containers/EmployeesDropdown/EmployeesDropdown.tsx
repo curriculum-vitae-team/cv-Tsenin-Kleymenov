@@ -14,6 +14,7 @@ export const EmployeesDropdown: FC<IEmployeesDropdownProps> = ({ userId }) => {
       <MenuItem>
         <Link
           to={`${userId}/${AppNavigationRoutes.PROFILE}`}
+          state={AppNavigationRoutes.EMPLOYEES}
           style={{ color: 'inherit', textDecoration: 'none' }}
         >
           Profile

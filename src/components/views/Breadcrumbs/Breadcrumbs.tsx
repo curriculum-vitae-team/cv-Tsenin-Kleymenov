@@ -37,8 +37,13 @@ export const AppBreadcrumbs: FC<IAppBreadcrumbsProps> = ({ id }) => {
           return (
             <BreadcrumbsLink key={item} to={profileLink}>
               <UserBreadcrumbText>
-                {data?.user && <AccountCircleIcon sx={{ mr: 1 }} />}
-                {data?.user.profile.full_name || data?.user.email || data?.Cv.name}
+                {data?.user && (
+                  <>
+                    <AccountCircleIcon sx={{ mr: 1 }} />
+                    {data?.user?.profile.full_name || data?.user?.email}
+                  </>
+                )}
+                {data?.cv && data?.cv?.name}
               </UserBreadcrumbText>
             </BreadcrumbsLink>
           )

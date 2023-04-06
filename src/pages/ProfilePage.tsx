@@ -23,6 +23,7 @@ export const ProfilePage: FC = () => {
       <NavigationTabs
         textColor="inherit"
         tabs={PROFILE_TABS}
+        locationState={AppNavigationRoutes.EMPLOYEES}
         defaultValue={AppNavigationRoutes.PROFILE}
       />
       <Outlet />
