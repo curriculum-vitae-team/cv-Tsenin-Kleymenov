@@ -1,7 +1,7 @@
 import { FC, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useQuery, useReactiveVar } from '@apollo/client'
-import { Container } from '@mui/material'
+import { Typography } from '@mui/material'
 
 import { IUserResult } from '@/appTypes/IResult.interfaces'
 import { CVItem } from '@/components/containers/CVItem/CVItem'
@@ -33,11 +33,16 @@ export const EmployeeCVsProfile: FC = () => {
   return (
     <>
       {userCheck && (
-        <Container sx={{ my: 2 }} maxWidth="lg">
-          {userData?.user?.cvs &&
+        <>
+          {userData?.user?.cvs ? (
             userData?.user?.cvs.map(CV => (
               <CVItem key={CV.id} CV={CV} handleSetCurrentCV={handleSetCurrentCV} />
-            ))}
+            ))
+          ) : (
+            <Typography sx={{ my: 2 }} variant="h5">
+              You don't have any CVs
+            </Typography>
+          )}
           {open && (
             <CVsModal
               open={open}
@@ -46,7 +51,7 @@ export const EmployeeCVsProfile: FC = () => {
               CVData={selectedCV}
             />
           )}
-        </Container>
+        </>
       )}
     </>
   )

@@ -25,17 +25,17 @@ export const EmployeeLanguagesProfile: FC = () => {
   }
 
   return (
-    <Container sx={{ display: 'flex', flexDirection: 'column' }} maxWidth="lg">
+    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
       {userCheck && (
         <Button
-          sx={{ maxWidth: 210, my: 3, alignSelf: 'flex-end' }}
+          sx={{ maxWidth: 210, alignSelf: 'flex-end' }}
           variant="contained"
           onClick={handleLanguageModalClose}
         >
           + Add Languages
         </Button>
       )}
-      <Divider />
+      <Divider sx={{ my: 2 }} />
       {userData?.user?.profile.languages.length ? (
         <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
           {userData?.user?.profile?.languages.map(item => (
@@ -58,6 +58,6 @@ export const EmployeeLanguagesProfile: FC = () => {
           handleClose={handleLanguageModalClose}
         />
       )}
-    </Container>
+    </Box>
   )
 }

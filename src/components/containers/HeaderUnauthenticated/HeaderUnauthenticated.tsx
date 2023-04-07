@@ -11,7 +11,7 @@ export const HeaderUnauthenticated: FC = () => {
   return (
     <HeaderWrapper color="secondary">
       <HeaderTabsWrapper>
-        <NavigationTabs tabs={HEADER_TABS} defaultValue={AppNavigationRoutes.LOGIN} />
+        <NavigationTabs  tabs={HEADER_TABS} defaultValue={AppNavigationRoutes.LOGIN} />
       </HeaderTabsWrapper>
     </HeaderWrapper>
   )

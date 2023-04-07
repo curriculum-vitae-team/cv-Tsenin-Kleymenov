@@ -69,12 +69,12 @@ export const EmployeeAvatarUpload: FC = () => {
   }
 
   return (
-    <Grid sx={{ mt: 2 }} container spacing={2}>
+    <Grid container spacing={2}>
       <Grid item xs={6}>
         <AvatarWrapper>
           {userData?.user.profile.avatar ? (
             <>
-              <Avatar src={userData?.user.profile.avatar} sx={{ width: 200, height: 200, mb: 5 }} />
+              <Avatar src={userData?.user.profile.avatar} sx={{ width: 200, height: 200}} />
               {userCheck && (
                 <IconButton onClick={handleFileRemove}>
                   <CloseIcon />
@@ -82,7 +82,7 @@ export const EmployeeAvatarUpload: FC = () => {
               )}
             </>
           ) : (
-            <Avatar sx={{ width: 200, height: 200, mb: 5 }}>
+            <Avatar sx={{ width: 200, height: 200}}>
               {uploadLoading ? (
                 <Loader sx={{ position: 'static' }} color="primary" />
               ) : (

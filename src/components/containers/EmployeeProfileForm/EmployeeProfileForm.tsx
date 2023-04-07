@@ -77,7 +77,7 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
   return (
     <Container maxWidth="md">
       <EmployeeAvatarUpload />
-      <Box sx={{ my: 1, minHeight: 150 }}>
+      <Box sx={{ minHeight: 150 }}>
         {userLoading ? (
           <Box sx={{ position: 'relative' }}>
             <Loader color="primary" />
