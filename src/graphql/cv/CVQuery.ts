@@ -8,21 +8,11 @@ export const CV = gql`
       name
       description
       user {
-        email
-      }
-      projects {
         id
-        name
-        internal_name
-        description
-        domain
-        start_date
-        end_date
-        team_size
-        tech_stack {
-          id
-          created_at
-          name
+        email
+        position_name
+        profile {
+          full_name
         }
       }
       skills {
