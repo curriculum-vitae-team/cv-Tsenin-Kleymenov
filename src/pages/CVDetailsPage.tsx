@@ -1,11 +1,16 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { useQuery } from '@apollo/client'
-import { Box } from '@mui/material'
+import { useQuery, useReactiveVar } from '@apollo/client'
+import { Box, Divider } from '@mui/material'
 
+import { IUserResult } from '@/appTypes/IResult.interfaces'
+import { CVsModal } from '@/components/containers/EmployeeCVsProfile/CVsModal/CVsModal'
+import { Button } from '@/components/views/Button/Button'
 import { CVDetailItem } from '@/components/views/CVDetailItem/CVDetailItem'
 import { Loader } from '@/components/views/Loader/Loader'
+import { authService } from '@/graphql/auth/authService'
 import { CV } from '@/graphql/cv/CVQuery'
+import { USER } from '@/graphql/user/userQuery'
 
 export const CVDetailsPage: FC = () => {
   const { id: CVId } = useParams()
@@ -13,13 +18,47 @@ export const CVDetailsPage: FC = () => {
     variables: { id: CVId }
   })
 
+  const user = useReactiveVar(authService.user$)
+  const userCheck = CVData?.cv.user?.id === user?.id
+
+
+  const [open, setOpen] = useState<boolean>(false)
+
+  const { data: userData } = useQuery<IUserResult>(USER, {
+    variables: { id: user?.id }
+  })
+
+  const handleCVsModalClose = (): void => {
+    setOpen(prev => !prev)
+  }
+
   return (
-    <Box>
+    <>
       {CVLoading ? (
         <Loader color="primary" />
       ) : (
-        <CVDetailItem cv={CVData?.cv} />
+        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+          {userCheck && (
+            <Button
+              sx={{ maxWidth: 210, alignSelf: 'flex-end' }}
+              variant="contained"
+              onClick={handleCVsModalClose}
+            >
+              edit
+            </Button>
+          )}
+          <Divider sx={{ my: 2 }} />
+          <CVDetailItem cv={CVData?.cv} />
+        </Box>
       )}
-    </Box>
+      {open && (
+        <CVsModal
+          open={open}
+          handleClose={handleCVsModalClose}
+          userData={userData?.user}
+          CVData={CVData?.cv}
+        />
+      )}
+    </>
   )
 }

@@ -21,8 +21,13 @@ export const AppBreadcrumbs: FC<IAppBreadcrumbsProps> = ({ id }) => {
   })
 
   const pathnameArray = location.pathname.split('/').filter(item => item)
+
   const profileLink = useMemo(
     () => `/${AppNavigationRoutes.EMPLOYEES}/${id}/${AppNavigationRoutes.PROFILE}`,
+    [id]
+  )
+  const cvLink = useMemo(
+    () => `/${AppNavigationRoutes.CVS}/${id}/${AppNavigationRoutes.DETAILS}`,
     [id]
   )
 
@@ -35,7 +40,11 @@ export const AppBreadcrumbs: FC<IAppBreadcrumbsProps> = ({ id }) => {
       {pathnameArray.map((item, index, arr) => {
         if (item === id && index !== arr.length - 1) {
           return (
-            <BreadcrumbsLink key={item} to={profileLink}>
+            <BreadcrumbsLink
+              key={item}
+              to={data?.user ? profileLink : cvLink}
+              state={data?.user ? AppNavigationRoutes.EMPLOYEES : AppNavigationRoutes.CVS}
+            >
               <UserBreadcrumbText>
                 {data?.user && (
                   <>

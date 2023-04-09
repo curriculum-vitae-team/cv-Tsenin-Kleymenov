@@ -1,4 +1,4 @@
 export interface IRowInfoProps {
-   title: string
-   info?: string
- }
+  title: string
+  info?: string
+}

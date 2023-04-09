@@ -14,6 +14,7 @@ import { UPDATE_CV } from '@/graphql/cv/updateCVMutation'
 import { GET_PROJECTS } from '@/graphql/projects/projectsQuery'
 import { USER } from '@/graphql/user/userQuery'
 import { createLanguagesArray } from '@/utils/createLanguagesArray'
+import { createProjectsIdArray } from '@/utils/createProjectsIdArray'
 import { createSkillsArray } from '@/utils/createSkillsArray'
 
 import { ICVsModalProps } from './CVsModal.interfaces'
@@ -50,7 +51,7 @@ export const CVsModal: FC<ICVsModalProps> = ({ CVData, userData, open, handleClo
           name: formData[FORM_PROFILE_CVS_KEYS.name],
           description: formData[FORM_PROFILE_CVS_KEYS.description],
           userId: userData?.id,
-          projectsIds: projectsData?.projects.map(({ id: projectId }) => projectId) || [],
+          projectsIds: createProjectsIdArray(projectsData?.projects),
           skills: createSkillsArray(userData?.profile.skills),
           languages: createLanguagesArray(userData?.profile.languages),
           is_template: formData[FORM_PROFILE_CVS_KEYS.template]

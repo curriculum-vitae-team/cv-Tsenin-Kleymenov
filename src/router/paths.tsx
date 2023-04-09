@@ -14,6 +14,6 @@ export const AppNavigationRoutes: IPath = {
   POSITIONS: 'positions',
   SKILLS: 'skills',
   LANGUAGES: 'languages',
-  SETTINGS: 'settings', 
+  SETTINGS: 'settings',
   PAGE_NOT_FOUND: '*'
 }

@@ -23,6 +23,15 @@ export const CV = gql`
         language_name
         proficiency
       }
+      projects {
+        id
+        name
+        internal_name
+        domain
+        start_date
+        end_date
+        description
+      }
       is_template
     }
   }

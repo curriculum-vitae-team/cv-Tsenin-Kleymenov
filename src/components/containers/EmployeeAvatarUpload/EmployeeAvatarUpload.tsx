@@ -74,7 +74,7 @@ export const EmployeeAvatarUpload: FC = () => {
         <AvatarWrapper>
           {userData?.user.profile.avatar ? (
             <>
-              <Avatar src={userData?.user.profile.avatar} sx={{ width: 200, height: 200}} />
+              <Avatar src={userData?.user.profile.avatar} sx={{ width: 200, height: 200 }} />
               {userCheck && (
                 <IconButton onClick={handleFileRemove}>
                   <CloseIcon />
@@ -82,7 +82,7 @@ export const EmployeeAvatarUpload: FC = () => {
               )}
             </>
           ) : (
-            <Avatar sx={{ width: 200, height: 200}}>
+            <Avatar sx={{ width: 200, height: 200 }}>
               {uploadLoading ? (
                 <Loader sx={{ position: 'static' }} color="primary" />
               ) : (

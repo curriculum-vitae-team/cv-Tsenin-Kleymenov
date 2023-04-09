@@ -17,6 +17,7 @@ export const CVsDropdown: FC<ICVsDropdownProps> = ({ CVId }) => {
       >
         <MenuItem>CV</MenuItem>
       </Link>
+
       <MenuItem>Delete CV</MenuItem>
     </BasicMenu>
   )

@@ -1,7 +1,7 @@
 import { FC, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useQuery, useReactiveVar } from '@apollo/client'
-import { Box, Container, Divider, Typography } from '@mui/material'
+import { Box, Divider, Typography } from '@mui/material'
 
 import { IUserResult } from '@/appTypes/IResult.interfaces'
 import { LanguageItem } from '@/components/containers/LanguageItem/LanguageItem'
