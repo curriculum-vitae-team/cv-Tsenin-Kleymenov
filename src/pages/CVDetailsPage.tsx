@@ -14,13 +14,14 @@ import { USER } from '@/graphql/user/userQuery'
 
 export const CVDetailsPage: FC = () => {
   const { id: CVId } = useParams()
+  
   const { data: CVData, loading: CVLoading } = useQuery(CV, {
     variables: { id: CVId }
   })
 
   const user = useReactiveVar(authService.user$)
-  const userCheck = CVData?.cv.user?.id === user?.id
 
+  const userCheck = CVData?.cv.user?.id === user?.id
 
   const [open, setOpen] = useState<boolean>(false)
 
