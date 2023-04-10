@@ -17,6 +17,10 @@ import { tableColumns } from './tableColumns'
 
 export const CVProjectsPage: FC = () => {
   const { id: CVId } = useParams()
+  const user = useReactiveVar(authService.user$)
+  const [open, setOpen] = useState<boolean>(false)
+  const [searchedName, setSearchedName] = useState<string>('')
+
   const {
     data: CVData,
     loading: CVLoading,
@@ -25,10 +29,7 @@ export const CVProjectsPage: FC = () => {
     variables: { id: CVId }
   })
 
-  const user = useReactiveVar(authService.user$)
   const userCheck = CVData?.cv?.user?.id === user?.id
-  const [open, setOpen] = useState<boolean>(false)
-  const [searchedName, setSearchedName] = useState<string>('')
 
   const handleSearchUser = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setSearchedName(event.target.value)
@@ -62,7 +63,6 @@ export const CVProjectsPage: FC = () => {
           onChange={handleSearchUser}
           placeholder="Search"
         />
-
         {userCheck && (
           <Button sx={{ maxWidth: 150 }} variant="contained" onClick={handleCVsModalClose}>
             Update

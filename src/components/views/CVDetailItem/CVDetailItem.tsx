@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { Box, Chip, Divider, Typography } from '@mui/material'
 
-import { RowInfo } from '../RowInfo/RowInfo'
+import { RowInfo } from '@/components/views/RowInfo/RowInfo'
 
 import { ICVDetailItemProps } from './CVDetailItem.interfaces'
 
@@ -14,7 +14,6 @@ export const CVDetailItem: FC<ICVDetailItemProps> = ({ cv }) => {
       <RowInfo title="User position" info={cv?.user?.position_name} />
       <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}>
         <Typography sx={{ my: 1, fontSize: '24px' }}>Skills:</Typography>
-        <Box></Box>
         {cv?.skills.length > 0 ? (
           cv?.skills.map(skill => (
             <Chip

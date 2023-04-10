@@ -24,6 +24,7 @@ import {
 
 export const CVProjectsModal: FC<ICVProjectsModalProps> = ({ CVData, open, handleClose }) => {
   const { id } = useParams()
+
   const [updateCVMutation, { loading: updateCVLoading }] = useMutation(UPDATE_CV, {
     refetchQueries: [{ query: CV, variables: { id } }]
   })

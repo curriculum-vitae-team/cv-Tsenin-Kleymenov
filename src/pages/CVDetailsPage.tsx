@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import { FC, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useQuery, useReactiveVar } from '@apollo/client'
 import { Box, Divider } from '@mui/material'
@@ -14,20 +14,18 @@ import { USER } from '@/graphql/user/userQuery'
 
 export const CVDetailsPage: FC = () => {
   const { id: CVId } = useParams()
-  
+  const user = useReactiveVar(authService.user$)
+  const [open, setOpen] = useState<boolean>(false)
+
   const { data: CVData, loading: CVLoading } = useQuery(CV, {
     variables: { id: CVId }
   })
 
-  const user = useReactiveVar(authService.user$)
-
-  const userCheck = CVData?.cv.user?.id === user?.id
-
-  const [open, setOpen] = useState<boolean>(false)
-
   const { data: userData } = useQuery<IUserResult>(USER, {
     variables: { id: user?.id }
   })
+
+  const userCheck = CVData?.cv.user?.id === user?.id
 
   const handleCVsModalClose = (): void => {
     setOpen(prev => !prev)
@@ -40,15 +38,17 @@ export const CVDetailsPage: FC = () => {
       ) : (
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
           {userCheck && (
-            <Button
-              sx={{ maxWidth: 210, alignSelf: 'flex-end' }}
-              variant="contained"
-              onClick={handleCVsModalClose}
-            >
-              edit
-            </Button>
+            <>
+              <Button
+                sx={{ maxWidth: 210, alignSelf: 'flex-end' }}
+                variant="contained"
+                onClick={handleCVsModalClose}
+              >
+                edit
+              </Button>
+              <Divider sx={{ my: 2 }} />
+            </>
           )}
-          <Divider sx={{ my: 2 }} />
           <CVDetailItem cv={CVData?.cv} />
         </Box>
       )}
