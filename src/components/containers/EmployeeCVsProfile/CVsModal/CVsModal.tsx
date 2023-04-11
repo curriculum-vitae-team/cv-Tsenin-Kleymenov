@@ -28,8 +28,6 @@ export const CVsModal: FC<ICVsModalProps> = ({ currentCVData, open, handleClose 
     fetchPolicy: FETCH_POLICY.networkOnly
   })
 
-  console.log(CVData)
-
   const [updateCVMutation, { loading: updateCVLoading }] = useMutation(UPDATE_CV)
 
   const {

@@ -28,8 +28,6 @@ export const CVDetailsModal: FC<ICVDetailsModalProps> = ({ CVData, open, handleC
     refetchQueries: [{ query: CV, variables: { id: CVData?.id } }]
   })
 
-  console.log(CVData)
-
   const {
     register,
     handleSubmit,

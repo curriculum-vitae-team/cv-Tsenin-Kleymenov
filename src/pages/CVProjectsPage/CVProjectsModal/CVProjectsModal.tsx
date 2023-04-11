@@ -29,8 +29,6 @@ export const CVProjectsModal: FC<ICVProjectsModalProps> = ({ CVData, open, handl
     refetchQueries: [{ query: CV, variables: { id: CVData?.id } }]
   })
 
-  console.log(CVData)
-
   const { data: projectsData } = useQuery<IProjectsResult>(GET_PROJECTS)
 
   const {
