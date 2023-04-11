@@ -41,7 +41,7 @@ export const CVDetailsPage: FC = () => {
                 variant="contained"
                 onClick={handleCVsModalClose}
               >
-                edit
+                Edit
               </Button>
               <Divider sx={{ my: 2 }} />
             </>

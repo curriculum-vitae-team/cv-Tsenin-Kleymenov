@@ -32,7 +32,7 @@ export const CVPreviewPage: FC = () => {
         variant="contained"
         onClick={handlePrintClick}
       >
-        print
+        Print
       </Button>
       <Divider sx={{ my: 2 }} />
       {CVLoading ? (
