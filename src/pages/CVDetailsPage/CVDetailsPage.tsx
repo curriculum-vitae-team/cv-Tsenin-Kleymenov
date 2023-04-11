@@ -3,14 +3,14 @@ import { useParams } from 'react-router-dom'
 import { useQuery, useReactiveVar } from '@apollo/client'
 import { Box, Divider } from '@mui/material'
 
-import { IUserResult } from '@/appTypes/IResult.interfaces'
-import { CVsModal } from '@/components/containers/EmployeeCVsProfile/CVsModal/CVsModal'
 import { Button } from '@/components/views/Button/Button'
 import { CVDetailItem } from '@/components/views/CVDetailItem/CVDetailItem'
 import { Loader } from '@/components/views/Loader/Loader'
 import { authService } from '@/graphql/auth/authService'
 import { CV } from '@/graphql/cv/CVQuery'
-import { USER } from '@/graphql/user/userQuery'
+import { FETCH_POLICY } from '@/graphql/fetchPolicy'
+
+import { CVDetailsModal } from './CVDetailsModal/CVDetailsModal'
 
 export const CVDetailsPage: FC = () => {
   const { id: CVId } = useParams()
@@ -18,11 +18,8 @@ export const CVDetailsPage: FC = () => {
   const [open, setOpen] = useState<boolean>(false)
 
   const { data: CVData, loading: CVLoading } = useQuery(CV, {
-    variables: { id: CVId }
-  })
-
-  const { data: userData } = useQuery<IUserResult>(USER, {
-    variables: { id: user?.id }
+    variables: { id: CVId },
+    fetchPolicy: FETCH_POLICY.networkOnly
   })
 
   const userCheck = CVData?.cv.user?.id === user?.id
@@ -49,17 +46,10 @@ export const CVDetailsPage: FC = () => {
               <Divider sx={{ my: 2 }} />
             </>
           )}
-          <CVDetailItem cv={CVData?.cv} />
+          <CVDetailItem CVData={CVData?.cv} />
         </Box>
       )}
-      {open && (
-        <CVsModal
-          open={open}
-          handleClose={handleCVsModalClose}
-          userData={userData?.user}
-          CVData={CVData?.cv}
-        />
-      )}
+      {open && <CVDetailsModal open={open} handleClose={handleCVsModalClose} CVData={CVData?.cv} />}
     </>
   )
 }

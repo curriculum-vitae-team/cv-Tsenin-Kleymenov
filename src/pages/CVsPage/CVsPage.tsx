@@ -6,12 +6,15 @@ import { ICVsResult } from '@/appTypes/IResult.interfaces'
 import { CommonTable } from '@/components/views/CommonTable/CommonTable'
 import { InputWithIcon } from '@/components/views/Input/Input'
 import { GET_CVS } from '@/graphql/cvs/cvsQuery'
+import { FETCH_POLICY } from '@/graphql/fetchPolicy'
 import { ICV } from '@/graphql/interfaces/ICV.interfaces'
 
 import { tableColumns } from './tableColumns'
 
 export const CVsPage: FC = () => {
-  const { data, loading, error } = useQuery<ICVsResult>(GET_CVS)
+  const { data, loading, error } = useQuery<ICVsResult>(GET_CVS, {
+    fetchPolicy: FETCH_POLICY.networkOnly
+  })
 
   const [searchedName, setSearchedName] = useState<string>('')
 

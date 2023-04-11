@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { Navigate, Outlet, Route, Routes } from 'react-router'
 
-import { CVDetailsPage } from '@/pages/CVDetailsPage'
+import { CVDetailsPage } from '@/pages/CVDetailsPage/CVDetailsPage'
 import { CVPage } from '@/pages/CVPage'
 import { CVPreviewPage } from '@/pages/CVPreviewPage'
 import { CVProjectsPage } from '@/pages/CVProjectsPage/CVProjectsPage'

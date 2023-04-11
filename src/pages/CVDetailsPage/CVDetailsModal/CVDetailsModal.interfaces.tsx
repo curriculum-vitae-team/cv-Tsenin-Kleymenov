@@ -1,9 +1,7 @@
 import { ICV } from '@/graphql/interfaces/ICV.interfaces'
-import { IUser } from '@/graphql/interfaces/IUser.interfaces'
 
-export interface ICVsModalProps {
-  currentCVData: ICV | null
-  userData?: IUser
+export interface ICVDetailsModalProps {
+  CVData?: ICV | null
   open: boolean
   handleClose: () => void
 }
@@ -14,7 +12,7 @@ export enum FORM_PROFILE_CVS_KEYS {
   template = 'template'
 }
 
-export interface IProfileCVsFormValues {
+export interface ICVDetailsFormValues {
   [FORM_PROFILE_CVS_KEYS.name]: string
   [FORM_PROFILE_CVS_KEYS.description]: string
   [FORM_PROFILE_CVS_KEYS.template]: boolean

@@ -6,6 +6,7 @@ import { Typography } from '@mui/material'
 import { IUserResult } from '@/appTypes/IResult.interfaces'
 import { CVItem } from '@/components/containers/CVItem/CVItem'
 import { authService } from '@/graphql/auth/authService'
+import { FETCH_POLICY } from '@/graphql/fetchPolicy'
 import { ICV } from '@/graphql/interfaces/ICV.interfaces'
 import { USER } from '@/graphql/user/userQuery'
 
@@ -17,8 +18,10 @@ export const EmployeeCVsProfile: FC = () => {
   const userCheck = id === user?.id
   const [open, setOpen] = useState<boolean>(false)
   const [selectedCV, setSelectedCV] = useState<ICV | null>(null)
+
   const { data: userData } = useQuery<IUserResult>(USER, {
-    variables: { id: user?.id }
+    variables: { id: user?.id },
+    fetchPolicy: FETCH_POLICY.networkOnly
   })
 
   const handleCVsModalClose = (): void => {
@@ -44,12 +47,7 @@ export const EmployeeCVsProfile: FC = () => {
             </Typography>
           )}
           {open && (
-            <CVsModal
-              open={open}
-              handleClose={handleCVsModalClose}
-              userData={userData?.user}
-              CVData={selectedCV}
-            />
+            <CVsModal open={open} handleClose={handleCVsModalClose} currentCVData={selectedCV} />
           )}
         </>
       )}

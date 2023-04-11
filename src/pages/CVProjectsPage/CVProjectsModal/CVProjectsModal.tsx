@@ -1,7 +1,6 @@
 import { FC } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
-import { useParams } from 'react-router-dom'
-import { useMutation, useQuery } from '@apollo/client'
+import { useMutation, useQuery, useReactiveVar } from '@apollo/client'
 import CheckBoxIcon from '@mui/icons-material/CheckBox'
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank'
 import { Autocomplete, Checkbox, Container, TextField } from '@mui/material'
@@ -9,6 +8,7 @@ import { Autocomplete, Checkbox, Container, TextField } from '@mui/material'
 import { IProjectsResult } from '@/appTypes/IResult.interfaces'
 import { Button } from '@/components/views/Button/Button'
 import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
+import { authService } from '@/graphql/auth/authService'
 import { CV } from '@/graphql/cv/CVQuery'
 import { UPDATE_CV } from '@/graphql/cv/updateCVMutation'
 import { GET_PROJECTS } from '@/graphql/projects/projectsQuery'
@@ -23,11 +23,13 @@ import {
 } from './CVProjectsModal.interfaces'
 
 export const CVProjectsModal: FC<ICVProjectsModalProps> = ({ CVData, open, handleClose }) => {
-  const { id } = useParams()
+  const user = useReactiveVar(authService.user$)
 
   const [updateCVMutation, { loading: updateCVLoading }] = useMutation(UPDATE_CV, {
-    refetchQueries: [{ query: CV, variables: { id } }]
+    refetchQueries: [{ query: CV, variables: { id: CVData?.id } }]
   })
+
+  console.log(CVData)
 
   const { data: projectsData } = useQuery<IProjectsResult>(GET_PROJECTS)
 
@@ -48,7 +50,7 @@ export const CVProjectsModal: FC<ICVProjectsModalProps> = ({ CVData, open, handl
         cv: {
           name: CVData?.name,
           description: CVData?.description,
-          userId: CVData?.user?.id,
+          userId: user?.id,
           projectsIds: createProjectsIdArray(formData[FORM_CV_PROJECTS_KEYS.projects]),
           skills: createSkillsArray(CVData?.skills),
           languages: createLanguagesArray(CVData?.languages),

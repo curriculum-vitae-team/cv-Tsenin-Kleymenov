@@ -9,6 +9,7 @@ import { UserAvatar } from '@/components/views/UserAvatar/UserAvatar'
 import { UserMenuItem } from '@/components/views/UserMenuItem/UserMenuItem'
 import { USER_MENU_ITEMS } from '@/constants/userMenuItems'
 import { authService } from '@/graphql/auth/authService'
+import { FETCH_POLICY } from '@/graphql/fetchPolicy'
 import { IUser } from '@/graphql/interfaces/IUser.interfaces'
 import { USER } from '@/graphql/user/userQuery'
 import { AppNavigationRoutes } from '@/router/paths'
@@ -21,7 +22,8 @@ export const UserMenu: FC = () => {
   const navigate = useNavigate()
 
   const { data } = useQuery<IUserResult>(USER, {
-    variables: { id: user?.id }
+    variables: { id: user?.id },
+    fetchPolicy: FETCH_POLICY.cacheOnly
   })
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
@@ -58,7 +60,7 @@ export const UserMenu: FC = () => {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         {Object.values(USER_MENU_ITEMS).map(({ route, text, icon: Icon }) => {
-          return <UserMenuItem userId={user?.id} key={text} route={route} text={text} Icon={Icon} />
+          return <UserMenuItem key={text} route={route} text={text} Icon={Icon} />
         })}
         <Divider />
         <UserMenuItem onClick={handleLogout} text="Logout" Icon={Logout} />

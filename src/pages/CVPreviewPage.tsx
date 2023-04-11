@@ -9,6 +9,7 @@ import { Button } from '@/components/views/Button/Button'
 import { Loader } from '@/components/views/Loader/Loader'
 import { RowInfo } from '@/components/views/RowInfo/RowInfo'
 import { CV } from '@/graphql/cv/CVQuery'
+import { FETCH_POLICY } from '@/graphql/fetchPolicy'
 import { getFirstChars } from '@/utils/getFirstChar'
 
 export const CVPreviewPage: FC = () => {
@@ -16,7 +17,8 @@ export const CVPreviewPage: FC = () => {
   const componentRef = useRef<ReactInstance | null>(null)
 
   const { data: CVData, loading: CVLoading } = useQuery<ICVResult>(CV, {
-    variables: { id: CVId }
+    variables: { id: CVId },
+    fetchPolicy: FETCH_POLICY.networkOnly
   })
 
   const handlePrintClick = useReactToPrint({

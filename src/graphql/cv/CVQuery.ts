@@ -11,8 +11,12 @@ export const CV = gql`
         id
         email
         position_name
+        department_name
         profile {
+          first_name
+          last_name
           full_name
+          avatar
         }
       }
       skills {
