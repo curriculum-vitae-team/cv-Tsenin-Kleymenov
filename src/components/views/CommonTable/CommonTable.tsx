@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import {
-  Table,
+  Table as MuiTable,
   TableBody,
   TableCell,
   TableContainer,
@@ -15,7 +15,7 @@ import { Loader } from '../Loader/Loader'
 import { ICommonTableProps } from './CommonTable.interfaces'
 import { StyledTableRow } from './CommonTable.styles'
 
-export const CommonTable = <T extends { id: string }>({
+const Table = <T extends { id: string }>({
   label,
   data,
   tableColumns,
@@ -54,7 +54,7 @@ export const CommonTable = <T extends { id: string }>({
     <Loader />
   ) : (
     <TableContainer>
-      <Table aria-label={`${label.toLowerCase()} table`}>
+      <MuiTable aria-label={`${label.toLowerCase()} table`}>
         <TableHead>
           <TableRow>
             {tableColumns.map(column => (
@@ -102,7 +102,9 @@ export const CommonTable = <T extends { id: string }>({
             ))
           )}
         </TableBody>
-      </Table>
+      </MuiTable>
     </TableContainer>
   )
 }
+
+export const CommonTable = memo(Table) as typeof Table

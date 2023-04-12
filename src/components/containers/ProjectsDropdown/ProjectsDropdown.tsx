@@ -10,15 +10,13 @@ import { IProjectsDropdownProps } from './ProjectsDropdown.interfaces'
 export const ProjectsDropdown: FC<IProjectsDropdownProps> = ({ projectId }) => {
   return (
     <BasicMenu>
-      <MenuItem>
-        <Link
-          to={`${projectId}`}
-          state={AppNavigationRoutes.PROJECTS}
-          style={{ color: 'inherit', textDecoration: 'none' }}
-        >
-          Project
-        </Link>
-      </MenuItem>
+      <Link
+        to={`${projectId}`}
+        state={AppNavigationRoutes.PROJECTS}
+        style={{ color: 'inherit', textDecoration: 'none' }}
+      >
+        <MenuItem>Project</MenuItem>
+      </Link>
       <MenuItem>Delete project</MenuItem>
     </BasicMenu>
   )

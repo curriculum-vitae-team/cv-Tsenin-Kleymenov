@@ -37,10 +37,10 @@ export const CVItem: FC<ICVsItemProps> = ({ CV, handleSetCurrentCV }) => {
         </Box>
         <ButtonContainer>
           <Button variant="contained" onClick={() => handleSetCurrentCV(CV)}>
-            edit
+            Edit
           </Button>
           <Button variant="contained" onClick={() => unbindCV(CV.id)}>
-            unassign
+            Unassign
           </Button>
         </ButtonContainer>
       </AccordionDetails>

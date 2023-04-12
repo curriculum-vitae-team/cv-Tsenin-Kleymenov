@@ -1,8 +1,8 @@
-import { ICV } from '@/graphql/interfaces/ICV.interfaces'
+import { ICV } from '@/graphql/interfaces/ICv.interfaces'
 import { IUser } from '@/graphql/interfaces/IUser.interfaces'
 
 export interface ICVsModalProps {
-  CVData: ICV | null
+  CVData?: ICV | null
   userData?: IUser
   open: boolean
   handleClose: () => void

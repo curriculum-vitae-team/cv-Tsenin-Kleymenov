@@ -6,7 +6,7 @@ import { IProjectsNames } from './ProjectsNames.interfaces'
 export const ProjectsNames: FC<IProjectsNames> = ({ item }) => {
   return (
     <>
-      {item.projects.map(({ id, name }) => {
+      {item?.projects?.map(({ id, name }) => {
         return (
           <Chip
             style={{ marginBottom: '6px', marginRight: '6px' }}

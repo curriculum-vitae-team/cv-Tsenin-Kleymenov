@@ -9,7 +9,7 @@ import { IProjectsResult } from '@/appTypes/IResult.interfaces'
 import { Button } from '@/components/views/Button/Button'
 import { Input } from '@/components/views/Input/Input'
 import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
-import { FORM_PROFILE_CVS_SCHEMA } from '@/constants/schemaOptions'
+import { FORM_CVS_SCHEMA } from '@/constants/schemaOptions'
 import { UPDATE_CV } from '@/graphql/cvs/updateCVMutation'
 import { GET_PROJECTS } from '@/graphql/projects/projectsQuery'
 import { USER } from '@/graphql/user/userQuery'
@@ -39,7 +39,7 @@ export const CVsModal: FC<ICVsModalProps> = ({ CVData, userData, open, handleClo
       [FORM_PROFILE_CVS_KEYS.template]: CVData?.is_template || false
     },
     mode: 'onSubmit',
-    resolver: yupResolver(FORM_PROFILE_CVS_SCHEMA)
+    resolver: yupResolver(FORM_CVS_SCHEMA)
   })
 
   const onSubmit: SubmitHandler<IProfileCVsFormValues> = async formData => {

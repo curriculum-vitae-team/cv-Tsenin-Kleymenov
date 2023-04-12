@@ -11,14 +11,12 @@ import { IEmployeesDropdownProps } from './EmployeesDropdown.interfaces'
 export const EmployeesDropdown: FC<IEmployeesDropdownProps> = ({ userId }) => {
   return (
     <BasicMenu>
-      <MenuItem>
-        <Link
-          to={`${userId}/${AppNavigationRoutes.PROFILE}`}
-          style={{ color: 'inherit', textDecoration: 'none' }}
-        >
-          Profile
-        </Link>
-      </MenuItem>
+      <Link
+        to={`${userId}/${AppNavigationRoutes.PROFILE}`}
+        style={{ color: 'inherit', textDecoration: 'none' }}
+      >
+        <MenuItem>Profile</MenuItem>
+      </Link>
       <MenuItem>Delete user</MenuItem>
     </BasicMenu>
   )

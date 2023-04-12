@@ -1,4 +1,4 @@
-import { ICV } from '@/graphql/interfaces/ICV.interfaces'
+import { ICV } from '@/graphql/interfaces/ICv.interfaces'
 import { IDepartment } from '@/graphql/interfaces/IDepartment.interfaces'
 import { ILanguage } from '@/graphql/interfaces/ILanguage.interfaces'
 import { IPosition } from '@/graphql/interfaces/IPosition.interfaces'

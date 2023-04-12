@@ -7,6 +7,7 @@ import { CommonTable } from '@/components/views/CommonTable/CommonTable'
 import { InputWithIcon } from '@/components/views/Input/Input'
 import { ISkill } from '@/graphql/interfaces/ISkill.interfaces'
 import { SKILLS } from '@/graphql/skills/skillsQuery'
+import useDebounce from '@/hooks/useDebounce'
 
 import { tableColumns } from './tableColumns'
 
@@ -19,14 +20,16 @@ export const SkillsPage: FC = () => {
     setSearchedName(event.target.value)
   }
 
+  const debouncedSearchTerm = useDebounce(searchedName, 150)
+
   const requestSearch = useMemo(
     () =>
-      searchedName === ''
+      debouncedSearchTerm === ''
         ? data?.skills
         : data?.skills.filter(skill =>
-            skill.name?.toLowerCase().includes(searchedName.toLowerCase())
+            skill.name?.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
           ),
-    [data?.skills, searchedName]
+    [data?.skills, debouncedSearchTerm]
   )
 
   return (

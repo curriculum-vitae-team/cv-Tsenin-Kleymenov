@@ -6,7 +6,7 @@ import { Container } from '@mui/material'
 import { IUserResult } from '@/appTypes/IResult.interfaces'
 import { CVItem } from '@/components/containers/CVItem/CVItem'
 import { authService } from '@/graphql/auth/authService'
-import { ICV } from '@/graphql/interfaces/ICV.interfaces'
+import { ICV } from '@/graphql/interfaces/ICv.interfaces'
 import { USER } from '@/graphql/user/userQuery'
 
 import { CVsModal } from './CVsModal/CVsModal'
@@ -15,19 +15,21 @@ export const EmployeeCVsProfile: FC = () => {
   const { id } = useParams()
   const user = useReactiveVar(authService.user$)
   const userCheck = id === user?.id
+
   const [open, setOpen] = useState<boolean>(false)
   const [selectedCV, setSelectedCV] = useState<ICV | null>(null)
+
   const { data: userData } = useQuery<IUserResult>(USER, {
     variables: { id: user?.id }
   })
 
-  const handleСVsModalClose = (): void => {
+  const handleCVsModalClose = (): void => {
     setOpen(prev => !prev)
   }
 
   const handleSetCurrentCV = (CV: ICV): void => {
     setSelectedCV(CV)
-    handleСVsModalClose()
+    handleCVsModalClose()
   }
 
   return (
@@ -41,7 +43,7 @@ export const EmployeeCVsProfile: FC = () => {
           {open && (
             <CVsModal
               open={open}
-              handleClose={handleСVsModalClose}
+              handleClose={handleCVsModalClose}
               userData={userData?.user}
               CVData={selectedCV}
             />

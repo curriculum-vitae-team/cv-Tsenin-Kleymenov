@@ -56,7 +56,7 @@ export const FORM_PROFILE_SKILLS_SCHEMA = yup.object().shape({
   [FORM_PROFILE_SKILLS_KEYS.mastery]: yup.string().required('Mastery is a required field')
 })
 
-export const FORM_PROFILE_CVS_SCHEMA = yup.object().shape({
+export const FORM_CVS_SCHEMA = yup.object().shape({
   [FORM_PROFILE_CVS_KEYS.name]: yup.string().required('Name is a required field'),
   [FORM_PROFILE_CVS_KEYS.description]: yup.string().required('Description is a required field')
 })
