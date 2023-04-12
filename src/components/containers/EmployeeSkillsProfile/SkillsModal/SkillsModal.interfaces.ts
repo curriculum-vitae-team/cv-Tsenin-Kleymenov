@@ -1,9 +1,8 @@
+import { IBaseModalProps } from '@/appTypes/IBaseModalProps.interfaces'
 import { IUser } from '@/graphql/interfaces/IUser.interfaces'
 
-export interface ISkillsModalProps {
+export interface ISkillsModalProps extends IBaseModalProps{
   userData?: IUser
-  open: boolean
-  handleClose: () => void
 }
 
 export enum FORM_PROFILE_SKILLS_KEYS {

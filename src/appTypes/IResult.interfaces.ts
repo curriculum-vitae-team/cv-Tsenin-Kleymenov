@@ -40,3 +40,7 @@ export interface IProjectsResult {
 export interface ICVsResult {
   cvs: ICV[]
 }
+
+export interface ICVResult {
+  cv: ICV
+}

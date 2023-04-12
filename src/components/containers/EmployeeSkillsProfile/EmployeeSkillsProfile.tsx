@@ -1,7 +1,7 @@
 import { FC, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useQuery, useReactiveVar } from '@apollo/client'
-import { Container, Divider, Typography } from '@mui/material'
+import { Box, Divider, Typography } from '@mui/material'
 
 import { IUserResult } from '@/appTypes/IResult.interfaces'
 import { Button } from '@/components/views/Button/Button'
@@ -34,17 +34,17 @@ export const EmployeeSkillsProfile: FC = () => {
   }
 
   return (
-    <Container sx={{ display: 'flex', flexDirection: 'column' }} maxWidth="lg">
+    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
       {userCheck && (
         <Button
-          sx={{ maxWidth: 170, my: 3, alignSelf: 'flex-end' }}
+          sx={{ maxWidth: 170, alignSelf: 'flex-end' }}
           variant="contained"
           onClick={handleSkillModalClose}
         >
           + Add skills
         </Button>
       )}
-      <Divider />
+      <Divider sx={{ my: 2 }} />
       {userData?.user?.profile.skills.length ? (
         Object.keys(masteryObject).map(key => {
           return <SkillRow key={key} skills={masteryObject[key]} />
@@ -55,8 +55,8 @@ export const EmployeeSkillsProfile: FC = () => {
         </Typography>
       )}
       {open && (
-        <SkillsModal open={open} userData={userData?.user} handleClose={handleSkillModalClose} />
+        <SkillsModal userData={userData?.user} onClose={handleSkillModalClose} />
       )}
-    </Container>
+    </Box>
   )
 }

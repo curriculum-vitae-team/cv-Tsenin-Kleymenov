@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react'
+import { FC } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
@@ -21,10 +21,8 @@ export const AppBreadcrumbs: FC<IAppBreadcrumbsProps> = ({ id }) => {
   })
 
   const pathnameArray = location.pathname.split('/').filter(item => item)
-  const profileLink = useMemo(
-    () => `/${AppNavigationRoutes.EMPLOYEES}/${id}/${AppNavigationRoutes.PROFILE}`,
-    [id]
-  )
+  const profileLink = `/${AppNavigationRoutes.EMPLOYEES}/${id}/${AppNavigationRoutes.PROFILE}`
+  const cvLink = `/${AppNavigationRoutes.CVS}/${id}/${AppNavigationRoutes.DETAILS}`
 
   return (
     <Breadcrumbs sx={{ my: 2 }} color="secondary" separator={<NavigateNextIcon />}>
@@ -35,10 +33,19 @@ export const AppBreadcrumbs: FC<IAppBreadcrumbsProps> = ({ id }) => {
       {pathnameArray.map((item, index, arr) => {
         if (item === id && index !== arr.length - 1) {
           return (
-            <BreadcrumbsLink key={item} to={profileLink}>
+            <BreadcrumbsLink
+              key={item}
+              to={data?.user ? profileLink : cvLink}
+              state={data?.user ? AppNavigationRoutes.EMPLOYEES : AppNavigationRoutes.CVS}
+            >
               <UserBreadcrumbText>
-                {data?.user && <AccountCircleIcon sx={{ mr: 1 }} />}
-                {data?.user.profile.full_name || data?.user.email || data?.Cv.name}
+                {data?.user && (
+                  <>
+                    <AccountCircleIcon sx={{ mr: 1 }} />
+                    {data?.user?.profile.full_name || data?.user?.email}
+                  </>
+                )}
+                {data?.cv && data?.cv?.name}
               </UserBreadcrumbText>
             </BreadcrumbsLink>
           )

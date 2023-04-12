@@ -13,7 +13,6 @@ import { tableColumns } from './tableColumns'
 
 export const DepartmentsPage: FC = () => {
   const { data, loading, error } = useQuery<IDepartmentResult>(DEPARTMENTS)
-  console.log(data)
 
   const [searchedName, setSearchedName] = useState<string>('')
 

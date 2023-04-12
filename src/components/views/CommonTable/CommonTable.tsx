@@ -10,7 +10,7 @@ import {
 } from '@mui/material'
 import get from 'lodash/get'
 
-import { Loader } from '../Loader/Loader'
+import { LoadingOverlay } from '@/components/views/LoadingOverlay/LoadingOverlay'
 
 import { ICommonTableProps } from './CommonTable.interfaces'
 import { StyledTableRow } from './CommonTable.styles'
@@ -50,60 +50,60 @@ const Table = <T extends { id: string }>({
     else return valueA > valueB ? -1 : 1
   })
 
-  return isLoading ? (
-    <Loader />
-  ) : (
-    <TableContainer>
-      <MuiTable aria-label={`${label.toLowerCase()} table`}>
-        <TableHead>
-          <TableRow>
-            {tableColumns.map(column => (
-              <TableCell key={column.id} sx={{ fontWeight: '700' }}>
-                {!column.sortable ? (
-                  column.header
-                ) : (
-                  <TableSortLabel
-                    active={column.field === orderBy}
-                    direction={column.field === orderBy ? sortOrder : 'asc'}
-                    onClick={() => handleSortColumnClick(column.field as string)}
-                  >
-                    {column.header}
-                  </TableSortLabel>
-                )}
-              </TableCell>
-            ))}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {error ? (
+  return (
+    <LoadingOverlay active={isLoading}>
+      <TableContainer>
+        <MuiTable aria-label={`${label.toLowerCase()} table`}>
+          <TableHead>
             <TableRow>
-              <TableCell
-                colSpan={tableColumns.length}
-                style={{ color: 'red', textAlign: 'center' }}
-              >
-                {error.message}
-              </TableCell>
+              {tableColumns.map(column => (
+                <TableCell key={column.id} sx={{ fontWeight: '700' }}>
+                  {!column.sortable ? (
+                    column.header
+                  ) : (
+                    <TableSortLabel
+                      active={column.field === orderBy}
+                      direction={column.field === orderBy ? sortOrder : 'asc'}
+                      onClick={() => handleSortColumnClick(column.field as string)}
+                    >
+                      {column.header}
+                    </TableSortLabel>
+                  )}
+                </TableCell>
+              ))}
             </TableRow>
-          ) : (
-            sortedData?.map(item => (
-              <StyledTableRow key={item.id}>
-                {tableColumns.map(column => {
-                  return (
-                    <TableCell key={column.id}>
-                      {column.render
-                        ? column.render(item)
-                        : column.field &&
-                          typeof get(item, column.field) !== 'object' &&
-                          get(item, column.field)}
-                    </TableCell>
-                  )
-                })}
-              </StyledTableRow>
-            ))
-          )}
-        </TableBody>
-      </MuiTable>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {error ? (
+              <TableRow>
+                <TableCell
+                  colSpan={tableColumns.length}
+                  style={{ color: 'red', textAlign: 'center' }}
+                >
+                  {error.message}
+                </TableCell>
+              </TableRow>
+            ) : (
+              sortedData?.map(item => (
+                <StyledTableRow key={item.id}>
+                  {tableColumns.map(column => {
+                    return (
+                      <TableCell key={column.id}>
+                        {column.render
+                          ? column.render(item)
+                          : column.field &&
+                            typeof get(item, column.field) !== 'object' &&
+                            get(item, column.field)}
+                      </TableCell>
+                    )
+                  })}
+                </StyledTableRow>
+              ))
+            )}
+          </TableBody>
+        </MuiTable>
+      </TableContainer>
+    </LoadingOverlay>
   )
 }
 

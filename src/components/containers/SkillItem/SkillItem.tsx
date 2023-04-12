@@ -5,7 +5,7 @@ import ClearIcon from '@mui/icons-material/Clear'
 import { Box, Typography } from '@mui/material'
 
 import { IUserResult } from '@/appTypes/IResult.interfaces'
-import { Loader } from '@/components/views/Loader/Loader'
+import { LoadingOverlay } from '@/components/views/LoadingOverlay/LoadingOverlay'
 import { MASTERY_COLORS } from '@/constants/mastery'
 import { authService } from '@/graphql/auth/authService'
 import { UPDATE_USER } from '@/graphql/user/updateUserMutation'
@@ -56,15 +56,9 @@ export const SkillItem: FC<ISkillItemProps> = ({ skillName, skillMastery }) => {
       </SkillBox>
       {userCheck && (
         <Box onClick={() => handleDelete(skillName, skillMastery)}>
-          {userLoading ? (
-            <Loader
-              size={20}
-              sx={{ position: 'static', backgroundColor: 'white', borderRadius: '50%' }}
-              color="secondary"
-            />
-          ) : (
+          <LoadingOverlay active={userLoading} position="static">
             <ClearIcon sx={{ '&:hover': { cursor: 'pointer' } }} />
-          )}
+          </LoadingOverlay>
         </Box>
       )}
     </SkillItemContainer>

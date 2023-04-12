@@ -20,7 +20,7 @@ import {
   IProfileLanguagesFormValues
 } from './LanguagesModal.interfaces'
 
-export const LanguagesModal: FC<ILanguagesModalProps> = ({ userData, open, handleClose }) => {
+export const LanguagesModal: FC<ILanguagesModalProps> = ({ userData, onClose: handleClose }) => {
   const { loading: loadingLanguages, data: languagesData } = useQuery<ILanguagesResult>(LANGUAGES)
   const [updateUser, { loading: userLoading }] = useMutation(UPDATE_USER)
 
@@ -80,7 +80,7 @@ export const LanguagesModal: FC<ILanguagesModalProps> = ({ userData, open, handl
   }, [isSubmitSuccessful])
 
   return (
-    <ModalWindow open={open} onClose={handleClose}>
+    <ModalWindow onClose={handleClose}>
       <Container sx={{ minWidth: '500px' }}>
         <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
           <AppSelect

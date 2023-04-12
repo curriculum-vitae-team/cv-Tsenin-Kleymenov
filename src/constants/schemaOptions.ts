@@ -12,10 +12,7 @@ export const LOGIN_SCHEMA = yup.object().shape({
     .string()
     .required('Email is a required field')
     .email('Invalid email format'),
-  [FORM_LOGIN_KEYS.password]: yup
-    .string()
-    .required('Password is a required field')
-    .min(6, 'Password must be at least 6 characters')
+  [FORM_LOGIN_KEYS.password]: yup.string().required('Password is a required field')
 })
 
 export const SIGNUP_SCHEMA = yup.object().shape({
@@ -23,10 +20,7 @@ export const SIGNUP_SCHEMA = yup.object().shape({
     .string()
     .required('Email is a required field')
     .email('Invalid email format'),
-  [FORM_SIGNUP_KEYS.password]: yup
-    .string()
-    .required('Password is a required field')
-    .min(6, 'Password must be at least 6 characters')
+  [FORM_SIGNUP_KEYS.password]: yup.string().required('Password is a required field')
 })
 
 export const FORM_PROFILE_SCHEMA = yup.object().shape({
@@ -56,7 +50,7 @@ export const FORM_PROFILE_SKILLS_SCHEMA = yup.object().shape({
   [FORM_PROFILE_SKILLS_KEYS.mastery]: yup.string().required('Mastery is a required field')
 })
 
-export const FORM_CVS_SCHEMA = yup.object().shape({
+export const FORM_PROFILE_CVS_SCHEMA = yup.object().shape({
   [FORM_PROFILE_CVS_KEYS.name]: yup.string().required('Name is a required field'),
   [FORM_PROFILE_CVS_KEYS.description]: yup.string().required('Description is a required field')
 })

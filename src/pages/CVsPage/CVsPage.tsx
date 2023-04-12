@@ -8,6 +8,7 @@ import { CreateCVModal } from '@/components/containers/CreateCVModal/CreateCVMod
 import { CommonTable } from '@/components/views/CommonTable/CommonTable'
 import { InputWithIcon } from '@/components/views/Input/Input'
 import { GET_CVS } from '@/graphql/cvs/cvsQuery'
+import { FETCH_POLICY } from '@/graphql/fetchPolicy'
 import { ICV } from '@/graphql/interfaces/ICv.interfaces'
 import useDebounce from '@/hooks/useDebounce'
 
@@ -15,7 +16,9 @@ import { CvsTableToolBar } from './CVsPage.styles'
 import { tableColumns } from './tableColumns'
 
 export const CVsPage: FC = () => {
-  const { data, loading, error } = useQuery<ICVsResult>(GET_CVS)
+  const { data, loading, error } = useQuery<ICVsResult>(GET_CVS, {
+    fetchPolicy: FETCH_POLICY.networkOnly
+  })
 
   const [searchedName, setSearchedName] = useState<string>('')
 

@@ -7,13 +7,25 @@ import { filterRoutPath } from '@/utils/tabsFilter'
 
 import { INavigationTabsProps } from './NavigationTabs.interfaces'
 
-export const NavigationTabs: FC<INavigationTabsProps> = ({ tabs, defaultValue, textColor }) => {
+export const NavigationTabs: FC<INavigationTabsProps> = ({
+  tabs,
+  defaultValue,
+  locationState,
+  textColor
+}) => {
   const location = useLocation()
 
   return (
     <AppTabs textColor={textColor} value={filterRoutPath(location.pathname, tabs) || defaultValue}>
       {tabs.map(({ label, path }) => (
-        <Tab key={label} label={label} value={path} component={Link} to={path} />
+        <Tab
+          key={label}
+          label={label}
+          value={path}
+          component={Link}
+          to={path}
+          state={locationState}
+        />
       ))}
     </AppTabs>
   )

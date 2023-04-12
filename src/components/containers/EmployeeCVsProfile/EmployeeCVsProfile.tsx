@@ -1,11 +1,12 @@
 import { FC, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useQuery, useReactiveVar } from '@apollo/client'
-import { Container } from '@mui/material'
+import { Typography } from '@mui/material'
 
 import { IUserResult } from '@/appTypes/IResult.interfaces'
 import { CVItem } from '@/components/containers/CVItem/CVItem'
 import { authService } from '@/graphql/auth/authService'
+import { FETCH_POLICY } from '@/graphql/fetchPolicy'
 import { ICV } from '@/graphql/interfaces/ICv.interfaces'
 import { USER } from '@/graphql/user/userQuery'
 
@@ -20,7 +21,8 @@ export const EmployeeCVsProfile: FC = () => {
   const [selectedCV, setSelectedCV] = useState<ICV | null>(null)
 
   const { data: userData } = useQuery<IUserResult>(USER, {
-    variables: { id: user?.id }
+    variables: { id: user?.id },
+    fetchPolicy: FETCH_POLICY.networkOnly
   })
 
   const handleCVsModalClose = (): void => {
@@ -35,20 +37,18 @@ export const EmployeeCVsProfile: FC = () => {
   return (
     <>
       {userCheck && (
-        <Container sx={{ my: 2 }} maxWidth="lg">
-          {userData?.user?.cvs &&
+        <>
+          {userData?.user?.cvs?.length ? (
             userData?.user?.cvs.map(CV => (
               <CVItem key={CV.id} CV={CV} handleSetCurrentCV={handleSetCurrentCV} />
-            ))}
-          {open && (
-            <CVsModal
-              open={open}
-              handleClose={handleCVsModalClose}
-              userData={userData?.user}
-              CVData={selectedCV}
-            />
+            ))
+          ) : (
+            <Typography sx={{ my: 2 }} variant="h5">
+              You don't have any CVs
+            </Typography>
           )}
-        </Container>
+          {open && <CVsModal onClose={handleCVsModalClose} currentCVData={selectedCV} />}
+        </>
       )}
     </>
   )
