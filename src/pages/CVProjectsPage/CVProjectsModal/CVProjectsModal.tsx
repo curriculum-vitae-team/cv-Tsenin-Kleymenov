@@ -22,7 +22,7 @@ import {
   ICVProjectsModalProps
 } from './CVProjectsModal.interfaces'
 
-export const CVProjectsModal: FC<ICVProjectsModalProps> = ({ CVData, open, handleClose }) => {
+export const CVProjectsModal: FC<ICVProjectsModalProps> = ({ CVData, handleClose }) => {
   const user = useReactiveVar(authService.user$)
 
   const [updateCVMutation, { loading: updateCVLoading }] = useMutation(UPDATE_CV, {
@@ -60,7 +60,7 @@ export const CVProjectsModal: FC<ICVProjectsModalProps> = ({ CVData, open, handl
   }
 
   return (
-    <ModalWindow open={open} onClose={handleClose}>
+    <ModalWindow onClose={handleClose}>
       <Container sx={{ minWidth: '500px' }}>
         <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
           <Controller

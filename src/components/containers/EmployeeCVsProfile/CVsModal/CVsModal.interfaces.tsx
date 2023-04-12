@@ -4,7 +4,6 @@ import { IUser } from '@/graphql/interfaces/IUser.interfaces'
 export interface ICVsModalProps {
   currentCVData: ICV | null
   userData?: IUser
-  open: boolean
   handleClose: () => void
 }
 

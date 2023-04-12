@@ -6,7 +6,7 @@ import { Checkbox, Container, FormControlLabel } from '@mui/material'
 
 import { Button } from '@/components/views/Button/Button'
 import { Input } from '@/components/views/Input/Input'
-import { Loader } from '@/components/views/Loader/Loader'
+import { LoadingOverlay } from '@/components/views/LoadingOverlay/LoadingOverlay'
 import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
 import { FORM_PROFILE_CVS_SCHEMA } from '@/constants/schemaOptions'
 import { authService } from '@/graphql/auth/authService'
@@ -20,7 +20,7 @@ import { createSkillsArray } from '@/utils/createSkillsArray'
 import { ICVsModalProps } from './CVsModal.interfaces'
 import { FORM_PROFILE_CVS_KEYS, IProfileCVsFormValues } from './CVsModal.interfaces'
 
-export const CVsModal: FC<ICVsModalProps> = ({ currentCVData, open, handleClose }) => {
+export const CVsModal: FC<ICVsModalProps> = ({ currentCVData, handleClose }) => {
   const user = useReactiveVar(authService.user$)
 
   const { data: CVData, loading: CVLoading } = useQuery(CV, {
@@ -64,49 +64,45 @@ export const CVsModal: FC<ICVsModalProps> = ({ currentCVData, open, handleClose 
   }
 
   return (
-    <>
-      {CVLoading ? (
-        <Loader color="primary" />
-      ) : (
-        <ModalWindow open={open} onClose={handleClose}>
-          <Container sx={{ minWidth: '500px' }}>
-            <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
-              <Input
-                variant="outlined"
-                label="Name"
-                error={!!errors[FORM_PROFILE_CVS_KEYS.name]}
-                helperText={errors?.[FORM_PROFILE_CVS_KEYS.name]?.message}
-                {...register(FORM_PROFILE_CVS_KEYS.name)}
-              />
-              <Input
-                variant="outlined"
-                label="Description"
-                error={!!errors[FORM_PROFILE_CVS_KEYS.description]}
-                helperText={errors?.[FORM_PROFILE_CVS_KEYS.description]?.message}
-                {...register(FORM_PROFILE_CVS_KEYS.description)}
-              />
-              <Controller
-                control={control}
-                name={FORM_PROFILE_CVS_KEYS.template}
-                render={({ field: { value, onChange, onBlur } }) => (
-                  <FormControlLabel
-                    label="Template"
-                    control={<Checkbox checked={value} onChange={onChange} onBlur={onBlur} />}
-                  />
-                )}
-              />
-              <Button
-                type="submit"
-                variant="contained"
-                loading={updateCVLoading}
-                disabled={!isDirty && isValid}
-              >
-                Save
-              </Button>
-            </form>
-          </Container>
-        </ModalWindow>
-      )}
-    </>
+    <LoadingOverlay active={CVLoading}>
+      <ModalWindow onClose={handleClose}>
+        <Container sx={{ minWidth: '500px' }}>
+          <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
+            <Input
+              variant="outlined"
+              label="Name"
+              error={!!errors[FORM_PROFILE_CVS_KEYS.name]}
+              helperText={errors?.[FORM_PROFILE_CVS_KEYS.name]?.message}
+              {...register(FORM_PROFILE_CVS_KEYS.name)}
+            />
+            <Input
+              variant="outlined"
+              label="Description"
+              error={!!errors[FORM_PROFILE_CVS_KEYS.description]}
+              helperText={errors?.[FORM_PROFILE_CVS_KEYS.description]?.message}
+              {...register(FORM_PROFILE_CVS_KEYS.description)}
+            />
+            <Controller
+              control={control}
+              name={FORM_PROFILE_CVS_KEYS.template}
+              render={({ field: { value, onChange, onBlur } }) => (
+                <FormControlLabel
+                  label="Template"
+                  control={<Checkbox checked={value} onChange={onChange} onBlur={onBlur} />}
+                />
+              )}
+            />
+            <Button
+              type="submit"
+              variant="contained"
+              loading={updateCVLoading}
+              disabled={!isDirty && isValid}
+            >
+              Save
+            </Button>
+          </form>
+        </Container>
+      </ModalWindow>
+    </LoadingOverlay>
   )
 }

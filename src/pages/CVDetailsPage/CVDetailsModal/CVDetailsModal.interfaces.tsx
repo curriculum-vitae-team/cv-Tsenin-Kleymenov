@@ -2,7 +2,6 @@ import { ICV } from '@/graphql/interfaces/ICV.interfaces'
 
 export interface ICVDetailsModalProps {
   CVData?: ICV | null
-  open: boolean
   handleClose: () => void
 }
 

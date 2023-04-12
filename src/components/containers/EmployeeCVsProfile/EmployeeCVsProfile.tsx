@@ -37,7 +37,7 @@ export const EmployeeCVsProfile: FC = () => {
     <>
       {userCheck && (
         <>
-          {userData?.user?.cvs ? (
+          {userData?.user?.cvs?.length ? (
             userData?.user?.cvs.map(CV => (
               <CVItem key={CV.id} CV={CV} handleSetCurrentCV={handleSetCurrentCV} />
             ))
@@ -47,7 +47,7 @@ export const EmployeeCVsProfile: FC = () => {
             </Typography>
           )}
           {open && (
-            <CVsModal open={open} handleClose={handleCVsModalClose} currentCVData={selectedCV} />
+            <CVsModal handleClose={handleCVsModalClose} currentCVData={selectedCV} />
           )}
         </>
       )}

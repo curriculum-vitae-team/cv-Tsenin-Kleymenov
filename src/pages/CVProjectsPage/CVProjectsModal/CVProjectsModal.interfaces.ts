@@ -3,7 +3,6 @@ import { IProject } from '@/graphql/interfaces/IProject.interfaces'
 
 export interface ICVProjectsModalProps {
   CVData?: ICV
-  open: boolean
   handleClose: () => void
 }
 

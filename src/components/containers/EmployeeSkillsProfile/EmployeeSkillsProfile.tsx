@@ -55,7 +55,7 @@ export const EmployeeSkillsProfile: FC = () => {
         </Typography>
       )}
       {open && (
-        <SkillsModal open={open} userData={userData?.user} handleClose={handleSkillModalClose} />
+        <SkillsModal userData={userData?.user} handleClose={handleSkillModalClose} />
       )}
     </Box>
   )

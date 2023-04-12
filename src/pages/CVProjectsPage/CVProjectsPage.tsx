@@ -78,7 +78,7 @@ export const CVProjectsPage: FC = () => {
         error={CVError}
       />
       {open && (
-        <CVProjectsModal open={open} handleClose={handleCVsModalClose} CVData={CVData?.cv} />
+        <CVProjectsModal handleClose={handleCVsModalClose} CVData={CVData?.cv} />
       )}
     </>
   )

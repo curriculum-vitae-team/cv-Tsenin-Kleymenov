@@ -53,7 +53,6 @@ export const EmployeeLanguagesProfile: FC = () => {
       )}
       {open && (
         <LanguagesModal
-          open={open}
           userData={userData?.user}
           handleClose={handleLanguageModalClose}
         />

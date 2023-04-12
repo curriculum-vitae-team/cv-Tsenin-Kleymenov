@@ -2,7 +2,6 @@ import { IUser } from '@/graphql/interfaces/IUser.interfaces'
 
 export interface ILanguagesModalProps {
   userData?: IUser
-  open: boolean
   handleClose: () => void
 }
 
