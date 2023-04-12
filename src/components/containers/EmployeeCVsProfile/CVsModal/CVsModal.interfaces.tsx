@@ -3,7 +3,7 @@ import { ICV } from '@/graphql/interfaces/ICv.interfaces'
 import { IUser } from '@/graphql/interfaces/IUser.interfaces'
 
 export interface ICVsModalProps extends IBaseModalProps {
-  currentCVData: ICV | null
+  currentCVData?: ICV | null
   userData?: IUser
 }
 

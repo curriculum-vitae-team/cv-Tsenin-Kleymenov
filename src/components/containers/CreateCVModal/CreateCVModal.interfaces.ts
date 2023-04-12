@@ -1,5 +1,4 @@
 export interface ICreateCVModal {
-  isOpen: boolean
   handleOpenClose: () => void
 }
 

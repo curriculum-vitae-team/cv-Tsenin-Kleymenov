@@ -21,9 +21,14 @@ export const CVsPage: FC = () => {
   })
 
   const [searchedName, setSearchedName] = useState<string>('')
+  const [isOpen, setIsOpen] = useState<boolean>(false)
 
   const handleSearchUser = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setSearchedName(event.target.value)
+  }
+
+  const handleCVsModalOpenClose = (): void => {
+    setIsOpen(prev => !prev)
   }
 
   const debouncedSearchTerm = useDebounce(searchedName, 150)
@@ -49,7 +54,9 @@ export const CVsPage: FC = () => {
           onChange={handleSearchUser}
           placeholder="Search"
         />
-        <ButtonWithDialog />
+        <Button variant="contained" onClick={handleCVsModalOpenClose}>
+          Create Cv
+        </Button>
       </CvsTableToolBar>
       <CommonTable<ICV>
         label="cvs"
@@ -58,23 +65,7 @@ export const CVsPage: FC = () => {
         isLoading={loading}
         error={error}
       />
-    </>
-  )
-}
-
-const ButtonWithDialog: FC = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
-
-  const handleCVsModalOpenClose = (): void => {
-    setIsOpen(prev => !prev)
-  }
-
-  return (
-    <>
-      <Button variant="contained" onClick={handleCVsModalOpenClose}>
-        Create Cv
-      </Button>
-      {isOpen && <CreateCVModal isOpen={isOpen} handleOpenClose={handleCVsModalOpenClose} />}
+      {isOpen && <CreateCVModal onClose={handleCVsModalOpenClose} />}
     </>
   )
 }
