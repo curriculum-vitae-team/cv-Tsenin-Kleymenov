@@ -15,7 +15,6 @@ export const LOGIN_SCHEMA = yup.object().shape({
   [FORM_LOGIN_KEYS.password]: yup
     .string()
     .required('Password is a required field')
-    .min(6, 'Password must be at least 6 characters')
 })
 
 export const SIGNUP_SCHEMA = yup.object().shape({
@@ -26,7 +25,6 @@ export const SIGNUP_SCHEMA = yup.object().shape({
   [FORM_SIGNUP_KEYS.password]: yup
     .string()
     .required('Password is a required field')
-    .min(6, 'Password must be at least 6 characters')
 })
 
 export const FORM_PROFILE_SCHEMA = yup.object().shape({

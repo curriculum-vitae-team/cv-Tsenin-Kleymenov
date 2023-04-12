@@ -25,6 +25,22 @@ export const PROFILE_TABS: ITab[] = [
   }
 ]
 
+export const CV_TABS: ITab[] = [
+  {
+    label: 'Details',
+    path: AppNavigationRoutes.DETAILS
+  },
+  {
+    label: 'Projects',
+    path: AppNavigationRoutes.PROJECTS
+  },
+
+  {
+    label: 'Preview',
+    path: AppNavigationRoutes.PREVIEW
+  }
+]
+
 export const HEADER_TABS: ITab[] = [
   {
     label: 'Login',

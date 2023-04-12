@@ -1,5 +1,6 @@
 import { FC, useEffect } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
+import { Card, Container } from '@mui/material'
 
 import { NavigationTabs } from '@/components/views/NavigationTabs/NavigationTabs'
 import { PROFILE_TABS } from '@/constants/tabs'
@@ -23,9 +24,14 @@ export const ProfilePage: FC = () => {
       <NavigationTabs
         textColor="inherit"
         tabs={PROFILE_TABS}
+        locationState={AppNavigationRoutes.EMPLOYEES}
         defaultValue={AppNavigationRoutes.PROFILE}
       />
-      <Outlet />
+      <Container maxWidth="lg">
+        <Card sx={{ p: 2, m: 2 }}>
+          <Outlet />
+        </Card>
+      </Container>
     </>
   )
 }

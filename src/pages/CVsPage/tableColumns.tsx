@@ -39,7 +39,7 @@ export const tableColumns: IColumn<ICV>[] = [
   {
     id: 6,
     header: '',
-    render: () => <CVsDropdown />,
+    render: CV => <CVsDropdown CVId={CV.id} />,
     sortable: false
   }
 ]

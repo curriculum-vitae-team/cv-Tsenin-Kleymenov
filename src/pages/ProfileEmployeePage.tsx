@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/client'
 
 import { IUserResult } from '@/appTypes/IResult.interfaces'
 import { EmployeeProfileForm } from '@/components/containers/EmployeeProfileForm/EmployeeProfileForm'
-import { Loader } from '@/components/views/Loader/Loader'
+import { LoadingOverlay } from '@/components/views/LoadingOverlay/LoadingOverlay'
 import { USER } from '@/graphql/user/userQuery'
 
 export const ProfileEmployeePage: FC = () => {
@@ -14,9 +14,9 @@ export const ProfileEmployeePage: FC = () => {
     variables: { id }
   })
 
-  if (loadingUser) {
-    return <Loader color="primary" />
-  }
-
-  return <EmployeeProfileForm currentUser={userData?.user} />
+  return (
+    <LoadingOverlay active={loadingUser}>
+      <EmployeeProfileForm currentUser={userData?.user} />
+    </LoadingOverlay>
+  )
 }

@@ -1,6 +1,10 @@
 import { FC } from 'react'
 import { Navigate, Outlet, Route, Routes } from 'react-router'
 
+import { CVDetailsPage } from '@/pages/CVDetailsPage/CVDetailsPage'
+import { CVPage } from '@/pages/CVPage'
+import { CVPreviewPage } from '@/pages/CVPreviewPage'
+import { CVProjectsPage } from '@/pages/CVProjectsPage/CVProjectsPage'
 import { CVsPage } from '@/pages/CVsPage/CVsPage'
 import { DepartmentsPage } from '@/pages/DepartmentsPage/DepartmentsPage'
 import { EmployeesPage } from '@/pages/EmployeesPage/EmployeesPage'
@@ -41,6 +45,17 @@ const AuthenticatedApp: FC = () => {
 
           <Route path=":id" element={<ProjectDetailPage />}>
             <Route index element={<ProjectDetailPage />} />
+          </Route>
+        </Route>
+
+        <Route path={AppNavigationRoutes.CVS} element={<Outlet />}>
+          <Route index element={<CVsPage />} />
+
+          <Route path=":id" element={<CVPage />}>
+            <Route index element={<CVPage />} />
+            <Route path={AppNavigationRoutes.DETAILS} element={<CVDetailsPage />} />
+            <Route path={AppNavigationRoutes.PROJECTS} element={<CVProjectsPage />} />
+            <Route path={AppNavigationRoutes.PREVIEW} element={<CVPreviewPage />} />
           </Route>
         </Route>
 

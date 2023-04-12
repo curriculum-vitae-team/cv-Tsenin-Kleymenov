@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 
-export interface IModalWindowProps {
+import { IBaseModalProps } from '@/appTypes/IBaseModalProps.interfaces'
+
+export interface IModalWindowProps extends IBaseModalProps {
   children: ReactNode
-  open: boolean
-  onClose: () => void
 }

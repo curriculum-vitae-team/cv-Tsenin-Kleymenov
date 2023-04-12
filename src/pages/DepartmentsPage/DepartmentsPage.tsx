@@ -12,7 +12,6 @@ import { tableColumns } from './tableColumns'
 
 export const DepartmentsPage: FC = () => {
   const { data, loading, error } = useQuery<IDepartmentResult>(DEPARTMENTS)
-  console.log(data)
 
   const [searchedName, setSearchedName] = useState<string>('')
 
@@ -25,7 +24,7 @@ export const DepartmentsPage: FC = () => {
       searchedName === ''
         ? data?.departments
         : data?.departments.filter(department =>
-          department.name?.toLowerCase().includes(searchedName.toLowerCase())
+            department.name?.toLowerCase().includes(searchedName.toLowerCase())
           ),
     [data?.departments, searchedName]
   )

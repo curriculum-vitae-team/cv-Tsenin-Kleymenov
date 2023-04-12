@@ -1,9 +1,8 @@
+import { IBaseModalProps } from '@/appTypes/IBaseModalProps.interfaces'
 import { IUser } from '@/graphql/interfaces/IUser.interfaces'
 
-export interface ILanguagesModalProps {
+export interface ILanguagesModalProps extends IBaseModalProps {
   userData?: IUser
-  open: boolean
-  handleClose: () => void
 }
 
 export enum FORM_PROFILE_LANGUAGES_KEYS {

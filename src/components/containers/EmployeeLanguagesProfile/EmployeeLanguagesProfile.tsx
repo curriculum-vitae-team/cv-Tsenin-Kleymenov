@@ -1,7 +1,7 @@
 import { FC, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useQuery, useReactiveVar } from '@apollo/client'
-import { Box, Container, Divider, Typography } from '@mui/material'
+import { Box, Divider, Typography } from '@mui/material'
 
 import { IUserResult } from '@/appTypes/IResult.interfaces'
 import { LanguageItem } from '@/components/containers/LanguageItem/LanguageItem'
@@ -25,17 +25,17 @@ export const EmployeeLanguagesProfile: FC = () => {
   }
 
   return (
-    <Container sx={{ display: 'flex', flexDirection: 'column' }} maxWidth="lg">
+    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
       {userCheck && (
         <Button
-          sx={{ maxWidth: 210, my: 3, alignSelf: 'flex-end' }}
+          sx={{ maxWidth: 210, alignSelf: 'flex-end' }}
           variant="contained"
           onClick={handleLanguageModalClose}
         >
           + Add Languages
         </Button>
       )}
-      <Divider />
+      <Divider sx={{ my: 2 }} />
       {userData?.user?.profile.languages.length ? (
         <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
           {userData?.user?.profile?.languages.map(item => (
@@ -53,11 +53,10 @@ export const EmployeeLanguagesProfile: FC = () => {
       )}
       {open && (
         <LanguagesModal
-          open={open}
           userData={userData?.user}
-          handleClose={handleLanguageModalClose}
+          onClose={handleLanguageModalClose}
         />
       )}
-    </Container>
+    </Box>
   )
 }

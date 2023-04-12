@@ -8,7 +8,7 @@ import { Avatar, Box, Grid, IconButton, Typography } from '@mui/material'
 
 import { IUserResult } from '@/appTypes/IResult.interfaces'
 import { EmployeeAvatarAlert } from '@/components/views/EmployeeAvatarAlert/EmployeeAvatarAlert'
-import { Loader } from '@/components/views/Loader/Loader'
+import { LoadingOverlay } from '@/components/views/LoadingOverlay/LoadingOverlay'
 import { DROP_ZONE_ACCEPT_FILES } from '@/constants/dropZoneAcceptFile'
 import { authService } from '@/graphql/auth/authService'
 import { DELETE_AVATAR } from '@/graphql/user/deleteUserAvatarMutation'
@@ -69,12 +69,12 @@ export const EmployeeAvatarUpload: FC = () => {
   }
 
   return (
-    <Grid sx={{ mt: 2 }} container spacing={2}>
+    <Grid container spacing={2}>
       <Grid item xs={6}>
         <AvatarWrapper>
           {userData?.user.profile.avatar ? (
             <>
-              <Avatar src={userData?.user.profile.avatar} sx={{ width: 200, height: 200, mb: 5 }} />
+              <Avatar src={userData?.user.profile.avatar} sx={{ width: 200, height: 200 }} />
               {userCheck && (
                 <IconButton onClick={handleFileRemove}>
                   <CloseIcon />
@@ -82,14 +82,12 @@ export const EmployeeAvatarUpload: FC = () => {
               )}
             </>
           ) : (
-            <Avatar sx={{ width: 200, height: 200, mb: 5 }}>
-              {uploadLoading ? (
-                <Loader sx={{ position: 'static' }} color="primary" />
-              ) : (
+            <Avatar sx={{ width: 200, height: 200 }}>
+              <LoadingOverlay active={uploadLoading} position="static">
                 <Typography variant="h3">
                   {getFirstChars(userData?.user.profile.full_name || userData?.user.email)}
                 </Typography>
-              )}
+              </LoadingOverlay>
             </Avatar>
           )}
         </AvatarWrapper>
