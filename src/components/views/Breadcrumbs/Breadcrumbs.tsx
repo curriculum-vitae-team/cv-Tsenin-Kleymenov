@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react'
+import { FC } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
@@ -21,15 +21,8 @@ export const AppBreadcrumbs: FC<IAppBreadcrumbsProps> = ({ id }) => {
   })
 
   const pathnameArray = location.pathname.split('/').filter(item => item)
-
-  const profileLink = useMemo(
-    () => `/${AppNavigationRoutes.EMPLOYEES}/${id}/${AppNavigationRoutes.PROFILE}`,
-    [id]
-  )
-  const cvLink = useMemo(
-    () => `/${AppNavigationRoutes.CVS}/${id}/${AppNavigationRoutes.DETAILS}`,
-    [id]
-  )
+  const profileLink = `/${AppNavigationRoutes.EMPLOYEES}/${id}/${AppNavigationRoutes.PROFILE}`
+  const cvLink = `/${AppNavigationRoutes.CVS}/${id}/${AppNavigationRoutes.DETAILS}`
 
   return (
     <Breadcrumbs sx={{ my: 2 }} color="secondary" separator={<NavigateNextIcon />}>
