@@ -8,7 +8,7 @@ import { IDepartmentResult, IPositionResult } from '@/appTypes/IResult.interface
 import { EmployeeAvatarUpload } from '@/components/containers/EmployeeAvatarUpload/EmployeeAvatarUpload'
 import { Button } from '@/components/views/Button/Button'
 import { Input } from '@/components/views/Input/Input'
-import { Loader } from '@/components/views/Loader/Loader'
+import { LoadingOverlay } from '@/components/views/LoadingOverlay/LoadingOverlay'
 import { AppSelect } from '@/components/views/Select/Select'
 import { FORM_PROFILE_SCHEMA } from '@/constants/schemaOptions'
 import { authService } from '@/graphql/auth/authService'
@@ -78,21 +78,15 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
     <Container maxWidth="md">
       <EmployeeAvatarUpload />
       <Box sx={{ minHeight: 150 }}>
-        {userLoading ? (
-          <Box sx={{ position: 'relative' }}>
-            <Loader color="primary" />
-          </Box>
-        ) : (
-          <>
-            <Typography>{currentUser?.profile.full_name}</Typography>
-            <Typography>{currentUser?.email}</Typography>
-            <Typography>{`Department: ${currentUser?.department_name || '-'}`}</Typography>
-            <Typography>{`Position: ${currentUser?.position_name || '-'}`}</Typography>
-            <Typography>{`A member since ${convertCreatedAtDate(
-              currentUser?.created_at
-            )}`}</Typography>
-          </>
-        )}
+        <LoadingOverlay active={userLoading}>
+          <Typography>{currentUser?.profile.full_name}</Typography>
+          <Typography>{currentUser?.email}</Typography>
+          <Typography>{`Department: ${currentUser?.department_name || '-'}`}</Typography>
+          <Typography>{`Position: ${currentUser?.position_name || '-'}`}</Typography>
+          <Typography>{`A member since ${convertCreatedAtDate(
+            currentUser?.created_at
+          )}`}</Typography>
+        </LoadingOverlay>
       </Box>
       {userCheck && (
         <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">

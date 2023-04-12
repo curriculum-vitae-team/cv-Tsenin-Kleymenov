@@ -5,7 +5,7 @@ import { Box, Divider } from '@mui/material'
 
 import { Button } from '@/components/views/Button/Button'
 import { CVDetailItem } from '@/components/views/CVDetailItem/CVDetailItem'
-import { Loader } from '@/components/views/Loader/Loader'
+import { LoadingOverlay } from '@/components/views/LoadingOverlay/LoadingOverlay'
 import { authService } from '@/graphql/auth/authService'
 import { CV } from '@/graphql/cv/CVQuery'
 import { FETCH_POLICY } from '@/graphql/fetchPolicy'
@@ -30,9 +30,7 @@ export const CVDetailsPage: FC = () => {
 
   return (
     <>
-      {CVLoading ? (
-        <Loader color="primary" />
-      ) : (
+      <LoadingOverlay active={CVLoading}>
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
           {userCheck && (
             <>
@@ -48,8 +46,8 @@ export const CVDetailsPage: FC = () => {
           )}
           <CVDetailItem CVData={CVData?.cv} />
         </Box>
-      )}
-      {open && <CVDetailsModal open={open} handleClose={handleCVsModalClose} CVData={CVData?.cv} />}
+      </LoadingOverlay>
+      {open && <CVDetailsModal handleClose={handleCVsModalClose} CVData={CVData?.cv} />}
     </>
   )
 }

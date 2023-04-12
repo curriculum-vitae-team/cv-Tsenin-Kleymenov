@@ -6,7 +6,7 @@ import { Avatar, Box, Card, Chip, Divider, Typography } from '@mui/material'
 
 import { ICVResult } from '@/appTypes/IResult.interfaces'
 import { Button } from '@/components/views/Button/Button'
-import { Loader } from '@/components/views/Loader/Loader'
+import { LoadingOverlay } from '@/components/views/LoadingOverlay/LoadingOverlay'
 import { RowInfo } from '@/components/views/RowInfo/RowInfo'
 import { CV } from '@/graphql/cv/CVQuery'
 import { FETCH_POLICY } from '@/graphql/fetchPolicy'
@@ -20,6 +20,8 @@ export const CVPreviewPage: FC = () => {
     variables: { id: CVId },
     fetchPolicy: FETCH_POLICY.networkOnly
   })
+
+  const { profile, email, position_name, department_name } = CVData?.cv?.user ?? {}
 
   const handlePrintClick = useReactToPrint({
     content: () => componentRef.current
@@ -35,31 +37,27 @@ export const CVPreviewPage: FC = () => {
         Print
       </Button>
       <Divider sx={{ my: 2 }} />
-      {CVLoading ? (
-        <Loader color="primary" />
-      ) : (
-        <Box sx={{ p: 3 }} ref={componentRef} id="pdf">
+      <LoadingOverlay active={CVLoading}>
+        <Box sx={{ p: 3 }} ref={componentRef}>
           <Box sx={{ display: 'flex' }}>
             <Box>
-              {CVData?.cv.user?.profile?.avatar ? (
-                <Avatar src={CVData?.cv.user?.profile?.avatar} sx={{ width: 200, height: 200 }} />
+              {profile?.avatar ? (
+                <Avatar src={profile?.avatar} sx={{ width: 200, height: 200 }} />
               ) : (
                 <Avatar sx={{ width: 200, height: 200 }}>
-                  <Typography variant="h3">
-                    {getFirstChars(CVData?.cv.user?.profile?.full_name || CVData?.cv.user?.email)}
-                  </Typography>
+                  <Typography variant="h3">{getFirstChars(profile?.full_name || email)}</Typography>
                 </Avatar>
               )}
-              <RowInfo title="Name" info={CVData?.cv.user?.profile?.full_name} />
-              <RowInfo title="Email" info={CVData?.cv.user?.email} />
-              <RowInfo title="Position" info={CVData?.cv.user?.position_name} />
-              <RowInfo title="Department" info={CVData?.cv.user?.department_name} />
+              <RowInfo title="Name" info={profile?.full_name} />
+              <RowInfo title="Email" info={email} />
+              <RowInfo title="Position" info={position_name} />
+              <RowInfo title="Department" info={department_name} />
             </Box>
             <Divider sx={{ mx: 2 }} orientation="vertical" flexItem />
             <Box sx={{ alignSelf: 'flex-start' }}>
               <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}>
                 <Typography sx={{ my: 1, fontSize: '24px' }}>Skills:</Typography>
-                {CVData?.cv?.skills ? (
+                {CVData?.cv?.skills.length ? (
                   CVData?.cv.skills.map(skill => (
                     <Chip
                       sx={{ m: 0.5, fontWeight: '700' }}
@@ -77,7 +75,7 @@ export const CVPreviewPage: FC = () => {
               </Box>
               <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}>
                 <Typography sx={{ my: 1, fontSize: '24px' }}>Languages:</Typography>
-                {CVData?.cv?.languages ? (
+                {CVData?.cv?.languages.length ? (
                   CVData?.cv.languages.map(language => (
                     <Chip
                       sx={{ m: 0.5, fontWeight: '700' }}
@@ -112,7 +110,7 @@ export const CVPreviewPage: FC = () => {
             ))}
           </>
         </Box>
-      )}
+      </LoadingOverlay>
     </Box>
   )
 }
