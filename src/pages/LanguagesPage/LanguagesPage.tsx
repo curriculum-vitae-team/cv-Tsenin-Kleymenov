@@ -1,22 +1,35 @@
 import { FC, useMemo, useState } from 'react'
-import { useQuery } from '@apollo/client'
+import { useQuery, useReactiveVar } from '@apollo/client'
 import SearchIcon from '@mui/icons-material/Search'
+import { Box, Divider } from '@mui/material'
 
 import { ILanguagesResult } from '@/appTypes/IResult.interfaces'
+import { Button } from '@/components/views/Button/Button'
 import { CommonTable } from '@/components/views/CommonTable/CommonTable'
 import { InputWithIcon } from '@/components/views/Input/Input'
+import { ROLE } from '@/constants/userRole'
+import { authService } from '@/graphql/auth/authService'
 import { ILanguage } from '@/graphql/interfaces/ILanguage.interfaces'
 import { LANGUAGES } from '@/graphql/languages/languagesQuery'
 
+import { LanguageCreateModal } from './LanguageCreateModal/LanguageCreateModal'
 import { tableColumns } from './tableColumns'
 
 export const LanguagesPage: FC = () => {
-  const { data, loading, error } = useQuery<ILanguagesResult>(LANGUAGES)
+  const user = useReactiveVar(authService.user$)
+  const isAdmin = user?.role === ROLE.admin
 
   const [searchedName, setSearchedName] = useState<string>('')
+  const [open, setOpen] = useState<boolean>(false)
+
+  const { data, loading, error } = useQuery<ILanguagesResult>(LANGUAGES)
 
   const handleSearchUser = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setSearchedName(event.target.value)
+  }
+
+  const handleModalClose = (): void => {
+    setOpen(prev => !prev)
   }
 
   const requestSearch = useMemo(
@@ -31,15 +44,22 @@ export const LanguagesPage: FC = () => {
 
   return (
     <>
-      <InputWithIcon
-        icon={<SearchIcon fontSize="small" />}
-        position="start"
-        size="small"
-        style={{ marginBottom: '20px' }}
-        value={searchedName}
-        onChange={handleSearchUser}
-        placeholder="Search"
-      />
+      <Box sx={{ display: 'flex', justifyContent: ' space-between' }}>
+        <InputWithIcon
+          icon={<SearchIcon fontSize="small" />}
+          position="start"
+          size="small"
+          value={searchedName}
+          onChange={handleSearchUser}
+          placeholder="Search"
+        />
+        {isAdmin && (
+          <Button sx={{ maxWidth: 100 }} variant="contained" onClick={handleModalClose}>
+            Create
+          </Button>
+        )}
+      </Box>
+      <Divider sx={{ my: 2 }} />
       <CommonTable<ILanguage>
         label="languages"
         data={requestSearch}
@@ -47,6 +67,7 @@ export const LanguagesPage: FC = () => {
         isLoading={loading}
         error={error}
       />
+      {open && <LanguageCreateModal onClose={handleModalClose} />}
     </>
   )
 }
