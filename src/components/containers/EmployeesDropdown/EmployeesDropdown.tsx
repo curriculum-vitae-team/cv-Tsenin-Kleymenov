@@ -13,7 +13,7 @@ export const EmployeesDropdown: FC<IEmployeesDropdownProps> = ({ userId }) => {
   const handleOpenEmployee = (): void => {
     navigate(`${userId}/${AppNavigationRoutes.PROFILE}`, { state: AppNavigationRoutes.EMPLOYEES })
   }
-  
+
   return (
     <BasicMenu>
       <MenuItem onClick={handleOpenEmployee}>Profile</MenuItem>

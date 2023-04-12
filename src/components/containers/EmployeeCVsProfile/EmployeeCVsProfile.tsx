@@ -24,13 +24,13 @@ export const EmployeeCVsProfile: FC = () => {
     fetchPolicy: FETCH_POLICY.networkOnly
   })
 
-  const handleCVsModalClose = (): void => {
+  const handleModalClose = (): void => {
     setOpen(prev => !prev)
   }
 
   const handleSetCurrentCV = (CV: ICV): void => {
     setSelectedCV(CV)
-    handleCVsModalClose()
+    handleModalClose()
   }
 
   return (
@@ -46,9 +46,7 @@ export const EmployeeCVsProfile: FC = () => {
               You don't have any CVs
             </Typography>
           )}
-          {open && (
-            <CVsModal onClose={handleCVsModalClose} currentCVData={selectedCV} />
-          )}
+          {open && <CVsModal onClose={handleModalClose} currentCVData={selectedCV} />}
         </>
       )}
     </>

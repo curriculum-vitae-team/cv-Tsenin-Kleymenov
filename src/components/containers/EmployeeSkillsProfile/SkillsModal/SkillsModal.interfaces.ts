@@ -1,7 +1,7 @@
 import { IBaseModalProps } from '@/appTypes/IBaseModalProps.interfaces'
 import { IUser } from '@/graphql/interfaces/IUser.interfaces'
 
-export interface ISkillsModalProps extends IBaseModalProps{
+export interface ISkillsModalProps extends IBaseModalProps {
   userData?: IUser
 }
 

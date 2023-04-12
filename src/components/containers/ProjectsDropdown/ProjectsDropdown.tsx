@@ -13,7 +13,7 @@ export const ProjectsDropdown: FC<IProjectsDropdownProps> = ({ projectId }) => {
   const handleOpenProject = (): void => {
     navigate(`${projectId}`, { state: AppNavigationRoutes.PROJECTS })
   }
-  
+
   return (
     <BasicMenu>
       <MenuItem onClick={handleOpenProject}>Project</MenuItem>
