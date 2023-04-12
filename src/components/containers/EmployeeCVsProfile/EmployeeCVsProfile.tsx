@@ -47,7 +47,7 @@ export const EmployeeCVsProfile: FC = () => {
             </Typography>
           )}
           {open && (
-            <CVsModal handleClose={handleCVsModalClose} currentCVData={selectedCV} />
+            <CVsModal onClose={handleCVsModalClose} currentCVData={selectedCV} />
           )}
         </>
       )}

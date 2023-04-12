@@ -54,7 +54,7 @@ export const EmployeeLanguagesProfile: FC = () => {
       {open && (
         <LanguagesModal
           userData={userData?.user}
-          handleClose={handleLanguageModalClose}
+          onClose={handleLanguageModalClose}
         />
       )}
     </Box>

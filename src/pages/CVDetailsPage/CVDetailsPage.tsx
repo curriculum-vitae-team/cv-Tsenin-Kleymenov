@@ -47,7 +47,7 @@ export const CVDetailsPage: FC = () => {
           <CVDetailItem CVData={CVData?.cv} />
         </Box>
       </LoadingOverlay>
-      {open && <CVDetailsModal handleClose={handleCVsModalClose} CVData={CVData?.cv} />}
+      {open && <CVDetailsModal onClose={handleCVsModalClose} CVData={CVData?.cv} />}
     </>
   )
 }

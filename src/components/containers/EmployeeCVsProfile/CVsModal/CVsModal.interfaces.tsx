@@ -1,10 +1,10 @@
+import { IBaseModalProps } from '@/appTypes/IBaseModalProps.interfaces'
 import { ICV } from '@/graphql/interfaces/ICV.interfaces'
 import { IUser } from '@/graphql/interfaces/IUser.interfaces'
 
-export interface ICVsModalProps {
+export interface ICVsModalProps extends IBaseModalProps {
   currentCVData: ICV | null
   userData?: IUser
-  handleClose: () => void
 }
 
 export enum FORM_PROFILE_CVS_KEYS {

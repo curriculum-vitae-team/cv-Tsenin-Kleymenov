@@ -21,7 +21,7 @@ import {
   ICVDetailsModalProps
 } from './CVDetailsModal.interfaces'
 
-export const CVDetailsModal: FC<ICVDetailsModalProps> = ({ CVData, handleClose }) => {
+export const CVDetailsModal: FC<ICVDetailsModalProps> = ({ CVData, onClose: handleClose }) => {
   const user = useReactiveVar(authService.user$)
 
   const [updateCVMutation, { loading: updateCVLoading }] = useMutation(UPDATE_CV, {

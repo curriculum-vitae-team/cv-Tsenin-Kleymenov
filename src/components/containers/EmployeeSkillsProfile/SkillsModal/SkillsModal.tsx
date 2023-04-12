@@ -20,7 +20,7 @@ import {
   ISkillsModalProps
 } from './SkillsModal.interfaces'
 
-export const SkillsModal: FC<ISkillsModalProps> = ({ userData, handleClose }) => {
+export const SkillsModal: FC<ISkillsModalProps> = ({ userData, onClose: handleClose }) => {
   const { loading: loadingSkills, data: skillsData } = useQuery<ISkillsResult>(SKILLS)
   const [updateUser, { loading: userLoading }] = useMutation(UPDATE_USER)
 

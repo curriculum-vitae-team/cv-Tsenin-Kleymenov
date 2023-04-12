@@ -20,7 +20,7 @@ import {
   IProfileLanguagesFormValues
 } from './LanguagesModal.interfaces'
 
-export const LanguagesModal: FC<ILanguagesModalProps> = ({ userData, handleClose }) => {
+export const LanguagesModal: FC<ILanguagesModalProps> = ({ userData, onClose: handleClose }) => {
   const { loading: loadingLanguages, data: languagesData } = useQuery<ILanguagesResult>(LANGUAGES)
   const [updateUser, { loading: userLoading }] = useMutation(UPDATE_USER)
 

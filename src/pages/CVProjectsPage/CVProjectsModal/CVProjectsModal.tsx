@@ -22,7 +22,7 @@ import {
   ICVProjectsModalProps
 } from './CVProjectsModal.interfaces'
 
-export const CVProjectsModal: FC<ICVProjectsModalProps> = ({ CVData, handleClose }) => {
+export const CVProjectsModal: FC<ICVProjectsModalProps> = ({ CVData, onClose: handleClose }) => {
   const user = useReactiveVar(authService.user$)
 
   const [updateCVMutation, { loading: updateCVLoading }] = useMutation(UPDATE_CV, {
