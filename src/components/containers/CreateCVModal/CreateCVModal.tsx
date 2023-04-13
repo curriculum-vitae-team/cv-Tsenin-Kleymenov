@@ -72,13 +72,13 @@ export const CreateCVModal: FC<ICVsModalProps> = ({ onClose: handleOpenClose }) 
           <Input
             label="Name"
             error={!!errors[FORM_CREATE_CV_KEYS.name]}
-            {...register('name')}
+            {...register(FORM_CREATE_CV_KEYS.name)}
             helperText={errors?.[FORM_CREATE_CV_KEYS.name]?.message}
           />
           <Input
             label="Description"
             error={!!errors[FORM_CREATE_CV_KEYS.description]}
-            {...register('description')}
+            {...register(FORM_CREATE_CV_KEYS.description)}
             helperText={errors?.[FORM_CREATE_CV_KEYS.description]?.message}
           />
           <Controller
