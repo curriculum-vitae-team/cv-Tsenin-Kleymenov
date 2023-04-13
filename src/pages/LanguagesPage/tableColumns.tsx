@@ -1,6 +1,8 @@
 import { IColumn } from '@/constants/tablesData/Column.interfaces'
 import { ILanguage } from '@/graphql/interfaces/ILanguage.interfaces'
 
+import { LanguageDropdown } from './LanguageDropdown/LanguageDropdown'
+
 export const tableColumns: IColumn<ILanguage>[] = [
   {
     id: 1,
@@ -13,5 +15,11 @@ export const tableColumns: IColumn<ILanguage>[] = [
     header: 'ISO2',
     field: 'iso2',
     sortable: true
+  },
+  {
+    id: 3,
+    header: '',
+    render: item => <LanguageDropdown language={item} />,
+    sortable: false
   }
 ]

@@ -29,7 +29,7 @@ export const EmployeeSkillsProfile: FC = () => {
     return acc
   }, {})
 
-  const handleSkillModalClose = (): void => {
+  const handleModalClose = (): void => {
     setOpen(prev => !prev)
   }
 
@@ -39,7 +39,7 @@ export const EmployeeSkillsProfile: FC = () => {
         <Button
           sx={{ maxWidth: 170, alignSelf: 'flex-end' }}
           variant="contained"
-          onClick={handleSkillModalClose}
+          onClick={handleModalClose}
         >
           + Add skills
         </Button>
@@ -54,9 +54,7 @@ export const EmployeeSkillsProfile: FC = () => {
           You don't have any skills
         </Typography>
       )}
-      {open && (
-        <SkillsModal userData={userData?.user} onClose={handleSkillModalClose} />
-      )}
+      {open && <SkillsModal userData={userData?.user} onClose={handleModalClose} />}
     </Box>
   )
 }

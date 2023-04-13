@@ -35,7 +35,7 @@ export const CVProjectsPage: FC = () => {
     setSearchedName(event.target.value)
   }
 
-  const handleCVsModalClose = (): void => {
+  const handleModalClose = (): void => {
     setOpen(prev => !prev)
   }
 
@@ -64,7 +64,7 @@ export const CVProjectsPage: FC = () => {
           placeholder="Search"
         />
         {userCheck && (
-          <Button sx={{ maxWidth: 150 }} variant="contained" onClick={handleCVsModalClose}>
+          <Button sx={{ maxWidth: 150 }} variant="contained" onClick={handleModalClose}>
             Update
           </Button>
         )}
@@ -77,9 +77,7 @@ export const CVProjectsPage: FC = () => {
         isLoading={CVLoading}
         error={CVError}
       />
-      {open && (
-        <CVProjectsModal onClose={handleCVsModalClose} CVData={CVData?.cv} />
-      )}
+      {open && <CVProjectsModal onClose={handleModalClose} CVData={CVData?.cv} />}
     </>
   )
 }

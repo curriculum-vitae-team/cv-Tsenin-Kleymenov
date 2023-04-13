@@ -4,6 +4,7 @@ import { useMutation, useQuery, useReactiveVar } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Checkbox, Container, FormControlLabel } from '@mui/material'
 
+import { ICVResult } from '@/appTypes/IResult.interfaces'
 import { Button } from '@/components/views/Button/Button'
 import { Input } from '@/components/views/Input/Input'
 import { LoadingOverlay } from '@/components/views/LoadingOverlay/LoadingOverlay'
@@ -20,10 +21,10 @@ import { createSkillsArray } from '@/utils/createSkillsArray'
 import { ICVsModalProps } from './CVsModal.interfaces'
 import { FORM_PROFILE_CVS_KEYS, IProfileCVsFormValues } from './CVsModal.interfaces'
 
-export const CVsModal: FC<ICVsModalProps> = ({ currentCVData, onClose: handleClose}) => {
+export const CVsModal: FC<ICVsModalProps> = ({ currentCVData, onClose: handleClose }) => {
   const user = useReactiveVar(authService.user$)
 
-  const { data: CVData, loading: CVLoading } = useQuery(CV, {
+  const { data: CVData, loading: CVLoading } = useQuery<ICVResult>(CV, {
     variables: { id: currentCVData?.id },
     fetchPolicy: FETCH_POLICY.networkOnly
   })

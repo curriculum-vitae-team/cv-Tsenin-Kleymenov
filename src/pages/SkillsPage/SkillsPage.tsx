@@ -12,6 +12,7 @@ import { authService } from '@/graphql/auth/authService'
 import { ISkill } from '@/graphql/interfaces/ISkill.interfaces'
 import { SKILLS } from '@/graphql/skills/skillsQuery'
 import { SkillCreateModal } from '@/pages/SkillsPage/SkillCreateModal/SkillCreateModal'
+import useDebounce from '@/hooks/useDebounce'
 
 import { tableColumns } from './tableColumns'
 
@@ -31,14 +32,16 @@ export const SkillsPage: FC = () => {
     setOpen(prev => !prev)
   }
 
+  const debouncedSearchTerm = useDebounce(searchedName, 150)
+
   const requestSearch = useMemo(
     () =>
-      searchedName === ''
+      debouncedSearchTerm === ''
         ? data?.skills
         : data?.skills.filter(skill =>
-            skill.name?.toLowerCase().includes(searchedName.toLowerCase())
+            skill.name?.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
           ),
-    [data?.skills, searchedName]
+    [data?.skills, debouncedSearchTerm]
   )
 
   return (
