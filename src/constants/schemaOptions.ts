@@ -7,6 +7,8 @@ import { FORM_PROFILE_SKILLS_KEYS } from '@/components/containers/EmployeeSkills
 import { FORM_LOGIN_KEYS } from '@/components/containers/LoginForm/LoginForm.interfaces'
 import { FORM_SIGNUP_KEYS } from '@/components/containers/SignUpForm/SignUpForm.interfaces'
 import { FORM_POSITION_KEYS } from '@/pages/PositionsPage/PositionsPage.interfaces'
+import { FORM_DEPARTMENT_KEYS } from '@/pages/DepartmentsPage/DepartmentsPage.interfaces'
+import { FORM_SKILL_KEYS } from '@/pages/SkillsPage/SkillsPage.interfaces'
 import { FORM_LANGUAGE_KEYS } from '@/pages/LanguagesPage/LanguagesPage.interfaces'
 
 export const LOGIN_SCHEMA = yup.object().shape({
@@ -59,6 +61,12 @@ export const FORM_PROFILE_CVS_SCHEMA = yup.object().shape({
 
 export const FORM_POSITION_SCHEMA = yup.object().shape({
   [FORM_POSITION_KEYS.name]: yup.string().required('Name is a required field')
+
+export const FORM_DEPARTMENT_SCHEMA = yup.object().shape({
+  [FORM_DEPARTMENT_KEYS.name]: yup.string().required('Name is a required field')
+
+export const FORM_SKILL_SCHEMA = yup.object().shape({
+  [FORM_SKILL_KEYS.name]: yup.string().required('Name is a required field')
 
 export const FORM_LANGUAGE_SCHEMA = yup.object().shape({
   [FORM_LANGUAGE_KEYS.name]: yup
