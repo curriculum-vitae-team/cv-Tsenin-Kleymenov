@@ -30,7 +30,7 @@ export const tableColumns: IColumn<IProject>[] = [
   {
     id: 5,
     header: 'End Date',
-    field: 'end_date',
+    render: item => <>{!item.end_date ? 'Till now' : item.end_date}</>,
     sortable: true
   },
   {

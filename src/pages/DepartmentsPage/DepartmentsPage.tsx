@@ -7,6 +7,7 @@ import { CommonTable } from '@/components/views/CommonTable/CommonTable'
 import { InputWithIcon } from '@/components/views/Input/Input'
 import { DEPARTMENTS } from '@/graphql/departments/departmentsQuery'
 import { IDepartment } from '@/graphql/interfaces/IDepartment.interfaces'
+import useDebounce from '@/hooks/useDebounce'
 
 import { tableColumns } from './tableColumns'
 
@@ -19,14 +20,16 @@ export const DepartmentsPage: FC = () => {
     setSearchedName(event.target.value)
   }
 
+  const debouncedSearchTerm = useDebounce(searchedName, 150)
+
   const requestSearch = useMemo(
     () =>
-      searchedName === ''
+      debouncedSearchTerm === ''
         ? data?.departments
         : data?.departments.filter(department =>
-            department.name?.toLowerCase().includes(searchedName.toLowerCase())
+            department.name?.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
           ),
-    [data?.departments, searchedName]
+    [data?.departments, debouncedSearchTerm]
   )
 
   return (

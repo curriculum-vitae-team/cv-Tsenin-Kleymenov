@@ -11,6 +11,7 @@ import { ROLE } from '@/constants/userRole'
 import { authService } from '@/graphql/auth/authService'
 import { ILanguage } from '@/graphql/interfaces/ILanguage.interfaces'
 import { LANGUAGES } from '@/graphql/languages/languagesQuery'
+import useDebounce from '@/hooks/useDebounce'
 
 import { LanguageCreateModal } from './LanguageCreateModal/LanguageCreateModal'
 import { tableColumns } from './tableColumns'
@@ -32,14 +33,16 @@ export const LanguagesPage: FC = () => {
     setOpen(prev => !prev)
   }
 
+  const debouncedSearchTerm = useDebounce(searchedName, 150)
+
   const requestSearch = useMemo(
     () =>
-      searchedName === ''
+      debouncedSearchTerm === ''
         ? data?.languages
         : data?.languages.filter(language =>
-            language.name?.toLowerCase().includes(searchedName.toLowerCase())
+            language.name?.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
           ),
-    [data?.languages, searchedName]
+    [data?.languages, debouncedSearchTerm]
   )
 
   return (

@@ -6,7 +6,7 @@ import { CloseButton, Dialog, DialogContent } from './ModalWindow.styles'
 
 export const ModalWindow: FC<IModalWindowProps> = ({ children, onClose }) => {
   return (
-    <Dialog open={true} onClose={onClose}>
+    <Dialog open onClose={onClose}>
       <DialogContent>
         <CloseButton onClick={onClose}>
           <ClearIcon />

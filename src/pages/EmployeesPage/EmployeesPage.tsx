@@ -7,6 +7,7 @@ import { CommonTable } from '@/components/views/CommonTable/CommonTable'
 import { InputWithIcon } from '@/components/views/Input/Input'
 import { IUser } from '@/graphql/interfaces/IUser.interfaces'
 import { GET_EMPLOYEES } from '@/graphql/users/usersQuery'
+import useDebounce from '@/hooks/useDebounce'
 
 import { tableColumns } from './tableColumns'
 
@@ -19,14 +20,16 @@ export const EmployeesPage: FC = () => {
     setSearchedName(event.target.value)
   }
 
+  const debouncedSearchTerm = useDebounce(searchedName, 150)
+
   const requestSearch = useMemo(
     () =>
-      searchedName === ''
+      debouncedSearchTerm === ''
         ? data?.users
         : data?.users.filter(user =>
-            user.profile.full_name?.toLowerCase().includes(searchedName.toLowerCase())
+            user.profile.full_name?.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
           ),
-    [data?.users, searchedName]
+    [data?.users, debouncedSearchTerm]
   )
 
   return (
