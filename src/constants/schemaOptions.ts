@@ -6,15 +6,14 @@ import { FORM_PROFILE_KEYS } from '@/components/containers/EmployeeProfileForm/E
 import { FORM_PROFILE_SKILLS_KEYS } from '@/components/containers/EmployeeSkillsProfile/SkillsModal/SkillsModal.interfaces'
 import { FORM_LOGIN_KEYS } from '@/components/containers/LoginForm/LoginForm.interfaces'
 import { FORM_SIGNUP_KEYS } from '@/components/containers/SignUpForm/SignUpForm.interfaces'
+import { FORM_POSITION_KEYS } from '@/pages/PositionsPage/PositionsPage.interfaces'
 
 export const LOGIN_SCHEMA = yup.object().shape({
   [FORM_LOGIN_KEYS.email]: yup
     .string()
     .required('Email is a required field')
     .email('Invalid email format'),
-  [FORM_LOGIN_KEYS.password]: yup
-    .string()
-    .required('Password is a required field')
+  [FORM_LOGIN_KEYS.password]: yup.string().required('Password is a required field')
 })
 
 export const SIGNUP_SCHEMA = yup.object().shape({
@@ -22,9 +21,7 @@ export const SIGNUP_SCHEMA = yup.object().shape({
     .string()
     .required('Email is a required field')
     .email('Invalid email format'),
-  [FORM_SIGNUP_KEYS.password]: yup
-    .string()
-    .required('Password is a required field')
+  [FORM_SIGNUP_KEYS.password]: yup.string().required('Password is a required field')
 })
 
 export const FORM_PROFILE_SCHEMA = yup.object().shape({
@@ -57,4 +54,8 @@ export const FORM_PROFILE_SKILLS_SCHEMA = yup.object().shape({
 export const FORM_PROFILE_CVS_SCHEMA = yup.object().shape({
   [FORM_PROFILE_CVS_KEYS.name]: yup.string().required('Name is a required field'),
   [FORM_PROFILE_CVS_KEYS.description]: yup.string().required('Description is a required field')
+})
+
+export const FORM_POSITION_SCHEMA = yup.object().shape({
+  [FORM_POSITION_KEYS.name]: yup.string().required('Name is a required field')
 })
