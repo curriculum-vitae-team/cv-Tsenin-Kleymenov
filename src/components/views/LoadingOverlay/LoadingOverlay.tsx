@@ -6,6 +6,6 @@ import { ILoadingOverlayProps } from './LoadingOverlay.interfaces'
 
 export const LoadingOverlay: FC<ILoadingOverlayProps> = ({ active, position, children }) => {
   return (
-    <>{active ? <Loader sx={{ position: `${position}` }} color="primary" /> : <> {children}</>} </>
+    <>{active ? <Loader sx={{ position: `${position}` }} color="primary" /> : <>{children}</>} </>
   )
 }
