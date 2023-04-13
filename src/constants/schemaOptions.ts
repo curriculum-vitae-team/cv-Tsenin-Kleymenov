@@ -7,6 +7,7 @@ import { FORM_PROFILE_SKILLS_KEYS } from '@/components/containers/EmployeeSkills
 import { FORM_LOGIN_KEYS } from '@/components/containers/LoginForm/LoginForm.interfaces'
 import { FORM_SIGNUP_KEYS } from '@/components/containers/SignUpForm/SignUpForm.interfaces'
 import { FORM_DEPARTMENT_KEYS } from '@/pages/DepartmentsPage/DepartmentsPage.interfaces'
+import { FORM_LANGUAGE_KEYS } from '@/pages/LanguagesPage/LanguagesPage.interfaces'
 
 export const LOGIN_SCHEMA = yup.object().shape({
   [FORM_LOGIN_KEYS.email]: yup
@@ -58,4 +59,19 @@ export const FORM_PROFILE_CVS_SCHEMA = yup.object().shape({
 
 export const FORM_DEPARTMENT_SCHEMA = yup.object().shape({
   [FORM_DEPARTMENT_KEYS.name]: yup.string().required('Name is a required field')
+
+export const FORM_LANGUAGE_SCHEMA = yup.object().shape({
+  [FORM_LANGUAGE_KEYS.name]: yup
+    .string()
+    .required('Name is a required field')
+    .matches(/^\S+$/, 'Name should not contain spaces'),
+  [FORM_LANGUAGE_KEYS.native_name]: yup
+    .string()
+    .required('Native name is a required field')
+    .matches(/^\S+$/, 'Native name should not contain spaces'),
+  [FORM_LANGUAGE_KEYS.iso2]: yup
+    .string()
+    .max(2)
+    .required('ISO2 is a required field')
+    .matches(/^[A-Z]*$/gms, 'Only two letters in uppercase')
 })

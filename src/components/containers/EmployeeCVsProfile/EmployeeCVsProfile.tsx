@@ -7,7 +7,7 @@ import { IUserResult } from '@/appTypes/IResult.interfaces'
 import { CVItem } from '@/components/containers/CVItem/CVItem'
 import { authService } from '@/graphql/auth/authService'
 import { FETCH_POLICY } from '@/graphql/fetchPolicy'
-import { ICV } from '@/graphql/interfaces/ICV.interfaces'
+import { ICV } from '@/graphql/interfaces/ICv.interfaces'
 import { USER } from '@/graphql/user/userQuery'
 
 import { CVsModal } from './CVsModal/CVsModal'
@@ -16,6 +16,7 @@ export const EmployeeCVsProfile: FC = () => {
   const { id } = useParams()
   const user = useReactiveVar(authService.user$)
   const userCheck = id === user?.id
+
   const [open, setOpen] = useState<boolean>(false)
   const [selectedCV, setSelectedCV] = useState<ICV | null>(null)
 
@@ -24,13 +25,13 @@ export const EmployeeCVsProfile: FC = () => {
     fetchPolicy: FETCH_POLICY.networkOnly
   })
 
-  const handleCVsModalClose = (): void => {
+  const handleModalClose = (): void => {
     setOpen(prev => !prev)
   }
 
   const handleSetCurrentCV = (CV: ICV): void => {
     setSelectedCV(CV)
-    handleCVsModalClose()
+    handleModalClose()
   }
 
   return (
@@ -46,9 +47,7 @@ export const EmployeeCVsProfile: FC = () => {
               You don't have any CVs
             </Typography>
           )}
-          {open && (
-            <CVsModal onClose={handleCVsModalClose} currentCVData={selectedCV} />
-          )}
+          {open && <CVsModal onClose={handleModalClose} currentCVData={selectedCV} />}
         </>
       )}
     </>

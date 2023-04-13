@@ -24,7 +24,7 @@ export const CVDetailsPage: FC = () => {
 
   const userCheck = CVData?.cv.user?.id === user?.id
 
-  const handleCVsModalClose = (): void => {
+  const handleModalClose = (): void => {
     setOpen(prev => !prev)
   }
 
@@ -37,7 +37,7 @@ export const CVDetailsPage: FC = () => {
               <Button
                 sx={{ maxWidth: 210, alignSelf: 'flex-end' }}
                 variant="contained"
-                onClick={handleCVsModalClose}
+                onClick={handleModalClose}
               >
                 Edit
               </Button>
@@ -47,7 +47,7 @@ export const CVDetailsPage: FC = () => {
           <CVDetailItem CVData={CVData?.cv} />
         </Box>
       </LoadingOverlay>
-      {open && <CVDetailsModal onClose={handleCVsModalClose} CVData={CVData?.cv} />}
+      {open && <CVDetailsModal onClose={handleModalClose} CVData={CVData?.cv} />}
     </>
   )
 }

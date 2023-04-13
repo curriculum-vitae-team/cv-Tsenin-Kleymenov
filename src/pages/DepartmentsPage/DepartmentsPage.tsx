@@ -12,6 +12,7 @@ import { authService } from '@/graphql/auth/authService'
 import { DEPARTMENTS } from '@/graphql/departments/departmentsQuery'
 import { IDepartment } from '@/graphql/interfaces/IDepartment.interfaces'
 import { DepartmentCreateModal } from '@/pages/DepartmentsPage/DepartmentCreateModal/DepartmentCreateModal'
+import useDebounce from '@/hooks/useDebounce'
 
 import { tableColumns } from './tableColumns'
 
@@ -32,14 +33,16 @@ export const DepartmentsPage: FC = () => {
     setOpen(prev => !prev)
   }
 
+  const debouncedSearchTerm = useDebounce(searchedName, 150)
+
   const requestSearch = useMemo(
     () =>
-      searchedName === ''
+      debouncedSearchTerm === ''
         ? data?.departments
         : data?.departments.filter(department =>
-            department.name?.toLowerCase().includes(searchedName.toLowerCase())
+            department.name?.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
           ),
-    [data?.departments, searchedName]
+    [data?.departments, debouncedSearchTerm]
   )
 
   return (

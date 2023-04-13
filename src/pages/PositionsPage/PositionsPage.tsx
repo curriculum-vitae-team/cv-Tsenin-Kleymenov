@@ -7,6 +7,7 @@ import { CommonTable } from '@/components/views/CommonTable/CommonTable'
 import { InputWithIcon } from '@/components/views/Input/Input'
 import { IPosition } from '@/graphql/interfaces/IPosition.interfaces'
 import { POSITIONS } from '@/graphql/positions/positionsQuery'
+import useDebounce from '@/hooks/useDebounce'
 
 import { tableColumns } from './tableColumns'
 
@@ -19,14 +20,16 @@ export const PositionsPage: FC = () => {
     setSearchedName(event.target.value)
   }
 
+  const debouncedSearchTerm = useDebounce(searchedName, 150)
+
   const requestSearch = useMemo(
     () =>
-      searchedName === ''
+      debouncedSearchTerm === ''
         ? data?.positions
         : data?.positions.filter(position =>
-            position.name?.toLowerCase().includes(searchedName.toLowerCase())
+            position.name?.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
           ),
-    [data?.positions, searchedName]
+    [data?.positions, debouncedSearchTerm]
   )
 
   return (
