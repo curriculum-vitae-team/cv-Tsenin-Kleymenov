@@ -12,6 +12,7 @@ import { authService } from '@/graphql/auth/authService'
 import { IPosition } from '@/graphql/interfaces/IPosition.interfaces'
 import { POSITIONS } from '@/graphql/positions/positionsQuery'
 import { PositionCreateModal } from '@/pages/PositionsPage/PositionCreateModal/PositionCreateModal'
+import useDebounce from '@/hooks/useDebounce'
 
 import { tableColumns } from './tableColumns'
 
@@ -32,14 +33,16 @@ export const PositionsPage: FC = () => {
     setOpen(prev => !prev)
   }
 
+const debouncedSearchTerm = useDebounce(searchedName, 150)
+
   const requestSearch = useMemo(
     () =>
-      searchedName === ''
+      debouncedSearchTerm === ''
         ? data?.positions
         : data?.positions.filter(position =>
-            position.name?.toLowerCase().includes(searchedName.toLowerCase())
+            position.name?.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
           ),
-    [data?.positions, searchedName]
+    [data?.positions, debouncedSearchTerm]
   )
 
   return (

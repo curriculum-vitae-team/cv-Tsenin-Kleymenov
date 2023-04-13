@@ -1,4 +1,4 @@
-import { ICV } from './ICV.interfaces'
+import { ICV } from './ICv.interfaces'
 import { IDepartment } from './IDepartment.interfaces'
 import { IPosition } from './IPosition.interfaces'
 import { IProfile } from './IProfile.interfaces'

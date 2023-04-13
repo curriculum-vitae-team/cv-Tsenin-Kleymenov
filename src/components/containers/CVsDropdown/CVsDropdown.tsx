@@ -13,7 +13,7 @@ export const CVsDropdown: FC<ICVsDropdownProps> = ({ CVId }) => {
   const handleOpenCv = (): void => {
     navigate(`${CVId}/${AppNavigationRoutes.DETAILS}`, { state: AppNavigationRoutes.CVS })
   }
-  
+
   return (
     <BasicMenu>
       <MenuItem onClick={handleOpenCv}>CV</MenuItem>

@@ -20,7 +20,7 @@ export const EmployeeLanguagesProfile: FC = () => {
     variables: { id: userId }
   })
 
-  const handleLanguageModalClose = (): void => {
+  const handleModalClose = (): void => {
     setOpen(prev => !prev)
   }
 
@@ -30,7 +30,7 @@ export const EmployeeLanguagesProfile: FC = () => {
         <Button
           sx={{ maxWidth: 210, alignSelf: 'flex-end' }}
           variant="contained"
-          onClick={handleLanguageModalClose}
+          onClick={handleModalClose}
         >
           + Add Languages
         </Button>
@@ -51,12 +51,7 @@ export const EmployeeLanguagesProfile: FC = () => {
           You don't have any languages
         </Typography>
       )}
-      {open && (
-        <LanguagesModal
-          userData={userData?.user}
-          onClose={handleLanguageModalClose}
-        />
-      )}
+      {open && <LanguagesModal userData={userData?.user} onClose={handleModalClose} />}
     </Box>
   )
 }
