@@ -3,7 +3,7 @@ import { useMutation, useReactiveVar } from '@apollo/client'
 import { Box, MenuItem } from '@mui/material'
 
 import { BasicMenu } from '@/components/containers/BasicMenu/BasicMenu'
-import { ROLE } from '@/constants/userRole'
+import { ROLE } from '@/constants/userRoles'
 import { authService } from '@/graphql/auth/authService'
 import { DELETE_SKILL } from '@/graphql/skills/deleteSkillMutation'
 import { SKILLS } from '@/graphql/skills/skillsQuery'
