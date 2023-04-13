@@ -7,6 +7,7 @@ import { CommonTable } from '@/components/views/CommonTable/CommonTable'
 import { InputWithIcon } from '@/components/views/Input/Input'
 import { IProject } from '@/graphql/interfaces/IProject.interfaces'
 import { GET_PROJECTS } from '@/graphql/projects/projectsQuery'
+import useDebounce from '@/hooks/useDebounce'
 
 import { tableColumns } from './tableColumns'
 
@@ -19,16 +20,18 @@ export const ProjectsPage: FC = () => {
     setSearchedName(event.target.value)
   }
 
+  const debouncedSearchTerm = useDebounce(searchedName, 150)
+
   const requestSearch = useMemo(
     () =>
-      searchedName === ''
+      debouncedSearchTerm === ''
         ? data?.projects
         : data?.projects.filter(
             project =>
-              project.name?.toLowerCase().includes(searchedName.toLowerCase()) ||
-              project.internal_name?.toLowerCase().includes(searchedName.toLowerCase())
+              project.name?.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) ||
+              project.internal_name?.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
           ),
-    [data?.projects, searchedName]
+    [data?.projects, debouncedSearchTerm]
   )
 
   return (

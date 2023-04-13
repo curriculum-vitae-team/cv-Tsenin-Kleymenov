@@ -35,7 +35,13 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           color: '#fff',
-          fontSize: '14px'
+          fontSize: '14px',
+          fontWeight: 400,
+          boxShadow: 'none',
+
+          '&:hover': {
+            boxShadow: 'none'
+          }
         },
         text: {
           color: '#c63031'

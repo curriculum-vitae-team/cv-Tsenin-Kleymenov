@@ -12,9 +12,7 @@ export const LOGIN_SCHEMA = yup.object().shape({
     .string()
     .required('Email is a required field')
     .email('Invalid email format'),
-  [FORM_LOGIN_KEYS.password]: yup
-    .string()
-    .required('Password is a required field')
+  [FORM_LOGIN_KEYS.password]: yup.string().required('Password is a required field')
 })
 
 export const SIGNUP_SCHEMA = yup.object().shape({
@@ -22,9 +20,7 @@ export const SIGNUP_SCHEMA = yup.object().shape({
     .string()
     .required('Email is a required field')
     .email('Invalid email format'),
-  [FORM_SIGNUP_KEYS.password]: yup
-    .string()
-    .required('Password is a required field')
+  [FORM_SIGNUP_KEYS.password]: yup.string().required('Password is a required field')
 })
 
 export const FORM_PROFILE_SCHEMA = yup.object().shape({

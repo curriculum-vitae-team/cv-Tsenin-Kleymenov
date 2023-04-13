@@ -7,6 +7,7 @@ import { CommonTable } from '@/components/views/CommonTable/CommonTable'
 import { InputWithIcon } from '@/components/views/Input/Input'
 import { ILanguage } from '@/graphql/interfaces/ILanguage.interfaces'
 import { LANGUAGES } from '@/graphql/languages/languagesQuery'
+import useDebounce from '@/hooks/useDebounce'
 
 import { tableColumns } from './tableColumns'
 
@@ -19,14 +20,16 @@ export const LanguagesPage: FC = () => {
     setSearchedName(event.target.value)
   }
 
+  const debouncedSearchTerm = useDebounce(searchedName, 150)
+
   const requestSearch = useMemo(
     () =>
-      searchedName === ''
+      debouncedSearchTerm === ''
         ? data?.languages
         : data?.languages.filter(language =>
-            language.name?.toLowerCase().includes(searchedName.toLowerCase())
+            language.name?.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
           ),
-    [data?.languages, searchedName]
+    [data?.languages, debouncedSearchTerm]
   )
 
   return (
