@@ -21,7 +21,7 @@ import { createSkillsArray } from '@/utils/createSkillsArray'
 
 import { ICVsModalProps } from '../EmployeeCVsProfile/CVsModal/CVsModal.interfaces'
 
-import { IFormCreateCV } from './CreateCVModal.interfaces'
+import { FORM_CREATE_CV_KEYS, ICreateCVFormValues } from './CreateCVModal.interfaces'
 
 export const CreateCVModal: FC<ICVsModalProps> = ({ onClose: handleOpenClose }) => {
   const user = useReactiveVar(authService.user$)
@@ -31,7 +31,7 @@ export const CreateCVModal: FC<ICVsModalProps> = ({ onClose: handleOpenClose }) 
   })
   const { data: userData } = useQuery<IUserResult>(USER, {
     variables: { id: user?.id },
-    fetchPolicy: FETCH_POLICY.cacheOnly
+    fetchPolicy: FETCH_POLICY.noCache
   })
 
   const {
@@ -39,23 +39,21 @@ export const CreateCVModal: FC<ICVsModalProps> = ({ onClose: handleOpenClose }) 
     control,
     handleSubmit,
     formState: { errors, isValid, isDirty }
-  } = useForm<IFormCreateCV>({
+  } = useForm<ICreateCVFormValues>({
     defaultValues: {
-      name: '',
-      description: '',
-      is_template: false
+      [FORM_CREATE_CV_KEYS.name]: '',
+      [FORM_CREATE_CV_KEYS.description]: '',
+      [FORM_CREATE_CV_KEYS.isTemplate]: false
     },
     mode: 'onSubmit',
     resolver: yupResolver(FORM_PROFILE_CVS_SCHEMA)
   })
 
   const submitClickHandler = handleSubmit(async (formData): Promise<void> => {
-    const { ...rest } = formData
-
     await createCV({
       variables: {
         cv: {
-          ...rest,
+          ...formData,
           userId: userData?.user.id,
           skills: createSkillsArray(userData?.user.profile.skills),
           languages: createLanguagesArray(userData?.user.profile.languages),
@@ -73,15 +71,15 @@ export const CreateCVModal: FC<ICVsModalProps> = ({ onClose: handleOpenClose }) 
         <Container sx={{ minWidth: '500px' }}>
           <Input
             label="Name"
-            error={!!errors.name}
+            error={!!errors[FORM_CREATE_CV_KEYS.name]}
             {...register('name')}
-            helperText={errors.name?.message}
+            helperText={errors?.[FORM_CREATE_CV_KEYS.name]?.message}
           />
           <Input
             label="Description"
-            error={!!errors.description}
+            error={!!errors[FORM_CREATE_CV_KEYS.description]}
             {...register('description')}
-            helperText={errors.description?.message}
+            helperText={errors?.[FORM_CREATE_CV_KEYS.description]?.message}
           />
           <Controller
             control={control}

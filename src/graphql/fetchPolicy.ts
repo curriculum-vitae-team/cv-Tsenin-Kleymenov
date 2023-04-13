@@ -7,7 +7,8 @@ interface IFetchPolicy {
 
 export const FETCH_POLICY: IFetchPolicy = {
   networkOnly: 'network-only',
-  cacheOnly: 'cache-only'
+  cacheOnly: 'cache-only',
+  noCache: 'no-cache'
 }
 
 interface IMutationFetchPolicy {
