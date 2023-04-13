@@ -11,8 +11,8 @@ import { ROLE } from '@/constants/userRoles'
 import { authService } from '@/graphql/auth/authService'
 import { IPosition } from '@/graphql/interfaces/IPosition.interfaces'
 import { POSITIONS } from '@/graphql/positions/positionsQuery'
-import { PositionCreateModal } from '@/pages/PositionsPage/PositionCreateModal/PositionCreateModal'
 import useDebounce from '@/hooks/useDebounce'
+import { PositionCreateModal } from '@/pages/PositionsPage/PositionCreateModal/PositionCreateModal'
 
 import { tableColumns } from './tableColumns'
 
@@ -33,7 +33,7 @@ export const PositionsPage: FC = () => {
     setOpen(prev => !prev)
   }
 
-const debouncedSearchTerm = useDebounce(searchedName, 150)
+  const debouncedSearchTerm = useDebounce(searchedName, 150)
 
   const requestSearch = useMemo(
     () =>
