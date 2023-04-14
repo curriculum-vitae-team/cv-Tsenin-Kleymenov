@@ -1,4 +1,4 @@
-import { FC, useMemo, useState } from 'react'
+import { FC, useDeferredValue, useMemo, useState } from 'react'
 import { useQuery, useReactiveVar } from '@apollo/client'
 import SearchIcon from '@mui/icons-material/Search'
 import { Box, Divider } from '@mui/material'
@@ -11,7 +11,6 @@ import { ROLE } from '@/constants/userRoles'
 import { authService } from '@/graphql/auth/authService'
 import { DEPARTMENTS } from '@/graphql/departments/departmentsQuery'
 import { IDepartment } from '@/graphql/interfaces/IDepartment.interfaces'
-import useDebounce from '@/hooks/useDebounce'
 import { DepartmentCreateModal } from '@/pages/DepartmentsPage/DepartmentCreateModal/DepartmentCreateModal'
 
 import { tableColumns } from './tableColumns'
@@ -21,6 +20,7 @@ export const DepartmentsPage: FC = () => {
   const isAdmin = user?.role === ROLE.admin
 
   const [searchedName, setSearchedName] = useState<string>('')
+  const deferredValue = useDeferredValue(searchedName)
   const [open, setOpen] = useState<boolean>(false)
 
   const { data, loading, error } = useQuery<IDepartmentResult>(DEPARTMENTS)
@@ -33,16 +33,14 @@ export const DepartmentsPage: FC = () => {
     setOpen(prev => !prev)
   }
 
-  const debouncedSearchTerm = useDebounce(searchedName, 150)
-
   const requestSearch = useMemo(
     () =>
-      debouncedSearchTerm === ''
+      deferredValue === ''
         ? data?.departments
         : data?.departments.filter(department =>
-            department.name?.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
+            department.name?.toLowerCase().includes(deferredValue.toLowerCase())
           ),
-    [data?.departments, debouncedSearchTerm]
+    [data?.departments, deferredValue]
   )
 
   return (

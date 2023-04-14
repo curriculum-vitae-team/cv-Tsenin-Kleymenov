@@ -1,4 +1,4 @@
-import { FC, useMemo, useState } from 'react'
+import { FC, useDeferredValue, useMemo, useState } from 'react'
 import { useQuery } from '@apollo/client'
 import SearchIcon from '@mui/icons-material/Search'
 import { Button } from '@mui/material'
@@ -10,7 +10,6 @@ import { InputWithIcon } from '@/components/views/Input/Input'
 import { GET_CVS } from '@/graphql/cvs/cvsQuery'
 import { FETCH_POLICY } from '@/graphql/fetchPolicy'
 import { ICV } from '@/graphql/interfaces/ICv.interfaces'
-import useDebounce from '@/hooks/useDebounce'
 
 import { CvsTableToolBar } from './CVsPage.styles'
 import { tableColumns } from './tableColumns'
@@ -22,6 +21,7 @@ export const CVsPage: FC = () => {
 
   const [searchedName, setSearchedName] = useState<string>('')
   const [isOpen, setIsOpen] = useState<boolean>(false)
+  const deferredValue = useDeferredValue(searchedName)
 
   const handleSearchUser = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setSearchedName(event.target.value)
@@ -31,16 +31,12 @@ export const CVsPage: FC = () => {
     setIsOpen(prev => !prev)
   }
 
-  const debouncedSearchTerm = useDebounce(searchedName, 150)
-
   const requestSearch = useMemo(
     () =>
-      debouncedSearchTerm === ''
+      deferredValue === ''
         ? data?.cvs
-        : data?.cvs.filter(cv =>
-            cv.name?.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
-          ),
-    [data?.cvs, debouncedSearchTerm]
+        : data?.cvs.filter(cv => cv.name?.toLowerCase().includes(deferredValue.toLowerCase())),
+    [data?.cvs, deferredValue]
   )
 
   return (

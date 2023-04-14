@@ -1,4 +1,4 @@
-import { FC, useMemo, useState } from 'react'
+import { FC, useDeferredValue, useMemo, useState } from 'react'
 import { useQuery, useReactiveVar } from '@apollo/client'
 import SearchIcon from '@mui/icons-material/Search'
 import { Box, Divider } from '@mui/material'
@@ -11,7 +11,6 @@ import { ROLE } from '@/constants/userRoles'
 import { authService } from '@/graphql/auth/authService'
 import { ISkill } from '@/graphql/interfaces/ISkill.interfaces'
 import { SKILLS } from '@/graphql/skills/skillsQuery'
-import useDebounce from '@/hooks/useDebounce'
 import { SkillCreateModal } from '@/pages/SkillsPage/SkillCreateModal/SkillCreateModal'
 
 import { tableColumns } from './tableColumns'
@@ -22,6 +21,7 @@ export const SkillsPage: FC = () => {
   const { data, loading, error } = useQuery<ISkillsResult>(SKILLS)
 
   const [searchedName, setSearchedName] = useState<string>('')
+  const deferredValue = useDeferredValue(searchedName)
   const [open, setOpen] = useState<boolean>(false)
 
   const handleSearchUser = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -32,16 +32,14 @@ export const SkillsPage: FC = () => {
     setOpen(prev => !prev)
   }
 
-  const debouncedSearchTerm = useDebounce(searchedName, 150)
-
   const requestSearch = useMemo(
     () =>
-      debouncedSearchTerm === ''
+      deferredValue === ''
         ? data?.skills
         : data?.skills.filter(skill =>
-            skill.name?.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
+            skill.name?.toLowerCase().includes(deferredValue.toLowerCase())
           ),
-    [data?.skills, debouncedSearchTerm]
+    [data?.skills, deferredValue]
   )
 
   return (

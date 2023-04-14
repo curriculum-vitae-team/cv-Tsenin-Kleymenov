@@ -1,4 +1,4 @@
-import { FC, useMemo, useState } from 'react'
+import { FC, useDeferredValue, useMemo, useState } from 'react'
 import { useQuery, useReactiveVar } from '@apollo/client'
 import SearchIcon from '@mui/icons-material/Search'
 import { Box, Divider } from '@mui/material'
@@ -11,7 +11,6 @@ import { ROLE } from '@/constants/userRoles'
 import { authService } from '@/graphql/auth/authService'
 import { IPosition } from '@/graphql/interfaces/IPosition.interfaces'
 import { POSITIONS } from '@/graphql/positions/positionsQuery'
-import useDebounce from '@/hooks/useDebounce'
 import { PositionCreateModal } from '@/pages/PositionsPage/PositionCreateModal/PositionCreateModal'
 
 import { tableColumns } from './tableColumns'
@@ -21,6 +20,7 @@ export const PositionsPage: FC = () => {
   const isAdmin = user?.role === ROLE.admin
 
   const [searchedName, setSearchedName] = useState<string>('')
+  const deferredValue = useDeferredValue(searchedName)
   const [open, setOpen] = useState<boolean>(false)
 
   const { data, loading, error } = useQuery<IPositionResult>(POSITIONS)
@@ -33,16 +33,14 @@ export const PositionsPage: FC = () => {
     setOpen(prev => !prev)
   }
 
-  const debouncedSearchTerm = useDebounce(searchedName, 150)
-
   const requestSearch = useMemo(
     () =>
-      debouncedSearchTerm === ''
+      deferredValue === ''
         ? data?.positions
         : data?.positions.filter(position =>
-            position.name?.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
+            position.name?.toLowerCase().includes(deferredValue.toLowerCase())
           ),
-    [data?.positions, debouncedSearchTerm]
+    [data?.positions, deferredValue]
   )
 
   return (
