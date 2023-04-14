@@ -11,8 +11,8 @@ import { ROLE } from '@/constants/userRoles'
 import { authService } from '@/graphql/auth/authService'
 import { ISkill } from '@/graphql/interfaces/ISkill.interfaces'
 import { SKILLS } from '@/graphql/skills/skillsQuery'
-import { SkillCreateModal } from '@/pages/SkillsPage/SkillCreateModal/SkillCreateModal'
 import { useBooleanState } from '@/hooks/useBooleanState'
+import { SkillCreateModal } from '@/pages/SkillsPage/SkillCreateModal/SkillCreateModal'
 
 import { tableColumns } from './tableColumns'
 

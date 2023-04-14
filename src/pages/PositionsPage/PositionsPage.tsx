@@ -11,8 +11,8 @@ import { ROLE } from '@/constants/userRoles'
 import { authService } from '@/graphql/auth/authService'
 import { IPosition } from '@/graphql/interfaces/IPosition.interfaces'
 import { POSITIONS } from '@/graphql/positions/positionsQuery'
-import { PositionCreateModal } from '@/pages/PositionsPage/PositionCreateModal/PositionCreateModal'
 import { useBooleanState } from '@/hooks/useBooleanState'
+import { PositionCreateModal } from '@/pages/PositionsPage/PositionCreateModal/PositionCreateModal'
 
 import { tableColumns } from './tableColumns'
 

@@ -11,8 +11,8 @@ import { ROLE } from '@/constants/userRoles'
 import { authService } from '@/graphql/auth/authService'
 import { DEPARTMENTS } from '@/graphql/departments/departmentsQuery'
 import { IDepartment } from '@/graphql/interfaces/IDepartment.interfaces'
-import { DepartmentCreateModal } from '@/pages/DepartmentsPage/DepartmentCreateModal/DepartmentCreateModal'
 import { useBooleanState } from '@/hooks/useBooleanState'
+import { DepartmentCreateModal } from '@/pages/DepartmentsPage/DepartmentCreateModal/DepartmentCreateModal'
 
 import { tableColumns } from './tableColumns'
 
