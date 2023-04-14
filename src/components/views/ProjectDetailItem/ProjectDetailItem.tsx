@@ -12,6 +12,7 @@ export const ProjectDetailItem: FC<IProjectDetailItemProps> = ({ project }) => {
       <RowInfo title="Internal name" info={project?.internal_name} />
       <RowInfo title="Description" info={project?.description} />
       <RowInfo title="Domain" info={project?.domain} />
+      <RowInfo title="Team size" info={project?.team_size} />
       <RowInfo title="Start date" info={project?.start_date} />
       <RowInfo title="End date" info={project?.end_date} />
     </Box>

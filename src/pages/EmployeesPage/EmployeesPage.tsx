@@ -11,10 +11,10 @@ import { GET_EMPLOYEES } from '@/graphql/users/usersQuery'
 import { tableColumns } from './tableColumns'
 
 export const EmployeesPage: FC = () => {
-  const { data, loading, error } = useQuery<IUsersResult>(GET_EMPLOYEES)
-
   const [searchedName, setSearchedName] = useState<string>('')
   const deferredValue = useDeferredValue(searchedName)
+
+  const { data, loading, error } = useQuery<IUsersResult>(GET_EMPLOYEES)
 
   const handleSearchUser = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setSearchedName(event.target.value)

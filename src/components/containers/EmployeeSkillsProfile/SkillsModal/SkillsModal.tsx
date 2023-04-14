@@ -20,7 +20,7 @@ import {
   ISkillsModalProps
 } from './SkillsModal.interfaces'
 
-export const SkillsModal: FC<ISkillsModalProps> = ({ userData, onClose: handleClose }) => {
+export const SkillsModal: FC<ISkillsModalProps> = ({ userData, onClose }) => {
   const { loading: loadingSkills, data: skillsData } = useQuery<ISkillsResult>(SKILLS)
   const [updateUser, { loading: userLoading }] = useMutation(UPDATE_USER)
 
@@ -69,7 +69,8 @@ export const SkillsModal: FC<ISkillsModalProps> = ({ userData, onClose: handleCl
         }
       }
     })
-    handleClose()
+    
+    onClose()
   }
 
   useEffect(() => {
@@ -80,7 +81,7 @@ export const SkillsModal: FC<ISkillsModalProps> = ({ userData, onClose: handleCl
   }, [isSubmitSuccessful])
 
   return (
-    <ModalWindow onClose={handleClose}>
+    <ModalWindow onClose={onClose}>
       <Container sx={{ minWidth: '500px' }}>
         <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
           <AppSelect

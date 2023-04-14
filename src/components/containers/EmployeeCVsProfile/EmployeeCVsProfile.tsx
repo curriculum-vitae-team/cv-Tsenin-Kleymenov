@@ -9,29 +9,25 @@ import { authService } from '@/graphql/auth/authService'
 import { FETCH_POLICY } from '@/graphql/fetchPolicy'
 import { ICV } from '@/graphql/interfaces/ICv.interfaces'
 import { USER } from '@/graphql/user/userQuery'
+import { useBooleanState } from '@/hooks/useBooleanState'
 
 import { CVsModal } from './CVsModal/CVsModal'
 
 export const EmployeeCVsProfile: FC = () => {
   const { id } = useParams()
+  const [isVisible, toggleVisibility] = useBooleanState()
+  const [selectedCV, setSelectedCV] = useState<ICV | null>(null)
   const user = useReactiveVar(authService.user$)
   const userCheck = id === user?.id
-
-  const [open, setOpen] = useState<boolean>(false)
-  const [selectedCV, setSelectedCV] = useState<ICV | null>(null)
 
   const { data: userData } = useQuery<IUserResult>(USER, {
     variables: { id: user?.id },
     fetchPolicy: FETCH_POLICY.networkOnly
   })
 
-  const handleModalClose = (): void => {
-    setOpen(prev => !prev)
-  }
-
   const handleSetCurrentCV = (CV: ICV): void => {
     setSelectedCV(CV)
-    handleModalClose()
+    toggleVisibility()
   }
 
   return (
@@ -47,7 +43,7 @@ export const EmployeeCVsProfile: FC = () => {
               You don't have any CVs
             </Typography>
           )}
-          {open && <CVsModal onClose={handleModalClose} currentCVData={selectedCV} />}
+          {isVisible && <CVsModal onClose={toggleVisibility} currentCVData={selectedCV} />}
         </>
       )}
     </>

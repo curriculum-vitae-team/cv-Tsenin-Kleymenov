@@ -14,7 +14,7 @@ import { SKILLS } from '@/graphql/skills/skillsQuery'
 
 import { FORM_SKILL_KEYS, ISkillFormValues } from '../SkillsPage.interfaces'
 
-export const SkillCreateModal: FC<IBaseModalProps> = ({ onClose: handleClose }) => {
+export const SkillCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
   const [createSkillMutation, { loading: createSkillLoading }] = useMutation(CREATE_SKILL, {
     refetchQueries: [{ query: SKILLS }]
   })
@@ -36,11 +36,12 @@ export const SkillCreateModal: FC<IBaseModalProps> = ({ onClose: handleClose }) 
         }
       }
     })
-    handleClose()
+    
+    onClose()
   }
 
   return (
-    <ModalWindow onClose={handleClose}>
+    <ModalWindow onClose={onClose}>
       <Container sx={{ minWidth: '500px' }}>
         <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
           <Input

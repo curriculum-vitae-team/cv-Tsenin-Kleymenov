@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import { useParams } from 'react-router-dom'
 import { useQuery, useReactiveVar } from '@apollo/client'
 import { Box, Divider, Typography } from '@mui/material'
@@ -8,21 +8,19 @@ import { LanguageItem } from '@/components/containers/LanguageItem/LanguageItem'
 import { Button } from '@/components/views/Button/Button'
 import { authService } from '@/graphql/auth/authService'
 import { USER } from '@/graphql/user/userQuery'
+import { useBooleanState } from '@/hooks/useBooleanState'
 
 import { LanguagesModal } from './LanguagesModal/LanguagesModal'
 
 export const EmployeeLanguagesProfile: FC = () => {
   const { id: userId } = useParams()
+  const [isVisible, toggleVisibility] = useBooleanState()
   const user = useReactiveVar(authService.user$)
   const userCheck = userId === user?.id
-  const [open, setOpen] = useState(false)
+
   const { data: userData } = useQuery<IUserResult>(USER, {
     variables: { id: userId }
   })
-
-  const handleModalClose = (): void => {
-    setOpen(prev => !prev)
-  }
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
@@ -30,7 +28,7 @@ export const EmployeeLanguagesProfile: FC = () => {
         <Button
           sx={{ maxWidth: 210, alignSelf: 'flex-end' }}
           variant="contained"
-          onClick={handleModalClose}
+          onClick={toggleVisibility}
         >
           + Add Languages
         </Button>
@@ -51,7 +49,7 @@ export const EmployeeLanguagesProfile: FC = () => {
           You don't have any languages
         </Typography>
       )}
-      {open && <LanguagesModal userData={userData?.user} onClose={handleModalClose} />}
+      {isVisible && <LanguagesModal userData={userData?.user} onClose={toggleVisibility} />}
     </Box>
   )
 }

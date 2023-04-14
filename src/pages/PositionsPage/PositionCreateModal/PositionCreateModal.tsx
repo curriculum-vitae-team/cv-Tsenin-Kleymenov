@@ -16,7 +16,7 @@ import {
   IPositionFormValues
 } from '@/pages/PositionsPage/PositionsPage.interfaces'
 
-export const PositionCreateModal: FC<IBaseModalProps> = ({ onClose: handleClose }) => {
+export const PositionCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
   const [createPositionMutation, { loading: createPositionLoading }] = useMutation(
     CREATE_POSITION,
     {
@@ -41,11 +41,12 @@ export const PositionCreateModal: FC<IBaseModalProps> = ({ onClose: handleClose 
         }
       }
     })
-    handleClose()
+    
+    onClose()
   }
 
   return (
-    <ModalWindow onClose={handleClose}>
+    <ModalWindow onClose={onClose}>
       <Container sx={{ minWidth: '500px' }}>
         <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
           <Input
