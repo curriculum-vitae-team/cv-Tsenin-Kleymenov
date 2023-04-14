@@ -58,6 +58,7 @@ export const CVDetailsModal: FC<ICVDetailsModalProps> = ({ CVData, onClose }) =>
         }
       }
     })
+    
     onClose()
   }
 

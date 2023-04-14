@@ -46,6 +46,7 @@ export const PositionUpdateModal: FC<IPositionUpdateModalProps> = ({ position, o
         }
       }
     })
+    
     onClose()
   }
 

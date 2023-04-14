@@ -50,6 +50,7 @@ export const LanguageUpdateModal: FC<ILanguageUpdateModalProps> = ({ language, o
         }
       }
     })
+    
     onClose()
   }
 

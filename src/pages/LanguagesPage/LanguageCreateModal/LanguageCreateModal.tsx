@@ -43,6 +43,7 @@ export const LanguageCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
         }
       }
     })
+    
     onClose()
   }
 

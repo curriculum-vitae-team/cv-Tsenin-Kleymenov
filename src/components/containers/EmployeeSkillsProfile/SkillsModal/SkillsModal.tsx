@@ -69,6 +69,7 @@ export const SkillsModal: FC<ISkillsModalProps> = ({ userData, onClose }) => {
         }
       }
     })
+    
     onClose()
   }
 

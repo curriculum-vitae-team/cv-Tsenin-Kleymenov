@@ -43,6 +43,7 @@ export const DepartmentUpdateModal: FC<IDepartmentUpdateModalProps> = ({ departm
         }
       }
     })
+    
     onClose()
   }
 

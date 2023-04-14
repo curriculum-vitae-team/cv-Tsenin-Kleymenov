@@ -54,6 +54,7 @@ export const ProjectUpdateModal: FC<IProjectUpdateModalProps> = ({ project, onCl
         }
       }
     })
+
     onClose()
   }
 

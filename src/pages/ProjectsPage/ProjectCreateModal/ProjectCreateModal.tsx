@@ -32,7 +32,6 @@ export const ProjectCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
   })
 
   const onSubmit: SubmitHandler<IProjectFormValues> = async formData => {
-    console.log(formData)
     await createProjectMutation({
       variables: {
         project: {
@@ -47,6 +46,7 @@ export const ProjectCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
         }
       }
     })
+
     onClose()
   }
 
