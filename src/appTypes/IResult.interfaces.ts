@@ -25,16 +25,17 @@ export interface IPositionResult {
 export interface IProjectsResult {
   projects: IProject[]
 }
+
+export interface IProjectResult {
+  project: IProject
+}
+
 export interface ILanguagesResult {
   languages: ILanguage[]
 }
 
 export interface ISkillsResult {
   skills: ISkill[]
-}
-
-export interface IProjectsResult {
-  projects: IProject[]
 }
 
 export interface ICVsResult {
