@@ -14,7 +14,7 @@ import { FORM_SKILL_KEYS, ISkillFormValues } from '@/pages/SkillsPage/SkillsPage
 
 import { ISkillUpdateModalProps } from './SkillUpdateModal.interfaces'
 
-export const SkillUpdateModal: FC<ISkillUpdateModalProps> = ({ skill, onClose: handleClose }) => {
+export const SkillUpdateModal: FC<ISkillUpdateModalProps> = ({ skill, onClose }) => {
   const [updateSkillMutation, { loading: updateSkillLoading }] = useMutation(UPDATE_SKILL, {
     refetchQueries: [{ query: SKILLS }]
   })
@@ -40,11 +40,11 @@ export const SkillUpdateModal: FC<ISkillUpdateModalProps> = ({ skill, onClose: h
         }
       }
     })
-    handleClose()
+    onClose()
   }
 
   return (
-    <ModalWindow onClose={handleClose}>
+    <ModalWindow onClose={onClose}>
       <Container sx={{ minWidth: '500px' }}>
         <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
           <Input

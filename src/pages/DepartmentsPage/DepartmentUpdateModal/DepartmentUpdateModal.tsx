@@ -17,10 +17,7 @@ import {
 
 import { IDepartmentUpdateModalProps } from './DepartmentUpdateModal.interfaces'
 
-export const DepartmentUpdateModal: FC<IDepartmentUpdateModalProps> = ({
-  department,
-  onClose: handleClose
-}) => {
+export const DepartmentUpdateModal: FC<IDepartmentUpdateModalProps> = ({ department, onClose }) => {
   const [updateUpdateMutation, { loading: updateUpdateLoading }] = useMutation(UPDATE_DEPARTMENT, {
     refetchQueries: [{ query: DEPARTMENTS }]
   })
@@ -46,11 +43,11 @@ export const DepartmentUpdateModal: FC<IDepartmentUpdateModalProps> = ({
         }
       }
     })
-    handleClose()
+    onClose()
   }
 
   return (
-    <ModalWindow onClose={handleClose}>
+    <ModalWindow onClose={onClose}>
       <Container sx={{ minWidth: '500px' }}>
         <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
           <Input

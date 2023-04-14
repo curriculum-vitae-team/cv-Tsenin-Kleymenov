@@ -16,7 +16,7 @@ import {
   ILanguageFormValues
 } from '@/pages/LanguagesPage/LanguagesPage.interfaces'
 
-export const LanguageCreateModal: FC<IBaseModalProps> = ({ onClose: handleClose }) => {
+export const LanguageCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
   const [createLanguageMutation, { loading: createLanguageLoading }] = useMutation(
     CREATE_LANGUAGE,
     {
@@ -43,11 +43,11 @@ export const LanguageCreateModal: FC<IBaseModalProps> = ({ onClose: handleClose 
         }
       }
     })
-    handleClose()
+    onClose()
   }
 
   return (
-    <ModalWindow onClose={handleClose}>
+    <ModalWindow onClose={onClose}>
       <Container sx={{ minWidth: '500px' }}>
         <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
           <Input

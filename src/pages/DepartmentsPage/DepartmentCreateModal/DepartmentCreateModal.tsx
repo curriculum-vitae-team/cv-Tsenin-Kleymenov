@@ -14,7 +14,7 @@ import { DEPARTMENTS } from '@/graphql/departments/departmentsQuery'
 
 import { FORM_DEPARTMENT_KEYS, IDepartmentFormValues } from '../DepartmentsPage.interfaces'
 
-export const DepartmentCreateModal: FC<IBaseModalProps> = ({ onClose: handleClose }) => {
+export const DepartmentCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
   const [createDepartmentMutation, { loading: createDepartmentLoading }] = useMutation(
     CREATE_DEPARTMENT,
     {
@@ -39,11 +39,11 @@ export const DepartmentCreateModal: FC<IBaseModalProps> = ({ onClose: handleClos
         }
       }
     })
-    handleClose()
+    onClose()
   }
 
   return (
-    <ModalWindow onClose={handleClose}>
+    <ModalWindow onClose={onClose}>
       <Container sx={{ minWidth: '500px' }}>
         <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
           <Input
