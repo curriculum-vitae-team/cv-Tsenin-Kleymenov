@@ -2,13 +2,14 @@ import { FC, forwardRef } from 'react'
 import { InputAdornment, MenuItem, TextField, TextFieldProps } from '@mui/material'
 
 import { Loader } from '@/components/views/Loader/Loader'
+import { IRole } from '@/constants/userRoles'
 import { IDepartment } from '@/graphql/interfaces/IDepartment.interfaces'
 import { IPosition } from '@/graphql/interfaces/IPosition.interfaces'
 
 import { IAppSelectProps, IMastery, IProficiency } from './Select.interfaces'
 
 export const AppSelect: FC<
-  TextFieldProps & IAppSelectProps<IDepartment | IPosition | IProficiency | IMastery>
+  TextFieldProps & IAppSelectProps<IDepartment | IPosition | IProficiency | IMastery | IRole>
 > = forwardRef(({ loading, items, ...props }, ref) => {
   return (
     <TextField

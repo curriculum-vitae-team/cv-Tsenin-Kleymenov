@@ -13,3 +13,8 @@ export interface IMastery {
   id: string
   name: string
 }
+
+export interface IMastery {
+  id: string
+  name: string
+}

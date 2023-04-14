@@ -5,6 +5,7 @@ import { Typography } from '@mui/material'
 
 import { IUserResult } from '@/appTypes/IResult.interfaces'
 import { CVItem } from '@/components/containers/CVItem/CVItem'
+import { ROLE } from '@/constants/userRoles'
 import { authService } from '@/graphql/auth/authService'
 import { FETCH_POLICY } from '@/graphql/fetchPolicy'
 import { ICV } from '@/graphql/interfaces/ICv.interfaces'
@@ -13,15 +14,16 @@ import { USER } from '@/graphql/user/userQuery'
 import { CVsModal } from './CVsModal/CVsModal'
 
 export const EmployeeCVsProfile: FC = () => {
-  const { id } = useParams()
+  const { id: userId } = useParams()
   const user = useReactiveVar(authService.user$)
-  const userCheck = id === user?.id
+  const userCheck = userId === user?.id
+  const isAdmin = user?.role === ROLE.admin
 
   const [open, setOpen] = useState<boolean>(false)
   const [selectedCV, setSelectedCV] = useState<ICV | null>(null)
 
   const { data: userData } = useQuery<IUserResult>(USER, {
-    variables: { id: user?.id },
+    variables: { id: userId },
     fetchPolicy: FETCH_POLICY.networkOnly
   })
 
@@ -36,7 +38,7 @@ export const EmployeeCVsProfile: FC = () => {
 
   return (
     <>
-      {userCheck && (
+      {(userCheck || isAdmin) && (
         <>
           {userData?.user?.cvs?.length ? (
             userData?.user?.cvs.map(CV => (

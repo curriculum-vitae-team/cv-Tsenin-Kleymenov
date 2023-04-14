@@ -1,7 +1,7 @@
-import { EmployeesDropdown } from '@/components/containers/EmployeesDropdown/EmployeesDropdown'
 import { UserAvatar } from '@/components/views/UserAvatar/UserAvatar'
 import { IColumn } from '@/constants/tablesData/Column.interfaces'
 import { IUser } from '@/graphql/interfaces/IUser.interfaces'
+import { EmployeeDropdown } from '@/pages/EmployeesPage/EmployeeDropdown/EmployeeDropdown'
 
 export const tableColumns: IColumn<IUser>[] = [
   {
@@ -43,7 +43,7 @@ export const tableColumns: IColumn<IUser>[] = [
   {
     id: 7,
     header: '',
-    render: item => <EmployeesDropdown userId={item.id} />,
+    render: employee => <EmployeeDropdown employee={employee} />,
     sortable: false
   }
 ]
