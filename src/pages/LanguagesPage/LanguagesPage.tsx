@@ -1,4 +1,4 @@
-import { FC, useMemo, useState } from 'react'
+import { FC, useDeferredValue, useMemo, useState } from 'react'
 import { useQuery, useReactiveVar } from '@apollo/client'
 import SearchIcon from '@mui/icons-material/Search'
 import { Box, Divider } from '@mui/material'
@@ -12,7 +12,6 @@ import { authService } from '@/graphql/auth/authService'
 import { ILanguage } from '@/graphql/interfaces/ILanguage.interfaces'
 import { LANGUAGES } from '@/graphql/languages/languagesQuery'
 import { useBooleanState } from '@/hooks/useBooleanState'
-import useDebounce from '@/hooks/useDebounce'
 
 import { LanguageCreateModal } from './LanguageCreateModal/LanguageCreateModal'
 import { tableColumns } from './tableColumns'
@@ -22,23 +21,22 @@ export const LanguagesPage: FC = () => {
   const isAdmin = user?.role === ROLE.admin
   const [isVisible, toggleVisibility] = useBooleanState()
   const [searchedName, setSearchedName] = useState<string>('')
- 
+  const deferredValue = useDeferredValue(searchedName)
+
   const { data, loading, error } = useQuery<ILanguagesResult>(LANGUAGES)
 
   const handleSearchUser = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setSearchedName(event.target.value)
   }
 
-  const debouncedSearchTerm = useDebounce(searchedName, 150)
-
   const requestSearch = useMemo(
     () =>
-      debouncedSearchTerm === ''
+      deferredValue === ''
         ? data?.languages
         : data?.languages.filter(language =>
-            language.name?.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
+            language.name?.toLowerCase().includes(deferredValue.toLowerCase())
           ),
-    [data?.languages, debouncedSearchTerm]
+    [data?.languages, deferredValue]
   )
 
   return (

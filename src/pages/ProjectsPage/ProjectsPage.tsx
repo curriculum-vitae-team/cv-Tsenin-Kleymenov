@@ -1,4 +1,5 @@
-import { FC, useMemo, useState } from 'react'
+
+import { FC,useDeferredValue, useMemo, useState } from 'react'
 import { useQuery, useReactiveVar } from '@apollo/client'
 import SearchIcon from '@mui/icons-material/Search'
 import { Box, Divider } from '@mui/material'
@@ -21,6 +22,7 @@ export const ProjectsPage: FC = () => {
   const isAdmin = user?.role === ROLE.admin
   const [isVisible, toggleVisibility] = useBooleanState()
   const [searchedName, setSearchedName] = useState<string>('')
+  const deferredValue = useDeferredValue(searchedName)
 
   const { data, loading, error } = useQuery<IProjectsResult>(GET_PROJECTS)
 
@@ -30,14 +32,14 @@ export const ProjectsPage: FC = () => {
 
   const requestSearch = useMemo(
     () =>
-      searchedName === ''
+      deferredValue === ''
         ? data?.projects
         : data?.projects.filter(
             project =>
-              project.name?.toLowerCase().includes(searchedName.toLowerCase()) ||
-              project.internal_name?.toLowerCase().includes(searchedName.toLowerCase())
+              project.name?.toLowerCase().includes(deferredValue.toLowerCase()) ||
+              project.internal_name?.toLowerCase().includes(deferredValue.toLowerCase())
           ),
-    [data?.projects, searchedName]
+    [data?.projects, deferredValue]
   )
 
   return (

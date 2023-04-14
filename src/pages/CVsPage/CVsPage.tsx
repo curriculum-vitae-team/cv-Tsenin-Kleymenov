@@ -1,4 +1,4 @@
-import { FC, useMemo, useState } from 'react'
+import { FC, useDeferredValue, useMemo, useState } from 'react'
 import { useQuery } from '@apollo/client'
 import SearchIcon from '@mui/icons-material/Search'
 import { Button } from '@mui/material'
@@ -11,7 +11,6 @@ import { GET_CVS } from '@/graphql/cvs/cvsQuery'
 import { FETCH_POLICY } from '@/graphql/fetchPolicy'
 import { ICV } from '@/graphql/interfaces/ICv.interfaces'
 import { useBooleanState } from '@/hooks/useBooleanState'
-import useDebounce from '@/hooks/useDebounce'
 
 import { CvsTableToolBar } from './CVsPage.styles'
 import { tableColumns } from './tableColumns'
@@ -19,6 +18,7 @@ import { tableColumns } from './tableColumns'
 export const CVsPage: FC = () => {
   const [isVisible, toggleVisibility] = useBooleanState()
   const [searchedName, setSearchedName] = useState<string>('')
+  const deferredValue = useDeferredValue(searchedName)
 
   const { data, loading, error } = useQuery<ICVsResult>(GET_CVS, {
     fetchPolicy: FETCH_POLICY.networkOnly
@@ -28,16 +28,12 @@ export const CVsPage: FC = () => {
     setSearchedName(event.target.value)
   }
 
-  const debouncedSearchTerm = useDebounce(searchedName, 150)
-
   const requestSearch = useMemo(
     () =>
-      debouncedSearchTerm === ''
+      deferredValue === ''
         ? data?.cvs
-        : data?.cvs.filter(cv =>
-            cv.name?.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
-          ),
-    [data?.cvs, debouncedSearchTerm]
+        : data?.cvs.filter(cv => cv.name?.toLowerCase().includes(deferredValue.toLowerCase())),
+    [data?.cvs, deferredValue]
   )
 
   return (
