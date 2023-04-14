@@ -5,25 +5,25 @@ import { Box, MenuItem } from '@mui/material'
 import { BasicMenu } from '@/components/containers/BasicMenu/BasicMenu'
 import { ROLE } from '@/constants/userRoles'
 import { authService } from '@/graphql/auth/authService'
-import { DELETE_LANGUAGE } from '@/graphql/languages/deleteLanguageMutation'
-import { LANGUAGES } from '@/graphql/languages/languagesQuery'
-import { LanguageUpdateModal } from '@/pages/LanguagesPage/LanguageUpdateModal/LanguageUpdateModal'
+import { DELETE_SKILL } from '@/graphql/skills/deleteSkillMutation'
+import { SKILLS } from '@/graphql/skills/skillsQuery'
+import { SkillUpdateModal } from '@/pages/SkillsPage/SkillUpdateModal/SkillUpdateModal'
 
-import { ILanguageDropdownProps } from './LanguageDropdown.interfaces'
+import { ISkillDropdownProps } from './SkillDropdown.interfaces'
 
-export const LanguageDropdown: FC<ILanguageDropdownProps> = ({ language }) => {
+export const SkillDropdown: FC<ISkillDropdownProps> = ({ skill }) => {
   const user = useReactiveVar(authService.user$)
   const isAdmin = user?.role === ROLE.admin
 
   const [open, setOpen] = useState<boolean>(false)
 
-  const [deleteLanguageMutation] = useMutation(DELETE_LANGUAGE, {
-    refetchQueries: [{ query: LANGUAGES }]
+  const [deleteSkillMutation] = useMutation(DELETE_SKILL, {
+    refetchQueries: [{ query: SKILLS }]
   })
 
-  const handleLanguageDelete = (): void => {
-    deleteLanguageMutation({
-      variables: { id: language.id }
+  const handleSkillDelete = (): void => {
+    deleteSkillMutation({
+      variables: { id: skill.id }
     })
   }
 
@@ -36,10 +36,10 @@ export const LanguageDropdown: FC<ILanguageDropdownProps> = ({ language }) => {
       {isAdmin && (
         <BasicMenu>
           <MenuItem onClick={handleModalClose}>Update</MenuItem>
-          <MenuItem onClick={handleLanguageDelete}>Delete</MenuItem>
+          <MenuItem onClick={handleSkillDelete}>Delete</MenuItem>
         </BasicMenu>
       )}
-      {open && <LanguageUpdateModal language={language} onClose={handleModalClose} />}
+      {open && <SkillUpdateModal skill={skill} onClose={handleModalClose} />}
     </Box>
   )
 }
