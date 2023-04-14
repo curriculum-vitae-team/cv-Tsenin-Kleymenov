@@ -11,6 +11,7 @@ import { ROLE } from '@/constants/userRoles'
 import { authService } from '@/graphql/auth/authService'
 import { DEPARTMENTS } from '@/graphql/departments/departmentsQuery'
 import { IDepartment } from '@/graphql/interfaces/IDepartment.interfaces'
+import { useBooleanState } from '@/hooks/useBooleanState'
 import useDebounce from '@/hooks/useDebounce'
 import { DepartmentCreateModal } from '@/pages/DepartmentsPage/DepartmentCreateModal/DepartmentCreateModal'
 
@@ -19,18 +20,13 @@ import { tableColumns } from './tableColumns'
 export const DepartmentsPage: FC = () => {
   const user = useReactiveVar(authService.user$)
   const isAdmin = user?.role === ROLE.admin
-
+  const [isVisible, toggleVisibility] = useBooleanState()
   const [searchedName, setSearchedName] = useState<string>('')
-  const [open, setOpen] = useState<boolean>(false)
 
   const { data, loading, error } = useQuery<IDepartmentResult>(DEPARTMENTS)
 
   const handleSearchUser = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setSearchedName(event.target.value)
-  }
-
-  const handleModalClose = (): void => {
-    setOpen(prev => !prev)
   }
 
   const debouncedSearchTerm = useDebounce(searchedName, 150)
@@ -57,7 +53,7 @@ export const DepartmentsPage: FC = () => {
           placeholder="Search"
         />
         {isAdmin && (
-          <Button sx={{ maxWidth: 100 }} variant="contained" onClick={handleModalClose}>
+          <Button sx={{ maxWidth: 100 }} variant="contained" onClick={toggleVisibility}>
             Create
           </Button>
         )}
@@ -70,7 +66,7 @@ export const DepartmentsPage: FC = () => {
         isLoading={loading}
         error={error}
       />
-      {open && <DepartmentCreateModal onClose={handleModalClose} />}
+      {isVisible && <DepartmentCreateModal onClose={toggleVisibility} />}
     </>
   )
 }

@@ -1,33 +1,26 @@
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import CloseIcon from '@mui/icons-material/Close'
 import MenuIcon from '@mui/icons-material/Menu'
 import { AppBar, Divider, Drawer, List } from '@mui/material'
 
 import { SideMenuItem } from '@/components/views/SideMenuItem/SideMenuItem'
 import { SIDE_MENU_ITEMS } from '@/constants/sideMenuItems'
+import { useBooleanState } from '@/hooks/useBooleanState'
 
 import { AppSideMenu, SideMenuBurgerButton, SideMenuCloseButton } from './SideMenu.styles'
 
 export const SideMenu: FC = () => {
-  const [open, setOpen] = useState<boolean>(false)
-
-  const handleClose = (): void => {
-    setOpen(false)
-  }
-
-  const handleOpen = (): void => {
-    setOpen(true)
-  }
+  const [isVisible, toggleVisibility] = useBooleanState()
 
   return (
     <>
-      <SideMenuBurgerButton color="primary" onClick={handleOpen}>
+      <SideMenuBurgerButton color="primary" onClick={toggleVisibility}>
         <MenuIcon />
       </SideMenuBurgerButton>
-      <Drawer onClose={handleClose} anchor="left" open={open}>
+      <Drawer onClose={toggleVisibility} anchor="left" open={isVisible}>
         <AppSideMenu>
           <AppBar color="secondary" position="static">
-            <SideMenuCloseButton color="primary" onClick={handleClose}>
+            <SideMenuCloseButton color="primary" onClick={toggleVisibility}>
               <CloseIcon />
             </SideMenuCloseButton>
           </AppBar>
@@ -36,7 +29,7 @@ export const SideMenu: FC = () => {
               return (
                 <SideMenuItem
                   key={text}
-                  onClick={handleClose}
+                  onClick={toggleVisibility}
                   text={text}
                   route={route}
                   Icon={Icon}

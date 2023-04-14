@@ -11,6 +11,7 @@ import { ROLE } from '@/constants/userRoles'
 import { authService } from '@/graphql/auth/authService'
 import { IPosition } from '@/graphql/interfaces/IPosition.interfaces'
 import { POSITIONS } from '@/graphql/positions/positionsQuery'
+import { useBooleanState } from '@/hooks/useBooleanState'
 import useDebounce from '@/hooks/useDebounce'
 import { PositionCreateModal } from '@/pages/PositionsPage/PositionCreateModal/PositionCreateModal'
 
@@ -19,18 +20,13 @@ import { tableColumns } from './tableColumns'
 export const PositionsPage: FC = () => {
   const user = useReactiveVar(authService.user$)
   const isAdmin = user?.role === ROLE.admin
-
+  const [isVisible, toggleVisibility] = useBooleanState()
   const [searchedName, setSearchedName] = useState<string>('')
-  const [open, setOpen] = useState<boolean>(false)
-
+ 
   const { data, loading, error } = useQuery<IPositionResult>(POSITIONS)
 
   const handleSearchUser = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setSearchedName(event.target.value)
-  }
-
-  const handleModalClose = (): void => {
-    setOpen(prev => !prev)
   }
 
   const debouncedSearchTerm = useDebounce(searchedName, 150)
@@ -57,7 +53,7 @@ export const PositionsPage: FC = () => {
           placeholder="Search"
         />
         {isAdmin && (
-          <Button sx={{ maxWidth: 100 }} variant="contained" onClick={handleModalClose}>
+          <Button sx={{ maxWidth: 100 }} variant="contained" onClick={toggleVisibility}>
             Create
           </Button>
         )}
@@ -70,7 +66,7 @@ export const PositionsPage: FC = () => {
         isLoading={loading}
         error={error}
       />
-      {open && <PositionCreateModal onClose={handleModalClose} />}
+      {isVisible && <PositionCreateModal onClose={toggleVisibility} />}
     </>
   )
 }

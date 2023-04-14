@@ -11,6 +11,7 @@ import { ROLE } from '@/constants/userRoles'
 import { authService } from '@/graphql/auth/authService'
 import { IProject } from '@/graphql/interfaces/IProject.interfaces'
 import { GET_PROJECTS } from '@/graphql/projects/projectsQuery'
+import { useBooleanState } from '@/hooks/useBooleanState'
 
 import { ProjectCreateModal } from './ProjectCreateModal/ProjectCreateModal'
 import { tableColumns } from './tableColumns'
@@ -18,18 +19,13 @@ import { tableColumns } from './tableColumns'
 export const ProjectsPage: FC = () => {
   const user = useReactiveVar(authService.user$)
   const isAdmin = user?.role === ROLE.admin
-
+  const [isVisible, toggleVisibility] = useBooleanState()
   const [searchedName, setSearchedName] = useState<string>('')
-  const [open, setOpen] = useState<boolean>(false)
 
   const { data, loading, error } = useQuery<IProjectsResult>(GET_PROJECTS)
 
   const handleSearchUser = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setSearchedName(event.target.value)
-  }
-
-  const handleModalClose = (): void => {
-    setOpen(prev => !prev)
   }
 
   const requestSearch = useMemo(
@@ -56,7 +52,7 @@ export const ProjectsPage: FC = () => {
           placeholder="Search"
         />
         {isAdmin && (
-          <Button sx={{ maxWidth: 100 }} variant="contained" onClick={handleModalClose}>
+          <Button sx={{ maxWidth: 100 }} variant="contained" onClick={toggleVisibility}>
             Create
           </Button>
         )}
@@ -69,7 +65,7 @@ export const ProjectsPage: FC = () => {
         isLoading={loading}
         error={error}
       />
-      {open && <ProjectCreateModal onClose={handleModalClose} />}
+      {isVisible && <ProjectCreateModal onClose={toggleVisibility} />}
     </>
   )
 }

@@ -17,16 +17,14 @@ import { AppNavigationRoutes } from '@/router/paths'
 import { MenuContainer, PaperPropsUserMenu, UserMenuInfo } from './UserMenu.styles'
 
 export const UserMenu: FC = () => {
-  const user = useReactiveVar<IUser | null>(authService.user$)
-
   const navigate = useNavigate()
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+  const user = useReactiveVar<IUser | null>(authService.user$)
 
   const { data } = useQuery<IUserResult>(USER, {
     variables: { id: user?.id },
     fetchPolicy: FETCH_POLICY.cacheOnly
   })
-
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 
   const handleOpen = (event: React.MouseEvent<HTMLElement>): void => {
     setAnchorEl(event.currentTarget)
