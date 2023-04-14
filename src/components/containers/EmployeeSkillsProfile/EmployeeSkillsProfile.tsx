@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import { useParams } from 'react-router-dom'
 import { useQuery, useReactiveVar } from '@apollo/client'
 import { Box, Divider, Typography } from '@mui/material'
@@ -11,12 +11,13 @@ import { ROLE } from '@/constants/userRoles'
 import { authService } from '@/graphql/auth/authService'
 import { ISkillMastery } from '@/graphql/interfaces/ISkillMastery.interfaces'
 import { USER } from '@/graphql/user/userQuery'
+import { useBooleanState } from '@/hooks/useBooleanState'
 
 import { SkillsModal } from './SkillsModal/SkillsModal'
 
 export const EmployeeSkillsProfile: FC = () => {
-  const [open, setOpen] = useState(false)
   const { id: userId } = useParams()
+  const [isVisible, toggleVisibility] = useBooleanState()
   const user = useReactiveVar(authService.user$)
   const userCheck = userId === user?.id
   const isAdmin = user?.role === ROLE.admin
@@ -32,17 +33,13 @@ export const EmployeeSkillsProfile: FC = () => {
     return acc
   }, {})
 
-  const handleModalClose = (): void => {
-    setOpen(prev => !prev)
-  }
-
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
       {(userCheck || isAdmin) && (
         <Button
           sx={{ maxWidth: 170, alignSelf: 'flex-end' }}
           variant="contained"
-          onClick={handleModalClose}
+          onClick={toggleVisibility}
         >
           + Add skills
         </Button>
@@ -57,7 +54,7 @@ export const EmployeeSkillsProfile: FC = () => {
           You don't have any skills
         </Typography>
       )}
-      {open && <SkillsModal userData={userData?.user} onClose={handleModalClose} />}
+      {isVisible && <SkillsModal userData={userData?.user} onClose={toggleVisibility} />}
     </Box>
   )
 }

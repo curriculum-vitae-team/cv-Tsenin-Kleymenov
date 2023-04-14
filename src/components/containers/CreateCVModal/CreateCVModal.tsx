@@ -23,7 +23,7 @@ import { ICVsModalProps } from '../EmployeeCVsProfile/CVsModal/CVsModal.interfac
 
 import { FORM_CREATE_CV_KEYS, ICreateCVFormValues } from './CreateCVModal.interfaces'
 
-export const CreateCVModal: FC<ICVsModalProps> = ({ onClose: handleOpenClose }) => {
+export const CreateCVModal: FC<ICVsModalProps> = ({ onClose }) => {
   const user = useReactiveVar(authService.user$)
   const [createCV, { loading: createCVLoading }] = useMutation<ICV>(CREATE_CV, {
     refetchQueries: [{ query: GET_CVS }],
@@ -62,12 +62,12 @@ export const CreateCVModal: FC<ICVsModalProps> = ({ onClose: handleOpenClose }) 
       }
     })
 
-    handleOpenClose()
+    onClose()
   })
 
   return (
     <LoadingOverlay active={createCVLoading}>
-      <ModalWindow onClose={handleOpenClose}>
+      <ModalWindow onClose={onClose}>
         <Container sx={{ minWidth: '500px' }}>
           <Input
             label="Name"

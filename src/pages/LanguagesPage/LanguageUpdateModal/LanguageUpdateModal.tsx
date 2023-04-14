@@ -17,10 +17,7 @@ import {
 
 import { ILanguageUpdateModalProps } from './LanguageUpdateModal.interfaces'
 
-export const LanguageUpdateModal: FC<ILanguageUpdateModalProps> = ({
-  language,
-  onClose: handleClose
-}) => {
+export const LanguageUpdateModal: FC<ILanguageUpdateModalProps> = ({ language, onClose }) => {
   const [updateLanguageMutation, { loading: updateLanguageLoading }] = useMutation(
     UPDATE_LANGUAGE,
     {
@@ -53,11 +50,12 @@ export const LanguageUpdateModal: FC<ILanguageUpdateModalProps> = ({
         }
       }
     })
-    handleClose()
+    
+    onClose()
   }
 
   return (
-    <ModalWindow onClose={handleClose}>
+    <ModalWindow onClose={onClose}>
       <Container sx={{ minWidth: '500px' }}>
         <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
           <Input

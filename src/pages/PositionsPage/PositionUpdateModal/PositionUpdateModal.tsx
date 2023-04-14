@@ -17,10 +17,7 @@ import {
 
 import { IPositionUpdateModalProps } from './PositionUpdateModal.interfaces'
 
-export const PositionUpdateModal: FC<IPositionUpdateModalProps> = ({
-  position,
-  onClose: handleClose
-}) => {
+export const PositionUpdateModal: FC<IPositionUpdateModalProps> = ({ position, onClose }) => {
   const [updatePositionMutation, { loading: updatePositionLoading }] = useMutation(
     UPDATE_POSITION,
     {
@@ -49,11 +46,12 @@ export const PositionUpdateModal: FC<IPositionUpdateModalProps> = ({
         }
       }
     })
-    handleClose()
+    
+    onClose()
   }
 
   return (
-    <ModalWindow onClose={handleClose}>
+    <ModalWindow onClose={onClose}>
       <Container sx={{ minWidth: '500px' }}>
         <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
           <Input

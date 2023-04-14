@@ -11,6 +11,7 @@ import { ROLE } from '@/constants/userRoles'
 import { authService } from '@/graphql/auth/authService'
 import { ILanguage } from '@/graphql/interfaces/ILanguage.interfaces'
 import { LANGUAGES } from '@/graphql/languages/languagesQuery'
+import { useBooleanState } from '@/hooks/useBooleanState'
 
 import { LanguageCreateModal } from './LanguageCreateModal/LanguageCreateModal'
 import { tableColumns } from './tableColumns'
@@ -18,19 +19,14 @@ import { tableColumns } from './tableColumns'
 export const LanguagesPage: FC = () => {
   const user = useReactiveVar(authService.user$)
   const isAdmin = user?.role === ROLE.admin
-
+  const [isVisible, toggleVisibility] = useBooleanState()
   const [searchedName, setSearchedName] = useState<string>('')
-  const [open, setOpen] = useState<boolean>(false)
   const deferredValue = useDeferredValue(searchedName)
 
   const { data, loading, error } = useQuery<ILanguagesResult>(LANGUAGES)
 
   const handleSearchUser = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setSearchedName(event.target.value)
-  }
-
-  const handleModalClose = (): void => {
-    setOpen(prev => !prev)
   }
 
   const requestSearch = useMemo(
@@ -55,7 +51,7 @@ export const LanguagesPage: FC = () => {
           placeholder="Search"
         />
         {isAdmin && (
-          <Button sx={{ maxWidth: 100 }} variant="contained" onClick={handleModalClose}>
+          <Button sx={{ maxWidth: 100 }} variant="contained" onClick={toggleVisibility}>
             Create
           </Button>
         )}
@@ -68,7 +64,7 @@ export const LanguagesPage: FC = () => {
         isLoading={loading}
         error={error}
       />
-      {open && <LanguageCreateModal onClose={handleModalClose} />}
+      {isVisible && <LanguageCreateModal onClose={toggleVisibility} />}
     </>
   )
 }

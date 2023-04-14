@@ -10,25 +10,22 @@ import { InputWithIcon } from '@/components/views/Input/Input'
 import { GET_CVS } from '@/graphql/cvs/cvsQuery'
 import { FETCH_POLICY } from '@/graphql/fetchPolicy'
 import { ICV } from '@/graphql/interfaces/ICv.interfaces'
+import { useBooleanState } from '@/hooks/useBooleanState'
 
 import { CvsTableToolBar } from './CVsPage.styles'
 import { tableColumns } from './tableColumns'
 
 export const CVsPage: FC = () => {
+  const [isVisible, toggleVisibility] = useBooleanState()
+  const [searchedName, setSearchedName] = useState<string>('')
+  const deferredValue = useDeferredValue(searchedName)
+
   const { data, loading, error } = useQuery<ICVsResult>(GET_CVS, {
     fetchPolicy: FETCH_POLICY.networkOnly
   })
 
-  const [searchedName, setSearchedName] = useState<string>('')
-  const [isOpen, setIsOpen] = useState<boolean>(false)
-  const deferredValue = useDeferredValue(searchedName)
-
   const handleSearchUser = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setSearchedName(event.target.value)
-  }
-
-  const handleCVsModalOpenClose = (): void => {
-    setIsOpen(prev => !prev)
   }
 
   const requestSearch = useMemo(
@@ -50,7 +47,7 @@ export const CVsPage: FC = () => {
           onChange={handleSearchUser}
           placeholder="Search"
         />
-        <Button variant="contained" onClick={handleCVsModalOpenClose}>
+        <Button variant="contained" onClick={toggleVisibility}>
           Create Cv
         </Button>
       </CvsTableToolBar>
@@ -61,7 +58,7 @@ export const CVsPage: FC = () => {
         isLoading={loading}
         error={error}
       />
-      {isOpen && <CreateCVModal onClose={handleCVsModalOpenClose} />}
+      {isVisible && <CreateCVModal onClose={toggleVisibility} />}
     </>
   )
 }
