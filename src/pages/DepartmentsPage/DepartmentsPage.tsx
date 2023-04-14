@@ -1,4 +1,4 @@
-import { FC, useMemo, useState } from 'react'
+import { FC, useDeferredValue, useMemo, useState } from 'react'
 import { useQuery } from '@apollo/client'
 import SearchIcon from '@mui/icons-material/Search'
 
@@ -7,7 +7,6 @@ import { CommonTable } from '@/components/views/CommonTable/CommonTable'
 import { InputWithIcon } from '@/components/views/Input/Input'
 import { DEPARTMENTS } from '@/graphql/departments/departmentsQuery'
 import { IDepartment } from '@/graphql/interfaces/IDepartment.interfaces'
-import useDebounce from '@/hooks/useDebounce'
 
 import { tableColumns } from './tableColumns'
 
@@ -15,21 +14,20 @@ export const DepartmentsPage: FC = () => {
   const { data, loading, error } = useQuery<IDepartmentResult>(DEPARTMENTS)
 
   const [searchedName, setSearchedName] = useState<string>('')
+  const deferredValue = useDeferredValue(searchedName)
 
   const handleSearchUser = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setSearchedName(event.target.value)
   }
 
-  const debouncedSearchTerm = useDebounce(searchedName, 150)
-
   const requestSearch = useMemo(
     () =>
-      debouncedSearchTerm === ''
+      deferredValue === ''
         ? data?.departments
         : data?.departments.filter(department =>
-            department.name?.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
+            department.name?.toLowerCase().includes(deferredValue.toLowerCase())
           ),
-    [data?.departments, debouncedSearchTerm]
+    [data?.departments, deferredValue]
   )
 
   return (

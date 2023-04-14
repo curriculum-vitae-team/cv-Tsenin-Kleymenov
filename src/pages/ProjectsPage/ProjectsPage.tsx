@@ -1,4 +1,4 @@
-import { FC, useMemo, useState } from 'react'
+import { FC, useDeferredValue, useMemo, useState } from 'react'
 import { useQuery } from '@apollo/client'
 import SearchIcon from '@mui/icons-material/Search'
 
@@ -7,7 +7,6 @@ import { CommonTable } from '@/components/views/CommonTable/CommonTable'
 import { InputWithIcon } from '@/components/views/Input/Input'
 import { IProject } from '@/graphql/interfaces/IProject.interfaces'
 import { GET_PROJECTS } from '@/graphql/projects/projectsQuery'
-import useDebounce from '@/hooks/useDebounce'
 
 import { tableColumns } from './tableColumns'
 
@@ -15,23 +14,22 @@ export const ProjectsPage: FC = () => {
   const { data, loading, error } = useQuery<IProjectsResult>(GET_PROJECTS)
 
   const [searchedName, setSearchedName] = useState<string>('')
+  const deferredValue = useDeferredValue(searchedName)
 
   const handleSearchUser = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setSearchedName(event.target.value)
   }
 
-  const debouncedSearchTerm = useDebounce(searchedName, 150)
-
   const requestSearch = useMemo(
     () =>
-      debouncedSearchTerm === ''
+      deferredValue === ''
         ? data?.projects
         : data?.projects.filter(
             project =>
-              project.name?.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) ||
-              project.internal_name?.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
+              project.name?.toLowerCase().includes(deferredValue.toLowerCase()) ||
+              project.internal_name?.toLowerCase().includes(deferredValue.toLowerCase())
           ),
-    [data?.projects, debouncedSearchTerm]
+    [data?.projects, deferredValue]
   )
 
   return (
