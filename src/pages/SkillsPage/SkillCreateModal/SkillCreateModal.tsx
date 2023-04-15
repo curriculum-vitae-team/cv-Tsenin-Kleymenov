@@ -36,7 +36,7 @@ export const SkillCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
         }
       }
     })
-    
+
     onClose()
   }
 

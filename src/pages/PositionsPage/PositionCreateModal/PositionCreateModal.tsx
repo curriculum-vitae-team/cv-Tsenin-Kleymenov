@@ -41,7 +41,7 @@ export const PositionCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
         }
       }
     })
-    
+
     onClose()
   }
 

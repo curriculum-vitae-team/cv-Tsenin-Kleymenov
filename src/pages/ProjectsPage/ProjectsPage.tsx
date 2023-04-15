@@ -1,5 +1,4 @@
-
-import { FC,useDeferredValue, useMemo, useState } from 'react'
+import { FC, useDeferredValue, useMemo, useState } from 'react'
 import { useQuery, useReactiveVar } from '@apollo/client'
 import SearchIcon from '@mui/icons-material/Search'
 import { Box, Divider } from '@mui/material'
