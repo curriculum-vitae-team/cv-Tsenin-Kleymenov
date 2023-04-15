@@ -7,6 +7,7 @@ import { ICVResult } from '@/appTypes/IResult.interfaces'
 import { Button } from '@/components/views/Button/Button'
 import { CVDetailItem } from '@/components/views/CVDetailItem/CVDetailItem'
 import { LoadingOverlay } from '@/components/views/LoadingOverlay/LoadingOverlay'
+import { ROLE } from '@/constants/userRoles'
 import { authService } from '@/graphql/auth/authService'
 import { CV } from '@/graphql/cv/CVQuery'
 import { FETCH_POLICY } from '@/graphql/fetchPolicy'
@@ -25,12 +26,13 @@ export const CVDetailsPage: FC = () => {
   })
 
   const userCheck = CVData?.cv.user?.id === user?.id
+  const isAdmin = user?.role === ROLE.admin
 
   return (
     <>
       <LoadingOverlay active={CVLoading}>
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-          {userCheck && (
+          {(userCheck || isAdmin) && (
             <>
               <Button
                 sx={{ maxWidth: 210, alignSelf: 'flex-end' }}
