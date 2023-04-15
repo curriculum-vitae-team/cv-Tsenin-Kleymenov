@@ -12,7 +12,7 @@ import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
 import { FORM_PROJECT_SCHEMA } from '@/constants/schemaOptions'
 import { CREATE_PROJECT } from '@/graphql/project/createProjectMutation'
 import { GET_PROJECTS } from '@/graphql/projects/projectsQuery'
-import { convertDate } from '@/utils/convertDate'
+import { convertDate } from '@/utils/dateHelper'
 
 import { FORM_PROJECT_KEYS, IProjectFormValues } from '../ProjectsPage.interfaces'
 

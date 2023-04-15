@@ -8,3 +8,7 @@ export const convertDate = (data: string): string | null => {
   }
   return null
 }
+
+export const convertDateToFormValue = (data?: string): string => {
+  return dayjs(data).format()
+}
