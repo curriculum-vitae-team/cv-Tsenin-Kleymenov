@@ -1,5 +1,6 @@
 import { FC, useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { useMutation, useQuery } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Container } from '@mui/material'
@@ -21,6 +22,7 @@ import {
 } from './LanguagesModal.interfaces'
 
 export const LanguagesModal: FC<ILanguagesModalProps> = ({ userData, onClose }) => {
+  const { t } = useTranslation()
   const { loading: loadingLanguages, data: languagesData } = useQuery<ILanguagesResult>(LANGUAGES)
   const [updateUser, { loading: userLoading }] = useMutation(UPDATE_USER)
 
@@ -69,7 +71,7 @@ export const LanguagesModal: FC<ILanguagesModalProps> = ({ userData, onClose }) 
         }
       }
     })
-    
+
     onClose()
   }
 
@@ -86,21 +88,21 @@ export const LanguagesModal: FC<ILanguagesModalProps> = ({ userData, onClose }) 
         <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
           <AppSelect
             variant="outlined"
-            label="Languages"
+            label={t('Languages')}
             defaultValue={''}
             loading={loadingLanguages}
             items={filteredLanguagesArray}
             error={!!errors[FORM_PROFILE_LANGUAGES_KEYS.languages]}
-            helperText={errors?.[FORM_PROFILE_LANGUAGES_KEYS.languages]?.message}
+            helperText={t(errors?.[FORM_PROFILE_LANGUAGES_KEYS.languages]?.message as string)}
             {...register(FORM_PROFILE_LANGUAGES_KEYS.languages)}
           />
           <AppSelect
             variant="outlined"
-            label="Proficiency"
+            label={t('Proficiency')}
             defaultValue={''}
             items={PROFICIENCY_ARRAY}
             error={!!errors[FORM_PROFILE_LANGUAGES_KEYS.proficiency]}
-            helperText={errors?.[FORM_PROFILE_LANGUAGES_KEYS.proficiency]?.message}
+            helperText={t(errors?.[FORM_PROFILE_LANGUAGES_KEYS.proficiency]?.message as string)}
             {...register(FORM_PROFILE_LANGUAGES_KEYS.proficiency)}
           />
           <Button loading={userLoading} type="submit" variant="contained" disabled={!isValid}>

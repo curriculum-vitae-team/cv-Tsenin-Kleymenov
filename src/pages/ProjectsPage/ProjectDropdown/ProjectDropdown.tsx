@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useMutation, useReactiveVar } from '@apollo/client'
 import { MenuItem } from '@mui/material'
@@ -16,6 +17,7 @@ export const ProjectDropdown: FC<IProjectDropdownProps> = ({ project }) => {
   const navigate = useNavigate()
   const user = useReactiveVar(authService.user$)
   const isAdmin = user?.role === ROLE.admin
+  const { t } = useTranslation()
 
   const [deleteProjectMutation] = useMutation(DELETE_PROJECT, {
     refetchQueries: [{ query: GET_PROJECTS }]
@@ -33,8 +35,8 @@ export const ProjectDropdown: FC<IProjectDropdownProps> = ({ project }) => {
 
   return (
     <BasicMenu>
-      <MenuItem onClick={handleOpenProject}>Details</MenuItem>
-      {isAdmin && <MenuItem onClick={handleProjectDelete}>Delete</MenuItem>}
+      <MenuItem onClick={handleOpenProject}>{t('Details')}</MenuItem>
+      {isAdmin && <MenuItem onClick={handleProjectDelete}>{t('Delete')}</MenuItem>}
     </BasicMenu>
   )
 }

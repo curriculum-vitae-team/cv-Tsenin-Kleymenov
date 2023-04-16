@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { MenuItem } from '@mui/material'
 
@@ -9,6 +10,7 @@ import { ICVsDropdownProps } from './CVsDropdown.interfaces'
 
 export const CVsDropdown: FC<ICVsDropdownProps> = ({ CVId }) => {
   const navigate = useNavigate()
+  const { t } = useTranslation()
 
   const handleOpenCv = (): void => {
     navigate(`${CVId}/${AppNavigationRoutes.DETAILS}`, { state: AppNavigationRoutes.CVS })
@@ -16,8 +18,8 @@ export const CVsDropdown: FC<ICVsDropdownProps> = ({ CVId }) => {
 
   return (
     <BasicMenu>
-      <MenuItem onClick={handleOpenCv}>CV</MenuItem>
-      <MenuItem>Delete CV</MenuItem>
+      <MenuItem onClick={handleOpenCv}>{t('Details')}</MenuItem>
+      <MenuItem>{t('Delete')}</MenuItem>
     </BasicMenu>
   )
 }

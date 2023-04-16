@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { useMutation } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Container } from '@mui/material'
@@ -11,10 +12,13 @@ import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
 import { FORM_DEPARTMENT_SCHEMA } from '@/constants/schemaOptions'
 import { CREATE_DEPARTMENT } from '@/graphql/departments/createDepartmentMutation'
 import { DEPARTMENTS } from '@/graphql/departments/departmentsQuery'
-
-import { FORM_DEPARTMENT_KEYS, IDepartmentFormValues } from '../DepartmentsPage.interfaces'
+import {
+  FORM_DEPARTMENT_KEYS,
+  IDepartmentFormValues
+} from '@/pages/DepartmentsPage/DepartmentsPage.interfaces'
 
 export const DepartmentCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
+  const { t } = useTranslation()
   const [createDepartmentMutation, { loading: createDepartmentLoading }] = useMutation(
     CREATE_DEPARTMENT,
     {
@@ -39,7 +43,7 @@ export const DepartmentCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
         }
       }
     })
-    
+
     onClose()
   }
 
@@ -49,9 +53,9 @@ export const DepartmentCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
         <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
           <Input
             variant="outlined"
-            label="Name"
+            label={t('Name')}
             error={!!errors[FORM_DEPARTMENT_KEYS.name]}
-            helperText={errors?.[FORM_DEPARTMENT_KEYS.name]?.message}
+            helperText={t(errors?.[FORM_DEPARTMENT_KEYS.name]?.message as string)}
             {...register(FORM_DEPARTMENT_KEYS.name)}
           />
           <Button
@@ -60,7 +64,7 @@ export const DepartmentCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
             loading={createDepartmentLoading}
             disabled={!isDirty && isValid}
           >
-            Create department
+            Create
           </Button>
         </form>
       </Container>

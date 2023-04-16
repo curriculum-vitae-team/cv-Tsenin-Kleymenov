@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { useMutation } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Container } from '@mui/material'
@@ -15,6 +16,7 @@ import { FORM_SKILL_KEYS, ISkillFormValues } from '@/pages/SkillsPage/SkillsPage
 import { ISkillUpdateModalProps } from './SkillUpdateModal.interfaces'
 
 export const SkillUpdateModal: FC<ISkillUpdateModalProps> = ({ skill, onClose }) => {
+  const { t } = useTranslation()
   const [updateSkillMutation, { loading: updateSkillLoading }] = useMutation(UPDATE_SKILL, {
     refetchQueries: [{ query: SKILLS }]
   })
@@ -40,7 +42,7 @@ export const SkillUpdateModal: FC<ISkillUpdateModalProps> = ({ skill, onClose })
         }
       }
     })
-    
+
     onClose()
   }
 
@@ -50,9 +52,9 @@ export const SkillUpdateModal: FC<ISkillUpdateModalProps> = ({ skill, onClose })
         <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
           <Input
             variant="outlined"
-            label="Name"
+            label={t('Name')}
             error={!!errors[FORM_SKILL_KEYS.name]}
-            helperText={errors?.[FORM_SKILL_KEYS.name]?.message}
+            helperText={t(errors?.[FORM_SKILL_KEYS.name]?.message as string)}
             {...register(FORM_SKILL_KEYS.name)}
           />
           <Button
@@ -61,7 +63,7 @@ export const SkillUpdateModal: FC<ISkillUpdateModalProps> = ({ skill, onClose })
             loading={updateSkillLoading}
             disabled={!isDirty && isValid}
           >
-            Update skill
+            Update
           </Button>
         </form>
       </Container>

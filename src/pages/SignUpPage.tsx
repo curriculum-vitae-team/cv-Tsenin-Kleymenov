@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { useMutation } from '@apollo/client'
 
@@ -11,9 +12,10 @@ import { AppNavigationRoutes } from '@/router/paths'
 
 export const SignUpPage: FC = () => {
   const [signUp] = useMutation<ISignUpResult>(SIGN_UP)
+  const { t } = useTranslation()
 
   return (
-    <AuthFormContainer title="Register Now" subtitle="Welcome! Sign up to continue.">
+    <AuthFormContainer title={t('Register now')} subtitle={t('Welcome! Sign up to continue.')}>
       <SignUpForm signUp={signUp} />
       <Button component={Link} to={`/${AppNavigationRoutes.LOGIN}`} variant="text">
         I have an account

@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { useMutation } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Container } from '@mui/material'
@@ -11,10 +12,10 @@ import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
 import { FORM_SKILL_SCHEMA } from '@/constants/schemaOptions'
 import { CREATE_SKILL } from '@/graphql/skills/createSkillMutation'
 import { SKILLS } from '@/graphql/skills/skillsQuery'
-
-import { FORM_SKILL_KEYS, ISkillFormValues } from '../SkillsPage.interfaces'
+import { FORM_SKILL_KEYS, ISkillFormValues } from '@/pages/SkillsPage/SkillsPage.interfaces'
 
 export const SkillCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
+  const { t } = useTranslation()
   const [createSkillMutation, { loading: createSkillLoading }] = useMutation(CREATE_SKILL, {
     refetchQueries: [{ query: SKILLS }]
   })
@@ -36,7 +37,7 @@ export const SkillCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
         }
       }
     })
-    
+
     onClose()
   }
 
@@ -46,9 +47,9 @@ export const SkillCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
         <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
           <Input
             variant="outlined"
-            label="Name"
+            label={t('Name')}
             error={!!errors[FORM_SKILL_KEYS.name]}
-            helperText={errors?.[FORM_SKILL_KEYS.name]?.message}
+            helperText={t(errors?.[FORM_SKILL_KEYS.name]?.message as string)}
             {...register(FORM_SKILL_KEYS.name)}
           />
           <Button
@@ -57,7 +58,7 @@ export const SkillCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
             loading={createSkillLoading}
             disabled={!isDirty && isValid}
           >
-            Create skill
+            Create
           </Button>
         </form>
       </Container>

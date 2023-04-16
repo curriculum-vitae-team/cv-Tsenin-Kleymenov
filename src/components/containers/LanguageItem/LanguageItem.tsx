@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { useMutation, useQuery, useReactiveVar } from '@apollo/client'
 import ClearIcon from '@mui/icons-material/Clear'
@@ -14,6 +15,7 @@ import { ILanguageItemProps } from './LanguageItem.interfaces'
 import { CloseButton, LanguageItemContainer } from './LanguageItem.styles'
 
 export const LanguageItem: FC<ILanguageItemProps> = ({ languageName, languageProficiency }) => {
+  const { t } = useTranslation()
   const { id: userId } = useParams()
   const user = useReactiveVar(authService.user$)
   const userCheck = userId === user?.id
@@ -48,7 +50,7 @@ export const LanguageItem: FC<ILanguageItemProps> = ({ languageName, languagePro
     <LanguageItemContainer>
       <Box>
         <Typography sx={{ fontWeight: 'bold' }}>{languageName}</Typography>
-        <Typography>{`Level of language:${languageProficiency.toUpperCase()}`}</Typography>
+        <Typography>{`${t('Level of language')}:${languageProficiency.toUpperCase()}`}</Typography>
       </Box>
       {userCheck && (
         <CloseButton onClick={() => handleDelete(languageName, languageProficiency)}>

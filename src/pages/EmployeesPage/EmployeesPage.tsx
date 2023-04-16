@@ -1,4 +1,5 @@
 import { FC, useDeferredValue, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useQuery } from '@apollo/client'
 import SearchIcon from '@mui/icons-material/Search'
 
@@ -13,6 +14,7 @@ import { tableColumns } from './tableColumns'
 export const EmployeesPage: FC = () => {
   const [searchedName, setSearchedName] = useState<string>('')
   const deferredValue = useDeferredValue(searchedName)
+  const { t } = useTranslation()
 
   const { data, loading, error } = useQuery<IUsersResult>(GET_EMPLOYEES)
 
@@ -39,7 +41,7 @@ export const EmployeesPage: FC = () => {
         style={{ marginBottom: '20px' }}
         value={searchedName}
         onChange={handleSearchUser}
-        placeholder="Search"
+        placeholder={t('Search') as string}
       />
       <CommonTable<IUser>
         label="employees"

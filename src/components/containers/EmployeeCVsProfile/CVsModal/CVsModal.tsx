@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { useMutation, useQuery, useReactiveVar } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Checkbox, Container, FormControlLabel } from '@mui/material'
@@ -22,6 +23,7 @@ import { ICVsModalProps } from './CVsModal.interfaces'
 import { FORM_PROFILE_CVS_KEYS, IProfileCVsFormValues } from './CVsModal.interfaces'
 
 export const CVsModal: FC<ICVsModalProps> = ({ currentCVData, onClose }) => {
+  const { t } = useTranslation()
   const user = useReactiveVar(authService.user$)
 
   const { data: CVData, loading: CVLoading } = useQuery<ICVResult>(CV, {
@@ -61,7 +63,7 @@ export const CVsModal: FC<ICVsModalProps> = ({ currentCVData, onClose }) => {
         }
       }
     })
-    
+
     onClose()
   }
 
@@ -72,16 +74,16 @@ export const CVsModal: FC<ICVsModalProps> = ({ currentCVData, onClose }) => {
           <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
             <Input
               variant="outlined"
-              label="Name"
+              label={t('Name')}
               error={!!errors[FORM_PROFILE_CVS_KEYS.name]}
-              helperText={errors?.[FORM_PROFILE_CVS_KEYS.name]?.message}
+              helperText={t(errors?.[FORM_PROFILE_CVS_KEYS.name]?.message as string)}
               {...register(FORM_PROFILE_CVS_KEYS.name)}
             />
             <Input
               variant="outlined"
-              label="Description"
+              label={t('Description')}
               error={!!errors[FORM_PROFILE_CVS_KEYS.description]}
-              helperText={errors?.[FORM_PROFILE_CVS_KEYS.description]?.message}
+              helperText={t(errors?.[FORM_PROFILE_CVS_KEYS.description]?.message as string)}
               {...register(FORM_PROFILE_CVS_KEYS.description)}
             />
             <Controller
@@ -89,7 +91,7 @@ export const CVsModal: FC<ICVsModalProps> = ({ currentCVData, onClose }) => {
               name={FORM_PROFILE_CVS_KEYS.template}
               render={({ field: { value, onChange, onBlur } }) => (
                 <FormControlLabel
-                  label="Template"
+                  label={t('Template')}
                   control={<Checkbox checked={value} onChange={onChange} onBlur={onBlur} />}
                 />
               )}

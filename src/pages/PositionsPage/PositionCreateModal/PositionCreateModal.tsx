@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { useMutation } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Container } from '@mui/material'
@@ -17,6 +18,7 @@ import {
 } from '@/pages/PositionsPage/PositionsPage.interfaces'
 
 export const PositionCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
+  const { t } = useTranslation()
   const [createPositionMutation, { loading: createPositionLoading }] = useMutation(
     CREATE_POSITION,
     {
@@ -41,7 +43,7 @@ export const PositionCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
         }
       }
     })
-    
+
     onClose()
   }
 
@@ -51,9 +53,9 @@ export const PositionCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
         <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
           <Input
             variant="outlined"
-            label="Name"
+            label={t('Name')}
             error={!!errors[FORM_POSITION_KEYS.name]}
-            helperText={errors?.[FORM_POSITION_KEYS.name]?.message}
+            helperText={t(errors?.[FORM_POSITION_KEYS.name]?.message as string)}
             {...register(FORM_POSITION_KEYS.name)}
           />
           <Button
@@ -62,7 +64,7 @@ export const PositionCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
             loading={createPositionLoading}
             disabled={!isDirty && isValid}
           >
-            Create position
+            Create
           </Button>
         </form>
       </Container>

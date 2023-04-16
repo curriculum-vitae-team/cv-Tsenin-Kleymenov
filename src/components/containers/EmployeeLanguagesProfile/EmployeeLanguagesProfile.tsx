@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { useQuery, useReactiveVar } from '@apollo/client'
 import { Box, Divider, Typography } from '@mui/material'
@@ -13,6 +14,7 @@ import { useBooleanState } from '@/hooks/useBooleanState'
 import { LanguagesModal } from './LanguagesModal/LanguagesModal'
 
 export const EmployeeLanguagesProfile: FC = () => {
+  const { t } = useTranslation()
   const { id: userId } = useParams()
   const [isVisible, toggleVisibility] = useBooleanState()
   const user = useReactiveVar(authService.user$)
@@ -30,7 +32,7 @@ export const EmployeeLanguagesProfile: FC = () => {
           variant="contained"
           onClick={toggleVisibility}
         >
-          + Add Languages
+          Add languages
         </Button>
       )}
       <Divider sx={{ my: 2 }} />
@@ -46,7 +48,7 @@ export const EmployeeLanguagesProfile: FC = () => {
         </Box>
       ) : (
         <Typography sx={{ my: 2 }} variant="h5">
-          You don't have any languages
+          {t('No languages')}
         </Typography>
       )}
       {isVisible && <LanguagesModal userData={userData?.user} onClose={toggleVisibility} />}

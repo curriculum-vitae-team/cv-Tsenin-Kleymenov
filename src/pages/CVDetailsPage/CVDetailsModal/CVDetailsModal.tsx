@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { useMutation, useReactiveVar } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Checkbox, Container, FormControlLabel } from '@mui/material'
@@ -23,6 +24,7 @@ import {
 
 export const CVDetailsModal: FC<ICVDetailsModalProps> = ({ CVData, onClose }) => {
   const user = useReactiveVar(authService.user$)
+  const { t } = useTranslation()
 
   const [updateCVMutation, { loading: updateCVLoading }] = useMutation(UPDATE_CV, {
     refetchQueries: [{ query: CV, variables: { id: CVData?.id } }]
@@ -58,7 +60,7 @@ export const CVDetailsModal: FC<ICVDetailsModalProps> = ({ CVData, onClose }) =>
         }
       }
     })
-    
+
     onClose()
   }
 
@@ -70,14 +72,14 @@ export const CVDetailsModal: FC<ICVDetailsModalProps> = ({ CVData, onClose }) =>
             variant="outlined"
             label="Name"
             error={!!errors[FORM_PROFILE_CVS_KEYS.name]}
-            helperText={errors?.[FORM_PROFILE_CVS_KEYS.name]?.message}
+            helperText={t(errors?.[FORM_PROFILE_CVS_KEYS.name]?.message as string)}
             {...register(FORM_PROFILE_CVS_KEYS.name)}
           />
           <Input
             variant="outlined"
             label="Description"
             error={!!errors[FORM_PROFILE_CVS_KEYS.description]}
-            helperText={errors?.[FORM_PROFILE_CVS_KEYS.description]?.message}
+            helperText={t(errors?.[FORM_PROFILE_CVS_KEYS.description]?.message as string)}
             {...register(FORM_PROFILE_CVS_KEYS.description)}
           />
           <Controller

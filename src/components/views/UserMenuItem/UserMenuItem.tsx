@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { useReactiveVar } from '@apollo/client'
 import { ListItemIcon, ListItemText, MenuItem } from '@mui/material'
@@ -10,6 +11,7 @@ import { IUserMenuItemProps } from './UserMenuItem.interfaces'
 
 export const UserMenuItem: FC<IUserMenuItemProps> = ({ onClick, route, Icon, text }) => {
   const user = useReactiveVar(authService.user$)
+  const { t } = useTranslation()
 
   return (
     <MenuItem
@@ -21,7 +23,7 @@ export const UserMenuItem: FC<IUserMenuItemProps> = ({ onClick, route, Icon, tex
       <ListItemIcon>
         <Icon />
       </ListItemIcon>
-      <ListItemText>{text}</ListItemText>
+      <ListItemText>{t(text)}</ListItemText>
     </MenuItem>
   )
 }

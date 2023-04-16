@@ -1,5 +1,5 @@
-
-import { FC,useDeferredValue, useMemo, useState } from 'react'
+import { FC, useDeferredValue, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useQuery, useReactiveVar } from '@apollo/client'
 import SearchIcon from '@mui/icons-material/Search'
 import { Box, Divider } from '@mui/material'
@@ -20,6 +20,7 @@ import { tableColumns } from './tableColumns'
 export const ProjectsPage: FC = () => {
   const user = useReactiveVar(authService.user$)
   const isAdmin = user?.role === ROLE.admin
+  const { t } = useTranslation()
   const [isVisible, toggleVisibility] = useBooleanState()
   const [searchedName, setSearchedName] = useState<string>('')
   const deferredValue = useDeferredValue(searchedName)
@@ -51,7 +52,7 @@ export const ProjectsPage: FC = () => {
           size="small"
           value={searchedName}
           onChange={handleSearchUser}
-          placeholder="Search"
+          placeholder={t('Search') as string}
         />
         {isAdmin && (
           <Button sx={{ maxWidth: 100 }} variant="contained" onClick={toggleVisibility}>

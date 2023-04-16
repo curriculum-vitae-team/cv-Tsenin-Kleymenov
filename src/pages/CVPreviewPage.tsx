@@ -1,4 +1,5 @@
 import { FC, ReactInstance, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { useReactToPrint } from 'react-to-print'
 import { useQuery } from '@apollo/client'
@@ -15,6 +16,7 @@ import { getFirstChars } from '@/utils/getFirstChar'
 export const CVPreviewPage: FC = () => {
   const { id: CVId } = useParams()
   const componentRef = useRef<ReactInstance | null>(null)
+  const { t } = useTranslation()
 
   const { data: CVData, loading: CVLoading } = useQuery<ICVResult>(CV, {
     variables: { id: CVId },
@@ -56,7 +58,7 @@ export const CVPreviewPage: FC = () => {
             <Divider sx={{ mx: 2 }} orientation="vertical" flexItem />
             <Box sx={{ alignSelf: 'flex-start' }}>
               <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}>
-                <Typography sx={{ my: 1, fontSize: '24px' }}>Skills:</Typography>
+                <Typography sx={{ my: 1, fontSize: '24px' }}>{t('Skills')}:</Typography>
                 {CVData?.cv?.skills.length ? (
                   CVData?.cv.skills.map(skill => (
                     <Chip
@@ -74,7 +76,7 @@ export const CVPreviewPage: FC = () => {
                 )}
               </Box>
               <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}>
-                <Typography sx={{ my: 1, fontSize: '24px' }}>Languages:</Typography>
+                <Typography sx={{ my: 1, fontSize: '24px' }}>{t('Languages')}:</Typography>
                 {CVData?.cv?.languages.length ? (
                   CVData?.cv.languages.map(language => (
                     <Chip
@@ -95,7 +97,7 @@ export const CVPreviewPage: FC = () => {
           </Box>
           <Divider sx={{ mx: 2 }} orientation="horizontal" flexItem />
           <>
-            <Typography sx={{ mt: 3, fontSize: '1.5rem' }}>Projects</Typography>
+            <Typography sx={{ mt: 3, fontSize: '1.5rem' }}>{t('Projects')}</Typography>
             {CVData?.cv?.projects?.map(project => (
               <Card sx={{ my: 1, p: 2, display: 'flex' }} key={project.internal_name}>
                 <Box>

@@ -1,10 +1,12 @@
 import { FC } from 'react'
 import { Controller, useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { useMutation, useQuery, useReactiveVar } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Checkbox, Container, FormControlLabel } from '@mui/material'
 
 import { IUserResult } from '@/appTypes/IResult.interfaces'
+import { ICVsModalProps } from '@/components/containers/EmployeeCVsProfile/CVsModal/CVsModal.interfaces'
 import { Button } from '@/components/views/Button/Button'
 import { Input } from '@/components/views/Input/Input'
 import { LoadingOverlay } from '@/components/views/LoadingOverlay/LoadingOverlay'
@@ -19,11 +21,10 @@ import { USER } from '@/graphql/user/userQuery'
 import { createLanguagesArray } from '@/utils/createLanguagesArray'
 import { createSkillsArray } from '@/utils/createSkillsArray'
 
-import { ICVsModalProps } from '../EmployeeCVsProfile/CVsModal/CVsModal.interfaces'
-
 import { FORM_CREATE_CV_KEYS, ICreateCVFormValues } from './CreateCVModal.interfaces'
 
 export const CreateCVModal: FC<ICVsModalProps> = ({ onClose }) => {
+  const { t } = useTranslation()
   const user = useReactiveVar(authService.user$)
   const [createCV, { loading: createCVLoading }] = useMutation<ICV>(CREATE_CV, {
     refetchQueries: [{ query: GET_CVS }],
@@ -70,23 +71,23 @@ export const CreateCVModal: FC<ICVsModalProps> = ({ onClose }) => {
       <ModalWindow onClose={onClose}>
         <Container sx={{ minWidth: '500px' }}>
           <Input
-            label="Name"
+            label={t('Name')}
             error={!!errors[FORM_CREATE_CV_KEYS.name]}
             {...register(FORM_CREATE_CV_KEYS.name)}
-            helperText={errors?.[FORM_CREATE_CV_KEYS.name]?.message}
+            helperText={t(errors?.[FORM_CREATE_CV_KEYS.name]?.message as string)}
           />
           <Input
-            label="Description"
+            label={t('Description')}
             error={!!errors[FORM_CREATE_CV_KEYS.description]}
             {...register(FORM_CREATE_CV_KEYS.description)}
-            helperText={errors?.[FORM_CREATE_CV_KEYS.description]?.message}
+            helperText={t(errors?.[FORM_CREATE_CV_KEYS.description]?.message as string)}
           />
           <Controller
             control={control}
             name="is_template"
             render={({ field: { value, onChange, onBlur } }) => (
               <FormControlLabel
-                label="Template"
+                label={t('Template')}
                 control={<Checkbox checked={!!value} onChange={onChange} onBlur={onBlur} />}
               />
             )}

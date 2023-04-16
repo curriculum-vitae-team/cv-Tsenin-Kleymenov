@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import { Controller } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { TextField } from '@mui/material'
 import { DesktopDatePicker, LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
@@ -14,6 +15,8 @@ export const DatePicker: FC<DatePickerInputProps<IProjectFormValues>> = ({
   label,
   name
 }) => {
+  const { t } = useTranslation()
+
   return (
     <Controller
       name={name}
@@ -29,8 +32,8 @@ export const DatePicker: FC<DatePickerInputProps<IProjectFormValues>> = ({
                 {...params}
                 margin="normal"
                 fullWidth
-                label={label}
-                helperText={fieldState.error?.message || ''}
+                label={t(label)}
+                helperText={t(fieldState.error?.message as string) || ''}
                 error={!!fieldState.error}
               />
             )}

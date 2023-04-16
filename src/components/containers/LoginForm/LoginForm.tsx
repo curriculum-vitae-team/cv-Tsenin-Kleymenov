@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
 
@@ -14,6 +15,7 @@ import { AppNavigationRoutes } from '@/router/paths'
 import { FORM_LOGIN_KEYS, ILoginFormProps } from './LoginForm.interfaces'
 
 export const SignInForm: FC<ILoginFormProps> = ({ login }) => {
+  const { t } = useTranslation()
   const navigate = useNavigate()
   const {
     register,
@@ -34,17 +36,17 @@ export const SignInForm: FC<ILoginFormProps> = ({ login }) => {
     <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
       <Input
         type="email"
-        label="Email"
-        placeholder=" Enter your email"
+        label={t('Email')}
+        placeholder={t('Enter your email') as string}
         error={!!errors[FORM_LOGIN_KEYS.email]}
-        helperText={errors?.[FORM_LOGIN_KEYS.email]?.message}
+        helperText={t(errors?.[FORM_LOGIN_KEYS.email]?.message as string)}
         {...register(FORM_LOGIN_KEYS.email)}
       />
       <PasswordInput
-        label="Password"
-        placeholder=" Enter your password"
+        label={t('Password')}
+        placeholder={t('Enter your password') as string}
         error={!!errors[FORM_LOGIN_KEYS.password]}
-        helperText={errors?.[FORM_LOGIN_KEYS.password]?.message}
+        helperText={t(errors?.[FORM_LOGIN_KEYS.password]?.message as string)}
         {...register(FORM_LOGIN_KEYS.password)}
       />
       <Button type="submit" variant="contained">

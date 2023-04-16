@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { useMutation, useQuery, useReactiveVar } from '@apollo/client'
 import CheckBoxIcon from '@mui/icons-material/CheckBox'
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank'
@@ -24,6 +25,7 @@ import {
 
 export const CVProjectsModal: FC<ICVProjectsModalProps> = ({ CVData, onClose }) => {
   const user = useReactiveVar(authService.user$)
+  const { t } = useTranslation()
 
   const [updateCVMutation, { loading: updateCVLoading }] = useMutation(UPDATE_CV, {
     refetchQueries: [{ query: CV, variables: { id: CVData?.id } }]
@@ -56,7 +58,7 @@ export const CVProjectsModal: FC<ICVProjectsModalProps> = ({ CVData, onClose }) 
         }
       }
     })
-    
+
     onClose()
   }
 
@@ -94,7 +96,7 @@ export const CVProjectsModal: FC<ICVProjectsModalProps> = ({ CVData, onClose }) 
                     fullWidth
                     inputRef={ref}
                     variant="outlined"
-                    label="Projects"
+                    label={t('Projects')}
                   />
                 )}
               />

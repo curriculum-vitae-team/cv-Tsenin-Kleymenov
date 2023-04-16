@@ -1,4 +1,5 @@
 import { memo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import {
   Table as MuiTable,
   TableBody,
@@ -22,6 +23,7 @@ const Table = <T extends { id: string }>({
   isLoading,
   error
 }: ICommonTableProps<T>): JSX.Element => {
+  const { t } = useTranslation()
   const [orderBy, setOrderBy] = useState<string | null>('')
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
 
@@ -59,14 +61,14 @@ const Table = <T extends { id: string }>({
               {tableColumns.map(column => (
                 <TableCell key={column.id} sx={{ fontWeight: '700' }}>
                   {!column.sortable ? (
-                    column.header
+                    t(column.header as string)
                   ) : (
                     <TableSortLabel
                       active={column.field === orderBy}
                       direction={column.field === orderBy ? sortOrder : 'asc'}
                       onClick={() => handleSortColumnClick(column.field as string)}
                     >
-                      {column.header}
+                      {t(column.header as string)}
                     </TableSortLabel>
                   )}
                 </TableCell>

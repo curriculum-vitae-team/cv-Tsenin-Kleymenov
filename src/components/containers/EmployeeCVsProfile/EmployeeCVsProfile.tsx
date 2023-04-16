@@ -1,4 +1,5 @@
 import { FC, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { useQuery, useReactiveVar } from '@apollo/client'
 import { Typography } from '@mui/material'
@@ -15,6 +16,7 @@ import { CVsModal } from './CVsModal/CVsModal'
 
 export const EmployeeCVsProfile: FC = () => {
   const { id } = useParams()
+  const { t } = useTranslation()
   const [isVisible, toggleVisibility] = useBooleanState()
   const [selectedCV, setSelectedCV] = useState<ICV | null>(null)
   const user = useReactiveVar(authService.user$)
@@ -40,7 +42,7 @@ export const EmployeeCVsProfile: FC = () => {
             ))
           ) : (
             <Typography sx={{ my: 2 }} variant="h5">
-              You don't have any CVs
+              {t('No CVs')}
             </Typography>
           )}
           {isVisible && <CVsModal onClose={toggleVisibility} currentCVData={selectedCV} />}

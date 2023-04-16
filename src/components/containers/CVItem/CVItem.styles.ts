@@ -8,7 +8,7 @@ export const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }))
 
 export const ButtonContainer = styled(Box)(() => ({
-  width: '250px',
+  width: '350px',
   display: 'flex',
   alignItems: 'center'
 }))

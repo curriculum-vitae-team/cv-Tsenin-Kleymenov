@@ -1,10 +1,11 @@
 import { FC, useDeferredValue, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useQuery } from '@apollo/client'
 import SearchIcon from '@mui/icons-material/Search'
-import { Button } from '@mui/material'
 
 import { ICVsResult } from '@/appTypes/IResult.interfaces'
 import { CreateCVModal } from '@/components/containers/CreateCVModal/CreateCVModal'
+import { Button } from '@/components/views/Button/Button'
 import { CommonTable } from '@/components/views/CommonTable/CommonTable'
 import { InputWithIcon } from '@/components/views/Input/Input'
 import { GET_CVS } from '@/graphql/cvs/cvsQuery'
@@ -19,6 +20,7 @@ export const CVsPage: FC = () => {
   const [isVisible, toggleVisibility] = useBooleanState()
   const [searchedName, setSearchedName] = useState<string>('')
   const deferredValue = useDeferredValue(searchedName)
+  const { t } = useTranslation()
 
   const { data, loading, error } = useQuery<ICVsResult>(GET_CVS, {
     fetchPolicy: FETCH_POLICY.networkOnly
@@ -45,10 +47,10 @@ export const CVsPage: FC = () => {
           size="small"
           value={searchedName}
           onChange={handleSearchUser}
-          placeholder="Search"
+          placeholder={t('Search') as string}
         />
-        <Button variant="contained" onClick={toggleVisibility}>
-          Create Cv
+        <Button sx={{ maxWidth: 100 }} variant="contained" onClick={toggleVisibility}>
+          Create
         </Button>
       </CvsTableToolBar>
       <CommonTable<ICV>

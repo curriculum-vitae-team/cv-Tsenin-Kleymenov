@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import { useDropzone } from 'react-dropzone'
+import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { useMutation, useQuery, useReactiveVar } from '@apollo/client'
 import CloseIcon from '@mui/icons-material/Close'
@@ -22,6 +23,7 @@ import { AvatarWrapper, DropZone } from './EmployeeAvatarUpload.styles'
 
 export const EmployeeAvatarUpload: FC = () => {
   const { id } = useParams()
+  const { t } = useTranslation()
   const user = useReactiveVar(authService.user$)
   const userCheck = id === user?.id
 
@@ -99,9 +101,11 @@ export const EmployeeAvatarUpload: FC = () => {
             <Typography variant="h6">
               <Box sx={{ display: 'flex' }}>
                 <FileUploadIcon sx={{ mr: 1 }} />
-                <Typography sx={{ textTransform: 'uppercase' }}>upload avatar image</Typography>
+                <Typography sx={{ textTransform: 'uppercase' }}>
+                  {t('upload avatar image')}
+                </Typography>
               </Box>
-              <Typography>png, jpg or gif no more than 0.5MB</Typography>
+              <Typography>png, jpg or gif {t('no more than')} 0.5MB</Typography>
             </Typography>
           </DropZone>
           {fileRejections.length > 0 && (

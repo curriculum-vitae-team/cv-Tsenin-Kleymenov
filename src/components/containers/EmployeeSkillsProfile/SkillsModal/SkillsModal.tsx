@@ -1,5 +1,6 @@
 import { FC, useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { useMutation, useQuery } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Container } from '@mui/material'
@@ -21,6 +22,7 @@ import {
 } from './SkillsModal.interfaces'
 
 export const SkillsModal: FC<ISkillsModalProps> = ({ userData, onClose }) => {
+  const { t } = useTranslation()
   const { loading: loadingSkills, data: skillsData } = useQuery<ISkillsResult>(SKILLS)
   const [updateUser, { loading: userLoading }] = useMutation(UPDATE_USER)
 
@@ -69,7 +71,7 @@ export const SkillsModal: FC<ISkillsModalProps> = ({ userData, onClose }) => {
         }
       }
     })
-    
+
     onClose()
   }
 
@@ -86,21 +88,21 @@ export const SkillsModal: FC<ISkillsModalProps> = ({ userData, onClose }) => {
         <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
           <AppSelect
             variant="outlined"
-            label="Skills"
+            label={t('Skills')}
             defaultValue={''}
             loading={loadingSkills}
             items={filteredSkillsArray}
             error={!!errors[FORM_PROFILE_SKILLS_KEYS.skills]}
-            helperText={errors?.[FORM_PROFILE_SKILLS_KEYS.skills]?.message}
+            helperText={t(errors?.[FORM_PROFILE_SKILLS_KEYS.skills]?.message as string)}
             {...register(FORM_PROFILE_SKILLS_KEYS.skills)}
           />
           <AppSelect
             variant="outlined"
-            label="Mastery"
+            label={t('Mastery')}
             defaultValue={''}
             items={MASTERY_ARRAY}
             error={!!errors[FORM_PROFILE_SKILLS_KEYS.mastery]}
-            helperText={errors?.[FORM_PROFILE_SKILLS_KEYS.mastery]?.message}
+            helperText={t(errors?.[FORM_PROFILE_SKILLS_KEYS.mastery]?.message as string)}
             {...register(FORM_PROFILE_SKILLS_KEYS.mastery)}
           />
           <Button loading={userLoading} type="submit" variant="contained" disabled={!isValid}>

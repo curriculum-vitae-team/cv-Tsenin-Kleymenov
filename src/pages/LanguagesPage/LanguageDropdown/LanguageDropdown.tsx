@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useMutation, useReactiveVar } from '@apollo/client'
 import { Box, MenuItem } from '@mui/material'
 
@@ -16,6 +17,7 @@ export const LanguageDropdown: FC<ILanguageDropdownProps> = ({ language }) => {
   const user = useReactiveVar(authService.user$)
   const isAdmin = user?.role === ROLE.admin
   const [isVisible, toggleVisibility] = useBooleanState()
+  const { t } = useTranslation()
 
   const [deleteLanguageMutation] = useMutation(DELETE_LANGUAGE, {
     refetchQueries: [{ query: LANGUAGES }]
@@ -31,8 +33,8 @@ export const LanguageDropdown: FC<ILanguageDropdownProps> = ({ language }) => {
     <Box style={{ display: 'flex', justifyContent: 'flex-end' }}>
       {isAdmin && (
         <BasicMenu>
-          <MenuItem onClick={toggleVisibility}>Update</MenuItem>
-          <MenuItem onClick={handleLanguageDelete}>Delete</MenuItem>
+          <MenuItem onClick={toggleVisibility}>{t('Update')}</MenuItem>
+          <MenuItem onClick={handleLanguageDelete}>{t('Delete')}</MenuItem>
         </BasicMenu>
       )}
       {isVisible && <LanguageUpdateModal language={language} onClose={toggleVisibility} />}
