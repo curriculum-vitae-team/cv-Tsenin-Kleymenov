@@ -9,6 +9,7 @@ import { Button } from '@/components/views/Button/Button'
 import { Input } from '@/components/views/Input/Input'
 import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
 import { FORM_LANGUAGE_SCHEMA } from '@/constants/schemaOptions'
+import { TOAST_TYPES } from '@/constants/toastTypes'
 import { LANGUAGES } from '@/graphql/languages/languagesQuery'
 import { UPDATE_LANGUAGE } from '@/graphql/languages/updateLanguageMutation'
 import {
@@ -56,7 +57,7 @@ export const LanguageUpdateModal: FC<ILanguageUpdateModalProps> = ({ language, o
 
     onClose()
 
-    toastMessage('Successfully updated', 'success')
+    toastMessage('Successfully updated', TOAST_TYPES.success)
   }
 
   return (

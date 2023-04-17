@@ -5,6 +5,7 @@ import { useMutation, useReactiveVar } from '@apollo/client'
 import { MenuItem } from '@mui/material'
 
 import { BasicMenu } from '@/components/containers/BasicMenu/BasicMenu'
+import { TOAST_TYPES } from '@/constants/toastTypes'
 import { ROLE } from '@/constants/userRoles'
 import { authService } from '@/graphql/auth/authService'
 import { DELETE_USER } from '@/graphql/users/deleteUserMutation'
@@ -34,7 +35,7 @@ export const EmployeeDropdown: FC<IEmployeeDropdownProps> = ({ employee }) => {
       variables: { id: employee.id }
     })
 
-    toastMessage('Successfully deleted', 'success')
+    toastMessage('Successfully deleted', TOAST_TYPES.success)
   }
 
   return (

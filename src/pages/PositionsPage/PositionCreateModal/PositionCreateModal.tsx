@@ -10,6 +10,7 @@ import { Button } from '@/components/views/Button/Button'
 import { Input } from '@/components/views/Input/Input'
 import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
 import { FORM_POSITION_SCHEMA } from '@/constants/schemaOptions'
+import { TOAST_TYPES } from '@/constants/toastTypes'
 import { CREATE_POSITION } from '@/graphql/positions/createPositionMutation'
 import { POSITIONS } from '@/graphql/positions/positionsQuery'
 import {
@@ -47,7 +48,7 @@ export const PositionCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
 
     onClose()
 
-    toastMessage('Successfully created', 'success')
+    toastMessage('Successfully created', TOAST_TYPES.success)
   }
 
   return (

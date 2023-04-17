@@ -12,6 +12,7 @@ import { Input } from '@/components/views/Input/Input'
 import { LoadingOverlay } from '@/components/views/LoadingOverlay/LoadingOverlay'
 import { AppSelect } from '@/components/views/Select/Select'
 import { FORM_PROFILE_SCHEMA } from '@/constants/schemaOptions'
+import { TOAST_TYPES } from '@/constants/toastTypes'
 import { ROLE } from '@/constants/userRoles'
 import { authService } from '@/graphql/auth/authService'
 import { DEPARTMENTS } from '@/graphql/departments/departmentsQuery'
@@ -71,7 +72,7 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
       }
     })
 
-    toastMessage('Successfully updated', 'success')
+    toastMessage('Successfully updated', TOAST_TYPES.success)
   }
 
   useEffect(() => {

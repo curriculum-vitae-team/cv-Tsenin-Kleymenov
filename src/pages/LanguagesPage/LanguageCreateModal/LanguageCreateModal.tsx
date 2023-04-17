@@ -10,6 +10,7 @@ import { Button } from '@/components/views/Button/Button'
 import { Input } from '@/components/views/Input/Input'
 import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
 import { FORM_LANGUAGE_SCHEMA } from '@/constants/schemaOptions'
+import { TOAST_TYPES } from '@/constants/toastTypes'
 import { CREATE_LANGUAGE } from '@/graphql/languages/createLanguageMutation'
 import { LANGUAGES } from '@/graphql/languages/languagesQuery'
 import {
@@ -49,7 +50,7 @@ export const LanguageCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
 
     onClose()
 
-    toastMessage('Successfully created', 'success')
+    toastMessage('Successfully created', TOAST_TYPES.success)
   }
 
   return (

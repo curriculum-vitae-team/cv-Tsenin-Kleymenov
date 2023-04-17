@@ -5,6 +5,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { Accordion, AccordionSummary, Box, Typography } from '@mui/material'
 
 import { Button } from '@/components/views/Button/Button'
+import { TOAST_TYPES } from '@/constants/toastTypes'
 import { authService } from '@/graphql/auth/authService'
 import { UNBIND_CV } from '@/graphql/cv/unbindCVMutation'
 import { USER } from '@/graphql/user/userQuery'
@@ -27,7 +28,7 @@ export const CVItem: FC<ICVsItemProps> = ({ CV, handleSetCurrentCV }) => {
       variables: { id: CVId }
     })
 
-    toastMessage('Successfully unassigned', 'success')
+    toastMessage('Successfully unassigned', TOAST_TYPES.success)
   }
 
   return (

@@ -3,6 +3,7 @@ import { setContext } from '@apollo/client/link/context'
 import { onError } from '@apollo/client/link/error'
 
 import { INVALID_CREDENTIALS, UNAUTHORIZED } from '@/constants/apolloUserStatus'
+import { TOAST_TYPES } from '@/constants/toastTypes'
 import { toastMessage } from '@/utils/toastMessage'
 
 import { authService } from './authService'
@@ -24,16 +25,16 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
     graphQLErrors.forEach(({ message }) => {
       if (message === INVALID_CREDENTIALS) {
-        toastMessage(message, 'error')
+        toastMessage(message, TOAST_TYPES.error)
       }
       if (message === UNAUTHORIZED) {
         authService.clearStorage()
-        toastMessage(message, 'error')
+        toastMessage(message, TOAST_TYPES.error)
       }
     })
   }
   if (networkError) {
-    toastMessage(networkError.message, 'error')
+    toastMessage(networkError.message, TOAST_TYPES.error)
   }
 })
 

@@ -9,6 +9,7 @@ import { Button } from '@/components/views/Button/Button'
 import { Input } from '@/components/views/Input/Input'
 import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
 import { FORM_POSITION_SCHEMA } from '@/constants/schemaOptions'
+import { TOAST_TYPES } from '@/constants/toastTypes'
 import { POSITIONS } from '@/graphql/positions/positionsQuery'
 import { UPDATE_POSITION } from '@/graphql/positions/updatePositionMutation'
 import {
@@ -52,7 +53,7 @@ export const PositionUpdateModal: FC<IPositionUpdateModalProps> = ({ position, o
 
     onClose()
 
-    toastMessage('Successfully updated', 'success')
+    toastMessage('Successfully updated', TOAST_TYPES.success)
   }
 
   return (

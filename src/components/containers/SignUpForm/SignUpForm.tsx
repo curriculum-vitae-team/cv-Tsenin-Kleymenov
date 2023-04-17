@@ -9,6 +9,7 @@ import { Button } from '@/components/views/Button/Button'
 import { Input } from '@/components/views/Input/Input'
 import { PasswordInput } from '@/components/views/PasswordInput/PasswordInput'
 import { SIGNUP_SCHEMA } from '@/constants/schemaOptions'
+import { TOAST_TYPES } from '@/constants/toastTypes'
 import { authService } from '@/graphql/auth/authService'
 import { AppNavigationRoutes } from '@/router/paths'
 import { toastMessage } from '@/utils/toastMessage'
@@ -33,7 +34,7 @@ export const SignUpForm: FC<ISignUpFormProps> = ({ signUp }) => {
         navigate(`/${AppNavigationRoutes.EMPLOYEES}`)
       }
     } catch (error) {
-      error instanceof Error && toastMessage('This user already exists', 'error')
+      error instanceof Error && toastMessage('This user already exists', TOAST_TYPES.error)
     }
   }
 

@@ -9,6 +9,7 @@ import { Button } from '@/components/views/Button/Button'
 import { Input } from '@/components/views/Input/Input'
 import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
 import { FORM_PROFILE_CVS_SCHEMA } from '@/constants/schemaOptions'
+import { TOAST_TYPES } from '@/constants/toastTypes'
 import { CV } from '@/graphql/cv/CVQuery'
 import { UPDATE_CV } from '@/graphql/cv/updateCVMutation'
 import { createLanguagesArray } from '@/utils/createLanguagesArray'
@@ -62,7 +63,7 @@ export const CVDetailsModal: FC<ICVDetailsModalProps> = ({ CVData, onClose }) =>
 
     onClose()
 
-    toastMessage('Successfully updated', 'success')
+    toastMessage('Successfully updated', TOAST_TYPES.success)
   }
 
   return (

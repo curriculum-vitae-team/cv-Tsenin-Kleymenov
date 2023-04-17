@@ -1,6 +1,7 @@
 import { Id, toast, ToastContainerProps } from 'react-toastify'
 
 import { SimpleToast } from '@/components/views/SimpleToast/SimpleToast'
+import { TOAST_TYPES } from '@/constants/toastTypes'
 
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -27,7 +28,7 @@ type Position =
 
 export const toastMessage = (
   message: string,
-  type: 'success' | 'warning' | 'error' = 'success',
+  type: TOAST_TYPES,
   position: Position = 'bottom-left'
 ): Id => {
   toast.clearWaitingQueue()
