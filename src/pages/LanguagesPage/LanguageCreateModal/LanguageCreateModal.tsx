@@ -10,7 +10,7 @@ import { Button } from '@/components/views/Button/Button'
 import { Input } from '@/components/views/Input/Input'
 import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
 import { FORM_LANGUAGE_SCHEMA } from '@/constants/schemaOptions'
-import { CREATE_LANGUAGE } from '@/graphql/languages/createLanguageMutation'
+import { CREATE_LANGUAGE } from '@/graphql/language/createLanguageMutation'
 import { LANGUAGES } from '@/graphql/languages/languagesQuery'
 import {
   FORM_LANGUAGE_KEYS,

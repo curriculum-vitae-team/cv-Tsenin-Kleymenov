@@ -10,7 +10,7 @@ import { Button } from '@/components/views/Button/Button'
 import { Input } from '@/components/views/Input/Input'
 import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
 import { FORM_SKILL_SCHEMA } from '@/constants/schemaOptions'
-import { CREATE_SKILL } from '@/graphql/skills/createSkillMutation'
+import { CREATE_SKILL } from '@/graphql/skill/createSkillMutation'
 import { SKILLS } from '@/graphql/skills/skillsQuery'
 import { FORM_SKILL_KEYS, ISkillFormValues } from '@/pages/SkillsPage/SkillsPage.interfaces'
 

@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client'
 import { Box, MenuItem } from '@mui/material'
 
 import { BasicMenu } from '@/components/containers/BasicMenu/BasicMenu'
-import { DELETE_SKILL } from '@/graphql/skills/deleteSkillMutation'
+import { DELETE_SKILL } from '@/graphql/skill/deleteSkillMutation'
 import { SKILLS } from '@/graphql/skills/skillsQuery'
 import { useBooleanState } from '@/hooks/useBooleanState'
 import { useUser } from '@/hooks/useUser'

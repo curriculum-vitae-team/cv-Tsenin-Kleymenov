@@ -9,8 +9,8 @@ import { Button } from '@/components/views/Button/Button'
 import { Input } from '@/components/views/Input/Input'
 import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
 import { FORM_POSITION_SCHEMA } from '@/constants/schemaOptions'
+import { UPDATE_POSITION } from '@/graphql/position/updatePositionMutation'
 import { POSITIONS } from '@/graphql/positions/positionsQuery'
-import { UPDATE_POSITION } from '@/graphql/positions/updatePositionMutation'
 import {
   FORM_POSITION_KEYS,
   IPositionFormValues

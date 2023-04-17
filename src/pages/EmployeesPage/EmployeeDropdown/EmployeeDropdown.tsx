@@ -5,7 +5,7 @@ import { useMutation } from '@apollo/client'
 import { MenuItem } from '@mui/material'
 
 import { BasicMenu } from '@/components/containers/BasicMenu/BasicMenu'
-import { DELETE_USER } from '@/graphql/users/deleteUserMutation'
+import { DELETE_USER } from '@/graphql/user/deleteUserMutation'
 import { GET_EMPLOYEES } from '@/graphql/users/usersQuery'
 import { useUser } from '@/hooks/useUser'
 import { AppNavigationRoutes } from '@/router/paths'

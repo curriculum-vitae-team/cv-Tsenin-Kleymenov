@@ -10,7 +10,7 @@ import { Button } from '@/components/views/Button/Button'
 import { Input } from '@/components/views/Input/Input'
 import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
 import { FORM_DEPARTMENT_SCHEMA } from '@/constants/schemaOptions'
-import { CREATE_DEPARTMENT } from '@/graphql/departments/createDepartmentMutation'
+import { CREATE_DEPARTMENT } from '@/graphql/department/createDepartmentMutation'
 import { DEPARTMENTS } from '@/graphql/departments/departmentsQuery'
 import {
   FORM_DEPARTMENT_KEYS,

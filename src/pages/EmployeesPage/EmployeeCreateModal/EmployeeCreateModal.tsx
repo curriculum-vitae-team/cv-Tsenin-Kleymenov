@@ -16,7 +16,7 @@ import { FORM_EMPLOYEES_SCHEMA } from '@/constants/schemaOptions'
 import { ROLE_ARRAY } from '@/constants/userRoles'
 import { DEPARTMENTS } from '@/graphql/departments/departmentsQuery'
 import { POSITIONS } from '@/graphql/positions/positionsQuery'
-import { CREATE_USER } from '@/graphql/users/createUserMutation'
+import { CREATE_USER } from '@/graphql/user/createUserMutation'
 import { GET_EMPLOYEES } from '@/graphql/users/usersQuery'
 
 import { FORM_EMPLOYEES_KEYS, IEmployeesFormValues } from '../EmployeesPage.interfaces'

@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client'
 import { Box, MenuItem } from '@mui/material'
 
 import { BasicMenu } from '@/components/containers/BasicMenu/BasicMenu'
-import { DELETE_LANGUAGE } from '@/graphql/languages/deleteLanguageMutation'
+import { DELETE_LANGUAGE } from '@/graphql/language/deleteLanguageMutation'
 import { LANGUAGES } from '@/graphql/languages/languagesQuery'
 import { useBooleanState } from '@/hooks/useBooleanState'
 import { useUser } from '@/hooks/useUser'

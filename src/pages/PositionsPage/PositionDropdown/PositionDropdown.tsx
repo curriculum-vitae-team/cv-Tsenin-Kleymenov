@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client'
 import { Box, MenuItem } from '@mui/material'
 
 import { BasicMenu } from '@/components/containers/BasicMenu/BasicMenu'
-import { DELETE_POSITION } from '@/graphql/positions/deletePositionMutation'
+import { DELETE_POSITION } from '@/graphql/position/deletePositionMutation'
 import { POSITIONS } from '@/graphql/positions/positionsQuery'
 import { useBooleanState } from '@/hooks/useBooleanState'
 import { useUser } from '@/hooks/useUser'

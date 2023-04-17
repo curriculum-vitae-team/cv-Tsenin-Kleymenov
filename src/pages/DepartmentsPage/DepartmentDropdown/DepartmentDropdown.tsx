@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client'
 import { Box, MenuItem } from '@mui/material'
 
 import { BasicMenu } from '@/components/containers/BasicMenu/BasicMenu'
-import { DELETE_DEPARTMENT } from '@/graphql/departments/deleteDepartmentMutation'
+import { DELETE_DEPARTMENT } from '@/graphql/department/deleteDepartmentMutation'
 import { DEPARTMENTS } from '@/graphql/departments/departmentsQuery'
 import { useBooleanState } from '@/hooks/useBooleanState'
 import { useUser } from '@/hooks/useUser'

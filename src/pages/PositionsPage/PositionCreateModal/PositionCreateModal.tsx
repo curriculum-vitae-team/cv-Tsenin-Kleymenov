@@ -10,7 +10,7 @@ import { Button } from '@/components/views/Button/Button'
 import { Input } from '@/components/views/Input/Input'
 import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
 import { FORM_POSITION_SCHEMA } from '@/constants/schemaOptions'
-import { CREATE_POSITION } from '@/graphql/positions/createPositionMutation'
+import { CREATE_POSITION } from '@/graphql/position/createPositionMutation'
 import { POSITIONS } from '@/graphql/positions/positionsQuery'
 import {
   FORM_POSITION_KEYS,
