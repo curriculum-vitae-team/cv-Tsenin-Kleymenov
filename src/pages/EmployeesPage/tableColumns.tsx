@@ -1,5 +1,4 @@
 import { IColumn } from '@/appTypes/Column.interfaces'
-import { EmployeesDropdown } from '@/components/containers/EmployeesDropdown/EmployeesDropdown'
 import { UserAvatar } from '@/components/views/UserAvatar/UserAvatar'
 import { IUser } from '@/graphql/interfaces/IUser.interfaces'
 import { EmployeeDropdown } from '@/pages/EmployeesPage/EmployeeDropdown/EmployeeDropdown'

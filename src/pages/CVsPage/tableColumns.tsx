@@ -1,7 +1,6 @@
 import { Checkbox } from '@mui/material'
 
 import { IColumn } from '@/appTypes/Column.interfaces'
-import { CVsDropdown } from '@/components/containers/CVsDropdown/CVsDropdown'
 import { ProjectsNames } from '@/components/views/ProjectsNames/ProjectsNames'
 import { ICV } from '@/graphql/interfaces/ICv.interfaces'
 import { CVDropdown } from '@/pages/CVsPage/CVDropdown/CVDropdown'

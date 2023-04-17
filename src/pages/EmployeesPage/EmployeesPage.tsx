@@ -51,7 +51,7 @@ export const EmployeesPage: FC = () => {
           size="small"
           value={searchedName}
           onChange={handleSearchUser}
-          placeholder="Search"
+          placeholder={t('Search') as string}
         />
         {isAdmin && (
           <Button sx={{ maxWidth: 100 }} variant="contained" onClick={toggleVisibility}>
