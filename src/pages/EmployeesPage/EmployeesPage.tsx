@@ -26,8 +26,6 @@ export const EmployeesPage: FC = () => {
   const [searchedName, setSearchedName] = useState<string>('')
   const deferredValue = useDeferredValue(searchedName)
 
-  const { data, loading, error } = useQuery<IUsersResult>(GET_EMPLOYEES)
-
   const handleSearchUser = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setSearchedName(event.target.value)
   }

@@ -4,17 +4,8 @@ export interface IAppSelectProps<T> {
   items?: T[]
 }
 
-export interface IProficiency {
+export interface IAppSelectItemProps {
   id: string
   name: string
 }
 
-export interface IMastery {
-  id: string
-  name: string
-}
-
-export interface IMastery {
-  id: string
-  name: string
-}
