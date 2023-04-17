@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { useMutation } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Container } from '@mui/material'
@@ -18,6 +19,7 @@ import {
 import { IDepartmentUpdateModalProps } from './DepartmentUpdateModal.interfaces'
 
 export const DepartmentUpdateModal: FC<IDepartmentUpdateModalProps> = ({ department, onClose }) => {
+  const { t } = useTranslation()
   const [updateUpdateMutation, { loading: updateUpdateLoading }] = useMutation(UPDATE_DEPARTMENT, {
     refetchQueries: [{ query: DEPARTMENTS }]
   })
@@ -53,9 +55,9 @@ export const DepartmentUpdateModal: FC<IDepartmentUpdateModalProps> = ({ departm
         <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
           <Input
             variant="outlined"
-            label="Name"
+            label={t('Name')}
             error={!!errors[FORM_DEPARTMENT_KEYS.name]}
-            helperText={errors?.[FORM_DEPARTMENT_KEYS.name]?.message}
+            helperText={t(errors?.[FORM_DEPARTMENT_KEYS.name]?.message as string)}
             {...register(FORM_DEPARTMENT_KEYS.name)}
           />
           <Button
@@ -64,7 +66,7 @@ export const DepartmentUpdateModal: FC<IDepartmentUpdateModalProps> = ({ departm
             loading={updateUpdateLoading}
             disabled={!isDirty && isValid}
           >
-            Update department
+            {t('Update')}
           </Button>
         </form>
       </Container>

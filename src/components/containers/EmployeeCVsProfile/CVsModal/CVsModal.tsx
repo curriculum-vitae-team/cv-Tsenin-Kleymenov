@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router'
 import { useMutation, useQuery } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -23,6 +24,7 @@ import { FORM_PROFILE_CVS_KEYS, IProfileCVsFormValues } from './CVsModal.interfa
 
 
 export const CVsModal: FC<ICVsModalProps> = ({ currentCVData, onClose }) => {
+  const { t } = useTranslation()
   const { id: userId } = useParams()
 
   const { data: CVData, loading: CVLoading } = useQuery<ICVResult>(CV, {
@@ -73,16 +75,16 @@ export const CVsModal: FC<ICVsModalProps> = ({ currentCVData, onClose }) => {
           <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
             <Input
               variant="outlined"
-              label="Name"
+              label={t('Name')}
               error={!!errors[FORM_PROFILE_CVS_KEYS.name]}
-              helperText={errors?.[FORM_PROFILE_CVS_KEYS.name]?.message}
+              helperText={t(errors?.[FORM_PROFILE_CVS_KEYS.name]?.message as string)}
               {...register(FORM_PROFILE_CVS_KEYS.name)}
             />
             <Input
               variant="outlined"
-              label="Description"
+              label={t('Description')}
               error={!!errors[FORM_PROFILE_CVS_KEYS.description]}
-              helperText={errors?.[FORM_PROFILE_CVS_KEYS.description]?.message}
+              helperText={t(errors?.[FORM_PROFILE_CVS_KEYS.description]?.message as string)}
               {...register(FORM_PROFILE_CVS_KEYS.description)}
             />
             <Controller
@@ -90,7 +92,7 @@ export const CVsModal: FC<ICVsModalProps> = ({ currentCVData, onClose }) => {
               name={FORM_PROFILE_CVS_KEYS.template}
               render={({ field: { value, onChange, onBlur } }) => (
                 <FormControlLabel
-                  label="Template"
+                  label={t('Template')}
                   control={<Checkbox checked={value} onChange={onChange} onBlur={onBlur} />}
                 />
               )}
@@ -101,7 +103,7 @@ export const CVsModal: FC<ICVsModalProps> = ({ currentCVData, onClose }) => {
               loading={updateCVLoading}
               disabled={!isDirty && isValid}
             >
-              Save
+              {t('Save')}
             </Button>
           </form>
         </Container>

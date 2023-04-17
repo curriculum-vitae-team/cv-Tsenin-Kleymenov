@@ -1,4 +1,4 @@
-import { IColumn } from '@/constants/tablesData/Column.interfaces'
+import { IColumn } from '@/appTypes/Column.interfaces'
 import { IProject } from '@/graphql/interfaces/IProject.interfaces'
 import { ProjectDropdown } from '@/pages/ProjectsPage/ProjectDropdown/ProjectDropdown'
 
@@ -11,7 +11,7 @@ export const tableColumns: IColumn<IProject>[] = [
   },
   {
     id: 2,
-    header: 'Internal Name',
+    header: 'Internal name',
     field: 'internal_name',
     sortable: true
   },
@@ -23,20 +23,20 @@ export const tableColumns: IColumn<IProject>[] = [
   },
   {
     id: 4,
-    header: 'Start Date',
+    header: 'Start date',
     field: 'start_date',
     sortable: true
   },
   {
     id: 5,
-    header: 'End Date',
+    header: 'End date',
     field: 'end_date',
     render: item => <>{!item.end_date ? 'Till now' : item.end_date}</>,
     sortable: true
   },
   {
     id: 6,
-    header: 'Team Size',
+    header: 'Team size',
     field: 'team_size',
     sortable: true
   },

@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { useMutation } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Container } from '@mui/material'
@@ -18,6 +19,7 @@ import {
 import { IPositionUpdateModalProps } from './PositionUpdateModal.interfaces'
 
 export const PositionUpdateModal: FC<IPositionUpdateModalProps> = ({ position, onClose }) => {
+  const { t } = useTranslation()
   const [updatePositionMutation, { loading: updatePositionLoading }] = useMutation(
     UPDATE_POSITION,
     {
@@ -56,9 +58,9 @@ export const PositionUpdateModal: FC<IPositionUpdateModalProps> = ({ position, o
         <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
           <Input
             variant="outlined"
-            label="Name"
+            label={t('Name')}
             error={!!errors[FORM_POSITION_KEYS.name]}
-            helperText={errors?.[FORM_POSITION_KEYS.name]?.message}
+            helperText={t(errors?.[FORM_POSITION_KEYS.name]?.message as string)}
             {...register(FORM_POSITION_KEYS.name)}
           />
           <Button
@@ -67,7 +69,7 @@ export const PositionUpdateModal: FC<IPositionUpdateModalProps> = ({ position, o
             loading={updatePositionLoading}
             disabled={!isDirty && isValid}
           >
-            Update position
+            {t('Update')}
           </Button>
         </form>
       </Container>

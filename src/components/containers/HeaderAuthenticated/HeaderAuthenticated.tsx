@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { Container } from '@mui/material'
 
+import { LanguageMenu } from '@/components/containers/LanguageMenu/LanguageMenu'
 import { HeaderWrapper } from '@/components/views/HeaderWrapper/HeaderWrapper'
 import { SideMenu } from '@/components/views/SideMenu/SideMenu'
 import { UserMenu } from '@/components/views/UserMenu/UserMenu'
@@ -13,7 +14,10 @@ export const HeaderAuthenticated: FC = () => {
       <Container maxWidth="xl">
         <HeaderMenuWrapper>
           <SideMenu />
-          <UserMenu />
+          <div style={{ display: 'flex' }}>
+            <UserMenu />
+            <LanguageMenu />
+          </div>
         </HeaderMenuWrapper>
       </Container>
     </HeaderWrapper>

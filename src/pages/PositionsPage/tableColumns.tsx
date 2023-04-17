@@ -1,11 +1,11 @@
-import { IColumn } from '@/constants/tablesData/Column.interfaces'
+import { IColumn } from '@/appTypes/Column.interfaces'
 import { IPosition } from '@/graphql/interfaces/IPosition.interfaces'
 import { PositionDropdown } from '@/pages/PositionsPage/PositionDropdown/PositionDropdown'
 
 export const tableColumns: IColumn<IPosition>[] = [
   {
     id: 1,
-    header: 'Position Name',
+    header: 'Position name',
     field: 'name',
     sortable: true
   },

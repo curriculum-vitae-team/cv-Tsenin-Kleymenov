@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { useMutation, useQuery } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Container } from '@mui/material'
@@ -21,6 +22,8 @@ import { GET_EMPLOYEES } from '@/graphql/users/usersQuery'
 import { FORM_EMPLOYEES_KEYS, IEmployeesFormValues } from '../EmployeesPage.interfaces'
 
 export const EmployeeCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
+  const { t } = useTranslation()
+
   const [createUserMutation, { loading: createUserLoading }] = useMutation(CREATE_USER, {
     refetchQueries: [{ query: GET_EMPLOYEES }]
   })
@@ -70,56 +73,55 @@ export const EmployeeCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
         <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
           <Input
             variant="outlined"
-            label="Email"
+            label={t('Email')}
             error={!!errors[FORM_EMPLOYEES_KEYS.email]}
-            helperText={errors?.[FORM_EMPLOYEES_KEYS.email]?.message}
+            helperText={t(errors?.[FORM_EMPLOYEES_KEYS.email]?.message as string)}
             {...register(FORM_EMPLOYEES_KEYS.email)}
           />
           <PasswordInput
-            label="Password"
-            placeholder=" Enter your password"
+            label={t('Password')}
             error={!!errors[FORM_EMPLOYEES_KEYS.password]}
-            helperText={errors?.[FORM_EMPLOYEES_KEYS.password]?.message}
+            helperText={t(errors?.[FORM_EMPLOYEES_KEYS.password]?.message as string)}
             {...register(FORM_EMPLOYEES_KEYS.password)}
           />
           <Input
             variant="outlined"
-            label="First name"
+            label={t('First name')}
             error={!!errors[FORM_EMPLOYEES_KEYS.first_name]}
-            helperText={errors?.[FORM_EMPLOYEES_KEYS.first_name]?.message}
+            helperText={t(errors?.[FORM_EMPLOYEES_KEYS.first_name]?.message as string)}
             {...register(FORM_EMPLOYEES_KEYS.first_name)}
           />
           <Input
             variant="outlined"
-            label="Last name"
+            label={t('Last name')}
             error={!!errors[FORM_EMPLOYEES_KEYS.last_name]}
-            helperText={errors?.[FORM_EMPLOYEES_KEYS.last_name]?.message}
+            helperText={t(errors?.[FORM_EMPLOYEES_KEYS.last_name]?.message as string)}
             {...register(FORM_EMPLOYEES_KEYS.last_name)}
           />
           <AppSelect
             variant="outlined"
-            label="Department"
-            defaultValue=''
+            label={t('Department')}
+            defaultValue=""
             loading={departmentsLoading}
             items={departmentsData?.departments}
             error={!!errors[FORM_EMPLOYEES_KEYS.department]}
-            helperText={errors?.[FORM_EMPLOYEES_KEYS.department]?.message}
+            helperText={t(errors?.[FORM_EMPLOYEES_KEYS.department]?.message as string)}
             {...register(FORM_EMPLOYEES_KEYS.department)}
           />
           <AppSelect
             variant="outlined"
-            label="Position"
-            defaultValue=''
+            label={t('Position')}
+            defaultValue=""
             loading={positionsLoading}
             items={positionsData?.positions}
             error={!!errors[FORM_EMPLOYEES_KEYS.position]}
-            helperText={errors?.[FORM_EMPLOYEES_KEYS.position]?.message}
+            helperText={t(errors?.[FORM_EMPLOYEES_KEYS.position]?.message as string)}
             {...register(FORM_EMPLOYEES_KEYS.position)}
           />
           <AppSelect
             variant="outlined"
-            label="Role"
-            defaultValue=''
+            label={t('Role')}
+            defaultValue=""
             items={ROLE_ARRAY}
             error={!!errors[FORM_EMPLOYEES_KEYS.role]}
             helperText={errors?.[FORM_EMPLOYEES_KEYS.role]?.message}
@@ -131,7 +133,7 @@ export const EmployeeCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
             loading={createUserLoading}
             disabled={!isDirty && isValid}
           >
-            Create employee
+            {t('Create')}
           </Button>
         </form>
       </Container>

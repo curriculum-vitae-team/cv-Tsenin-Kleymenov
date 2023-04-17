@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useMutation, useReactiveVar } from '@apollo/client'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { Accordion, AccordionSummary, Box, Typography } from '@mui/material'
@@ -14,6 +15,7 @@ import { AccordionDetails, ButtonContainer } from './CVItem.styles'
 
 export const CVItem: FC<ICVsItemProps> = ({ CV, handleSetCurrentCV }) => {
   const user = useReactiveVar(authService.user$)
+  const { t } = useTranslation()
 
   const [unbindCVMutation] = useMutation(UNBIND_CV, {
     refetchQueries: [{ query: USER, variables: { id: user?.id } }]
@@ -32,15 +34,15 @@ export const CVItem: FC<ICVsItemProps> = ({ CV, handleSetCurrentCV }) => {
       </AccordionSummary>
       <AccordionDetails>
         <Box sx={{ color: 'inherit' }}>
-          <Typography>Name:{CV.name}</Typography>
-          <Typography>Description:{CV.description}</Typography>
+          <Typography>{`${t('Name')}:${CV.name}`}</Typography>
+          <Typography>{`${t('Description')}:${CV.description}`}</Typography>
         </Box>
         <ButtonContainer>
           <Button variant="contained" onClick={() => handleSetCurrentCV(CV)}>
-            Edit
+            {t('Edit')}
           </Button>
           <Button variant="contained" onClick={() => unbindCV(CV.id)}>
-            Unassign
+            {t('Unassign')}
           </Button>
         </ButtonContainer>
       </AccordionDetails>

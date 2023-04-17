@@ -53,12 +53,12 @@ export const FORM_PROFILE_SCHEMA = yup.object().shape({
     .string()
     .matches(/^([^0-9]*)$/, 'First name should not contain numbers')
     .matches(/^\S+$/, 'First name should not contain spaces')
-    .required('First Name is a required field'),
+    .required('First name is a required field'),
   [FORM_PROFILE_KEYS.lastName]: yup
     .string()
     .matches(/^([^0-9]*)$/, 'Last name should not contain numbers')
-    .matches(/^\S+$/, 'First name should not contain spaces')
-    .required('Last Name is a required field'),
+    .matches(/^\S+$/, 'Last name should not contain spaces')
+    .required('Last name is a required field'),
   [FORM_PROFILE_KEYS.department]: yup.string().required('Department is a required field'),
   [FORM_PROFILE_KEYS.position]: yup.string().required('Position is a required field')
 })

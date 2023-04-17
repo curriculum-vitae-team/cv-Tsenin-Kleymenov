@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useMutation, useReactiveVar } from '@apollo/client'
 import { Box, MenuItem } from '@mui/material'
 
@@ -15,6 +16,7 @@ import { IDepartmentDropdownProps } from './DepartmentDropdown.interfaces'
 export const DepartmentDropdown: FC<IDepartmentDropdownProps> = ({ department }) => {
   const user = useReactiveVar(authService.user$)
   const isAdmin = user?.role === ROLE.admin
+  const { t } = useTranslation()
   const [isVisible, toggleVisibility] = useBooleanState()
 
   const [deleteDepartmentMutation] = useMutation(DELETE_DEPARTMENT, {
@@ -31,8 +33,8 @@ export const DepartmentDropdown: FC<IDepartmentDropdownProps> = ({ department })
     <Box style={{ display: 'flex', justifyContent: 'flex-end' }}>
       {isAdmin && (
         <BasicMenu>
-          <MenuItem onClick={toggleVisibility}>Update</MenuItem>
-          <MenuItem onClick={handleDepartmentDelete}>Delete</MenuItem>
+          <MenuItem onClick={toggleVisibility}>{t('Update')}</MenuItem>
+          <MenuItem onClick={handleDepartmentDelete}>{t('Delete')}</MenuItem>
         </BasicMenu>
       )}
       {isVisible && <DepartmentUpdateModal department={department} onClose={toggleVisibility} />}

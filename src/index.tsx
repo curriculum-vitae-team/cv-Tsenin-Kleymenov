@@ -7,6 +7,8 @@ import { ThemeProvider } from '@mui/material'
 import { client } from '@/graphql/auth/client'
 import { theme } from '@/theme/theme'
 
+import './i18n/i18n'
+
 import App from './App'
 
 import './styles/index.css'

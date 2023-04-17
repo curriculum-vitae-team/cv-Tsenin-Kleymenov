@@ -1,4 +1,5 @@
 import { FC, useDeferredValue, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useQuery, useReactiveVar } from '@apollo/client'
 import SearchIcon from '@mui/icons-material/Search'
 import { Box, Divider } from '@mui/material'
@@ -25,6 +26,7 @@ export const EmployeesPage: FC = () => {
 
   const [searchedName, setSearchedName] = useState<string>('')
   const deferredValue = useDeferredValue(searchedName)
+  const { t } = useTranslation()
 
   const handleSearchUser = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setSearchedName(event.target.value)
@@ -53,7 +55,7 @@ export const EmployeesPage: FC = () => {
         />
         {isAdmin && (
           <Button sx={{ maxWidth: 100 }} variant="contained" onClick={toggleVisibility}>
-            Create
+            {t('Create')}
           </Button>
         )}
       </Box>

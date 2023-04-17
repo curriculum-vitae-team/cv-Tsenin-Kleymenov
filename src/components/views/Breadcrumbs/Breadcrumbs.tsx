@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useLocation } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
@@ -15,6 +16,7 @@ import { BreadcrumbsQuery } from './queries'
 
 export const AppBreadcrumbs: FC<IAppBreadcrumbsProps> = ({ id }) => {
   const location = useLocation()
+  const { t } = useTranslation()
 
   const { data } = useQuery(BreadcrumbsQuery[location.state] || USER, {
     variables: { id }
@@ -28,7 +30,7 @@ export const AppBreadcrumbs: FC<IAppBreadcrumbsProps> = ({ id }) => {
     <Breadcrumbs sx={{ my: 2 }} color="secondary" separator={<NavigateNextIcon />}>
       <BreadcrumbsLink to={AppNavigationRoutes.EMPLOYEES}>
         <HomeIcon sx={{ mr: 1 }} />
-        Home
+        {t('Home')}
       </BreadcrumbsLink>
       {pathnameArray.map((item, index, arr) => {
         if (item === id && index !== arr.length - 1) {
@@ -59,7 +61,7 @@ export const AppBreadcrumbs: FC<IAppBreadcrumbsProps> = ({ id }) => {
           >
             {item === id && index === arr.length - 1
               ? data?.project.name
-              : item.charAt(0).toUpperCase() + item.slice(1, item.length)}
+              : t(item.charAt(0).toUpperCase() + item.slice(1, item.length))}
           </BreadcrumbsLink>
         )
       })}

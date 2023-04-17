@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useMutation, useReactiveVar } from '@apollo/client'
 import { MenuItem } from '@mui/material'
@@ -17,6 +18,7 @@ export const CVDropdown: FC<ICVDropdownProps> = ({ CV }) => {
   const user = useReactiveVar(authService.user$)
   const userCheck = CV?.user?.id === user?.id
   const isAdmin = user?.role === ROLE.admin
+  const { t } = useTranslation()
 
   const [deleteCVMutation] = useMutation(DELETE_CV, {
     refetchQueries: [{ query: GET_CVS }]
@@ -33,8 +35,8 @@ export const CVDropdown: FC<ICVDropdownProps> = ({ CV }) => {
   }
   return (
     <BasicMenu>
-      <MenuItem onClick={handleOpenCv}>CV Details</MenuItem>
-      {(userCheck || isAdmin) && <MenuItem onClick={handleCVDelete}>Delete CV</MenuItem>}
+      <MenuItem onClick={handleOpenCv}>{t('Details')}</MenuItem>
+      {(userCheck || isAdmin) && <MenuItem onClick={handleCVDelete}>{t('Delete')}</MenuItem>}
     </BasicMenu>
   )
 }

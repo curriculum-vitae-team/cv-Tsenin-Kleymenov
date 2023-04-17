@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Box, Chip, Divider, Typography } from '@mui/material'
 
 import { RowInfo } from '@/components/views/RowInfo/RowInfo'
@@ -6,6 +7,8 @@ import { RowInfo } from '@/components/views/RowInfo/RowInfo'
 import { ICVDetailItemProps } from './CVDetailItem.interfaces'
 
 export const CVDetailItem: FC<ICVDetailItemProps> = ({ CVData }) => {
+  const { t } = useTranslation()
+
   return (
     <>
       <RowInfo title="Name" info={CVData?.name} />
@@ -13,7 +16,7 @@ export const CVDetailItem: FC<ICVDetailItemProps> = ({ CVData }) => {
       <RowInfo title="User" info={CVData?.user?.profile?.full_name} />
       <RowInfo title="User position" info={CVData?.user?.position_name} />
       <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}>
-        <Typography sx={{ my: 1, fontSize: '24px' }}>Skills:</Typography>
+        <Typography sx={{ my: 1, fontSize: '24px' }}>{t('Skills')}:</Typography>
         {CVData?.skills.length ? (
           CVData?.skills.map(skill => (
             <Chip
@@ -32,7 +35,7 @@ export const CVDetailItem: FC<ICVDetailItemProps> = ({ CVData }) => {
       </Box>
       <Divider />
       <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}>
-        <Typography sx={{ my: 1, fontSize: '24px' }}>Languages:</Typography>
+        <Typography sx={{ my: 1, fontSize: '24px' }}>{t('Languages')}:</Typography>
         {CVData?.languages.length ? (
           CVData?.languages.map(language => (
             <Chip

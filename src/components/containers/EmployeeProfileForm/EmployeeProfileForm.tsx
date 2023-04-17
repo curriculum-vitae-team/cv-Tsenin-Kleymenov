@@ -1,5 +1,6 @@
 import { FC, useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { useMutation, useQuery, useReactiveVar } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Box, Container, Grid, Typography } from '@mui/material'
@@ -28,6 +29,7 @@ import {
 export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser }) => {
   const user = useReactiveVar(authService.user$)
   const userCheck = currentUser?.id === user?.id
+  const { t } = useTranslation()
   const isAdmin = user?.role === ROLE.admin
   const { loading: departmentsLoading, data: departmentsData } =
     useQuery<IDepartmentResult>(DEPARTMENTS)
@@ -81,11 +83,11 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
       <EmployeeAvatarUpload />
       <Box sx={{ minHeight: 150 }}>
         <LoadingOverlay active={userLoading}>
-          <Typography>{currentUser?.profile.full_name}</Typography>
-          <Typography>{currentUser?.email}</Typography>
-          <Typography>{`Department: ${currentUser?.department_name || '-'}`}</Typography>
-          <Typography>{`Position: ${currentUser?.position_name || '-'}`}</Typography>
-          <Typography>{`A member since ${convertCreatedAtDate(
+          <Typography>{`${t('Full name')}: ${currentUser?.profile.full_name || '-'}`}</Typography>
+          <Typography>{`${t('Email')}: ${currentUser?.email || '-'}`}</Typography>
+          <Typography>{`${t('Department')}: ${currentUser?.department_name || '-'}`}</Typography>
+          <Typography>{`${t('Position')}: ${currentUser?.position_name || '-'}`}</Typography>
+          <Typography>{`${t('A member since')}: ${convertCreatedAtDate(
             currentUser?.created_at
           )}`}</Typography>
         </LoadingOverlay>
@@ -97,20 +99,20 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
               <Input
                 type="text"
                 variant="outlined"
-                label="First Name"
-                placeholder=" Enter your First Name"
+                label={t('First name')}
+                placeholder={t('Enter your first name') as string}
                 error={!!errors[FORM_PROFILE_KEYS.firstName]}
-                helperText={errors?.[FORM_PROFILE_KEYS.firstName]?.message}
+                helperText={t(errors?.[FORM_PROFILE_KEYS.firstName]?.message as string)}
                 {...register(FORM_PROFILE_KEYS.firstName)}
               />
               <AppSelect
                 variant="outlined"
-                label="Department"
-                defaultValue=''
+                label={t('Department')}
+                defaultValue={''}
                 loading={departmentsLoading}
                 items={departmentsData?.departments}
                 error={!!errors[FORM_PROFILE_KEYS.department]}
-                helperText={errors?.[FORM_PROFILE_KEYS.department]?.message}
+                helperText={t(errors?.[FORM_PROFILE_KEYS.department]?.message as string)}
                 {...register(FORM_PROFILE_KEYS.department)}
               />
             </Grid>
@@ -118,20 +120,20 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
               <Input
                 type="text"
                 variant="outlined"
-                label="Last Name"
-                placeholder="Enter your Last Name"
+                label={t('Last name')}
+                placeholder={t('Enter your last name') as string}
                 error={!!errors[FORM_PROFILE_KEYS.lastName]}
-                helperText={errors?.[FORM_PROFILE_KEYS.lastName]?.message}
+                helperText={t(errors?.[FORM_PROFILE_KEYS.lastName]?.message as string)}
                 {...register(FORM_PROFILE_KEYS.lastName)}
               />
               <AppSelect
                 variant="outlined"
-                label="Position"
-                defaultValue=''
+                label={t('Position')}
+                defaultValue={''}
                 loading={positionsLoading}
                 items={positionsData?.positions}
                 error={!!errors[FORM_PROFILE_KEYS.position]}
-                helperText={errors?.[FORM_PROFILE_KEYS.position]?.message}
+                helperText={t(errors?.[FORM_PROFILE_KEYS.position]?.message as string)}
                 {...register(FORM_PROFILE_KEYS.position)}
               />
               <Button
@@ -140,7 +142,7 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
                 loading={userLoading}
                 disabled={!isDirty && isValid}
               >
-                Confirm
+                {t('Confirm')}
               </Button>
             </Grid>
           </Grid>

@@ -1,5 +1,6 @@
+import { IColumn } from '@/appTypes/Column.interfaces'
+import { EmployeesDropdown } from '@/components/containers/EmployeesDropdown/EmployeesDropdown'
 import { UserAvatar } from '@/components/views/UserAvatar/UserAvatar'
-import { IColumn } from '@/constants/tablesData/Column.interfaces'
 import { IUser } from '@/graphql/interfaces/IUser.interfaces'
 import { EmployeeDropdown } from '@/pages/EmployeesPage/EmployeeDropdown/EmployeeDropdown'
 
@@ -12,13 +13,13 @@ export const tableColumns: IColumn<IUser>[] = [
   },
   {
     id: 2,
-    header: 'First Name',
+    header: 'First name',
     field: 'profile.first_name',
     sortable: true
   },
   {
     id: 3,
-    header: 'Last Name',
+    header: 'Last name',
     field: 'profile.last_name',
     sortable: true
   },

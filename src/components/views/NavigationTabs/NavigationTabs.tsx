@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link, useLocation } from 'react-router-dom'
 import { Tab } from '@mui/material'
 
@@ -14,13 +15,14 @@ export const NavigationTabs: FC<INavigationTabsProps> = ({
   textColor
 }) => {
   const location = useLocation()
+  const { t } = useTranslation()
 
   return (
     <AppTabs textColor={textColor} value={filterRoutPath(location.pathname, tabs) || defaultValue}>
       {tabs.map(({ label, path }) => (
         <Tab
           key={label}
-          label={label}
+          label={t(label)}
           value={path}
           component={Link}
           to={path}

@@ -1,4 +1,5 @@
 import { FC, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { useQuery, useReactiveVar } from '@apollo/client'
 import SearchIcon from '@mui/icons-material/Search'
@@ -22,6 +23,7 @@ export const CVProjectsPage: FC = () => {
   const [isVisible, toggleVisibility] = useBooleanState()
   const [searchedName, setSearchedName] = useState<string>('')
   const user = useReactiveVar(authService.user$)
+  const { t } = useTranslation()
 
   const {
     data: CVData,
@@ -60,11 +62,11 @@ export const CVProjectsPage: FC = () => {
           style={{ marginBottom: '20px' }}
           value={searchedName}
           onChange={handleSearchUser}
-          placeholder="Search"
+          placeholder={t('Search') as string}
         />
         {(userCheck || isAdmin) && (
           <Button sx={{ maxWidth: 150 }} variant="contained" onClick={toggleVisibility}>
-            Update
+            {t('Update')}
           </Button>
         )}
       </Box>

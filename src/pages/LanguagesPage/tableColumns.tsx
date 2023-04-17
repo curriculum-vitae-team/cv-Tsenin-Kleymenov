@@ -1,4 +1,4 @@
-import { IColumn } from '@/constants/tablesData/Column.interfaces'
+import { IColumn } from '@/appTypes/Column.interfaces'
 import { ILanguage } from '@/graphql/interfaces/ILanguage.interfaces'
 
 import { LanguageDropdown } from './LanguageDropdown/LanguageDropdown'

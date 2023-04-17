@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useMutation, useReactiveVar } from '@apollo/client'
 import { Box, MenuItem } from '@mui/material'
 
@@ -15,6 +16,7 @@ import { ISkillDropdownProps } from './SkillDropdown.interfaces'
 export const SkillDropdown: FC<ISkillDropdownProps> = ({ skill }) => {
   const user = useReactiveVar(authService.user$)
   const isAdmin = user?.role === ROLE.admin
+  const { t } = useTranslation()
   const [isVisible, toggleVisibility] = useBooleanState()
 
   const [deleteSkillMutation] = useMutation(DELETE_SKILL, {
@@ -31,8 +33,8 @@ export const SkillDropdown: FC<ISkillDropdownProps> = ({ skill }) => {
     <Box style={{ display: 'flex', justifyContent: 'flex-end' }}>
       {isAdmin && (
         <BasicMenu>
-          <MenuItem onClick={toggleVisibility}>Update</MenuItem>
-          <MenuItem onClick={handleSkillDelete}>Delete</MenuItem>
+          <MenuItem onClick={toggleVisibility}>{t('Update')}</MenuItem>
+          <MenuItem onClick={handleSkillDelete}>{t('Delete')}</MenuItem>
         </BasicMenu>
       )}
       {isVisible && <SkillUpdateModal skill={skill} onClose={toggleVisibility} />}

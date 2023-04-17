@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useMutation, useReactiveVar } from '@apollo/client'
 import { MenuItem } from '@mui/material'
@@ -16,6 +17,7 @@ export const EmployeeDropdown: FC<IEmployeeDropdownProps> = ({ employee }) => {
   const navigate = useNavigate()
   const user = useReactiveVar(authService.user$)
   const isAdmin = user?.role === ROLE.admin
+  const { t } = useTranslation()
 
   const [deleteUserMutation] = useMutation(DELETE_USER, {
     refetchQueries: [{ query: GET_EMPLOYEES }]
@@ -34,8 +36,8 @@ export const EmployeeDropdown: FC<IEmployeeDropdownProps> = ({ employee }) => {
 
   return (
     <BasicMenu>
-      <MenuItem onClick={handleOpenEmployee}>Profile</MenuItem>
-      {isAdmin && <MenuItem onClick={handleUserDelete}>Delete</MenuItem>}
+      <MenuItem onClick={handleOpenEmployee}>{t('Profile')}</MenuItem>
+      {isAdmin && <MenuItem onClick={handleUserDelete}>{t('Delete')}</MenuItem>}
     </BasicMenu>
   )
 }

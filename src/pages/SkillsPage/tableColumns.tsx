@@ -1,4 +1,4 @@
-import { IColumn } from '@/constants/tablesData/Column.interfaces'
+import { IColumn } from '@/appTypes/Column.interfaces'
 import { ISkill } from '@/graphql/interfaces/ISkill.interfaces'
 
 import { SkillDropdown } from './SkillDropdown/SkillDropdown'

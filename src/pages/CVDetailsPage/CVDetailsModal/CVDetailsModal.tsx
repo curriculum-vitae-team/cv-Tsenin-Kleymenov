@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
-import { useMutation, useReactiveVar } from '@apollo/client'
+import { useTranslation } from 'react-i18next'
+import { useMutation } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Checkbox, Container, FormControlLabel } from '@mui/material'
 
@@ -8,7 +9,6 @@ import { Button } from '@/components/views/Button/Button'
 import { Input } from '@/components/views/Input/Input'
 import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
 import { FORM_PROFILE_CVS_SCHEMA } from '@/constants/schemaOptions'
-import { authService } from '@/graphql/auth/authService'
 import { CV } from '@/graphql/cv/CVQuery'
 import { UPDATE_CV } from '@/graphql/cv/updateCVMutation'
 import { createLanguagesArray } from '@/utils/createLanguagesArray'
@@ -22,7 +22,7 @@ import {
 } from './CVDetailsModal.interfaces'
 
 export const CVDetailsModal: FC<ICVDetailsModalProps> = ({ CVData, onClose }) => {
-  const user = useReactiveVar(authService.user$)
+  const { t } = useTranslation()
 
   const [updateCVMutation, { loading: updateCVLoading }] = useMutation(UPDATE_CV, {
     refetchQueries: [{ query: CV, variables: { id: CVData?.id } }]
@@ -50,7 +50,7 @@ export const CVDetailsModal: FC<ICVDetailsModalProps> = ({ CVData, onClose }) =>
         cv: {
           name: formData[FORM_PROFILE_CVS_KEYS.name],
           description: formData[FORM_PROFILE_CVS_KEYS.description],
-          userId: user?.id,
+          userId: CVData?.user.id,
           projectsIds: createProjectsIdArray(CVData?.projects),
           skills: createSkillsArray(CVData?.skills),
           languages: createLanguagesArray(CVData?.languages),
@@ -70,14 +70,14 @@ export const CVDetailsModal: FC<ICVDetailsModalProps> = ({ CVData, onClose }) =>
             variant="outlined"
             label="Name"
             error={!!errors[FORM_PROFILE_CVS_KEYS.name]}
-            helperText={errors?.[FORM_PROFILE_CVS_KEYS.name]?.message}
+            helperText={t(errors?.[FORM_PROFILE_CVS_KEYS.name]?.message as string)}
             {...register(FORM_PROFILE_CVS_KEYS.name)}
           />
           <Input
             variant="outlined"
             label="Description"
             error={!!errors[FORM_PROFILE_CVS_KEYS.description]}
-            helperText={errors?.[FORM_PROFILE_CVS_KEYS.description]?.message}
+            helperText={t(errors?.[FORM_PROFILE_CVS_KEYS.description]?.message as string)}
             {...register(FORM_PROFILE_CVS_KEYS.description)}
           />
           <Controller
@@ -96,7 +96,7 @@ export const CVDetailsModal: FC<ICVDetailsModalProps> = ({ CVData, onClose }) =>
             loading={updateCVLoading}
             disabled={!isDirty && isValid}
           >
-            Save
+            {t('Save')}
           </Button>
         </form>
       </Container>
