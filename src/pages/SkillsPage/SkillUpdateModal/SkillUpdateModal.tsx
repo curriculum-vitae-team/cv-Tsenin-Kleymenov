@@ -47,7 +47,7 @@ export const SkillUpdateModal: FC<ISkillUpdateModalProps> = ({ skill, onClose })
 
     onClose()
 
-    toastMessage('Successfully updated', TOAST_TYPES.success)
+    toastMessage(t('Successfully updated'), TOAST_TYPES.success)
   }
 
   return (

@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useMutation, useReactiveVar } from '@apollo/client'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
@@ -28,7 +28,7 @@ export const CVItem: FC<ICVsItemProps> = ({ CV, handleSetCurrentCV }) => {
       variables: { id: CVId }
     })
 
-    toastMessage('Successfully unassigned', TOAST_TYPES.success)
+    toastMessage(t('Successfully unassigned'), TOAST_TYPES.success)
   }
 
   return (

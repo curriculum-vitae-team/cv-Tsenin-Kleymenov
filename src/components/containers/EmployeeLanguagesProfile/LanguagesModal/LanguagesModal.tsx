@@ -76,7 +76,7 @@ export const LanguagesModal: FC<ILanguagesModalProps> = ({ userData, onClose }) 
 
     onClose()
 
-    toastMessage('Successfully added', TOAST_TYPES.success)
+    toastMessage(t('Successfully added'), TOAST_TYPES.success)
   }
 
   useEffect(() => {

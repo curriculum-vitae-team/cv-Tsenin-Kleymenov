@@ -68,7 +68,7 @@ export const EmployeeCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
 
     onClose()
 
-    toastMessage('Successfully created', TOAST_TYPES.success)
+    toastMessage(t('Successfully created'), TOAST_TYPES.success)
   }
 
   return (

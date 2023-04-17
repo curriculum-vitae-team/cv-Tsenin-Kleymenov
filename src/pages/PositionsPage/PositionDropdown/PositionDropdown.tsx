@@ -30,7 +30,7 @@ export const PositionDropdown: FC<IPositionDropdownProps> = ({ position }) => {
       variables: { id: position.id }
     })
 
-    toastMessage('Successfully deleted', TOAST_TYPES.success)
+    toastMessage(t('Successfully deleted'), TOAST_TYPES.success)
   }
 
   return (

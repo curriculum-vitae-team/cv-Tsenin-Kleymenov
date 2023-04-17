@@ -30,7 +30,7 @@ export const LanguageDropdown: FC<ILanguageDropdownProps> = ({ language }) => {
       variables: { id: language.id }
     })
 
-    toastMessage('Successfully deleted', TOAST_TYPES.success)
+    toastMessage(t('Successfully deleted'), TOAST_TYPES.success)
   }
 
   return (

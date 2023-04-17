@@ -67,7 +67,7 @@ export const CreateCVModal: FC<ICVsModalProps> = ({ onClose }) => {
 
     onClose()
 
-    toastMessage('Successfully created', TOAST_TYPES.success)
+    toastMessage(t('Successfully created'), TOAST_TYPES.success)
   })
 
   return (

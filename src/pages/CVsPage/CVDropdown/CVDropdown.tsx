@@ -35,7 +35,7 @@ export const CVDropdown: FC<ICVDropdownProps> = ({ CV }) => {
       variables: { id: CV.id }
     })
 
-    toastMessage('Successfully deleted', TOAST_TYPES.success)
+    toastMessage(t('Successfully deleted'), TOAST_TYPES.success)
   }
   return (
     <BasicMenu>

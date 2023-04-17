@@ -35,7 +35,7 @@ export const EmployeeDropdown: FC<IEmployeeDropdownProps> = ({ employee }) => {
       variables: { id: employee.id }
     })
 
-    toastMessage('Successfully deleted', TOAST_TYPES.success)
+    toastMessage(t('Successfully deleted'), TOAST_TYPES.success)
   }
 
   return (

@@ -53,7 +53,7 @@ export const PositionUpdateModal: FC<IPositionUpdateModalProps> = ({ position, o
 
     onClose()
 
-    toastMessage('Successfully updated', TOAST_TYPES.success)
+    toastMessage(t('Successfully updated'), TOAST_TYPES.success)
   }
 
   return (

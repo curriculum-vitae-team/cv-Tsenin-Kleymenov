@@ -30,7 +30,7 @@ export const SkillDropdown: FC<ISkillDropdownProps> = ({ skill }) => {
       variables: { id: skill.id }
     })
 
-    toastMessage('Successfully deleted', TOAST_TYPES.success)
+    toastMessage(t('Successfully deleted'), TOAST_TYPES.success)
   }
 
   return (

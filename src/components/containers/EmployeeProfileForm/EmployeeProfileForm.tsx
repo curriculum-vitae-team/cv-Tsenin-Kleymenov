@@ -72,7 +72,7 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
       }
     })
 
-    toastMessage('Successfully updated', TOAST_TYPES.success)
+    toastMessage(t('Successfully updated'), TOAST_TYPES.success)
   }
 
   useEffect(() => {

@@ -68,7 +68,7 @@ export const CVsModal: FC<ICVsModalProps> = ({ currentCVData, onClose }) => {
 
     onClose()
 
-    toastMessage('Successfully updated', TOAST_TYPES.success)
+    toastMessage(t('Successfully updated'), TOAST_TYPES.success)
   }
 
   return (

@@ -50,7 +50,7 @@ export const DepartmentUpdateModal: FC<IDepartmentUpdateModalProps> = ({ departm
 
     onClose()
 
-    toastMessage('Successfully updated', TOAST_TYPES.success)
+    toastMessage(t('Successfully updated'), TOAST_TYPES.success)
   }
 
   return (

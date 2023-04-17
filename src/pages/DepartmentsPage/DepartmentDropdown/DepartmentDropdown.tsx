@@ -30,7 +30,7 @@ export const DepartmentDropdown: FC<IDepartmentDropdownProps> = ({ department })
       variables: { id: department.id }
     })
 
-    toastMessage('Successfully deleted', TOAST_TYPES.success)
+    toastMessage(t('Successfully deleted'), TOAST_TYPES.success)
   }
 
   return (
