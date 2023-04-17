@@ -5,6 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { Checkbox, Container, FormControlLabel } from '@mui/material'
 
 import { IUserResult } from '@/appTypes/IResult.interfaces'
+import { ICVsModalProps } from '@/components/containers/EmployeeCVsProfile/CVsModal/CVsModal.interfaces'
 import { Button } from '@/components/views/Button/Button'
 import { Input } from '@/components/views/Input/Input'
 import { LoadingOverlay } from '@/components/views/LoadingOverlay/LoadingOverlay'
@@ -18,8 +19,6 @@ import { ICV } from '@/graphql/interfaces/ICv.interfaces'
 import { USER } from '@/graphql/user/userQuery'
 import { createLanguagesArray } from '@/utils/createLanguagesArray'
 import { createSkillsArray } from '@/utils/createSkillsArray'
-
-import { ICVsModalProps } from '../EmployeeCVsProfile/CVsModal/CVsModal.interfaces'
 
 import { FORM_CREATE_CV_KEYS, ICreateCVFormValues } from './CreateCVModal.interfaces'
 

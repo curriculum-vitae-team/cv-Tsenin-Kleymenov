@@ -69,7 +69,7 @@ export const LanguagesModal: FC<ILanguagesModalProps> = ({ userData, onClose }) 
         }
       }
     })
-    
+
     onClose()
   }
 

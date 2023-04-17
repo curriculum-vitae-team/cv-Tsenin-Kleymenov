@@ -22,10 +22,10 @@ export const SkillsPage: FC = () => {
   const [isVisible, toggleVisibility] = useBooleanState()
   const [searchedName, setSearchedName] = useState<string>('')
   const deferredValue = useDeferredValue(searchedName)
-  
+
   const { data, loading, error } = useQuery<ISkillsResult>(SKILLS)
 
-const handleSearchUser = (event: React.ChangeEvent<HTMLInputElement>): void => {
+  const handleSearchUser = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setSearchedName(event.target.value)
   }
 

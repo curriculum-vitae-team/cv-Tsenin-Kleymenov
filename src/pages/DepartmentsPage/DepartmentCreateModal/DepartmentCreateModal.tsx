@@ -39,7 +39,7 @@ export const DepartmentCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
         }
       }
     })
-    
+
     onClose()
   }
 

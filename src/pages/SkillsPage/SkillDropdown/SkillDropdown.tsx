@@ -16,7 +16,7 @@ export const SkillDropdown: FC<ISkillDropdownProps> = ({ skill }) => {
   const user = useReactiveVar(authService.user$)
   const isAdmin = user?.role === ROLE.admin
   const [isVisible, toggleVisibility] = useBooleanState()
- 
+
   const [deleteSkillMutation] = useMutation(DELETE_SKILL, {
     refetchQueries: [{ query: SKILLS }]
   })

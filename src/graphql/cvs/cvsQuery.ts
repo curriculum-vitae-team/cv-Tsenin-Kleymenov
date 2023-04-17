@@ -8,6 +8,7 @@ export const GET_CVS = gql`
       name
       description
       user {
+        id
         email
       }
       projects {

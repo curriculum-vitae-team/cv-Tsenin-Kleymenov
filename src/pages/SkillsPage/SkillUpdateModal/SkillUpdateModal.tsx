@@ -40,7 +40,7 @@ export const SkillUpdateModal: FC<ISkillUpdateModalProps> = ({ skill, onClose })
         }
       }
     })
-    
+
     onClose()
   }
 
