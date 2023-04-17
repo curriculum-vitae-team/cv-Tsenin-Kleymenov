@@ -102,7 +102,7 @@ export const EmployeeAvatarUpload: FC = () => {
               <Box sx={{ display: 'flex' }}>
                 <FileUploadIcon sx={{ mr: 1 }} />
                 <Typography sx={{ textTransform: 'uppercase' }}>
-                  {t('upload avatar image')}
+                  {t('Upload avatar image')}
                 </Typography>
               </Box>
               <Typography>png, jpg or gif {t('no more than')} 0.5MB</Typography>

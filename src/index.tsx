@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import { ApolloProvider } from '@apollo/client'
@@ -9,7 +9,6 @@ import { theme } from '@/theme/theme'
 
 import './i18n/i18n'
 
-import { Loader } from './components/views/Loader/Loader'
 import App from './App'
 
 import './styles/index.css'
@@ -20,9 +19,7 @@ root.render(
     <BrowserRouter>
       <ApolloProvider client={client}>
         <ThemeProvider theme={theme}>
-          <Suspense fallback={<Loader />}>
-            <App />
-          </Suspense>
+          <App />
         </ThemeProvider>
       </ApolloProvider>
     </BrowserRouter>

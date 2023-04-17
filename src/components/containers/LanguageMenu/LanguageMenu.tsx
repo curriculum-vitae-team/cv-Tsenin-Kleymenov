@@ -3,7 +3,6 @@ import LanguageIcon from '@mui/icons-material/Language'
 import { IconButton, Menu } from '@mui/material'
 
 import { ILanguageMenuProps } from './LanguageMenu.interfaces'
-import { MenuWrapper } from './LanguageMenu.styles'
 
 export const LanguageMenu: FC<ILanguageMenuProps> = ({ children }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
@@ -17,7 +16,7 @@ export const LanguageMenu: FC<ILanguageMenuProps> = ({ children }) => {
   }
 
   return (
-    <MenuWrapper>
+    <>
       <IconButton aria-label="more" color="primary" onClick={handleClick}>
         <LanguageIcon />
       </IconButton>
@@ -39,6 +38,6 @@ export const LanguageMenu: FC<ILanguageMenuProps> = ({ children }) => {
       >
         {children && Children.map(children, child => <div onClick={handleClose}>{child}</div>)}
       </Menu>
-    </MenuWrapper>
+    </>
   )
 }
