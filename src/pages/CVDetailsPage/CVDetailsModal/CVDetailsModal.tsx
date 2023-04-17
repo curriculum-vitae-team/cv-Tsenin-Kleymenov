@@ -98,7 +98,7 @@ export const CVDetailsModal: FC<ICVDetailsModalProps> = ({ CVData, onClose }) =>
             loading={updateCVLoading}
             disabled={!isDirty && isValid}
           >
-            Save
+            {t('Save')}
           </Button>
         </form>
       </Container>

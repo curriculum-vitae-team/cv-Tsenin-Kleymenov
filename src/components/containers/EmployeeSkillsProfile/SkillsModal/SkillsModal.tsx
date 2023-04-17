@@ -106,7 +106,7 @@ export const SkillsModal: FC<ISkillsModalProps> = ({ userData, onClose }) => {
             {...register(FORM_PROFILE_SKILLS_KEYS.mastery)}
           />
           <Button loading={userLoading} type="submit" variant="contained" disabled={!isValid}>
-            Save
+            {t('Save')}
           </Button>
         </form>
       </Container>

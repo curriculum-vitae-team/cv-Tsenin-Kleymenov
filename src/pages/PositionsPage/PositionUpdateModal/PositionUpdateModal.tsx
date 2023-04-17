@@ -69,7 +69,7 @@ export const PositionUpdateModal: FC<IPositionUpdateModalProps> = ({ position, o
             loading={updatePositionLoading}
             disabled={!isDirty && isValid}
           >
-            Update
+            {t('Update')}
           </Button>
         </form>
       </Container>

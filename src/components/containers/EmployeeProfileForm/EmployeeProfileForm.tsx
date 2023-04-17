@@ -140,7 +140,7 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
                 loading={userLoading}
                 disabled={!isDirty && isValid}
               >
-                Confirm
+                {t('Confirm')}
               </Button>
             </Grid>
           </Grid>

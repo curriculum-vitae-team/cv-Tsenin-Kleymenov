@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { useQuery, useReactiveVar } from '@apollo/client'
 import { Box, Container, Divider } from '@mui/material'
@@ -15,6 +16,7 @@ import { ProjectUpdateModal } from './ProjectUpdateModal/ProjectUpdateModal'
 
 export const ProjectDetailPage: FC = () => {
   const { id: projectId } = useParams()
+  const { t } = useTranslation()
   const [isVisible, toggleVisibility] = useBooleanState()
   const user = useReactiveVar(authService.user$)
   const isAdmin = user?.role === ROLE.admin
@@ -37,7 +39,7 @@ export const ProjectDetailPage: FC = () => {
             variant="contained"
             onClick={toggleVisibility}
           >
-            Update
+            {t('Update')}
           </Button>
           <Divider sx={{ my: 2 }} />
         </Box>

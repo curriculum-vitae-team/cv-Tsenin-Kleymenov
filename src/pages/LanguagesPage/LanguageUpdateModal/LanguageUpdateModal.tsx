@@ -87,7 +87,7 @@ export const LanguageUpdateModal: FC<ILanguageUpdateModalProps> = ({ language, o
             loading={updateLanguageLoading}
             disabled={!isDirty && isValid}
           >
-            Update
+            {t('Update')}
           </Button>
         </form>
       </Container>

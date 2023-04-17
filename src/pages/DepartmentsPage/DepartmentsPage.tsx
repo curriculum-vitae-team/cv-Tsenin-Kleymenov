@@ -54,7 +54,7 @@ export const DepartmentsPage: FC = () => {
         />
         {isAdmin && (
           <Button sx={{ maxWidth: 100 }} variant="contained" onClick={toggleVisibility}>
-            Create
+            {t('Create')}
           </Button>
         )}
       </Box>

@@ -106,7 +106,7 @@ export const LanguagesModal: FC<ILanguagesModalProps> = ({ userData, onClose }) 
             {...register(FORM_PROFILE_LANGUAGES_KEYS.proficiency)}
           />
           <Button loading={userLoading} type="submit" variant="contained" disabled={!isValid}>
-            Save
+            {t('Save')}
           </Button>
         </form>
       </Container>

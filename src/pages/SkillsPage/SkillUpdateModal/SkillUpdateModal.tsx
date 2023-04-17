@@ -63,7 +63,7 @@ export const SkillUpdateModal: FC<ISkillUpdateModalProps> = ({ skill, onClose })
             loading={updateSkillLoading}
             disabled={!isDirty && isValid}
           >
-            Update
+            {t('Update')}
           </Button>
         </form>
       </Container>

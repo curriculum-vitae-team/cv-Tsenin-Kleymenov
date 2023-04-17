@@ -64,7 +64,7 @@ export const CVProjectsPage: FC = () => {
         />
         {userCheck && (
           <Button sx={{ maxWidth: 150 }} variant="contained" onClick={toggleVisibility}>
-            Update
+            {t('Update')}
           </Button>
         )}
       </Box>

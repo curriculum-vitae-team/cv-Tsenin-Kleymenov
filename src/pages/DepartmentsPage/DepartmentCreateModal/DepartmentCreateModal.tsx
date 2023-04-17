@@ -64,7 +64,7 @@ export const DepartmentCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
             loading={createDepartmentLoading}
             disabled={!isDirty && isValid}
           >
-            Create
+            {t('Create')}
           </Button>
         </form>
       </Container>

@@ -58,7 +58,7 @@ export const SkillCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
             loading={createSkillLoading}
             disabled={!isDirty && isValid}
           >
-            Create
+            {t('Create')}
           </Button>
         </form>
       </Container>

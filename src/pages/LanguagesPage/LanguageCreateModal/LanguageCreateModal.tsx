@@ -80,7 +80,7 @@ export const LanguageCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
             loading={createLanguageLoading}
             disabled={!isDirty && isValid}
           >
-            Create
+            {t('Create')}
           </Button>
         </form>
       </Container>

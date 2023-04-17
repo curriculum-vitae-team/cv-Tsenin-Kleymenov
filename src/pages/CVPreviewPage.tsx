@@ -36,7 +36,7 @@ export const CVPreviewPage: FC = () => {
         variant="contained"
         onClick={handlePrintClick}
       >
-        Print
+        {t('Print')}
       </Button>
       <Divider sx={{ my: 2 }} />
       <LoadingOverlay active={CVLoading}>

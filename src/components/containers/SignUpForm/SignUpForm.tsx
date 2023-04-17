@@ -50,7 +50,7 @@ export const SignUpForm: FC<ISignUpFormProps> = ({ signUp }) => {
         {...register(FORM_SIGNUP_KEYS.password)}
       />
       <Button type="submit" variant="contained">
-        Sign up
+        {t('Sign up')}
       </Button>
     </form>
   )

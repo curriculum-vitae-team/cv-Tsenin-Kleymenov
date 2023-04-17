@@ -64,7 +64,7 @@ export const PositionCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
             loading={createPositionLoading}
             disabled={!isDirty && isValid}
           >
-            Create
+            {t('Create')}
           </Button>
         </form>
       </Container>

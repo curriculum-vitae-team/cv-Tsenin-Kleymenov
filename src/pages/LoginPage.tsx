@@ -18,7 +18,7 @@ export const LoginPage: FC = () => {
     <AuthFormContainer title={t('Welcome back')} subtitle={t('Hello again! Sign in to continue.')}>
       <SignInForm login={login} />
       <Button component={Link} to={`/${AppNavigationRoutes.SIGN_UP}`} variant="text">
-        I don't have an account yet
+        {t("I don't have an account yet")}
       </Button>
     </AuthFormContainer>
   )

@@ -50,7 +50,7 @@ export const CVsPage: FC = () => {
           placeholder={t('Search') as string}
         />
         <Button sx={{ maxWidth: 100 }} variant="contained" onClick={toggleVisibility}>
-          Create
+          {t('Create')}
         </Button>
       </CvsTableToolBar>
       <CommonTable<ICV>

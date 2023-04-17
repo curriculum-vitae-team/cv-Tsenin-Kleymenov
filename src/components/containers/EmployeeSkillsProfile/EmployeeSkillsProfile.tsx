@@ -41,7 +41,7 @@ export const EmployeeSkillsProfile: FC = () => {
           variant="contained"
           onClick={toggleVisibility}
         >
-          Add skills
+          {t('Add skills')}
         </Button>
       )}
       <Divider sx={{ my: 2 }} />

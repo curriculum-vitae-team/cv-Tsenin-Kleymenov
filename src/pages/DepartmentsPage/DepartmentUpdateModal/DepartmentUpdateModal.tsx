@@ -66,7 +66,7 @@ export const DepartmentUpdateModal: FC<IDepartmentUpdateModalProps> = ({ departm
             loading={updateUpdateLoading}
             disabled={!isDirty && isValid}
           >
-            Update
+            {t('Update')}
           </Button>
         </form>
       </Container>

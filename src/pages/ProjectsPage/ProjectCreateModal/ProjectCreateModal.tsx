@@ -98,7 +98,7 @@ export const ProjectCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
             loading={createProjectLoading}
             disabled={!isDirty && isValid}
           >
-            Create
+            {t('Create')}
           </Button>
         </form>
       </Container>

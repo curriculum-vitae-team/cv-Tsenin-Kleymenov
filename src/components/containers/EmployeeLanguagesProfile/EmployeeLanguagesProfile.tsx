@@ -32,7 +32,7 @@ export const EmployeeLanguagesProfile: FC = () => {
           variant="contained"
           onClick={toggleVisibility}
         >
-          Add languages
+          {t('Add languages')}
         </Button>
       )}
       <Divider sx={{ my: 2 }} />

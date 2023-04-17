@@ -107,7 +107,7 @@ export const ProjectUpdateModal: FC<IProjectUpdateModalProps> = ({ project, onCl
             loading={updateProjectLoading}
             disabled={!isDirty && isValid}
           >
-            Update
+            {t('Update')}
           </Button>
         </form>
       </Container>

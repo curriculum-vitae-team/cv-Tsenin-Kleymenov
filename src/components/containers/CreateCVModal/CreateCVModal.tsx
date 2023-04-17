@@ -99,7 +99,7 @@ export const CreateCVModal: FC<ICVsModalProps> = ({ onClose }) => {
             loading={createCVLoading}
             disabled={!isDirty && isValid}
           >
-            Create
+            {t('Create')}
           </Button>
         </Container>
       </ModalWindow>
