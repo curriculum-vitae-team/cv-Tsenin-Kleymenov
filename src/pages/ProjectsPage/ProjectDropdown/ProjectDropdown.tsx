@@ -15,7 +15,7 @@ import { IProjectDropdownProps } from './ProjectDropdown.interfaces'
 export const ProjectDropdown: FC<IProjectDropdownProps> = ({ project }) => {
   const navigate = useNavigate()
 
-  const [isAdmin] = useUser()
+  const [_, isAdmin] = useUser()
 
   const [deleteProjectMutation] = useMutation(DELETE_PROJECT, {
     refetchQueries: [{ query: GET_PROJECTS }]

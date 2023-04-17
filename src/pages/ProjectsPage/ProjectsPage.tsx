@@ -17,7 +17,7 @@ import { ProjectCreateModal } from './ProjectCreateModal/ProjectCreateModal'
 import { tableColumns } from './tableColumns'
 
 export const ProjectsPage: FC = () => {
-  const [isAdmin] = useUser()
+  const [_, isAdmin] = useUser()
 
   const [isVisible, toggleVisibility] = useBooleanState()
 

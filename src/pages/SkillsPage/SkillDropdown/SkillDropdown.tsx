@@ -13,7 +13,7 @@ import { SkillUpdateModal } from '@/pages/SkillsPage/SkillUpdateModal/SkillUpdat
 import { ISkillDropdownProps } from './SkillDropdown.interfaces'
 
 export const SkillDropdown: FC<ISkillDropdownProps> = ({ skill }) => {
-  const [isAdmin] = useUser()
+  const [_, isAdmin] = useUser()
 
   const [isVisible, toggleVisibility] = useBooleanState()
 

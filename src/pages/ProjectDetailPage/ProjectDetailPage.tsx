@@ -16,7 +16,7 @@ import { ProjectUpdateModal } from './ProjectUpdateModal/ProjectUpdateModal'
 export const ProjectDetailPage: FC = () => {
   const { id: projectId } = useParams()
 
-  const [isAdmin] = useUser()
+  const [_, isAdmin] = useUser()
 
   const [isVisible, toggleVisibility] = useBooleanState()
 

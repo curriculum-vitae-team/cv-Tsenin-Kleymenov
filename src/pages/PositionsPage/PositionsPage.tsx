@@ -17,7 +17,7 @@ import { PositionCreateModal } from '@/pages/PositionsPage/PositionCreateModal/P
 import { tableColumns } from './tableColumns'
 
 export const PositionsPage: FC = () => {
-  const [isAdmin] = useUser()
+  const [_, isAdmin] = useUser()
 
   const [isVisible, toggleVisibility] = useBooleanState()
 

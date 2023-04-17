@@ -17,7 +17,7 @@ import { SkillCreateModal } from '@/pages/SkillsPage/SkillCreateModal/SkillCreat
 import { tableColumns } from './tableColumns'
 
 export const SkillsPage: FC = () => {
-  const [isAdmin] = useUser()
+  const [_, isAdmin] = useUser()
 
   const [isVisible, toggleVisibility] = useBooleanState()
 

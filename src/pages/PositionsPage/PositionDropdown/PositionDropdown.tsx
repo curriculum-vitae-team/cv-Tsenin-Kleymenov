@@ -13,7 +13,7 @@ import { PositionUpdateModal } from '@/pages/PositionsPage/PositionUpdateModal/P
 import { IPositionDropdownProps } from './PositionDropdown.interfaces'
 
 export const PositionDropdown: FC<IPositionDropdownProps> = ({ position }) => {
-  const [isAdmin] = useUser()
+  const [_, isAdmin] = useUser()
 
   const [isVisible, toggleVisibility] = useBooleanState()
 

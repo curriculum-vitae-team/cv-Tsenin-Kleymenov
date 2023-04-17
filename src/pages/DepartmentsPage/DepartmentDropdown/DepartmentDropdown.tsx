@@ -13,7 +13,7 @@ import { DepartmentUpdateModal } from '@/pages/DepartmentsPage/DepartmentUpdateM
 import { IDepartmentDropdownProps } from './DepartmentDropdown.interfaces'
 
 export const DepartmentDropdown: FC<IDepartmentDropdownProps> = ({ department }) => {
-  const [isAdmin] = useUser()
+  const [_, isAdmin] = useUser()
 
   const [isVisible, toggleVisibility] = useBooleanState()
 

@@ -17,7 +17,7 @@ import { DepartmentCreateModal } from '@/pages/DepartmentsPage/DepartmentCreateM
 import { tableColumns } from './tableColumns'
 
 export const DepartmentsPage: FC = () => {
-  const [isAdmin] = useUser()
+  const [_, isAdmin] = useUser()
 
   const [isVisible, toggleVisibility] = useBooleanState()
 

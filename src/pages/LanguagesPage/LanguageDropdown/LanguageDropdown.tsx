@@ -13,7 +13,7 @@ import { LanguageUpdateModal } from '@/pages/LanguagesPage/LanguageUpdateModal/L
 import { ILanguageDropdownProps } from './LanguageDropdown.interfaces'
 
 export const LanguageDropdown: FC<ILanguageDropdownProps> = ({ language }) => {
-  const [isAdmin] = useUser()
+  const [_, isAdmin] = useUser()
 
   const [isVisible, toggleVisibility] = useBooleanState()
 

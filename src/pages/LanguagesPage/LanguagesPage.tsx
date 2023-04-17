@@ -17,7 +17,7 @@ import { LanguageCreateModal } from './LanguageCreateModal/LanguageCreateModal'
 import { tableColumns } from './tableColumns'
 
 export const LanguagesPage: FC = () => {
-  const [isAdmin] = useUser()
+  const [_, isAdmin] = useUser()
 
   const [isVisible, toggleVisibility] = useBooleanState()
 

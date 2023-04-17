@@ -17,7 +17,7 @@ import { EmployeeCreateModal } from '@/pages/EmployeesPage/EmployeeCreateModal/E
 import { tableColumns } from './tableColumns'
 
 export const EmployeesPage: FC = () => {
-  const [isAdmin] = useUser()
+  const [_, isAdmin] = useUser()
 
   const [isVisible, toggleVisibility] = useBooleanState()
 
