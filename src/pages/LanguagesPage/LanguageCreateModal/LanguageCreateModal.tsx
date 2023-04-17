@@ -16,6 +16,7 @@ import {
   FORM_LANGUAGE_KEYS,
   ILanguageFormValues
 } from '@/pages/LanguagesPage/LanguagesPage.interfaces'
+import { toastMessage } from '@/utils/toastMessage'
 
 export const LanguageCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
   const { t } = useTranslation()
@@ -47,6 +48,8 @@ export const LanguageCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
     })
 
     onClose()
+
+    toastMessage('Successfully created', 'success')
   }
 
   return (

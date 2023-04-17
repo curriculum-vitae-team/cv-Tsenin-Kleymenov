@@ -10,6 +10,7 @@ import { DELETE_LANGUAGE } from '@/graphql/languages/deleteLanguageMutation'
 import { LANGUAGES } from '@/graphql/languages/languagesQuery'
 import { useBooleanState } from '@/hooks/useBooleanState'
 import { LanguageUpdateModal } from '@/pages/LanguagesPage/LanguageUpdateModal/LanguageUpdateModal'
+import { toastMessage } from '@/utils/toastMessage'
 
 import { ILanguageDropdownProps } from './LanguageDropdown.interfaces'
 
@@ -27,6 +28,8 @@ export const LanguageDropdown: FC<ILanguageDropdownProps> = ({ language }) => {
     deleteLanguageMutation({
       variables: { id: language.id }
     })
+
+    toastMessage('Successfully deleted', 'success')
   }
 
   return (

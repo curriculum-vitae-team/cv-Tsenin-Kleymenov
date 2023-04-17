@@ -13,9 +13,11 @@ import { FORM_SKILL_SCHEMA } from '@/constants/schemaOptions'
 import { CREATE_SKILL } from '@/graphql/skills/createSkillMutation'
 import { SKILLS } from '@/graphql/skills/skillsQuery'
 import { FORM_SKILL_KEYS, ISkillFormValues } from '@/pages/SkillsPage/SkillsPage.interfaces'
+import { toastMessage } from '@/utils/toastMessage'
 
 export const SkillCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
   const { t } = useTranslation()
+
   const [createSkillMutation, { loading: createSkillLoading }] = useMutation(CREATE_SKILL, {
     refetchQueries: [{ query: SKILLS }]
   })
@@ -39,6 +41,8 @@ export const SkillCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
     })
 
     onClose()
+
+    toastMessage('Successfully created', 'success')
   }
 
   return (

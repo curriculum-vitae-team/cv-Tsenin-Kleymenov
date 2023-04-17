@@ -12,6 +12,7 @@ import { FORM_SKILL_SCHEMA } from '@/constants/schemaOptions'
 import { SKILLS } from '@/graphql/skills/skillsQuery'
 import { UPDATE_SKILL } from '@/graphql/skills/updateSkillMutation'
 import { FORM_SKILL_KEYS, ISkillFormValues } from '@/pages/SkillsPage/SkillsPage.interfaces'
+import { toastMessage } from '@/utils/toastMessage'
 
 import { ISkillUpdateModalProps } from './SkillUpdateModal.interfaces'
 
@@ -44,6 +45,8 @@ export const SkillUpdateModal: FC<ISkillUpdateModalProps> = ({ skill, onClose })
     })
 
     onClose()
+
+    toastMessage('Successfully updated', 'success')
   }
 
   return (

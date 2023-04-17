@@ -16,6 +16,7 @@ import {
   FORM_POSITION_KEYS,
   IPositionFormValues
 } from '@/pages/PositionsPage/PositionsPage.interfaces'
+import { toastMessage } from '@/utils/toastMessage'
 
 export const PositionCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
   const { t } = useTranslation()
@@ -45,6 +46,8 @@ export const PositionCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
     })
 
     onClose()
+
+    toastMessage('Successfully created', 'success')
   }
 
   return (

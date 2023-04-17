@@ -15,6 +15,7 @@ import {
   FORM_POSITION_KEYS,
   IPositionFormValues
 } from '@/pages/PositionsPage/PositionsPage.interfaces'
+import { toastMessage } from '@/utils/toastMessage'
 
 import { IPositionUpdateModalProps } from './PositionUpdateModal.interfaces'
 
@@ -50,6 +51,8 @@ export const PositionUpdateModal: FC<IPositionUpdateModalProps> = ({ position, o
     })
 
     onClose()
+
+    toastMessage('Successfully updated', 'success')
   }
 
   return (

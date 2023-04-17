@@ -10,6 +10,7 @@ import { DELETE_POSITION } from '@/graphql/positions/deletePositionMutation'
 import { POSITIONS } from '@/graphql/positions/positionsQuery'
 import { useBooleanState } from '@/hooks/useBooleanState'
 import { PositionUpdateModal } from '@/pages/PositionsPage/PositionUpdateModal/PositionUpdateModal'
+import { toastMessage } from '@/utils/toastMessage'
 
 import { IPositionDropdownProps } from './PositionDropdown.interfaces'
 
@@ -27,6 +28,8 @@ export const PositionDropdown: FC<IPositionDropdownProps> = ({ position }) => {
     deletePositionMutation({
       variables: { id: position.id }
     })
+
+    toastMessage('Successfully deleted', 'success')
   }
 
   return (

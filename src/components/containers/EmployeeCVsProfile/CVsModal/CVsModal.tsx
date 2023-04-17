@@ -18,10 +18,10 @@ import { FETCH_POLICY } from '@/graphql/fetchPolicy'
 import { createLanguagesArray } from '@/utils/createLanguagesArray'
 import { createProjectsIdArray } from '@/utils/createProjectsIdArray'
 import { createSkillsArray } from '@/utils/createSkillsArray'
+import { toastMessage } from '@/utils/toastMessage'
 
 import { ICVsModalProps } from './CVsModal.interfaces'
 import { FORM_PROFILE_CVS_KEYS, IProfileCVsFormValues } from './CVsModal.interfaces'
-
 
 export const CVsModal: FC<ICVsModalProps> = ({ currentCVData, onClose }) => {
   const { t } = useTranslation()
@@ -66,6 +66,8 @@ export const CVsModal: FC<ICVsModalProps> = ({ currentCVData, onClose }) => {
     })
 
     onClose()
+
+    toastMessage('Successfully updated', 'success')
   }
 
   return (

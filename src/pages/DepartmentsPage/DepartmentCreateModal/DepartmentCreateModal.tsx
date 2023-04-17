@@ -16,6 +16,7 @@ import {
   FORM_DEPARTMENT_KEYS,
   IDepartmentFormValues
 } from '@/pages/DepartmentsPage/DepartmentsPage.interfaces'
+import { toastMessage } from '@/utils/toastMessage'
 
 export const DepartmentCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
   const { t } = useTranslation()
@@ -45,6 +46,8 @@ export const DepartmentCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
     })
 
     onClose()
+
+    toastMessage('Successfully created', 'success')
   }
 
   return (

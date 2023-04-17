@@ -15,6 +15,7 @@ import { GET_PROJECTS } from '@/graphql/projects/projectsQuery'
 import { createLanguagesArray } from '@/utils/createLanguagesArray'
 import { createProjectsIdArray } from '@/utils/createProjectsIdArray'
 import { createSkillsArray } from '@/utils/createSkillsArray'
+import { toastMessage } from '@/utils/toastMessage'
 
 import {
   FORM_CV_PROJECTS_KEYS,
@@ -58,6 +59,8 @@ export const CVProjectsModal: FC<ICVProjectsModalProps> = ({ CVData, onClose }) 
     })
 
     onClose()
+
+    toastMessage('Successfully updated', 'success')
   }
 
   return (

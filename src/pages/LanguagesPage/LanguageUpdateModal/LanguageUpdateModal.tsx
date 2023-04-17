@@ -15,6 +15,7 @@ import {
   FORM_LANGUAGE_KEYS,
   ILanguageFormValues
 } from '@/pages/LanguagesPage/LanguagesPage.interfaces'
+import { toastMessage } from '@/utils/toastMessage'
 
 import { ILanguageUpdateModalProps } from './LanguageUpdateModal.interfaces'
 
@@ -54,6 +55,8 @@ export const LanguageUpdateModal: FC<ILanguageUpdateModalProps> = ({ language, o
     })
 
     onClose()
+
+    toastMessage('Successfully updated', 'success')
   }
 
   return (

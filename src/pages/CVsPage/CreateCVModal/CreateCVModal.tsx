@@ -20,6 +20,7 @@ import { ICV } from '@/graphql/interfaces/ICv.interfaces'
 import { USER } from '@/graphql/user/userQuery'
 import { createLanguagesArray } from '@/utils/createLanguagesArray'
 import { createSkillsArray } from '@/utils/createSkillsArray'
+import { toastMessage } from '@/utils/toastMessage'
 
 import { FORM_CREATE_CV_KEYS, ICreateCVFormValues } from './CreateCVModal.interfaces'
 
@@ -64,6 +65,8 @@ export const CreateCVModal: FC<ICVsModalProps> = ({ onClose }) => {
     })
 
     onClose()
+
+    toastMessage('Successfully created', 'success')
   })
 
   return (

@@ -14,6 +14,7 @@ import { FORM_PROFILE_LANGUAGES_SCHEMA } from '@/constants/schemaOptions'
 import { LANGUAGES } from '@/graphql/languages/languagesQuery'
 import { UPDATE_USER } from '@/graphql/user/updateUserMutation'
 import { createLanguagesArray } from '@/utils/createLanguagesArray'
+import { toastMessage } from '@/utils/toastMessage'
 
 import {
   FORM_PROFILE_LANGUAGES_KEYS,
@@ -73,6 +74,8 @@ export const LanguagesModal: FC<ILanguagesModalProps> = ({ userData, onClose }) 
     })
 
     onClose()
+
+    toastMessage('Successfully added', 'success')
   }
 
   useEffect(() => {

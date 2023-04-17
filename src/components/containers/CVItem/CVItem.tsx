@@ -9,6 +9,7 @@ import { authService } from '@/graphql/auth/authService'
 import { UNBIND_CV } from '@/graphql/cv/unbindCVMutation'
 import { USER } from '@/graphql/user/userQuery'
 import { theme } from '@/theme/theme'
+import { toastMessage } from '@/utils/toastMessage'
 
 import { ICVsItemProps } from './CVItem.interfaces'
 import { AccordionDetails, ButtonContainer } from './CVItem.styles'
@@ -25,6 +26,8 @@ export const CVItem: FC<ICVsItemProps> = ({ CV, handleSetCurrentCV }) => {
     await unbindCVMutation({
       variables: { id: CVId }
     })
+
+    toastMessage('Successfully unassigned', 'success')
   }
 
   return (

@@ -2,7 +2,8 @@ import { ApolloClient, from, HttpLink, InMemoryCache } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
 import { onError } from '@apollo/client/link/error'
 
-import { UNAUTHORIZED } from '@/constants/apolloUserStatus'
+import { INVALID_CREDENTIALS, UNAUTHORIZED } from '@/constants/apolloUserStatus'
+import { toastMessage } from '@/utils/toastMessage'
 
 import { authService } from './authService'
 
@@ -22,14 +23,17 @@ const authLink = setContext((_, { headers }) => {
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
     graphQLErrors.forEach(({ message }) => {
-      console.error(message)
+      if (message === INVALID_CREDENTIALS) {
+        toastMessage(message, 'error')
+      }
       if (message === UNAUTHORIZED) {
         authService.clearStorage()
+        toastMessage(message, 'error')
       }
     })
   }
   if (networkError) {
-    console.error(networkError)
+    toastMessage(networkError.message, 'error')
   }
 })
 

@@ -15,6 +15,7 @@ import {
   FORM_DEPARTMENT_KEYS,
   IDepartmentFormValues
 } from '@/pages/DepartmentsPage/DepartmentsPage.interfaces'
+import { toastMessage } from '@/utils/toastMessage'
 
 import { IDepartmentUpdateModalProps } from './DepartmentUpdateModal.interfaces'
 
@@ -47,6 +48,8 @@ export const DepartmentUpdateModal: FC<IDepartmentUpdateModalProps> = ({ departm
     })
 
     onClose()
+
+    toastMessage('Successfully updated', 'success')
   }
 
   return (

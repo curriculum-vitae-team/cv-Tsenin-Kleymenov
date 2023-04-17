@@ -14,6 +14,7 @@ import { FORM_PROFILE_SKILLS_SCHEMA } from '@/constants/schemaOptions'
 import { SKILLS } from '@/graphql/skills/skillsQuery'
 import { UPDATE_USER } from '@/graphql/user/updateUserMutation'
 import { createSkillsArray } from '@/utils/createSkillsArray'
+import { toastMessage } from '@/utils/toastMessage'
 
 import {
   FORM_PROFILE_SKILLS_KEYS,
@@ -73,6 +74,8 @@ export const SkillsModal: FC<ISkillsModalProps> = ({ userData, onClose }) => {
     })
 
     onClose()
+
+    toastMessage('Successfully added', 'success')
   }
 
   useEffect(() => {

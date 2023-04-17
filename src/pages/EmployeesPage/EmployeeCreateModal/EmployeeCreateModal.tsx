@@ -18,6 +18,7 @@ import { DEPARTMENTS } from '@/graphql/departments/departmentsQuery'
 import { POSITIONS } from '@/graphql/positions/positionsQuery'
 import { CREATE_USER } from '@/graphql/users/createUserMutation'
 import { GET_EMPLOYEES } from '@/graphql/users/usersQuery'
+import { toastMessage } from '@/utils/toastMessage'
 
 import { FORM_EMPLOYEES_KEYS, IEmployeesFormValues } from '../EmployeesPage.interfaces'
 
@@ -65,6 +66,8 @@ export const EmployeeCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
     })
 
     onClose()
+
+    toastMessage('Successfully created', 'success')
   }
 
   return (

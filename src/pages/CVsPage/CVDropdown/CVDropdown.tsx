@@ -10,6 +10,7 @@ import { authService } from '@/graphql/auth/authService'
 import { DELETE_CV } from '@/graphql/cv/deleteCVMutation'
 import { GET_CVS } from '@/graphql/cvs/cvsQuery'
 import { AppNavigationRoutes } from '@/router/paths'
+import { toastMessage } from '@/utils/toastMessage'
 
 import { ICVDropdownProps } from './CVDropdown.interfaces'
 
@@ -32,6 +33,8 @@ export const CVDropdown: FC<ICVDropdownProps> = ({ CV }) => {
     deleteCVMutation({
       variables: { id: CV.id }
     })
+
+    toastMessage('Successfully deleted', 'success')
   }
   return (
     <BasicMenu>

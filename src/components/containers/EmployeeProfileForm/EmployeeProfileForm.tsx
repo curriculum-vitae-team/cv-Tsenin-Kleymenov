@@ -19,6 +19,7 @@ import { POSITIONS } from '@/graphql/positions/positionsQuery'
 import { UPDATE_USER } from '@/graphql/user/updateUserMutation'
 import { USER } from '@/graphql/user/userQuery'
 import { convertCreatedAtDate } from '@/utils/createdAtFormat'
+import { toastMessage } from '@/utils/toastMessage'
 
 import {
   FORM_PROFILE_KEYS,
@@ -69,6 +70,8 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
         }
       }
     })
+
+    toastMessage('Successfully updated', 'success')
   }
 
   useEffect(() => {

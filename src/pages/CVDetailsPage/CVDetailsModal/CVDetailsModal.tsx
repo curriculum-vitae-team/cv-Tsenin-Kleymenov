@@ -14,6 +14,7 @@ import { UPDATE_CV } from '@/graphql/cv/updateCVMutation'
 import { createLanguagesArray } from '@/utils/createLanguagesArray'
 import { createProjectsIdArray } from '@/utils/createProjectsIdArray'
 import { createSkillsArray } from '@/utils/createSkillsArray'
+import { toastMessage } from '@/utils/toastMessage'
 
 import {
   FORM_PROFILE_CVS_KEYS,
@@ -60,6 +61,8 @@ export const CVDetailsModal: FC<ICVDetailsModalProps> = ({ CVData, onClose }) =>
     })
 
     onClose()
+
+    toastMessage('Successfully updated', 'success')
   }
 
   return (

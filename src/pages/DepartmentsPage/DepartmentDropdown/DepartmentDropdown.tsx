@@ -10,6 +10,7 @@ import { DELETE_DEPARTMENT } from '@/graphql/departments/deleteDepartmentMutatio
 import { DEPARTMENTS } from '@/graphql/departments/departmentsQuery'
 import { useBooleanState } from '@/hooks/useBooleanState'
 import { DepartmentUpdateModal } from '@/pages/DepartmentsPage/DepartmentUpdateModal/DepartmentUpdateModal'
+import { toastMessage } from '@/utils/toastMessage'
 
 import { IDepartmentDropdownProps } from './DepartmentDropdown.interfaces'
 
@@ -27,6 +28,8 @@ export const DepartmentDropdown: FC<IDepartmentDropdownProps> = ({ department })
     deleteDepartmentMutation({
       variables: { id: department.id }
     })
+
+    toastMessage('Successfully deleted', 'success')
   }
 
   return (
