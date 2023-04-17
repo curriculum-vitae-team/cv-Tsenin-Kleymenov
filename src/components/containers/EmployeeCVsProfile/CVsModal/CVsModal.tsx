@@ -21,7 +21,8 @@ import { createSkillsArray } from '@/utils/createSkillsArray'
 import { ICVsModalProps } from './CVsModal.interfaces'
 import { FORM_PROFILE_CVS_KEYS, IProfileCVsFormValues } from './CVsModal.interfaces'
 
-export const CVsModal: FC<ICVsModalProps> = ({ currentCVData, onClose: handleClose }) => {
+
+export const CVsModal: FC<ICVsModalProps> = ({ currentCVData, onClose }) => {
   const { id: userId } = useParams()
 
   const { data: CVData, loading: CVLoading } = useQuery<ICVResult>(CV, {
@@ -61,12 +62,13 @@ export const CVsModal: FC<ICVsModalProps> = ({ currentCVData, onClose: handleClo
         }
       }
     })
-    handleClose()
+    
+    onClose()
   }
 
   return (
     <LoadingOverlay active={CVLoading}>
-      <ModalWindow onClose={handleClose}>
+      <ModalWindow onClose={onClose}>
         <Container sx={{ minWidth: '500px' }}>
           <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
             <Input

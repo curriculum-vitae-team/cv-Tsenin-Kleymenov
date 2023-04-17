@@ -12,24 +12,21 @@ import { authService } from '@/graphql/auth/authService'
 import { ISkill } from '@/graphql/interfaces/ISkill.interfaces'
 import { SKILLS } from '@/graphql/skills/skillsQuery'
 import { SkillCreateModal } from '@/pages/SkillsPage/SkillCreateModal/SkillCreateModal'
+import { useBooleanState } from '@/hooks/useBooleanState'
 
 import { tableColumns } from './tableColumns'
 
 export const SkillsPage: FC = () => {
   const user = useReactiveVar(authService.user$)
   const isAdmin = user?.role === ROLE.admin
-  const { data, loading, error } = useQuery<ISkillsResult>(SKILLS)
-
+  const [isVisible, toggleVisibility] = useBooleanState()
   const [searchedName, setSearchedName] = useState<string>('')
   const deferredValue = useDeferredValue(searchedName)
-  const [open, setOpen] = useState<boolean>(false)
+  
+  const { data, loading, error } = useQuery<ISkillsResult>(SKILLS)
 
-  const handleSearchUser = (event: React.ChangeEvent<HTMLInputElement>): void => {
+const handleSearchUser = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setSearchedName(event.target.value)
-  }
-
-  const handleModalClose = (): void => {
-    setOpen(prev => !prev)
   }
 
   const requestSearch = useMemo(
@@ -54,7 +51,7 @@ export const SkillsPage: FC = () => {
           placeholder="Search"
         />
         {isAdmin && (
-          <Button sx={{ maxWidth: 100 }} variant="contained" onClick={handleModalClose}>
+          <Button sx={{ maxWidth: 100 }} variant="contained" onClick={toggleVisibility}>
             Create
           </Button>
         )}
@@ -67,7 +64,7 @@ export const SkillsPage: FC = () => {
         isLoading={loading}
         error={error}
       />
-      {open && <SkillCreateModal onClose={handleModalClose} />}
+      {isVisible && <SkillCreateModal onClose={toggleVisibility} />}
     </>
   )
 }

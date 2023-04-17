@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import { useMutation, useReactiveVar } from '@apollo/client'
 import { Box, MenuItem } from '@mui/material'
 
@@ -7,6 +7,7 @@ import { ROLE } from '@/constants/userRoles'
 import { authService } from '@/graphql/auth/authService'
 import { DELETE_DEPARTMENT } from '@/graphql/departments/deleteDepartmentMutation'
 import { DEPARTMENTS } from '@/graphql/departments/departmentsQuery'
+import { useBooleanState } from '@/hooks/useBooleanState'
 import { DepartmentUpdateModal } from '@/pages/DepartmentsPage/DepartmentUpdateModal/DepartmentUpdateModal'
 
 import { IDepartmentDropdownProps } from './DepartmentDropdown.interfaces'
@@ -14,8 +15,7 @@ import { IDepartmentDropdownProps } from './DepartmentDropdown.interfaces'
 export const DepartmentDropdown: FC<IDepartmentDropdownProps> = ({ department }) => {
   const user = useReactiveVar(authService.user$)
   const isAdmin = user?.role === ROLE.admin
-
-  const [open, setOpen] = useState<boolean>(false)
+  const [isVisible, toggleVisibility] = useBooleanState()
 
   const [deleteDepartmentMutation] = useMutation(DELETE_DEPARTMENT, {
     refetchQueries: [{ query: DEPARTMENTS }]
@@ -27,19 +27,15 @@ export const DepartmentDropdown: FC<IDepartmentDropdownProps> = ({ department })
     })
   }
 
-  const handleModalClose = (): void => {
-    setOpen(prev => !prev)
-  }
-
   return (
     <Box style={{ display: 'flex', justifyContent: 'flex-end' }}>
       {isAdmin && (
         <BasicMenu>
-          <MenuItem onClick={handleModalClose}>Update</MenuItem>
+          <MenuItem onClick={toggleVisibility}>Update</MenuItem>
           <MenuItem onClick={handleDepartmentDelete}>Delete</MenuItem>
         </BasicMenu>
       )}
-      {open && <DepartmentUpdateModal department={department} onClose={handleModalClose} />}
+      {isVisible && <DepartmentUpdateModal department={department} onClose={toggleVisibility} />}
     </Box>
   )
 }

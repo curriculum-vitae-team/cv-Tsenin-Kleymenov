@@ -1,6 +1,6 @@
-import { ProjectsDropdown } from '@/components/containers/ProjectsDropdown/ProjectsDropdown'
 import { IColumn } from '@/constants/tablesData/Column.interfaces'
 import { IProject } from '@/graphql/interfaces/IProject.interfaces'
+import { ProjectDropdown } from '@/pages/ProjectsPage/ProjectDropdown/ProjectDropdown'
 
 export const tableColumns: IColumn<IProject>[] = [
   {
@@ -30,6 +30,7 @@ export const tableColumns: IColumn<IProject>[] = [
   {
     id: 5,
     header: 'End Date',
+    field: 'end_date',
     render: item => <>{!item.end_date ? 'Till now' : item.end_date}</>,
     sortable: true
   },
@@ -42,7 +43,7 @@ export const tableColumns: IColumn<IProject>[] = [
   {
     id: 7,
     header: '',
-    render: project => <ProjectsDropdown projectId={project.id} />,
+    render: project => <ProjectDropdown project={project} />,
     sortable: false
   }
 ]

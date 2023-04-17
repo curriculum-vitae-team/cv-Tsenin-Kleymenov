@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import { useMutation, useReactiveVar } from '@apollo/client'
 import { Box, MenuItem } from '@mui/material'
 
@@ -7,6 +7,7 @@ import { ROLE } from '@/constants/userRoles'
 import { authService } from '@/graphql/auth/authService'
 import { DELETE_POSITION } from '@/graphql/positions/deletePositionMutation'
 import { POSITIONS } from '@/graphql/positions/positionsQuery'
+import { useBooleanState } from '@/hooks/useBooleanState'
 import { PositionUpdateModal } from '@/pages/PositionsPage/PositionUpdateModal/PositionUpdateModal'
 
 import { IPositionDropdownProps } from './PositionDropdown.interfaces'
@@ -14,8 +15,7 @@ import { IPositionDropdownProps } from './PositionDropdown.interfaces'
 export const PositionDropdown: FC<IPositionDropdownProps> = ({ position }) => {
   const user = useReactiveVar(authService.user$)
   const isAdmin = user?.role === ROLE.admin
-
-  const [open, setOpen] = useState<boolean>(false)
+  const [isVisible, toggleVisibility] = useBooleanState()
 
   const [deletePositionMutation] = useMutation(DELETE_POSITION, {
     refetchQueries: [{ query: POSITIONS }]
@@ -27,19 +27,15 @@ export const PositionDropdown: FC<IPositionDropdownProps> = ({ position }) => {
     })
   }
 
-  const handleModalClose = (): void => {
-    setOpen(prev => !prev)
-  }
-
   return (
     <Box style={{ display: 'flex', justifyContent: 'flex-end' }}>
       {isAdmin && (
         <BasicMenu>
-          <MenuItem onClick={handleModalClose}>Update</MenuItem>
+          <MenuItem onClick={toggleVisibility}>Update</MenuItem>
           <MenuItem onClick={handlePositionDelete}>Delete</MenuItem>
         </BasicMenu>
       )}
-      {open && <PositionUpdateModal position={position} onClose={handleModalClose} />}
+      {isVisible && <PositionUpdateModal position={position} onClose={toggleVisibility} />}
     </Box>
   )
 }

@@ -11,15 +11,16 @@ import { InputWithIcon } from '@/components/views/Input/Input'
 import { authService } from '@/graphql/auth/authService'
 import { CV } from '@/graphql/cv/CVQuery'
 import { IProject } from '@/graphql/interfaces/IProject.interfaces'
+import { useBooleanState } from '@/hooks/useBooleanState'
 
 import { CVProjectsModal } from './CVProjectsModal/CVProjectsModal'
 import { tableColumns } from './tableColumns'
 
 export const CVProjectsPage: FC = () => {
   const { id: CVId } = useParams()
-  const user = useReactiveVar(authService.user$)
-  const [open, setOpen] = useState<boolean>(false)
+  const [isVisible, toggleVisibility] = useBooleanState()
   const [searchedName, setSearchedName] = useState<string>('')
+  const user = useReactiveVar(authService.user$)
 
   const {
     data: CVData,
@@ -33,10 +34,6 @@ export const CVProjectsPage: FC = () => {
 
   const handleSearchUser = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setSearchedName(event.target.value)
-  }
-
-  const handleModalClose = (): void => {
-    setOpen(prev => !prev)
   }
 
   const requestSearch = useMemo(
@@ -64,7 +61,7 @@ export const CVProjectsPage: FC = () => {
           placeholder="Search"
         />
         {userCheck && (
-          <Button sx={{ maxWidth: 150 }} variant="contained" onClick={handleModalClose}>
+          <Button sx={{ maxWidth: 150 }} variant="contained" onClick={toggleVisibility}>
             Update
           </Button>
         )}
@@ -77,7 +74,7 @@ export const CVProjectsPage: FC = () => {
         isLoading={CVLoading}
         error={CVError}
       />
-      {open && <CVProjectsModal onClose={handleModalClose} CVData={CVData?.cv} />}
+      {isVisible && <CVProjectsModal onClose={toggleVisibility} CVData={CVData?.cv} />}
     </>
   )
 }

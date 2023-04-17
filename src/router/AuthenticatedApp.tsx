@@ -16,7 +16,7 @@ import { ProfileEmployeePage } from '@/pages/ProfileEmployeePage'
 import { ProfileLanguagePage } from '@/pages/ProfileLanguagePage'
 import { ProfilePage } from '@/pages/ProfilePage'
 import { ProfileSkillsPage } from '@/pages/ProfileSkillsPage'
-import { ProjectDetailPage } from '@/pages/ProjectDetailPage'
+import { ProjectDetailPage } from '@/pages/ProjectDetailPage/ProjectDetailPage'
 import { ProjectsPage } from '@/pages/ProjectsPage/ProjectsPage'
 import { SkillsPage } from '@/pages/SkillsPage/SkillsPage'
 
