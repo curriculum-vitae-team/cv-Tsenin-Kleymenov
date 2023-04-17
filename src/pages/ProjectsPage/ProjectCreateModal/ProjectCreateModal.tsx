@@ -14,7 +14,7 @@ import { FORM_PROJECT_SCHEMA } from '@/constants/schemaOptions'
 import { CREATE_PROJECT } from '@/graphql/project/createProjectMutation'
 import { GET_PROJECTS } from '@/graphql/projects/projectsQuery'
 import { FORM_PROJECT_KEYS, IProjectFormValues } from '@/pages/ProjectsPage/ProjectsPage.interfaces'
-import { convertDate } from '@/utils/convertDate'
+import { convertDate } from '@/utils/dateHelper'
 
 export const ProjectCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
   const { t } = useTranslation()

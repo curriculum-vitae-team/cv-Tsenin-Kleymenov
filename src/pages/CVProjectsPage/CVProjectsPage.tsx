@@ -9,6 +9,7 @@ import { ICVResult } from '@/appTypes/IResult.interfaces'
 import { Button } from '@/components/views/Button/Button'
 import { CommonTable } from '@/components/views/CommonTable/CommonTable'
 import { InputWithIcon } from '@/components/views/Input/Input'
+import { ROLE } from '@/constants/userRoles'
 import { authService } from '@/graphql/auth/authService'
 import { CV } from '@/graphql/cv/CVQuery'
 import { IProject } from '@/graphql/interfaces/IProject.interfaces'
@@ -33,6 +34,7 @@ export const CVProjectsPage: FC = () => {
   })
 
   const userCheck = CVData?.cv?.user?.id === user?.id
+  const isAdmin = user?.role === ROLE.admin
 
   const handleSearchUser = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setSearchedName(event.target.value)
@@ -62,7 +64,7 @@ export const CVProjectsPage: FC = () => {
           onChange={handleSearchUser}
           placeholder={t('Search') as string}
         />
-        {userCheck && (
+        {(userCheck || isAdmin) && (
           <Button sx={{ maxWidth: 150 }} variant="contained" onClick={toggleVisibility}>
             {t('Update')}
           </Button>

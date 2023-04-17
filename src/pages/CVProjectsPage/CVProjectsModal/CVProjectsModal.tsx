@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-import { useMutation, useQuery, useReactiveVar } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 import CheckBoxIcon from '@mui/icons-material/CheckBox'
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank'
 import { Autocomplete, Checkbox, Container, TextField } from '@mui/material'
@@ -9,7 +9,6 @@ import { Autocomplete, Checkbox, Container, TextField } from '@mui/material'
 import { IProjectsResult } from '@/appTypes/IResult.interfaces'
 import { Button } from '@/components/views/Button/Button'
 import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
-import { authService } from '@/graphql/auth/authService'
 import { CV } from '@/graphql/cv/CVQuery'
 import { UPDATE_CV } from '@/graphql/cv/updateCVMutation'
 import { GET_PROJECTS } from '@/graphql/projects/projectsQuery'
@@ -24,7 +23,6 @@ import {
 } from './CVProjectsModal.interfaces'
 
 export const CVProjectsModal: FC<ICVProjectsModalProps> = ({ CVData, onClose }) => {
-  const user = useReactiveVar(authService.user$)
   const { t } = useTranslation()
 
   const [updateCVMutation, { loading: updateCVLoading }] = useMutation(UPDATE_CV, {
@@ -50,7 +48,7 @@ export const CVProjectsModal: FC<ICVProjectsModalProps> = ({ CVData, onClose }) 
         cv: {
           name: CVData?.name,
           description: CVData?.description,
-          userId: user?.id,
+          userId: CVData?.user.id,
           projectsIds: createProjectsIdArray(formData[FORM_CV_PROJECTS_KEYS.projects]),
           skills: createSkillsArray(CVData?.skills),
           languages: createLanguagesArray(CVData?.languages),

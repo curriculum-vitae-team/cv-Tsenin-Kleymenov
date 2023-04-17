@@ -8,6 +8,7 @@ import { IUserResult } from '@/appTypes/IResult.interfaces'
 import { Button } from '@/components/views/Button/Button'
 import { SkillRow } from '@/components/views/SkillRow/SkillRow'
 import { MASTERY_ARRAY } from '@/constants/mastery'
+import { ROLE } from '@/constants/userRoles'
 import { authService } from '@/graphql/auth/authService'
 import { ISkillMastery } from '@/graphql/interfaces/ISkillMastery.interfaces'
 import { USER } from '@/graphql/user/userQuery'
@@ -21,6 +22,7 @@ export const EmployeeSkillsProfile: FC = () => {
   const [isVisible, toggleVisibility] = useBooleanState()
   const user = useReactiveVar(authService.user$)
   const userCheck = userId === user?.id
+  const isAdmin = user?.role === ROLE.admin
 
   const { data: userData } = useQuery<IUserResult>(USER, {
     variables: { id: userId }
@@ -35,7 +37,7 @@ export const EmployeeSkillsProfile: FC = () => {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-      {userCheck && (
+      {(userCheck || isAdmin) && (
         <Button
           sx={{ maxWidth: 170, alignSelf: 'flex-end' }}
           variant="contained"

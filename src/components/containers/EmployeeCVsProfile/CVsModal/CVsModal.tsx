@@ -1,7 +1,8 @@
 import { FC } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-import { useMutation, useQuery, useReactiveVar } from '@apollo/client'
+import { useParams } from 'react-router'
+import { useMutation, useQuery } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Checkbox, Container, FormControlLabel } from '@mui/material'
 
@@ -11,7 +12,6 @@ import { Input } from '@/components/views/Input/Input'
 import { LoadingOverlay } from '@/components/views/LoadingOverlay/LoadingOverlay'
 import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
 import { FORM_PROFILE_CVS_SCHEMA } from '@/constants/schemaOptions'
-import { authService } from '@/graphql/auth/authService'
 import { CV } from '@/graphql/cv/CVQuery'
 import { UPDATE_CV } from '@/graphql/cv/updateCVMutation'
 import { FETCH_POLICY } from '@/graphql/fetchPolicy'
@@ -22,9 +22,10 @@ import { createSkillsArray } from '@/utils/createSkillsArray'
 import { ICVsModalProps } from './CVsModal.interfaces'
 import { FORM_PROFILE_CVS_KEYS, IProfileCVsFormValues } from './CVsModal.interfaces'
 
+
 export const CVsModal: FC<ICVsModalProps> = ({ currentCVData, onClose }) => {
   const { t } = useTranslation()
-  const user = useReactiveVar(authService.user$)
+  const { id: userId } = useParams()
 
   const { data: CVData, loading: CVLoading } = useQuery<ICVResult>(CV, {
     variables: { id: currentCVData?.id },
@@ -55,7 +56,7 @@ export const CVsModal: FC<ICVsModalProps> = ({ currentCVData, onClose }) => {
         cv: {
           name: formData[FORM_PROFILE_CVS_KEYS.name],
           description: formData[FORM_PROFILE_CVS_KEYS.description],
-          userId: user?.id,
+          userId: userId,
           projectsIds: createProjectsIdArray(CVData?.cv.projects),
           skills: createSkillsArray(CVData?.cv.skills),
           languages: createLanguagesArray(CVData?.cv.languages),

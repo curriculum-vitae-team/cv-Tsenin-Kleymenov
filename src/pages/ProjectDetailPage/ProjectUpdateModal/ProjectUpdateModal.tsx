@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next'
 import { useMutation } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Container } from '@mui/material'
-import dayjs from 'dayjs'
 
 import { Button } from '@/components/views/Button/Button'
 import { DatePicker } from '@/components/views/DatePicker/DatePicker'
@@ -13,14 +12,13 @@ import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
 import { FORM_PROJECT_SCHEMA } from '@/constants/schemaOptions'
 import { UPDATE_PROJECT } from '@/graphql/project/updateProjectMutation'
 import { FORM_PROJECT_KEYS, IProjectFormValues } from '@/pages/ProjectsPage/ProjectsPage.interfaces'
-import { convertDate } from '@/utils/convertDate'
+import { convertDate, convertDateToFormValue } from '@/utils/dateHelper'
 
 import { IProjectUpdateModalProps } from './ProjectUpdateModal.interfaces'
 
 export const ProjectUpdateModal: FC<IProjectUpdateModalProps> = ({ project, onClose }) => {
   const { t } = useTranslation()
   const [updateProjectMutation, { loading: updateProjectLoading }] = useMutation(UPDATE_PROJECT)
-
   const {
     register,
     handleSubmit,
@@ -32,8 +30,8 @@ export const ProjectUpdateModal: FC<IProjectUpdateModalProps> = ({ project, onCl
       [FORM_PROJECT_KEYS.internal_name]: project?.project?.internal_name,
       [FORM_PROJECT_KEYS.description]: project?.project?.description,
       [FORM_PROJECT_KEYS.domain]: project?.project?.domain,
-      [FORM_PROJECT_KEYS.start_date]: dayjs(project?.project?.start_date).format(),
-      [FORM_PROJECT_KEYS.end_date]: dayjs(project?.project?.end_date).format(),
+      [FORM_PROJECT_KEYS.start_date]: convertDateToFormValue(project?.project?.start_date),
+      [FORM_PROJECT_KEYS.end_date]: convertDateToFormValue(project?.project?.end_date),
       [FORM_PROJECT_KEYS.team_size]: project?.project?.team_size
     },
     mode: 'onSubmit',
@@ -105,7 +103,7 @@ export const ProjectUpdateModal: FC<IProjectUpdateModalProps> = ({ project, onCl
             type="submit"
             variant="contained"
             loading={updateProjectLoading}
-            disabled={!isDirty && isValid}
+            disabled={!isDirty && !isValid}
           >
             {t('Update')}
           </Button>

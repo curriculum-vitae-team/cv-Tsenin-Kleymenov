@@ -7,6 +7,7 @@ import { Box, Divider, Typography } from '@mui/material'
 import { IUserResult } from '@/appTypes/IResult.interfaces'
 import { LanguageItem } from '@/components/containers/LanguageItem/LanguageItem'
 import { Button } from '@/components/views/Button/Button'
+import { ROLE } from '@/constants/userRoles'
 import { authService } from '@/graphql/auth/authService'
 import { USER } from '@/graphql/user/userQuery'
 import { useBooleanState } from '@/hooks/useBooleanState'
@@ -19,6 +20,7 @@ export const EmployeeLanguagesProfile: FC = () => {
   const [isVisible, toggleVisibility] = useBooleanState()
   const user = useReactiveVar(authService.user$)
   const userCheck = userId === user?.id
+  const isAdmin = user?.role === ROLE.admin
 
   const { data: userData } = useQuery<IUserResult>(USER, {
     variables: { id: userId }
@@ -26,7 +28,7 @@ export const EmployeeLanguagesProfile: FC = () => {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-      {userCheck && (
+      {(userCheck || isAdmin) && (
         <Button
           sx={{ maxWidth: 210, alignSelf: 'flex-end' }}
           variant="contained"
