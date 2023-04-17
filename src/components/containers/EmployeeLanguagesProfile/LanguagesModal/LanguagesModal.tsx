@@ -22,9 +22,11 @@ import {
 } from './LanguagesModal.interfaces'
 
 export const LanguagesModal: FC<ILanguagesModalProps> = ({ userData, onClose }) => {
-  const { t } = useTranslation()
   const { loading: loadingLanguages, data: languagesData } = useQuery<ILanguagesResult>(LANGUAGES)
+
   const [updateUser, { loading: userLoading }] = useMutation(UPDATE_USER)
+
+  const { t } = useTranslation()
 
   const languagesNameArray = userData?.profile.languages.map(item => item.language_name)
   const filteredLanguagesArray = languagesData?.languages

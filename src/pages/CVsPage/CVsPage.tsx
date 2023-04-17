@@ -18,13 +18,15 @@ import { tableColumns } from './tableColumns'
 
 export const CVsPage: FC = () => {
   const [isVisible, toggleVisibility] = useBooleanState()
+
   const [searchedName, setSearchedName] = useState<string>('')
   const deferredValue = useDeferredValue(searchedName)
-  const { t } = useTranslation()
 
   const { data, loading, error } = useQuery<ICVsResult>(GET_CVS, {
     fetchPolicy: FETCH_POLICY.networkOnly
   })
+
+  const { t } = useTranslation()
 
   const handleSearchUser = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setSearchedName(event.target.value)

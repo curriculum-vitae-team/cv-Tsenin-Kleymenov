@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-import { useMutation, useQuery, useReactiveVar } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Checkbox, Container, FormControlLabel } from '@mui/material'
 
@@ -12,24 +12,25 @@ import { Input } from '@/components/views/Input/Input'
 import { LoadingOverlay } from '@/components/views/LoadingOverlay/LoadingOverlay'
 import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
 import { FORM_PROFILE_CVS_SCHEMA } from '@/constants/schemaOptions'
-import { authService } from '@/graphql/auth/authService'
 import { CREATE_CV } from '@/graphql/cvs/createCVMutation'
 import { GET_CVS } from '@/graphql/cvs/cvsQuery'
 import { FETCH_POLICY, MUTATION_FETCH_POLICY } from '@/graphql/fetchPolicy'
 import { ICV } from '@/graphql/interfaces/ICv.interfaces'
 import { USER } from '@/graphql/user/userQuery'
+import { useUser } from '@/hooks/useUser'
 import { createLanguagesArray } from '@/utils/createLanguagesArray'
 import { createSkillsArray } from '@/utils/createSkillsArray'
 
 import { FORM_CREATE_CV_KEYS, ICreateCVFormValues } from './CreateCVModal.interfaces'
 
 export const CreateCVModal: FC<ICVsModalProps> = ({ onClose }) => {
-  const { t } = useTranslation()
-  const user = useReactiveVar(authService.user$)
+  const [user] = useUser()
+
   const [createCV, { loading: createCVLoading }] = useMutation<ICV>(CREATE_CV, {
     refetchQueries: [{ query: GET_CVS }],
     fetchPolicy: MUTATION_FETCH_POLICY.networkOnly
   })
+
   const { data: userData } = useQuery<IUserResult>(USER, {
     variables: { id: user?.id },
     fetchPolicy: FETCH_POLICY.noCache
@@ -49,6 +50,8 @@ export const CreateCVModal: FC<ICVsModalProps> = ({ onClose }) => {
     mode: 'onSubmit',
     resolver: yupResolver(FORM_PROFILE_CVS_SCHEMA)
   })
+
+  const { t } = useTranslation()
 
   const submitClickHandler = handleSubmit(async (formData): Promise<void> => {
     await createCV({

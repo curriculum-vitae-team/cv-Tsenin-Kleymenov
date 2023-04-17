@@ -19,7 +19,6 @@ import {
 import { IPositionUpdateModalProps } from './PositionUpdateModal.interfaces'
 
 export const PositionUpdateModal: FC<IPositionUpdateModalProps> = ({ position, onClose }) => {
-  const { t } = useTranslation()
   const [updatePositionMutation, { loading: updatePositionLoading }] = useMutation(
     UPDATE_POSITION,
     {
@@ -38,6 +37,8 @@ export const PositionUpdateModal: FC<IPositionUpdateModalProps> = ({ position, o
     mode: 'onSubmit',
     resolver: yupResolver(FORM_POSITION_SCHEMA)
   })
+
+  const { t } = useTranslation()
 
   const onSubmit: SubmitHandler<IPositionFormValues> = async formData => {
     await updatePositionMutation({

@@ -19,7 +19,6 @@ import {
 import { IDepartmentUpdateModalProps } from './DepartmentUpdateModal.interfaces'
 
 export const DepartmentUpdateModal: FC<IDepartmentUpdateModalProps> = ({ department, onClose }) => {
-  const { t } = useTranslation()
   const [updateUpdateMutation, { loading: updateUpdateLoading }] = useMutation(UPDATE_DEPARTMENT, {
     refetchQueries: [{ query: DEPARTMENTS }]
   })
@@ -35,6 +34,8 @@ export const DepartmentUpdateModal: FC<IDepartmentUpdateModalProps> = ({ departm
     mode: 'onSubmit',
     resolver: yupResolver(FORM_DEPARTMENT_SCHEMA)
   })
+
+  const { t } = useTranslation()
 
   const onSubmit: SubmitHandler<IDepartmentFormValues> = async formData => {
     await updateUpdateMutation({

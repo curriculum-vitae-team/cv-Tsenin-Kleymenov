@@ -19,7 +19,6 @@ import {
 import { ILanguageUpdateModalProps } from './LanguageUpdateModal.interfaces'
 
 export const LanguageUpdateModal: FC<ILanguageUpdateModalProps> = ({ language, onClose }) => {
-  const { t } = useTranslation()
   const [updateLanguageMutation, { loading: updateLanguageLoading }] = useMutation(
     UPDATE_LANGUAGE,
     {
@@ -40,6 +39,8 @@ export const LanguageUpdateModal: FC<ILanguageUpdateModalProps> = ({ language, o
     mode: 'onSubmit',
     resolver: yupResolver(FORM_LANGUAGE_SCHEMA)
   })
+
+  const { t } = useTranslation()
 
   const onSubmit: SubmitHandler<ILanguageFormValues> = async formData => {
     await updateLanguageMutation({

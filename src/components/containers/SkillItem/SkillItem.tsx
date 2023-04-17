@@ -1,16 +1,15 @@
 import { FC } from 'react'
 import { useParams } from 'react-router-dom'
-import { useMutation, useQuery, useReactiveVar } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 import ClearIcon from '@mui/icons-material/Clear'
 import { Box, Typography } from '@mui/material'
 
 import { IUserResult } from '@/appTypes/IResult.interfaces'
 import { LoadingOverlay } from '@/components/views/LoadingOverlay/LoadingOverlay'
 import { MASTERY_COLORS } from '@/constants/mastery'
-import { ROLE } from '@/constants/userRoles'
-import { authService } from '@/graphql/auth/authService'
 import { UPDATE_USER } from '@/graphql/user/updateUserMutation'
 import { USER } from '@/graphql/user/userQuery'
+import { useUser } from '@/hooks/useUser'
 import { createSkillsArray } from '@/utils/createSkillsArray'
 
 import { ISkillItemProps } from './SkillItem.interfaces'
@@ -18,9 +17,8 @@ import { MasteryBox, SkillBox, SkillItemContainer } from './SkillItem.styles'
 
 export const SkillItem: FC<ISkillItemProps> = ({ skillName, skillMastery }) => {
   const { id: userId } = useParams()
-  const user = useReactiveVar(authService.user$)
+  const [user, isAdmin] = useUser()
   const userCheck = userId === user?.id
-  const isAdmin = user?.role === ROLE.admin
 
   const { data: userData } = useQuery<IUserResult>(USER, {
     variables: { id: userId }

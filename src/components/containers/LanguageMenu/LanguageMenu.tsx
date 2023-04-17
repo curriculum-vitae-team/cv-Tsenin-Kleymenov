@@ -9,6 +9,7 @@ import { LanguageMenuWrapper } from './LanguageMenu.styles'
 
 export const LanguageMenu: FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+
   const { i18n } = useTranslation()
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>): void => {

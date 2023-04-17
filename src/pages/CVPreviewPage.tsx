@@ -15,13 +15,15 @@ import { getFirstChars } from '@/utils/getFirstChar'
 
 export const CVPreviewPage: FC = () => {
   const { id: CVId } = useParams()
+
   const componentRef = useRef<ReactInstance | null>(null)
-  const { t } = useTranslation()
 
   const { data: CVData, loading: CVLoading } = useQuery<ICVResult>(CV, {
     variables: { id: CVId },
     fetchPolicy: FETCH_POLICY.networkOnly
   })
+
+  const { t } = useTranslation()
 
   const { profile, email, position_name, department_name } = CVData?.cv?.user ?? {}
 

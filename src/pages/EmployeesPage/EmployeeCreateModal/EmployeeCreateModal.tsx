@@ -22,8 +22,6 @@ import { GET_EMPLOYEES } from '@/graphql/users/usersQuery'
 import { FORM_EMPLOYEES_KEYS, IEmployeesFormValues } from '../EmployeesPage.interfaces'
 
 export const EmployeeCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
-  const { t } = useTranslation()
-
   const [createUserMutation, { loading: createUserLoading }] = useMutation(CREATE_USER, {
     refetchQueries: [{ query: GET_EMPLOYEES }]
   })
@@ -41,6 +39,8 @@ export const EmployeeCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
     mode: 'onSubmit',
     resolver: yupResolver(FORM_EMPLOYEES_SCHEMA)
   })
+
+  const { t } = useTranslation()
 
   const onSubmit: SubmitHandler<IEmployeesFormValues> = async formData => {
     await createUserMutation({

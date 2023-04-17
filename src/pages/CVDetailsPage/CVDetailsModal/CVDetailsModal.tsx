@@ -22,8 +22,6 @@ import {
 } from './CVDetailsModal.interfaces'
 
 export const CVDetailsModal: FC<ICVDetailsModalProps> = ({ CVData, onClose }) => {
-  const { t } = useTranslation()
-
   const [updateCVMutation, { loading: updateCVLoading }] = useMutation(UPDATE_CV, {
     refetchQueries: [{ query: CV, variables: { id: CVData?.id } }]
   })
@@ -42,6 +40,8 @@ export const CVDetailsModal: FC<ICVDetailsModalProps> = ({ CVData, onClose }) =>
     mode: 'onSubmit',
     resolver: yupResolver(FORM_PROFILE_CVS_SCHEMA)
   })
+
+  const { t } = useTranslation()
 
   const onSubmit: SubmitHandler<ICVDetailsFormValues> = async formData => {
     await updateCVMutation({

@@ -1,27 +1,27 @@
 import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useMutation, useReactiveVar } from '@apollo/client'
+import { useMutation } from '@apollo/client'
 import { Box, MenuItem } from '@mui/material'
 
 import { BasicMenu } from '@/components/containers/BasicMenu/BasicMenu'
-import { ROLE } from '@/constants/userRoles'
-import { authService } from '@/graphql/auth/authService'
 import { DELETE_SKILL } from '@/graphql/skills/deleteSkillMutation'
 import { SKILLS } from '@/graphql/skills/skillsQuery'
 import { useBooleanState } from '@/hooks/useBooleanState'
+import { useUser } from '@/hooks/useUser'
 import { SkillUpdateModal } from '@/pages/SkillsPage/SkillUpdateModal/SkillUpdateModal'
 
 import { ISkillDropdownProps } from './SkillDropdown.interfaces'
 
 export const SkillDropdown: FC<ISkillDropdownProps> = ({ skill }) => {
-  const user = useReactiveVar(authService.user$)
-  const isAdmin = user?.role === ROLE.admin
-  const { t } = useTranslation()
+  const [isAdmin] = useUser()
+
   const [isVisible, toggleVisibility] = useBooleanState()
 
   const [deleteSkillMutation] = useMutation(DELETE_SKILL, {
     refetchQueries: [{ query: SKILLS }]
   })
+
+  const { t } = useTranslation()
 
   const handleSkillDelete = (): void => {
     deleteSkillMutation({

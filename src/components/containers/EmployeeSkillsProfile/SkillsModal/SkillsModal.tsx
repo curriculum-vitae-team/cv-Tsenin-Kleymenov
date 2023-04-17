@@ -22,9 +22,11 @@ import {
 } from './SkillsModal.interfaces'
 
 export const SkillsModal: FC<ISkillsModalProps> = ({ userData, onClose }) => {
-  const { t } = useTranslation()
   const { loading: loadingSkills, data: skillsData } = useQuery<ISkillsResult>(SKILLS)
+
   const [updateUser, { loading: userLoading }] = useMutation(UPDATE_USER)
+
+  const { t } = useTranslation()
 
   const skillsNameArray = userData?.profile.skills.map(item => item.skill_name)
   const filteredSkillsArray = skillsData?.skills

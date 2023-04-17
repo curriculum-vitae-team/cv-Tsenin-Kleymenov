@@ -18,7 +18,6 @@ import {
 } from '@/pages/DepartmentsPage/DepartmentsPage.interfaces'
 
 export const DepartmentCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
-  const { t } = useTranslation()
   const [createDepartmentMutation, { loading: createDepartmentLoading }] = useMutation(
     CREATE_DEPARTMENT,
     {
@@ -34,6 +33,8 @@ export const DepartmentCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
     mode: 'onSubmit',
     resolver: yupResolver(FORM_DEPARTMENT_SCHEMA)
   })
+
+  const { t } = useTranslation()
 
   const onSubmit: SubmitHandler<IDepartmentFormValues> = async formData => {
     await createDepartmentMutation({

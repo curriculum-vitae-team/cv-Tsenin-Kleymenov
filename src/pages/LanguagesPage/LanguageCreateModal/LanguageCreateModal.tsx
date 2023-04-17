@@ -18,7 +18,6 @@ import {
 } from '@/pages/LanguagesPage/LanguagesPage.interfaces'
 
 export const LanguageCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
-  const { t } = useTranslation()
   const [createLanguageMutation, { loading: createLanguageLoading }] = useMutation(
     CREATE_LANGUAGE,
     {
@@ -34,6 +33,8 @@ export const LanguageCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
     mode: 'onSubmit',
     resolver: yupResolver(FORM_LANGUAGE_SCHEMA)
   })
+
+  const { t } = useTranslation()
 
   const onSubmit: SubmitHandler<ILanguageFormValues> = async formData => {
     await createLanguageMutation({

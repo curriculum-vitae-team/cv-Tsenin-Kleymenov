@@ -1,27 +1,27 @@
 import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useMutation, useReactiveVar } from '@apollo/client'
+import { useMutation } from '@apollo/client'
 import { Box, MenuItem } from '@mui/material'
 
 import { BasicMenu } from '@/components/containers/BasicMenu/BasicMenu'
-import { ROLE } from '@/constants/userRoles'
-import { authService } from '@/graphql/auth/authService'
 import { DELETE_POSITION } from '@/graphql/positions/deletePositionMutation'
 import { POSITIONS } from '@/graphql/positions/positionsQuery'
 import { useBooleanState } from '@/hooks/useBooleanState'
+import { useUser } from '@/hooks/useUser'
 import { PositionUpdateModal } from '@/pages/PositionsPage/PositionUpdateModal/PositionUpdateModal'
 
 import { IPositionDropdownProps } from './PositionDropdown.interfaces'
 
 export const PositionDropdown: FC<IPositionDropdownProps> = ({ position }) => {
-  const user = useReactiveVar(authService.user$)
-  const isAdmin = user?.role === ROLE.admin
-  const { t } = useTranslation()
+  const [isAdmin] = useUser()
+
   const [isVisible, toggleVisibility] = useBooleanState()
 
   const [deletePositionMutation] = useMutation(DELETE_POSITION, {
     refetchQueries: [{ query: POSITIONS }]
   })
+
+  const { t } = useTranslation()
 
   const handlePositionDelete = (): void => {
     deletePositionMutation({

@@ -16,7 +16,6 @@ import { FORM_SKILL_KEYS, ISkillFormValues } from '@/pages/SkillsPage/SkillsPage
 import { ISkillUpdateModalProps } from './SkillUpdateModal.interfaces'
 
 export const SkillUpdateModal: FC<ISkillUpdateModalProps> = ({ skill, onClose }) => {
-  const { t } = useTranslation()
   const [updateSkillMutation, { loading: updateSkillLoading }] = useMutation(UPDATE_SKILL, {
     refetchQueries: [{ query: SKILLS }]
   })
@@ -32,6 +31,8 @@ export const SkillUpdateModal: FC<ISkillUpdateModalProps> = ({ skill, onClose })
     mode: 'onSubmit',
     resolver: yupResolver(FORM_SKILL_SCHEMA)
   })
+
+  const { t } = useTranslation()
 
   const onSubmit: SubmitHandler<ISkillFormValues> = async formData => {
     await updateSkillMutation({

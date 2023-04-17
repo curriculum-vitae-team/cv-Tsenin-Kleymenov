@@ -15,13 +15,15 @@ import { AppNavigationRoutes } from '@/router/paths'
 import { FORM_LOGIN_KEYS, ILoginFormProps } from './LoginForm.interfaces'
 
 export const SignInForm: FC<ILoginFormProps> = ({ login }) => {
-  const { t } = useTranslation()
   const navigate = useNavigate()
+
   const {
     register,
     handleSubmit,
     formState: { errors }
   } = useForm<IAuthFormValues>({ mode: 'onSubmit', resolver: yupResolver(LOGIN_SCHEMA) })
+
+  const { t } = useTranslation()
 
   const onSubmit: SubmitHandler<IAuthFormValues> = async formData => {
     const { data } = await login({ variables: formData })

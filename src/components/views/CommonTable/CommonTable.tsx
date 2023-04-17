@@ -23,9 +23,10 @@ const Table = <T extends { id: string }>({
   isLoading,
   error
 }: ICommonTableProps<T>): JSX.Element => {
-  const { t } = useTranslation()
   const [orderBy, setOrderBy] = useState<string | null>('')
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
+
+  const { t } = useTranslation()
 
   const handleSortColumnClick = (path: string): void => {
     if (path === orderBy) {

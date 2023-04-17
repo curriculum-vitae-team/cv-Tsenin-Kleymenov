@@ -1,27 +1,27 @@
 import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { useMutation, useReactiveVar } from '@apollo/client'
+import { useMutation } from '@apollo/client'
 import { MenuItem } from '@mui/material'
 
 import { BasicMenu } from '@/components/containers/BasicMenu/BasicMenu'
-import { ROLE } from '@/constants/userRoles'
-import { authService } from '@/graphql/auth/authService'
 import { DELETE_PROJECT } from '@/graphql/project/deleteProjectMutation'
 import { GET_PROJECTS } from '@/graphql/projects/projectsQuery'
+import { useUser } from '@/hooks/useUser'
 import { AppNavigationRoutes } from '@/router/paths'
 
 import { IProjectDropdownProps } from './ProjectDropdown.interfaces'
 
 export const ProjectDropdown: FC<IProjectDropdownProps> = ({ project }) => {
   const navigate = useNavigate()
-  const user = useReactiveVar(authService.user$)
-  const isAdmin = user?.role === ROLE.admin
-  const { t } = useTranslation()
+
+  const [isAdmin] = useUser()
 
   const [deleteProjectMutation] = useMutation(DELETE_PROJECT, {
     refetchQueries: [{ query: GET_PROJECTS }]
   })
+
+  const { t } = useTranslation()
 
   const handleOpenProject = (): void => {
     navigate(`${project?.id}`, { state: AppNavigationRoutes.PROJECTS })

@@ -18,7 +18,6 @@ import {
 } from '@/pages/PositionsPage/PositionsPage.interfaces'
 
 export const PositionCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
-  const { t } = useTranslation()
   const [createPositionMutation, { loading: createPositionLoading }] = useMutation(
     CREATE_POSITION,
     {
@@ -34,6 +33,8 @@ export const PositionCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
     mode: 'onSubmit',
     resolver: yupResolver(FORM_POSITION_SCHEMA)
   })
+
+  const { t } = useTranslation()
 
   const onSubmit: SubmitHandler<IPositionFormValues> = async formData => {
     await createPositionMutation({
