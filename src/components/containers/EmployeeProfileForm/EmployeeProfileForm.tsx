@@ -106,7 +106,7 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
               <AppSelect
                 variant="outlined"
                 label="Department"
-                defaultValue={''}
+                defaultValue=''
                 loading={departmentsLoading}
                 items={departmentsData?.departments}
                 error={!!errors[FORM_PROFILE_KEYS.department]}
@@ -127,7 +127,7 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
               <AppSelect
                 variant="outlined"
                 label="Position"
-                defaultValue={''}
+                defaultValue=''
                 loading={positionsLoading}
                 items={positionsData?.positions}
                 error={!!errors[FORM_PROFILE_KEYS.position]}

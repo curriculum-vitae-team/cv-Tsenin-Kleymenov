@@ -99,7 +99,7 @@ export const EmployeeCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
           <AppSelect
             variant="outlined"
             label="Department"
-            defaultValue={''}
+            defaultValue=''
             loading={departmentsLoading}
             items={departmentsData?.departments}
             error={!!errors[FORM_EMPLOYEES_KEYS.department]}
@@ -109,7 +109,7 @@ export const EmployeeCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
           <AppSelect
             variant="outlined"
             label="Position"
-            defaultValue={''}
+            defaultValue=''
             loading={positionsLoading}
             items={positionsData?.positions}
             error={!!errors[FORM_EMPLOYEES_KEYS.position]}
@@ -119,7 +119,7 @@ export const EmployeeCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
           <AppSelect
             variant="outlined"
             label="Role"
-            defaultValue={''}
+            defaultValue=''
             items={ROLE_ARRAY}
             error={!!errors[FORM_EMPLOYEES_KEYS.role]}
             helperText={errors?.[FORM_EMPLOYEES_KEYS.role]?.message}
