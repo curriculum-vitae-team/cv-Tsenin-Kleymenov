@@ -7,6 +7,7 @@ import { Box, Typography } from '@mui/material'
 import { IUserResult } from '@/appTypes/IResult.interfaces'
 import { LoadingOverlay } from '@/components/views/LoadingOverlay/LoadingOverlay'
 import { MASTERY_COLORS } from '@/constants/mastery'
+import { ROLE } from '@/constants/userRoles'
 import { authService } from '@/graphql/auth/authService'
 import { UPDATE_USER } from '@/graphql/user/updateUserMutation'
 import { USER } from '@/graphql/user/userQuery'
@@ -19,6 +20,8 @@ export const SkillItem: FC<ISkillItemProps> = ({ skillName, skillMastery }) => {
   const { id: userId } = useParams()
   const user = useReactiveVar(authService.user$)
   const userCheck = userId === user?.id
+  const isAdmin = user?.role === ROLE.admin
+
   const { data: userData } = useQuery<IUserResult>(USER, {
     variables: { id: userId }
   })
@@ -54,7 +57,7 @@ export const SkillItem: FC<ISkillItemProps> = ({ skillName, skillMastery }) => {
           <Typography>{skillMastery}</Typography>
         </MasteryBox>
       </SkillBox>
-      {userCheck && (
+      {(userCheck || isAdmin) && (
         <Box onClick={() => handleDelete(skillName, skillMastery)}>
           <LoadingOverlay active={userLoading} position="static">
             <ClearIcon sx={{ '&:hover': { cursor: 'pointer' } }} />

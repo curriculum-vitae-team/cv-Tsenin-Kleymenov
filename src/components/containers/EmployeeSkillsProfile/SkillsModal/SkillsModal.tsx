@@ -87,7 +87,7 @@ export const SkillsModal: FC<ISkillsModalProps> = ({ userData, onClose }) => {
           <AppSelect
             variant="outlined"
             label="Skills"
-            defaultValue={''}
+            defaultValue=''
             loading={loadingSkills}
             items={filteredSkillsArray}
             error={!!errors[FORM_PROFILE_SKILLS_KEYS.skills]}
@@ -97,7 +97,7 @@ export const SkillsModal: FC<ISkillsModalProps> = ({ userData, onClose }) => {
           <AppSelect
             variant="outlined"
             label="Mastery"
-            defaultValue={''}
+            defaultValue=''
             items={MASTERY_ARRAY}
             error={!!errors[FORM_PROFILE_SKILLS_KEYS.mastery]}
             helperText={errors?.[FORM_PROFILE_SKILLS_KEYS.mastery]?.message}

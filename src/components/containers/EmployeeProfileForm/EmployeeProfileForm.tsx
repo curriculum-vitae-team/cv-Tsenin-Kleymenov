@@ -11,6 +11,7 @@ import { Input } from '@/components/views/Input/Input'
 import { LoadingOverlay } from '@/components/views/LoadingOverlay/LoadingOverlay'
 import { AppSelect } from '@/components/views/Select/Select'
 import { FORM_PROFILE_SCHEMA } from '@/constants/schemaOptions'
+import { ROLE } from '@/constants/userRoles'
 import { authService } from '@/graphql/auth/authService'
 import { DEPARTMENTS } from '@/graphql/departments/departmentsQuery'
 import { POSITIONS } from '@/graphql/positions/positionsQuery'
@@ -27,6 +28,7 @@ import {
 export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser }) => {
   const user = useReactiveVar(authService.user$)
   const userCheck = currentUser?.id === user?.id
+  const isAdmin = user?.role === ROLE.admin
   const { loading: departmentsLoading, data: departmentsData } =
     useQuery<IDepartmentResult>(DEPARTMENTS)
 
@@ -88,7 +90,7 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
           )}`}</Typography>
         </LoadingOverlay>
       </Box>
-      {userCheck && (
+      {(userCheck || isAdmin) && (
         <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
           <Grid container spacing={2}>
             <Grid item xs={6}>
@@ -104,7 +106,7 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
               <AppSelect
                 variant="outlined"
                 label="Department"
-                defaultValue={''}
+                defaultValue=''
                 loading={departmentsLoading}
                 items={departmentsData?.departments}
                 error={!!errors[FORM_PROFILE_KEYS.department]}
@@ -125,7 +127,7 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
               <AppSelect
                 variant="outlined"
                 label="Position"
-                defaultValue={''}
+                defaultValue=''
                 loading={positionsLoading}
                 items={positionsData?.positions}
                 error={!!errors[FORM_PROFILE_KEYS.position]}

@@ -87,7 +87,7 @@ export const LanguagesModal: FC<ILanguagesModalProps> = ({ userData, onClose }) 
           <AppSelect
             variant="outlined"
             label="Languages"
-            defaultValue={''}
+            defaultValue=''
             loading={loadingLanguages}
             items={filteredLanguagesArray}
             error={!!errors[FORM_PROFILE_LANGUAGES_KEYS.languages]}
@@ -97,7 +97,7 @@ export const LanguagesModal: FC<ILanguagesModalProps> = ({ userData, onClose }) 
           <AppSelect
             variant="outlined"
             label="Proficiency"
-            defaultValue={''}
+            defaultValue=''
             items={PROFICIENCY_ARRAY}
             error={!!errors[FORM_PROFILE_LANGUAGES_KEYS.proficiency]}
             helperText={errors?.[FORM_PROFILE_LANGUAGES_KEYS.proficiency]?.message}

@@ -7,6 +7,7 @@ import { FORM_PROFILE_SKILLS_KEYS } from '@/components/containers/EmployeeSkills
 import { FORM_LOGIN_KEYS } from '@/components/containers/LoginForm/LoginForm.interfaces'
 import { FORM_SIGNUP_KEYS } from '@/components/containers/SignUpForm/SignUpForm.interfaces'
 import { FORM_DEPARTMENT_KEYS } from '@/pages/DepartmentsPage/DepartmentsPage.interfaces'
+import { FORM_EMPLOYEES_KEYS } from '@/pages/EmployeesPage/EmployeesPage.interfaces'
 import { FORM_LANGUAGE_KEYS } from '@/pages/LanguagesPage/LanguagesPage.interfaces'
 import { FORM_POSITION_KEYS } from '@/pages/PositionsPage/PositionsPage.interfaces'
 import { FORM_PROJECT_KEYS } from '@/pages/ProjectsPage/ProjectsPage.interfaces'
@@ -26,6 +27,25 @@ export const SIGNUP_SCHEMA = yup.object().shape({
     .required('Email is a required field')
     .email('Invalid email format'),
   [FORM_SIGNUP_KEYS.password]: yup.string().required('Password is a required field')
+})
+
+export const FORM_EMPLOYEES_SCHEMA = yup.object({
+  [FORM_EMPLOYEES_KEYS.email]: yup
+    .string()
+    .required('Email is a required field')
+    .email('Invalid email format'),
+  [FORM_EMPLOYEES_KEYS.password]: yup.string().required('Password is a required field'),
+  [FORM_EMPLOYEES_KEYS.first_name]: yup
+    .string()
+    .matches(/^([^0-9]*)$/, 'First name should not contain numbers')
+    .matches(/^\S+$/, 'First name should not contain spaces')
+    .required('First Name is a required field'),
+  [FORM_EMPLOYEES_KEYS.last_name]: yup
+    .string()
+    .matches(/^([^0-9]*)$/, 'Last name should not contain numbers')
+    .matches(/^\S+$/, 'Last name should not contain spaces')
+    .required('Last Name is a required field'),
+  [FORM_EMPLOYEES_KEYS.role]: yup.string().required('Role is a required field')
 })
 
 export const FORM_PROFILE_SCHEMA = yup.object().shape({
