@@ -1,14 +1,16 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useMutation, useReactiveVar } from '@apollo/client'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { Accordion, AccordionSummary, Box, Typography } from '@mui/material'
 
 import { Button } from '@/components/views/Button/Button'
+import { TOAST_TYPES } from '@/constants/toastTypes'
 import { authService } from '@/graphql/auth/authService'
 import { UNBIND_CV } from '@/graphql/cv/unbindCVMutation'
 import { USER } from '@/graphql/user/userQuery'
 import { theme } from '@/theme/theme'
+import { toastMessage } from '@/utils/toastMessage'
 
 import { ICVsItemProps } from './CVItem.interfaces'
 import { AccordionDetails, ButtonContainer } from './CVItem.styles'
@@ -25,6 +27,8 @@ export const CVItem: FC<ICVsItemProps> = ({ CV, handleSetCurrentCV }) => {
     await unbindCVMutation({
       variables: { id: CVId }
     })
+
+    toastMessage(t('Successfully unassigned'), TOAST_TYPES.success)
   }
 
   return (

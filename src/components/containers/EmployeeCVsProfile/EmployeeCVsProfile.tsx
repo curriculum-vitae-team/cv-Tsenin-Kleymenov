@@ -21,7 +21,7 @@ export const EmployeeCVsProfile: FC = () => {
   const user = useReactiveVar(authService.user$)
   const userCheck = userId === user?.id
   const isAdmin = user?.role === ROLE.admin
-  
+
   const [isVisible, toggleVisibility] = useBooleanState()
   const [selectedCV, setSelectedCV] = useState<ICV | null>(null)
 

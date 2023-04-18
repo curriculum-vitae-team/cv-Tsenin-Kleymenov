@@ -9,8 +9,10 @@ import { Button } from '@/components/views/Button/Button'
 import { Input } from '@/components/views/Input/Input'
 import { PasswordInput } from '@/components/views/PasswordInput/PasswordInput'
 import { SIGNUP_SCHEMA } from '@/constants/schemaOptions'
+import { TOAST_TYPES } from '@/constants/toastTypes'
 import { authService } from '@/graphql/auth/authService'
 import { AppNavigationRoutes } from '@/router/paths'
+import { toastMessage } from '@/utils/toastMessage'
 
 import { FORM_SIGNUP_KEYS, ISignUpFormProps } from './SignUpForm.interfaces'
 
@@ -24,11 +26,15 @@ export const SignUpForm: FC<ISignUpFormProps> = ({ signUp }) => {
   } = useForm<IAuthFormValues>({ mode: 'onSubmit', resolver: yupResolver(SIGNUP_SCHEMA) })
 
   const onSubmit: SubmitHandler<IAuthFormValues> = async formData => {
-    const { data } = await signUp({ variables: formData })
+    try {
+      const { data } = await signUp({ variables: formData })
 
-    if (data) {
-      authService.addUserToStorage(data.signup.user, data.signup.access_token)
-      navigate(`/${AppNavigationRoutes.EMPLOYEES}`)
+      if (data) {
+        authService.addUserToStorage(data.signup.user, data.signup.access_token)
+        navigate(`/${AppNavigationRoutes.EMPLOYEES}`)
+      }
+    } catch (error) {
+      error instanceof Error && toastMessage(t('This user already exists'), TOAST_TYPES.error)
     }
   }
 

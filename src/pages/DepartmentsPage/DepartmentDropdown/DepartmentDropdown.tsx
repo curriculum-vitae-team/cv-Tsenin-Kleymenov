@@ -4,12 +4,14 @@ import { useMutation, useReactiveVar } from '@apollo/client'
 import { Box, MenuItem } from '@mui/material'
 
 import { BasicMenu } from '@/components/containers/BasicMenu/BasicMenu'
+import { TOAST_TYPES } from '@/constants/toastTypes'
 import { ROLE } from '@/constants/userRoles'
 import { authService } from '@/graphql/auth/authService'
 import { DELETE_DEPARTMENT } from '@/graphql/departments/deleteDepartmentMutation'
 import { DEPARTMENTS } from '@/graphql/departments/departmentsQuery'
 import { useBooleanState } from '@/hooks/useBooleanState'
 import { DepartmentUpdateModal } from '@/pages/DepartmentsPage/DepartmentUpdateModal/DepartmentUpdateModal'
+import { toastMessage } from '@/utils/toastMessage'
 
 import { IDepartmentDropdownProps } from './DepartmentDropdown.interfaces'
 
@@ -27,6 +29,8 @@ export const DepartmentDropdown: FC<IDepartmentDropdownProps> = ({ department })
     deleteDepartmentMutation({
       variables: { id: department.id }
     })
+
+    toastMessage(t('Successfully deleted'), TOAST_TYPES.success)
   }
 
   return (

@@ -4,12 +4,14 @@ import { useMutation, useReactiveVar } from '@apollo/client'
 import { Box, MenuItem } from '@mui/material'
 
 import { BasicMenu } from '@/components/containers/BasicMenu/BasicMenu'
+import { TOAST_TYPES } from '@/constants/toastTypes'
 import { ROLE } from '@/constants/userRoles'
 import { authService } from '@/graphql/auth/authService'
 import { DELETE_LANGUAGE } from '@/graphql/languages/deleteLanguageMutation'
 import { LANGUAGES } from '@/graphql/languages/languagesQuery'
 import { useBooleanState } from '@/hooks/useBooleanState'
 import { LanguageUpdateModal } from '@/pages/LanguagesPage/LanguageUpdateModal/LanguageUpdateModal'
+import { toastMessage } from '@/utils/toastMessage'
 
 import { ILanguageDropdownProps } from './LanguageDropdown.interfaces'
 
@@ -27,6 +29,8 @@ export const LanguageDropdown: FC<ILanguageDropdownProps> = ({ language }) => {
     deleteLanguageMutation({
       variables: { id: language.id }
     })
+
+    toastMessage(t('Successfully deleted'), TOAST_TYPES.success)
   }
 
   return (

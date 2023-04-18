@@ -9,12 +9,14 @@ import { Button } from '@/components/views/Button/Button'
 import { Input } from '@/components/views/Input/Input'
 import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
 import { FORM_DEPARTMENT_SCHEMA } from '@/constants/schemaOptions'
+import { TOAST_TYPES } from '@/constants/toastTypes'
 import { DEPARTMENTS } from '@/graphql/departments/departmentsQuery'
 import { UPDATE_DEPARTMENT } from '@/graphql/departments/updateDepartmentMutation'
 import {
   FORM_DEPARTMENT_KEYS,
   IDepartmentFormValues
 } from '@/pages/DepartmentsPage/DepartmentsPage.interfaces'
+import { toastMessage } from '@/utils/toastMessage'
 
 import { IDepartmentUpdateModalProps } from './DepartmentUpdateModal.interfaces'
 
@@ -47,6 +49,8 @@ export const DepartmentUpdateModal: FC<IDepartmentUpdateModalProps> = ({ departm
     })
 
     onClose()
+
+    toastMessage(t('Successfully updated'), TOAST_TYPES.success)
   }
 
   return (

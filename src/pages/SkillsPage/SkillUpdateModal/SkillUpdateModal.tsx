@@ -9,9 +9,11 @@ import { Button } from '@/components/views/Button/Button'
 import { Input } from '@/components/views/Input/Input'
 import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
 import { FORM_SKILL_SCHEMA } from '@/constants/schemaOptions'
+import { TOAST_TYPES } from '@/constants/toastTypes'
 import { SKILLS } from '@/graphql/skills/skillsQuery'
 import { UPDATE_SKILL } from '@/graphql/skills/updateSkillMutation'
 import { FORM_SKILL_KEYS, ISkillFormValues } from '@/pages/SkillsPage/SkillsPage.interfaces'
+import { toastMessage } from '@/utils/toastMessage'
 
 import { ISkillUpdateModalProps } from './SkillUpdateModal.interfaces'
 
@@ -44,6 +46,8 @@ export const SkillUpdateModal: FC<ISkillUpdateModalProps> = ({ skill, onClose })
     })
 
     onClose()
+
+    toastMessage(t('Successfully updated'), TOAST_TYPES.success)
   }
 
   return (

@@ -12,16 +12,17 @@ import { Input } from '@/components/views/Input/Input'
 import { LoadingOverlay } from '@/components/views/LoadingOverlay/LoadingOverlay'
 import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
 import { FORM_PROFILE_CVS_SCHEMA } from '@/constants/schemaOptions'
+import { TOAST_TYPES } from '@/constants/toastTypes'
 import { CV } from '@/graphql/cv/CVQuery'
 import { UPDATE_CV } from '@/graphql/cv/updateCVMutation'
 import { FETCH_POLICY } from '@/graphql/fetchPolicy'
 import { createLanguagesArray } from '@/utils/createLanguagesArray'
 import { createProjectsIdArray } from '@/utils/createProjectsIdArray'
 import { createSkillsArray } from '@/utils/createSkillsArray'
+import { toastMessage } from '@/utils/toastMessage'
 
 import { ICVsModalProps } from './CVsModal.interfaces'
 import { FORM_PROFILE_CVS_KEYS, IProfileCVsFormValues } from './CVsModal.interfaces'
-
 
 export const CVsModal: FC<ICVsModalProps> = ({ currentCVData, onClose }) => {
   const { t } = useTranslation()
@@ -66,6 +67,8 @@ export const CVsModal: FC<ICVsModalProps> = ({ currentCVData, onClose }) => {
     })
 
     onClose()
+
+    toastMessage(t('Successfully updated'), TOAST_TYPES.success)
   }
 
   return (

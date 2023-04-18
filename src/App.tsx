@@ -1,5 +1,6 @@
 import React, { FC, Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
 import { useReactiveVar } from '@apollo/client'
 
 import { Loader } from '@/components/views/Loader/Loader'
@@ -13,6 +14,7 @@ const App: FC = () => {
 
   return (
     <Suspense fallback={<Loader color="primary" />}>
+      <ToastContainer />
       <Routes>
         {isAuth ? (
           <Route path="*" element={<AuthenticatedApp />} />

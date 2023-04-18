@@ -10,12 +10,15 @@ import { Button } from '@/components/views/Button/Button'
 import { Input } from '@/components/views/Input/Input'
 import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
 import { FORM_SKILL_SCHEMA } from '@/constants/schemaOptions'
+import { TOAST_TYPES } from '@/constants/toastTypes'
 import { CREATE_SKILL } from '@/graphql/skills/createSkillMutation'
 import { SKILLS } from '@/graphql/skills/skillsQuery'
 import { FORM_SKILL_KEYS, ISkillFormValues } from '@/pages/SkillsPage/SkillsPage.interfaces'
+import { toastMessage } from '@/utils/toastMessage'
 
 export const SkillCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
   const { t } = useTranslation()
+
   const [createSkillMutation, { loading: createSkillLoading }] = useMutation(CREATE_SKILL, {
     refetchQueries: [{ query: SKILLS }]
   })
@@ -39,6 +42,8 @@ export const SkillCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
     })
 
     onClose()
+
+    toastMessage(t('Successfully created'), TOAST_TYPES.success)
   }
 
   return (

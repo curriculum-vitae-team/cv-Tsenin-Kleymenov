@@ -11,9 +11,11 @@ import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
 import { AppSelect } from '@/components/views/Select/Select'
 import { MASTERY_ARRAY } from '@/constants/mastery'
 import { FORM_PROFILE_SKILLS_SCHEMA } from '@/constants/schemaOptions'
+import { TOAST_TYPES } from '@/constants/toastTypes'
 import { SKILLS } from '@/graphql/skills/skillsQuery'
 import { UPDATE_USER } from '@/graphql/user/updateUserMutation'
 import { createSkillsArray } from '@/utils/createSkillsArray'
+import { toastMessage } from '@/utils/toastMessage'
 
 import {
   FORM_PROFILE_SKILLS_KEYS,
@@ -73,6 +75,8 @@ export const SkillsModal: FC<ISkillsModalProps> = ({ userData, onClose }) => {
     })
 
     onClose()
+
+    toastMessage(t('Successfully added'), TOAST_TYPES.success)
   }
 
   useEffect(() => {
