@@ -23,10 +23,10 @@ export const CVDetailsPage: FC = () => {
     fetchPolicy: FETCH_POLICY.networkOnly
   })
 
-  const [user, isAdmin] = useUser()
+  const { user, isAdmin } = useUser()
   const userCheck = CVData?.cv.user?.id === user?.id
 
-  const [isVisible, toggleVisibility] = useBooleanState()
+  const { isVisible, toggleVisibility } = useBooleanState()
 
   const { t } = useTranslation()
 

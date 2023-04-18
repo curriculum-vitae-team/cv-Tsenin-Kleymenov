@@ -16,7 +16,7 @@ import { CloseButton, LanguageItemContainer } from './LanguageItem.styles'
 
 export const LanguageItem: FC<ILanguageItemProps> = ({ languageName, languageProficiency }) => {
   const { id: userId } = useParams()
-  const [user, isAdmin] = useUser()
+  const { user, isAdmin } = useUser()
   const userCheck = userId === user?.id
 
   const { data: userData } = useQuery<IUserResult>(USER, {

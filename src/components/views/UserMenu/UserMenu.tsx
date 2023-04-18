@@ -17,7 +17,7 @@ import { AppNavigationRoutes } from '@/router/paths'
 import { MenuContainer, PaperPropsUserMenu, UserMenuInfo } from './UserMenu.styles'
 
 export const UserMenu: FC = () => {
-  const [user] = useUser()
+  const { user } = useUser()
 
   const navigate = useNavigate()
 

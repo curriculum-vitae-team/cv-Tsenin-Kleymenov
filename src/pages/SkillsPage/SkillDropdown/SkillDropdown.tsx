@@ -13,9 +13,9 @@ import { SkillUpdateModal } from '@/pages/SkillsPage/SkillUpdateModal/SkillUpdat
 import { ISkillDropdownProps } from './SkillDropdown.interfaces'
 
 export const SkillDropdown: FC<ISkillDropdownProps> = ({ skill }) => {
-  const [_, isAdmin] = useUser()
+  const { isAdmin } = useUser()
 
-  const [isVisible, toggleVisibility] = useBooleanState()
+  const { isVisible, toggleVisibility } = useBooleanState()
 
   const [deleteSkillMutation] = useMutation(DELETE_SKILL, {
     refetchQueries: [{ query: SKILLS }]

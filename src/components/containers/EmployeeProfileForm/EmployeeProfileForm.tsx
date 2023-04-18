@@ -26,7 +26,7 @@ import {
 } from './EmployeeProfileForm.interfaces'
 
 export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser }) => {
-  const [user, isAdmin] = useUser()
+  const { user, isAdmin } = useUser()
   const userCheck = currentUser?.id === user?.id
 
   const { loading: departmentsLoading, data: departmentsData } =

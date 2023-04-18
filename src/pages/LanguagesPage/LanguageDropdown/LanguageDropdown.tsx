@@ -13,9 +13,9 @@ import { LanguageUpdateModal } from '@/pages/LanguagesPage/LanguageUpdateModal/L
 import { ILanguageDropdownProps } from './LanguageDropdown.interfaces'
 
 export const LanguageDropdown: FC<ILanguageDropdownProps> = ({ language }) => {
-  const [_, isAdmin] = useUser()
+  const { isAdmin } = useUser()
 
-  const [isVisible, toggleVisibility] = useBooleanState()
+  const { isVisible, toggleVisibility } = useBooleanState()
 
   const [deleteLanguageMutation] = useMutation(DELETE_LANGUAGE, {
     refetchQueries: [{ query: LANGUAGES }]

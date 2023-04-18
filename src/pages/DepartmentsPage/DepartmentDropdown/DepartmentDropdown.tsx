@@ -13,9 +13,9 @@ import { DepartmentUpdateModal } from '@/pages/DepartmentsPage/DepartmentUpdateM
 import { IDepartmentDropdownProps } from './DepartmentDropdown.interfaces'
 
 export const DepartmentDropdown: FC<IDepartmentDropdownProps> = ({ department }) => {
-  const [_, isAdmin] = useUser()
+  const { isAdmin } = useUser()
 
-  const [isVisible, toggleVisibility] = useBooleanState()
+  const { isVisible, toggleVisibility } = useBooleanState()
 
   const [deleteDepartmentMutation] = useMutation(DELETE_DEPARTMENT, {
     refetchQueries: [{ query: DEPARTMENTS }]

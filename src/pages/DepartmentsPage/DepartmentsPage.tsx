@@ -17,9 +17,9 @@ import { DepartmentCreateModal } from '@/pages/DepartmentsPage/DepartmentCreateM
 import { tableColumns } from './tableColumns'
 
 export const DepartmentsPage: FC = () => {
-  const [_, isAdmin] = useUser()
+  const { isAdmin } = useUser()
 
-  const [isVisible, toggleVisibility] = useBooleanState()
+  const { isVisible, toggleVisibility } = useBooleanState()
 
   const [searchedName, setSearchedName] = useState<string>('')
   const deferredValue = useDeferredValue(searchedName)

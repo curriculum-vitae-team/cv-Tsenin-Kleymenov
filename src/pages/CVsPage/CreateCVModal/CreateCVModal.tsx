@@ -24,7 +24,7 @@ import { createSkillsArray } from '@/utils/createSkillsArray'
 import { FORM_CREATE_CV_KEYS, ICreateCVFormValues } from './CreateCVModal.interfaces'
 
 export const CreateCVModal: FC<ICVsModalProps> = ({ onClose }) => {
-  const [user] = useUser()
+  const { user } = useUser()
 
   const [createCV, { loading: createCVLoading }] = useMutation<ICV>(CREATE_CV, {
     refetchQueries: [{ query: GET_CVS }],

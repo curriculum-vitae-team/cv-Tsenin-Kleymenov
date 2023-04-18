@@ -20,11 +20,11 @@ import { tableColumns } from './tableColumns'
 export const CVProjectsPage: FC = () => {
   const { id: CVId } = useParams()
 
-  const [isVisible, toggleVisibility] = useBooleanState()
+  const { isVisible, toggleVisibility } = useBooleanState()
 
   const [searchedName, setSearchedName] = useState<string>('')
 
-  const [user, isAdmin] = useUser()
+  const { user, isAdmin } = useUser()
   const {
     data: CVData,
     loading: CVLoading,

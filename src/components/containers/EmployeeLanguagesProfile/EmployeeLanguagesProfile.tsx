@@ -15,10 +15,10 @@ import { LanguagesModal } from './LanguagesModal/LanguagesModal'
 
 export const EmployeeLanguagesProfile: FC = () => {
   const { id: userId } = useParams()
-  const [user, isAdmin] = useUser()
+  const { user, isAdmin } = useUser()
   const userCheck = userId === user?.id
 
-  const [isVisible, toggleVisibility] = useBooleanState()
+  const { isVisible, toggleVisibility } = useBooleanState()
 
   const { data: userData } = useQuery<IUserResult>(USER, {
     variables: { id: userId }

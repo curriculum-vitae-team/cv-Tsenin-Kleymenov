@@ -7,7 +7,7 @@ import { useBooleanState } from '@/hooks/useBooleanState'
 import { IEmployeeAvatarAlertProps } from './EmployeeAvatarAlert.interfaces'
 
 export const EmployeeAvatarAlert: FC<IEmployeeAvatarAlertProps> = ({ children }) => {
-  const [isVisible, _, setInvisible] = useBooleanState(true)
+  const { isVisible, setInvisible } = useBooleanState(true)
 
   return (
     <Collapse in={isVisible}>

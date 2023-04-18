@@ -23,7 +23,7 @@ import { AvatarWrapper, DropZone } from './EmployeeAvatarUpload.styles'
 
 export const EmployeeAvatarUpload: FC = () => {
   const { id: userId } = useParams()
-  const [user] = useUser()
+  const { user } = useUser()
   const userCheck = userId === user?.id
 
   const { t } = useTranslation()

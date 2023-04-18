@@ -16,7 +16,7 @@ import { AccordionDetails, ButtonContainer } from './CVItem.styles'
 export const CVItem: FC<ICVsItemProps> = ({ CV, handleSetCurrentCV }) => {
   const { t } = useTranslation()
 
-  const [user] = useUser()
+  const { user } = useUser()
 
   const [unbindCVMutation] = useMutation(UNBIND_CV, {
     refetchQueries: [{ query: USER, variables: { id: user?.id } }]

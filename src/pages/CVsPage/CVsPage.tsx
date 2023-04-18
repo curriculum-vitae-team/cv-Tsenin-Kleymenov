@@ -17,7 +17,7 @@ import { CvsTableToolBar } from './CVsPage.styles'
 import { tableColumns } from './tableColumns'
 
 export const CVsPage: FC = () => {
-  const [isVisible, toggleVisibility] = useBooleanState()
+  const { isVisible, toggleVisibility } = useBooleanState()
 
   const [searchedName, setSearchedName] = useState<string>('')
   const deferredValue = useDeferredValue(searchedName)

@@ -15,7 +15,7 @@ import { ICVDropdownProps } from './CVDropdown.interfaces'
 export const CVDropdown: FC<ICVDropdownProps> = ({ CV }) => {
   const navigate = useNavigate()
 
-  const [user, isAdmin] = useUser()
+  const { user, isAdmin } = useUser()
   const userCheck = CV?.user?.id === user?.id
 
   const [deleteCVMutation] = useMutation(DELETE_CV, {

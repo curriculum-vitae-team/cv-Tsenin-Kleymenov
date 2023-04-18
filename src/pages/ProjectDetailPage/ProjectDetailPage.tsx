@@ -16,9 +16,9 @@ import { ProjectUpdateModal } from './ProjectUpdateModal/ProjectUpdateModal'
 export const ProjectDetailPage: FC = () => {
   const { id: projectId } = useParams()
 
-  const [_, isAdmin] = useUser()
+  const { isAdmin } = useUser()
 
-  const [isVisible, toggleVisibility] = useBooleanState()
+  const { isVisible, toggleVisibility } = useBooleanState()
 
   const { data: projectData, loading: projectLoading } = useQuery(PROJECT, {
     variables: { id: projectId }

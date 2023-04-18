@@ -17,7 +17,7 @@ import { MasteryBox, SkillBox, SkillItemContainer } from './SkillItem.styles'
 
 export const SkillItem: FC<ISkillItemProps> = ({ skillName, skillMastery }) => {
   const { id: userId } = useParams()
-  const [user, isAdmin] = useUser()
+  const { user, isAdmin } = useUser()
   const userCheck = userId === user?.id
 
   const { data: userData } = useQuery<IUserResult>(USER, {

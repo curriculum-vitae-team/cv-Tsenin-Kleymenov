@@ -9,7 +9,7 @@ import { useUser } from '@/hooks/useUser'
 
 export const AppLayout: FC = () => {
   const { id } = useParams()
-  const [user] = useUser()
+  const { user } = useUser()
   const currentId = id || user?.id
 
   return (

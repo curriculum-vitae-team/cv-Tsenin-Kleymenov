@@ -17,9 +17,9 @@ import { EmployeeCreateModal } from '@/pages/EmployeesPage/EmployeeCreateModal/E
 import { tableColumns } from './tableColumns'
 
 export const EmployeesPage: FC = () => {
-  const [_, isAdmin] = useUser()
+  const { isAdmin } = useUser()
 
-  const [isVisible, toggleVisibility] = useBooleanState()
+  const { isVisible, toggleVisibility } = useBooleanState()
 
   const { data, loading, error } = useQuery<IUsersResult>(GET_EMPLOYEES)
 

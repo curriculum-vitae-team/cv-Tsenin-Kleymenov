@@ -17,9 +17,9 @@ import { SkillCreateModal } from '@/pages/SkillsPage/SkillCreateModal/SkillCreat
 import { tableColumns } from './tableColumns'
 
 export const SkillsPage: FC = () => {
-  const [_, isAdmin] = useUser()
+  const { isAdmin } = useUser()
 
-  const [isVisible, toggleVisibility] = useBooleanState()
+  const { isVisible, toggleVisibility } = useBooleanState()
 
   const [searchedName, setSearchedName] = useState<string>('')
   const deferredValue = useDeferredValue(searchedName)

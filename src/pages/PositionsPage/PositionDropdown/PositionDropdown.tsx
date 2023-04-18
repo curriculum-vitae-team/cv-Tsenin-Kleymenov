@@ -13,9 +13,9 @@ import { PositionUpdateModal } from '@/pages/PositionsPage/PositionUpdateModal/P
 import { IPositionDropdownProps } from './PositionDropdown.interfaces'
 
 export const PositionDropdown: FC<IPositionDropdownProps> = ({ position }) => {
-  const [_, isAdmin] = useUser()
+  const { isAdmin } = useUser()
 
-  const [isVisible, toggleVisibility] = useBooleanState()
+  const { isVisible, toggleVisibility } = useBooleanState()
 
   const [deletePositionMutation] = useMutation(DELETE_POSITION, {
     refetchQueries: [{ query: POSITIONS }]

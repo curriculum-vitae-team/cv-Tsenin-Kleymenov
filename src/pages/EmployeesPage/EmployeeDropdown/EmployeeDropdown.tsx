@@ -15,7 +15,7 @@ import { IEmployeeDropdownProps } from './EmployeeDropdown.interfaces'
 export const EmployeeDropdown: FC<IEmployeeDropdownProps> = ({ employee }) => {
   const navigate = useNavigate()
 
-  const [_, isAdmin] = useUser()
+  const { isAdmin } = useUser()
 
   const [deleteUserMutation] = useMutation(DELETE_USER, {
     refetchQueries: [{ query: GET_EMPLOYEES }]

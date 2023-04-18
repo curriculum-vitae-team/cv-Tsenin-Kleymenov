@@ -17,9 +17,9 @@ import { PositionCreateModal } from '@/pages/PositionsPage/PositionCreateModal/P
 import { tableColumns } from './tableColumns'
 
 export const PositionsPage: FC = () => {
-  const [_, isAdmin] = useUser()
+  const { isAdmin } = useUser()
 
-  const [isVisible, toggleVisibility] = useBooleanState()
+  const { isVisible, toggleVisibility } = useBooleanState()
 
   const [searchedName, setSearchedName] = useState<string>('')
   const deferredValue = useDeferredValue(searchedName)
