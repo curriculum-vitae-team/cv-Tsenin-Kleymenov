@@ -12,12 +12,14 @@ import { Input } from '@/components/views/Input/Input'
 import { LoadingOverlay } from '@/components/views/LoadingOverlay/LoadingOverlay'
 import { AppSelect } from '@/components/views/Select/Select'
 import { FORM_PROFILE_SCHEMA } from '@/constants/schemaOptions'
+import { TOAST_TYPES } from '@/constants/toastTypes'
 import { DEPARTMENTS } from '@/graphql/departments/departmentsQuery'
 import { POSITIONS } from '@/graphql/positions/positionsQuery'
 import { UPDATE_USER } from '@/graphql/user/updateUserMutation'
 import { USER } from '@/graphql/user/userQuery'
 import { useUser } from '@/hooks/useUser'
 import { convertCreatedAtDate } from '@/utils/createdAtFormat'
+import { toastMessage } from '@/utils/toastMessage'
 
 import {
   FORM_PROFILE_KEYS,
@@ -70,6 +72,8 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
         }
       }
     })
+
+    toastMessage(t('Successfully updated'), TOAST_TYPES.success)
   }
 
   useEffect(() => {

@@ -12,6 +12,7 @@ import { Input } from '@/components/views/Input/Input'
 import { LoadingOverlay } from '@/components/views/LoadingOverlay/LoadingOverlay'
 import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
 import { FORM_PROFILE_CVS_SCHEMA } from '@/constants/schemaOptions'
+import { TOAST_TYPES } from '@/constants/toastTypes'
 import { CREATE_CV } from '@/graphql/cv/createCVMutation'
 import { GET_CVS } from '@/graphql/cvs/cvsQuery'
 import { FETCH_POLICY, MUTATION_FETCH_POLICY } from '@/graphql/fetchPolicy'
@@ -20,6 +21,7 @@ import { USER } from '@/graphql/user/userQuery'
 import { useUser } from '@/hooks/useUser'
 import { createLanguagesArray } from '@/utils/createLanguagesArray'
 import { createSkillsArray } from '@/utils/createSkillsArray'
+import { toastMessage } from '@/utils/toastMessage'
 
 import { FORM_CREATE_CV_KEYS, ICreateCVFormValues } from './CreateCVModal.interfaces'
 
@@ -67,6 +69,8 @@ export const CreateCVModal: FC<ICVsModalProps> = ({ onClose }) => {
     })
 
     onClose()
+
+    toastMessage(t('Successfully created'), TOAST_TYPES.success)
   })
 
   return (

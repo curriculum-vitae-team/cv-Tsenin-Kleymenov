@@ -10,12 +10,14 @@ import { Button } from '@/components/views/Button/Button'
 import { Input } from '@/components/views/Input/Input'
 import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
 import { FORM_POSITION_SCHEMA } from '@/constants/schemaOptions'
+import { TOAST_TYPES } from '@/constants/toastTypes'
 import { CREATE_POSITION } from '@/graphql/position/createPositionMutation'
 import { POSITIONS } from '@/graphql/positions/positionsQuery'
 import {
   FORM_POSITION_KEYS,
   IPositionFormValues
 } from '@/pages/PositionsPage/PositionsPage.interfaces'
+import { toastMessage } from '@/utils/toastMessage'
 
 export const PositionCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
   const [createPositionMutation, { loading: createPositionLoading }] = useMutation(
@@ -46,6 +48,8 @@ export const PositionCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
     })
 
     onClose()
+
+    toastMessage(t('Successfully created'), TOAST_TYPES.success)
   }
 
   return (

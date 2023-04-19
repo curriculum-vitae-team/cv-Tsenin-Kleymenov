@@ -1,8 +1,11 @@
+import { useTranslation } from 'react-i18next'
 import { ApolloClient, from, HttpLink, InMemoryCache } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
 import { onError } from '@apollo/client/link/error'
 
-import { UNAUTHORIZED } from '@/constants/apolloUserStatus'
+import { INVALID_CREDENTIALS, UNAUTHORIZED } from '@/constants/apolloUserStatus'
+import { TOAST_TYPES } from '@/constants/toastTypes'
+import { toastMessage } from '@/utils/toastMessage'
 
 import { authService } from './authService'
 
@@ -20,16 +23,21 @@ const authLink = setContext((_, { headers }) => {
 })
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
+  const { t } = useTranslation()
+
   if (graphQLErrors) {
     graphQLErrors.forEach(({ message }) => {
-      console.error(message)
+      if (message === INVALID_CREDENTIALS) {
+        toastMessage(t(message), TOAST_TYPES.error)
+      }
       if (message === UNAUTHORIZED) {
         authService.clearStorage()
+        toastMessage(t(message), TOAST_TYPES.error)
       }
     })
   }
   if (networkError) {
-    console.error(networkError)
+    toastMessage(t(networkError.message), TOAST_TYPES.error)
   }
 })
 

@@ -13,11 +13,13 @@ import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
 import { PasswordInput } from '@/components/views/PasswordInput/PasswordInput'
 import { AppSelect } from '@/components/views/Select/Select'
 import { FORM_EMPLOYEES_SCHEMA } from '@/constants/schemaOptions'
+import { TOAST_TYPES } from '@/constants/toastTypes'
 import { ROLE_ARRAY } from '@/constants/userRoles'
 import { DEPARTMENTS } from '@/graphql/departments/departmentsQuery'
 import { POSITIONS } from '@/graphql/positions/positionsQuery'
 import { CREATE_USER } from '@/graphql/user/createUserMutation'
 import { GET_EMPLOYEES } from '@/graphql/users/usersQuery'
+import { toastMessage } from '@/utils/toastMessage'
 
 import { FORM_EMPLOYEES_KEYS, IEmployeesFormValues } from '../EmployeesPage.interfaces'
 
@@ -65,6 +67,8 @@ export const EmployeeCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
     })
 
     onClose()
+
+    toastMessage(t('Successfully created'), TOAST_TYPES.success)
   }
 
   return (

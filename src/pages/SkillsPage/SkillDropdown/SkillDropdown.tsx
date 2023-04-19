@@ -4,11 +4,13 @@ import { useMutation } from '@apollo/client'
 import { Box, MenuItem } from '@mui/material'
 
 import { BasicMenu } from '@/components/containers/BasicMenu/BasicMenu'
+import { TOAST_TYPES } from '@/constants/toastTypes'
 import { DELETE_SKILL } from '@/graphql/skill/deleteSkillMutation'
 import { SKILLS } from '@/graphql/skills/skillsQuery'
 import { useBooleanState } from '@/hooks/useBooleanState'
 import { useUser } from '@/hooks/useUser'
 import { SkillUpdateModal } from '@/pages/SkillsPage/SkillUpdateModal/SkillUpdateModal'
+import { toastMessage } from '@/utils/toastMessage'
 
 import { ISkillDropdownProps } from './SkillDropdown.interfaces'
 
@@ -27,6 +29,8 @@ export const SkillDropdown: FC<ISkillDropdownProps> = ({ skill }) => {
     deleteSkillMutation({
       variables: { id: skill.id }
     })
+
+    toastMessage(t('Successfully deleted'), TOAST_TYPES.success)
   }
 
   return (

@@ -9,12 +9,14 @@ import { Autocomplete, Checkbox, Container, TextField } from '@mui/material'
 import { IProjectsResult } from '@/appTypes/IResult.interfaces'
 import { Button } from '@/components/views/Button/Button'
 import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
+import { TOAST_TYPES } from '@/constants/toastTypes'
 import { CV } from '@/graphql/cv/CVQuery'
 import { UPDATE_CV } from '@/graphql/cv/updateCVMutation'
 import { GET_PROJECTS } from '@/graphql/projects/projectsQuery'
 import { createLanguagesArray } from '@/utils/createLanguagesArray'
 import { createProjectsIdArray } from '@/utils/createProjectsIdArray'
 import { createSkillsArray } from '@/utils/createSkillsArray'
+import { toastMessage } from '@/utils/toastMessage'
 
 import {
   FORM_CV_PROJECTS_KEYS,
@@ -58,6 +60,8 @@ export const CVProjectsModal: FC<ICVProjectsModalProps> = ({ CVData, onClose }) 
     })
 
     onClose()
+
+    toastMessage(t('Successfully updated'), TOAST_TYPES.success)
   }
 
   return (
