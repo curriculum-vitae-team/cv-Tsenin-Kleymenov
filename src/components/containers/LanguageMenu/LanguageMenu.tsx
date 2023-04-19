@@ -1,24 +1,17 @@
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import LanguageIcon from '@mui/icons-material/Language'
 import { IconButton, Menu, MenuItem } from '@mui/material'
 
 import { LANGUAGES } from '@/constants/languages'
+import { useMenu } from '@/hooks/useMenu'
 
 import { LanguageMenuWrapper } from './LanguageMenu.styles'
 
 export const LanguageMenu: FC = () => {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+  const { anchorEl, handleClick, handleClose } = useMenu()
 
   const { i18n } = useTranslation()
-
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
-    setAnchorEl(event.currentTarget)
-  }
-
-  const handleClose = (): void => {
-    setAnchorEl(null)
-  }
 
   const changeLanguage = (language: string): void => {
     i18n.changeLanguage(language)
