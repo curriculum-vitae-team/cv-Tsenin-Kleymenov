@@ -11,7 +11,7 @@ import { Input } from '@/components/views/Input/Input'
 import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
 import { FORM_LANGUAGE_SCHEMA } from '@/constants/schemaOptions'
 import { TOAST_TYPES } from '@/constants/toastTypes'
-import { CREATE_LANGUAGE } from '@/graphql/languages/createLanguageMutation'
+import { CREATE_LANGUAGE } from '@/graphql/language/createLanguageMutation'
 import { LANGUAGES } from '@/graphql/languages/languagesQuery'
 import {
   FORM_LANGUAGE_KEYS,
@@ -20,7 +20,6 @@ import {
 import { toastMessage } from '@/utils/toastMessage'
 
 export const LanguageCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
-  const { t } = useTranslation()
   const [createLanguageMutation, { loading: createLanguageLoading }] = useMutation(
     CREATE_LANGUAGE,
     {
@@ -36,6 +35,8 @@ export const LanguageCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
     mode: 'onSubmit',
     resolver: yupResolver(FORM_LANGUAGE_SCHEMA)
   })
+
+  const { t } = useTranslation()
 
   const onSubmit: SubmitHandler<ILanguageFormValues> = async formData => {
     await createLanguageMutation({

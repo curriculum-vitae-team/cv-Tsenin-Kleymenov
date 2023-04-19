@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
-import { useMutation, useQuery, useReactiveVar } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 import CloseIcon from '@mui/icons-material/Close'
 import FileUploadIcon from '@mui/icons-material/FileUpload'
 import { Avatar, Box, Grid, IconButton, Typography } from '@mui/material'
@@ -11,10 +11,10 @@ import { IUserResult } from '@/appTypes/IResult.interfaces'
 import { EmployeeAvatarAlert } from '@/components/views/EmployeeAvatarAlert/EmployeeAvatarAlert'
 import { LoadingOverlay } from '@/components/views/LoadingOverlay/LoadingOverlay'
 import { DROP_ZONE_ACCEPT_FILES } from '@/constants/dropZoneAcceptFile'
-import { authService } from '@/graphql/auth/authService'
 import { DELETE_AVATAR } from '@/graphql/user/deleteUserAvatarMutation'
 import { UPLOAD_AVATAR } from '@/graphql/user/uploadUserAvatarMutation'
 import { USER } from '@/graphql/user/userQuery'
+import { useUser } from '@/hooks/useUser'
 import { convertBase64 } from '@/utils/convertBase64'
 import { getFirstChars } from '@/utils/getFirstChar'
 
@@ -22,21 +22,22 @@ import { ErrorUploadMessage } from './ErrorUploadMessage/ErrorUploadMessage'
 import { AvatarWrapper, DropZone } from './EmployeeAvatarUpload.styles'
 
 export const EmployeeAvatarUpload: FC = () => {
-  const { id } = useParams()
+  const { id: userId } = useParams()
+  const { user } = useUser()
+  const userCheck = userId === user?.id
+
   const { t } = useTranslation()
-  const user = useReactiveVar(authService.user$)
-  const userCheck = id === user?.id
 
   const { data: userData } = useQuery<IUserResult>(USER, {
-    variables: { id }
+    variables: { id: userId }
   })
 
   const [uploadAvatarMutation, { loading: uploadLoading }] = useMutation(UPLOAD_AVATAR, {
-    refetchQueries: () => [{ query: USER, variables: { id } }]
+    refetchQueries: () => [{ query: USER, variables: { id: userId } }]
   })
 
   const [deleteAvatarMutation] = useMutation(DELETE_AVATAR, {
-    refetchQueries: () => [{ query: USER, variables: { id } }]
+    refetchQueries: () => [{ query: USER, variables: { id: userId } }]
   })
 
   const { getRootProps, getInputProps, fileRejections } = useDropzone({

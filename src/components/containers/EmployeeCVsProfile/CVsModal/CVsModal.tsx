@@ -25,7 +25,6 @@ import { ICVsModalProps } from './CVsModal.interfaces'
 import { FORM_PROFILE_CVS_KEYS, IProfileCVsFormValues } from './CVsModal.interfaces'
 
 export const CVsModal: FC<ICVsModalProps> = ({ currentCVData, onClose }) => {
-  const { t } = useTranslation()
   const { id: userId } = useParams()
 
   const { data: CVData, loading: CVLoading } = useQuery<ICVResult>(CV, {
@@ -49,6 +48,8 @@ export const CVsModal: FC<ICVsModalProps> = ({ currentCVData, onClose }) => {
     mode: 'onSubmit',
     resolver: yupResolver(FORM_PROFILE_CVS_SCHEMA)
   })
+
+  const { t } = useTranslation()
 
   const onSubmit: SubmitHandler<IProfileCVsFormValues> = async formData => {
     await updateCVMutation({

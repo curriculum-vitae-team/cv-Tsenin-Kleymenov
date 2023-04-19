@@ -1,7 +1,7 @@
 import { FC, useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-import { useMutation, useQuery, useReactiveVar } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Box, Container, Grid, Typography } from '@mui/material'
 
@@ -13,12 +13,11 @@ import { LoadingOverlay } from '@/components/views/LoadingOverlay/LoadingOverlay
 import { AppSelect } from '@/components/views/Select/Select'
 import { FORM_PROFILE_SCHEMA } from '@/constants/schemaOptions'
 import { TOAST_TYPES } from '@/constants/toastTypes'
-import { ROLE } from '@/constants/userRoles'
-import { authService } from '@/graphql/auth/authService'
 import { DEPARTMENTS } from '@/graphql/departments/departmentsQuery'
 import { POSITIONS } from '@/graphql/positions/positionsQuery'
 import { UPDATE_USER } from '@/graphql/user/updateUserMutation'
 import { USER } from '@/graphql/user/userQuery'
+import { useUser } from '@/hooks/useUser'
 import { convertCreatedAtDate } from '@/utils/createdAtFormat'
 import { toastMessage } from '@/utils/toastMessage'
 
@@ -29,17 +28,19 @@ import {
 } from './EmployeeProfileForm.interfaces'
 
 export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser }) => {
-  const user = useReactiveVar(authService.user$)
+  const { user, isAdmin } = useUser()
   const userCheck = currentUser?.id === user?.id
-  const { t } = useTranslation()
-  const isAdmin = user?.role === ROLE.admin
+
   const { loading: departmentsLoading, data: departmentsData } =
     useQuery<IDepartmentResult>(DEPARTMENTS)
 
   const { loading: positionsLoading, data: positionsData } = useQuery<IPositionResult>(POSITIONS)
+
   const [updateUser, { loading: userLoading }] = useMutation(UPDATE_USER, {
     refetchQueries: () => [{ query: USER, variables: { id: currentUser?.id } }]
   })
+
+  const { t } = useTranslation()
 
   const {
     register,

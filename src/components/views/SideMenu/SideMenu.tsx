@@ -10,7 +10,7 @@ import { useBooleanState } from '@/hooks/useBooleanState'
 import { AppSideMenu, SideMenuBurgerButton, SideMenuCloseButton } from './SideMenu.styles'
 
 export const SideMenu: FC = () => {
-  const [isVisible, toggleVisibility] = useBooleanState()
+  const { isVisible, toggleVisibility } = useBooleanState()
 
   return (
     <>

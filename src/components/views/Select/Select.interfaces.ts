@@ -8,4 +8,3 @@ export interface IAppSelectItemProps {
   id: string
   name: string
 }
-

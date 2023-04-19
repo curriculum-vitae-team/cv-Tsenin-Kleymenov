@@ -1,32 +1,32 @@
 import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
-import { useQuery, useReactiveVar } from '@apollo/client'
+import { useQuery } from '@apollo/client'
 import { Box, Divider, Typography } from '@mui/material'
 
 import { IUserResult } from '@/appTypes/IResult.interfaces'
 import { Button } from '@/components/views/Button/Button'
 import { SkillRow } from '@/components/views/SkillRow/SkillRow'
 import { MASTERY_ARRAY } from '@/constants/mastery'
-import { ROLE } from '@/constants/userRoles'
-import { authService } from '@/graphql/auth/authService'
 import { ISkillMastery } from '@/graphql/interfaces/ISkillMastery.interfaces'
 import { USER } from '@/graphql/user/userQuery'
 import { useBooleanState } from '@/hooks/useBooleanState'
+import { useUser } from '@/hooks/useUser'
 
 import { SkillsModal } from './SkillsModal/SkillsModal'
 
 export const EmployeeSkillsProfile: FC = () => {
   const { id: userId } = useParams()
-  const { t } = useTranslation()
-  const [isVisible, toggleVisibility] = useBooleanState()
-  const user = useReactiveVar(authService.user$)
+  const { user, isAdmin } = useUser()
   const userCheck = userId === user?.id
-  const isAdmin = user?.role === ROLE.admin
+
+  const { isVisible, toggleVisibility } = useBooleanState()
 
   const { data: userData } = useQuery<IUserResult>(USER, {
     variables: { id: userId }
   })
+
+  const { t } = useTranslation()
 
   const masteryObject = MASTERY_ARRAY.reduce((acc: { [key: string]: ISkillMastery[] }, item) => {
     acc[item.name] =

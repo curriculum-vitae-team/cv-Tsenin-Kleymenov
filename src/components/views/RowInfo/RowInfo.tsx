@@ -6,7 +6,7 @@ import { IRowInfoProps } from './RowInfo.interfaces'
 
 export const RowInfo: FC<IRowInfoProps> = ({ title, info }) => {
   const { t } = useTranslation()
-  
+
   return (
     <>
       <Box sx={{ display: 'flex', my: 1 }}>

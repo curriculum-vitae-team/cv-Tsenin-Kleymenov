@@ -17,7 +17,6 @@ import { FORM_PROJECT_KEYS, IProjectFormValues } from '@/pages/ProjectsPage/Proj
 import { convertDate } from '@/utils/dateHelper'
 
 export const ProjectCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
-  const { t } = useTranslation()
   const [createProjectMutation, { loading: createProjectLoading }] = useMutation(CREATE_PROJECT, {
     refetchQueries: [{ query: GET_PROJECTS }]
   })
@@ -31,6 +30,8 @@ export const ProjectCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
     mode: 'onSubmit',
     resolver: yupResolver(FORM_PROJECT_SCHEMA)
   })
+
+  const { t } = useTranslation()
 
   const onSubmit: SubmitHandler<IProjectFormValues> = async formData => {
     await createProjectMutation({

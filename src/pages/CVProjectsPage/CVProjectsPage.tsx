@@ -1,7 +1,7 @@
 import { FC, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
-import { useQuery, useReactiveVar } from '@apollo/client'
+import { useQuery } from '@apollo/client'
 import SearchIcon from '@mui/icons-material/Search'
 import { Box, Divider } from '@mui/material'
 
@@ -9,22 +9,22 @@ import { ICVResult } from '@/appTypes/IResult.interfaces'
 import { Button } from '@/components/views/Button/Button'
 import { CommonTable } from '@/components/views/CommonTable/CommonTable'
 import { InputWithIcon } from '@/components/views/Input/Input'
-import { ROLE } from '@/constants/userRoles'
-import { authService } from '@/graphql/auth/authService'
 import { CV } from '@/graphql/cv/CVQuery'
 import { IProject } from '@/graphql/interfaces/IProject.interfaces'
 import { useBooleanState } from '@/hooks/useBooleanState'
+import { useUser } from '@/hooks/useUser'
 
 import { CVProjectsModal } from './CVProjectsModal/CVProjectsModal'
 import { tableColumns } from './tableColumns'
 
 export const CVProjectsPage: FC = () => {
   const { id: CVId } = useParams()
-  const [isVisible, toggleVisibility] = useBooleanState()
-  const [searchedName, setSearchedName] = useState<string>('')
-  const user = useReactiveVar(authService.user$)
-  const { t } = useTranslation()
 
+  const { isVisible, toggleVisibility } = useBooleanState()
+
+  const [searchedName, setSearchedName] = useState<string>('')
+
+  const { user, isAdmin } = useUser()
   const {
     data: CVData,
     loading: CVLoading,
@@ -34,7 +34,8 @@ export const CVProjectsPage: FC = () => {
   })
 
   const userCheck = CVData?.cv?.user?.id === user?.id
-  const isAdmin = user?.role === ROLE.admin
+
+  const { t } = useTranslation()
 
   const handleSearchUser = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setSearchedName(event.target.value)

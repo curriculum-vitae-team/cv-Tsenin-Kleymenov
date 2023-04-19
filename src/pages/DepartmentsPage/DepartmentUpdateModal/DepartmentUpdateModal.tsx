@@ -10,8 +10,8 @@ import { Input } from '@/components/views/Input/Input'
 import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
 import { FORM_DEPARTMENT_SCHEMA } from '@/constants/schemaOptions'
 import { TOAST_TYPES } from '@/constants/toastTypes'
+import { UPDATE_DEPARTMENT } from '@/graphql/department/updateDepartmentMutation'
 import { DEPARTMENTS } from '@/graphql/departments/departmentsQuery'
-import { UPDATE_DEPARTMENT } from '@/graphql/departments/updateDepartmentMutation'
 import {
   FORM_DEPARTMENT_KEYS,
   IDepartmentFormValues
@@ -21,7 +21,6 @@ import { toastMessage } from '@/utils/toastMessage'
 import { IDepartmentUpdateModalProps } from './DepartmentUpdateModal.interfaces'
 
 export const DepartmentUpdateModal: FC<IDepartmentUpdateModalProps> = ({ department, onClose }) => {
-  const { t } = useTranslation()
   const [updateUpdateMutation, { loading: updateUpdateLoading }] = useMutation(UPDATE_DEPARTMENT, {
     refetchQueries: [{ query: DEPARTMENTS }]
   })
@@ -37,6 +36,8 @@ export const DepartmentUpdateModal: FC<IDepartmentUpdateModalProps> = ({ departm
     mode: 'onSubmit',
     resolver: yupResolver(FORM_DEPARTMENT_SCHEMA)
   })
+
+  const { t } = useTranslation()
 
   const onSubmit: SubmitHandler<IDepartmentFormValues> = async formData => {
     await updateUpdateMutation({

@@ -10,15 +10,14 @@ import { Input } from '@/components/views/Input/Input'
 import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
 import { FORM_SKILL_SCHEMA } from '@/constants/schemaOptions'
 import { TOAST_TYPES } from '@/constants/toastTypes'
+import { UPDATE_SKILL } from '@/graphql/skill/updateSkillMutation'
 import { SKILLS } from '@/graphql/skills/skillsQuery'
-import { UPDATE_SKILL } from '@/graphql/skills/updateSkillMutation'
 import { FORM_SKILL_KEYS, ISkillFormValues } from '@/pages/SkillsPage/SkillsPage.interfaces'
 import { toastMessage } from '@/utils/toastMessage'
 
 import { ISkillUpdateModalProps } from './SkillUpdateModal.interfaces'
 
 export const SkillUpdateModal: FC<ISkillUpdateModalProps> = ({ skill, onClose }) => {
-  const { t } = useTranslation()
   const [updateSkillMutation, { loading: updateSkillLoading }] = useMutation(UPDATE_SKILL, {
     refetchQueries: [{ query: SKILLS }]
   })
@@ -34,6 +33,8 @@ export const SkillUpdateModal: FC<ISkillUpdateModalProps> = ({ skill, onClose })
     mode: 'onSubmit',
     resolver: yupResolver(FORM_SKILL_SCHEMA)
   })
+
+  const { t } = useTranslation()
 
   const onSubmit: SubmitHandler<ISkillFormValues> = async formData => {
     await updateSkillMutation({

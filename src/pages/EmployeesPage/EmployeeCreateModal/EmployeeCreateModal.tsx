@@ -17,15 +17,13 @@ import { TOAST_TYPES } from '@/constants/toastTypes'
 import { ROLE_ARRAY } from '@/constants/userRoles'
 import { DEPARTMENTS } from '@/graphql/departments/departmentsQuery'
 import { POSITIONS } from '@/graphql/positions/positionsQuery'
-import { CREATE_USER } from '@/graphql/users/createUserMutation'
+import { CREATE_USER } from '@/graphql/user/createUserMutation'
 import { GET_EMPLOYEES } from '@/graphql/users/usersQuery'
 import { toastMessage } from '@/utils/toastMessage'
 
 import { FORM_EMPLOYEES_KEYS, IEmployeesFormValues } from '../EmployeesPage.interfaces'
 
 export const EmployeeCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
-  const { t } = useTranslation()
-
   const [createUserMutation, { loading: createUserLoading }] = useMutation(CREATE_USER, {
     refetchQueries: [{ query: GET_EMPLOYEES }]
   })
@@ -43,6 +41,8 @@ export const EmployeeCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
     mode: 'onSubmit',
     resolver: yupResolver(FORM_EMPLOYEES_SCHEMA)
   })
+
+  const { t } = useTranslation()
 
   const onSubmit: SubmitHandler<IEmployeesFormValues> = async formData => {
     await createUserMutation({

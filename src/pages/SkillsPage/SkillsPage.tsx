@@ -1,6 +1,6 @@
 import { FC, useDeferredValue, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useQuery, useReactiveVar } from '@apollo/client'
+import { useQuery } from '@apollo/client'
 import SearchIcon from '@mui/icons-material/Search'
 import { Box, Divider } from '@mui/material'
 
@@ -8,24 +8,25 @@ import { ISkillsResult } from '@/appTypes/IResult.interfaces'
 import { Button } from '@/components/views/Button/Button'
 import { CommonTable } from '@/components/views/CommonTable/CommonTable'
 import { InputWithIcon } from '@/components/views/Input/Input'
-import { ROLE } from '@/constants/userRoles'
-import { authService } from '@/graphql/auth/authService'
 import { ISkill } from '@/graphql/interfaces/ISkill.interfaces'
 import { SKILLS } from '@/graphql/skills/skillsQuery'
 import { useBooleanState } from '@/hooks/useBooleanState'
+import { useUser } from '@/hooks/useUser'
 import { SkillCreateModal } from '@/pages/SkillsPage/SkillCreateModal/SkillCreateModal'
 
 import { tableColumns } from './tableColumns'
 
 export const SkillsPage: FC = () => {
-  const user = useReactiveVar(authService.user$)
-  const isAdmin = user?.role === ROLE.admin
-  const { t } = useTranslation()
-  const [isVisible, toggleVisibility] = useBooleanState()
+  const { isAdmin } = useUser()
+
+  const { isVisible, toggleVisibility } = useBooleanState()
+
   const [searchedName, setSearchedName] = useState<string>('')
   const deferredValue = useDeferredValue(searchedName)
 
   const { data, loading, error } = useQuery<ISkillsResult>(SKILLS)
+
+  const { t } = useTranslation()
 
   const handleSearchUser = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setSearchedName(event.target.value)

@@ -1,29 +1,29 @@
 import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useMutation, useReactiveVar } from '@apollo/client'
+import { useMutation } from '@apollo/client'
 import { Box, MenuItem } from '@mui/material'
 
 import { BasicMenu } from '@/components/containers/BasicMenu/BasicMenu'
 import { TOAST_TYPES } from '@/constants/toastTypes'
-import { ROLE } from '@/constants/userRoles'
-import { authService } from '@/graphql/auth/authService'
-import { DELETE_DEPARTMENT } from '@/graphql/departments/deleteDepartmentMutation'
+import { DELETE_DEPARTMENT } from '@/graphql/department/deleteDepartmentMutation'
 import { DEPARTMENTS } from '@/graphql/departments/departmentsQuery'
 import { useBooleanState } from '@/hooks/useBooleanState'
+import { useUser } from '@/hooks/useUser'
 import { DepartmentUpdateModal } from '@/pages/DepartmentsPage/DepartmentUpdateModal/DepartmentUpdateModal'
 import { toastMessage } from '@/utils/toastMessage'
 
 import { IDepartmentDropdownProps } from './DepartmentDropdown.interfaces'
 
 export const DepartmentDropdown: FC<IDepartmentDropdownProps> = ({ department }) => {
-  const user = useReactiveVar(authService.user$)
-  const isAdmin = user?.role === ROLE.admin
-  const { t } = useTranslation()
-  const [isVisible, toggleVisibility] = useBooleanState()
+  const { isAdmin } = useUser()
+
+  const { isVisible, toggleVisibility } = useBooleanState()
 
   const [deleteDepartmentMutation] = useMutation(DELETE_DEPARTMENT, {
     refetchQueries: [{ query: DEPARTMENTS }]
   })
+
+  const { t } = useTranslation()
 
   const handleDepartmentDelete = (): void => {
     deleteDepartmentMutation({

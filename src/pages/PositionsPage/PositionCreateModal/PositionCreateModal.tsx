@@ -11,7 +11,7 @@ import { Input } from '@/components/views/Input/Input'
 import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
 import { FORM_POSITION_SCHEMA } from '@/constants/schemaOptions'
 import { TOAST_TYPES } from '@/constants/toastTypes'
-import { CREATE_POSITION } from '@/graphql/positions/createPositionMutation'
+import { CREATE_POSITION } from '@/graphql/position/createPositionMutation'
 import { POSITIONS } from '@/graphql/positions/positionsQuery'
 import {
   FORM_POSITION_KEYS,
@@ -20,7 +20,6 @@ import {
 import { toastMessage } from '@/utils/toastMessage'
 
 export const PositionCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
-  const { t } = useTranslation()
   const [createPositionMutation, { loading: createPositionLoading }] = useMutation(
     CREATE_POSITION,
     {
@@ -36,6 +35,8 @@ export const PositionCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
     mode: 'onSubmit',
     resolver: yupResolver(FORM_POSITION_SCHEMA)
   })
+
+  const { t } = useTranslation()
 
   const onSubmit: SubmitHandler<IPositionFormValues> = async formData => {
     await createPositionMutation({

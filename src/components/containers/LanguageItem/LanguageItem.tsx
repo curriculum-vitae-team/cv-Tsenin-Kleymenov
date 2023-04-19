@@ -1,26 +1,24 @@
 import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
-import { useMutation, useQuery, useReactiveVar } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 import ClearIcon from '@mui/icons-material/Clear'
 import { Box, Typography } from '@mui/material'
 
 import { IUserResult } from '@/appTypes/IResult.interfaces'
-import { ROLE } from '@/constants/userRoles'
-import { authService } from '@/graphql/auth/authService'
 import { UPDATE_USER } from '@/graphql/user/updateUserMutation'
 import { USER } from '@/graphql/user/userQuery'
+import { useUser } from '@/hooks/useUser'
 import { createLanguagesArray } from '@/utils/createLanguagesArray'
 
 import { ILanguageItemProps } from './LanguageItem.interfaces'
 import { CloseButton, LanguageItemContainer } from './LanguageItem.styles'
 
 export const LanguageItem: FC<ILanguageItemProps> = ({ languageName, languageProficiency }) => {
-  const { t } = useTranslation()
   const { id: userId } = useParams()
-  const user = useReactiveVar(authService.user$)
-  const isAdmin = user?.role === ROLE.admin
+  const { user, isAdmin } = useUser()
   const userCheck = userId === user?.id
+
   const { data: userData } = useQuery<IUserResult>(USER, {
     variables: { id: userId }
   })
@@ -28,6 +26,8 @@ export const LanguageItem: FC<ILanguageItemProps> = ({ languageName, languagePro
   const [updateUser] = useMutation(UPDATE_USER, {
     refetchQueries: () => [{ query: USER, variables: { id: userId } }]
   })
+
+  const { t } = useTranslation()
 
   const handleDelete = (language_name: string, proficiency: string): void => {
     updateUser({

@@ -18,7 +18,7 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 1,
     '@typescript-eslint/no-unsafe-call': 0,
     '@typescript-eslint/unbound-method': 0,
-    '@typescript-eslint/no-unused-vars': 1,
+    '@typescript-eslint/no-unused-vars': [1, { destructuredArrayIgnorePattern: '^_' }],
     '@typescript-eslint/ban-types': 0,
     '@typescript-eslint/camelcase': 0,
     '@typescript-eslint/no-shadow': 1,

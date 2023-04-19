@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useQuery, useReactiveVar } from '@apollo/client'
+import { useQuery } from '@apollo/client'
 import { Logout } from '@mui/icons-material'
 import { Divider, Menu, Typography } from '@mui/material'
 
@@ -10,16 +10,18 @@ import { UserMenuItem } from '@/components/views/UserMenuItem/UserMenuItem'
 import { USER_MENU_ITEMS } from '@/constants/userMenuItems'
 import { authService } from '@/graphql/auth/authService'
 import { FETCH_POLICY } from '@/graphql/fetchPolicy'
-import { IUser } from '@/graphql/interfaces/IUser.interfaces'
 import { USER } from '@/graphql/user/userQuery'
+import { useUser } from '@/hooks/useUser'
 import { AppNavigationRoutes } from '@/router/paths'
 
 import { MenuContainer, PaperPropsUserMenu, UserMenuInfo } from './UserMenu.styles'
 
 export const UserMenu: FC = () => {
+  const { user } = useUser()
+
   const navigate = useNavigate()
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
-  const user = useReactiveVar<IUser | null>(authService.user$)
 
   const { data } = useQuery<IUserResult>(USER, {
     variables: { id: user?.id },

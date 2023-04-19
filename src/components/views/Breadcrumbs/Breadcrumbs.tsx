@@ -16,11 +16,12 @@ import { BreadcrumbsQuery } from './queries'
 
 export const AppBreadcrumbs: FC<IAppBreadcrumbsProps> = ({ id }) => {
   const location = useLocation()
-  const { t } = useTranslation()
 
   const { data } = useQuery(BreadcrumbsQuery[location.state] || USER, {
     variables: { id }
   })
+
+  const { t } = useTranslation()
 
   const pathnameArray = location.pathname.split('/').filter(item => item)
   const profileLink = `/${AppNavigationRoutes.EMPLOYEES}/${id}/${AppNavigationRoutes.PROFILE}`

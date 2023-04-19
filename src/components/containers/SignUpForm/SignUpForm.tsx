@@ -17,13 +17,15 @@ import { toastMessage } from '@/utils/toastMessage'
 import { FORM_SIGNUP_KEYS, ISignUpFormProps } from './SignUpForm.interfaces'
 
 export const SignUpForm: FC<ISignUpFormProps> = ({ signUp }) => {
-  const { t } = useTranslation()
   const navigate = useNavigate()
+
   const {
     register,
     handleSubmit,
     formState: { errors }
   } = useForm<IAuthFormValues>({ mode: 'onSubmit', resolver: yupResolver(SIGNUP_SCHEMA) })
+
+  const { t } = useTranslation()
 
   const onSubmit: SubmitHandler<IAuthFormValues> = async formData => {
     try {

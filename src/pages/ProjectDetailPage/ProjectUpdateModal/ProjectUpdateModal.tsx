@@ -17,8 +17,8 @@ import { convertDate, convertDateToFormValue } from '@/utils/dateHelper'
 import { IProjectUpdateModalProps } from './ProjectUpdateModal.interfaces'
 
 export const ProjectUpdateModal: FC<IProjectUpdateModalProps> = ({ project, onClose }) => {
-  const { t } = useTranslation()
   const [updateProjectMutation, { loading: updateProjectLoading }] = useMutation(UPDATE_PROJECT)
+
   const {
     register,
     handleSubmit,
@@ -37,6 +37,8 @@ export const ProjectUpdateModal: FC<IProjectUpdateModalProps> = ({ project, onCl
     mode: 'onSubmit',
     resolver: yupResolver(FORM_PROJECT_SCHEMA)
   })
+
+  const { t } = useTranslation()
 
   const onSubmit: SubmitHandler<IProjectFormValues> = async formData => {
     await updateProjectMutation({

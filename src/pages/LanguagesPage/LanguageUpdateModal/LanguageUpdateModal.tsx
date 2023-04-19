@@ -10,8 +10,8 @@ import { Input } from '@/components/views/Input/Input'
 import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
 import { FORM_LANGUAGE_SCHEMA } from '@/constants/schemaOptions'
 import { TOAST_TYPES } from '@/constants/toastTypes'
+import { UPDATE_LANGUAGE } from '@/graphql/language/updateLanguageMutation'
 import { LANGUAGES } from '@/graphql/languages/languagesQuery'
-import { UPDATE_LANGUAGE } from '@/graphql/languages/updateLanguageMutation'
 import {
   FORM_LANGUAGE_KEYS,
   ILanguageFormValues
@@ -21,7 +21,6 @@ import { toastMessage } from '@/utils/toastMessage'
 import { ILanguageUpdateModalProps } from './LanguageUpdateModal.interfaces'
 
 export const LanguageUpdateModal: FC<ILanguageUpdateModalProps> = ({ language, onClose }) => {
-  const { t } = useTranslation()
   const [updateLanguageMutation, { loading: updateLanguageLoading }] = useMutation(
     UPDATE_LANGUAGE,
     {
@@ -42,6 +41,8 @@ export const LanguageUpdateModal: FC<ILanguageUpdateModalProps> = ({ language, o
     mode: 'onSubmit',
     resolver: yupResolver(FORM_LANGUAGE_SCHEMA)
   })
+
+  const { t } = useTranslation()
 
   const onSubmit: SubmitHandler<ILanguageFormValues> = async formData => {
     await updateLanguageMutation({
