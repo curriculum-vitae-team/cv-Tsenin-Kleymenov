@@ -86,7 +86,7 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
   return (
     <Container maxWidth="md">
       <EmployeeAvatarUpload />
-      <Box sx={{ minHeight: 150 }}>
+      <Box sx={{ minHeight: 150, marginTop: '20px' }}>
         <LoadingOverlay active={userLoading}>
           <Typography>{`${t('Full name')}: ${currentUser?.profile.full_name || '-'}`}</Typography>
           <Typography>{`${t('Email')}: ${currentUser?.email || '-'}`}</Typography>

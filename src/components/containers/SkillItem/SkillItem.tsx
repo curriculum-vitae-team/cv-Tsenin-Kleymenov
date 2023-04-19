@@ -50,9 +50,9 @@ export const SkillItem: FC<ISkillItemProps> = ({ skillName, skillMastery }) => {
   return (
     <SkillItemContainer>
       <SkillBox>
-        <Typography>{skillName}</Typography>
+        <Typography fontSize="24px">{skillName}</Typography>
         <MasteryBox mastery_color={MASTERY_COLORS[skillMastery]}>
-          <Typography>{skillMastery}</Typography>
+          <Typography fontSize="15px">{skillMastery}</Typography>
         </MasteryBox>
       </SkillBox>
       {(userCheck || isAdmin) && (

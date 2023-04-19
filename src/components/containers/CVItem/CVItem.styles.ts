@@ -10,5 +10,6 @@ export const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 export const ButtonContainer = styled(Box)(() => ({
   width: '350px',
   display: 'flex',
-  alignItems: 'center'
+  alignItems: 'center',
+  gridColumnGap: '15px'
 }))

@@ -52,7 +52,7 @@ export const LanguageItem: FC<ILanguageItemProps> = ({ languageName, languagePro
     <LanguageItemContainer>
       <Box>
         <Typography sx={{ fontWeight: 'bold' }}>{languageName}</Typography>
-        <Typography>{`${t('Level of language')}:${languageProficiency.toUpperCase()}`}</Typography>
+        <Typography>{`${t('Level of language')}: ${languageProficiency.toUpperCase()}`}</Typography>
       </Box>
       {(userCheck || isAdmin) && (
         <CloseButton onClick={() => handleDelete(languageName, languageProficiency)}>
