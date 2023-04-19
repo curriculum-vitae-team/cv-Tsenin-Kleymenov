@@ -1,8 +1,9 @@
 import { FC } from 'react'
 
-import { IContentWrapperProps } from './ContentWrapper.interfaces'
+import { IBaseChildrenProps } from '@/appTypes/IBaseChildrenProps.interfaces'
+
 import { Content } from './ContentWrapper.styles'
 
-export const ContentWrapper: FC<IContentWrapperProps> = ({ children }) => {
+export const ContentWrapper: FC<IBaseChildrenProps> = ({ children }) => {
   return <Content>{children}</Content>
 }

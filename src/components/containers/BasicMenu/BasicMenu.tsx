@@ -2,9 +2,9 @@ import { Children, FC, useState } from 'react'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import { IconButton, Menu } from '@mui/material'
 
-import { IBasicMenuProps } from './BasicMenu.interfaces'
+import { IBaseChildrenProps } from '@/appTypes/IBaseChildrenProps.interfaces'
 
-export const BasicMenu: FC<IBasicMenuProps> = ({ children }) => {
+export const BasicMenu: FC<IBaseChildrenProps> = ({ children }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>): void => {

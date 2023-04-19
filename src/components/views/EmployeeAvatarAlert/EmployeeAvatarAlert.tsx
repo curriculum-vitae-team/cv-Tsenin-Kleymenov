@@ -2,11 +2,10 @@ import { FC } from 'react'
 import CloseIcon from '@mui/icons-material/Close'
 import { Alert, Collapse, IconButton } from '@mui/material'
 
+import { IBaseChildrenProps } from '@/appTypes/IBaseChildrenProps.interfaces'
 import { useBooleanState } from '@/hooks/useBooleanState'
 
-import { IEmployeeAvatarAlertProps } from './EmployeeAvatarAlert.interfaces'
-
-export const EmployeeAvatarAlert: FC<IEmployeeAvatarAlertProps> = ({ children }) => {
+export const EmployeeAvatarAlert: FC<IBaseChildrenProps> = ({ children }) => {
   const { isVisible, setInvisible } = useBooleanState(true)
 
   return (

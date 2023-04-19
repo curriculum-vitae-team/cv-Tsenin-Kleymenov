@@ -1,8 +1,9 @@
 import { FC } from 'react'
 
-import { IHeaderWrapperProps } from './HeaderWrapper.interfaces'
+import { IBaseChildrenProps } from '@/appTypes/IBaseChildrenProps.interfaces'
+
 import { Header } from './HeaderWrapper.styles'
 
-export const HeaderWrapper: FC<IHeaderWrapperProps> = ({ children }) => {
+export const HeaderWrapper: FC<IBaseChildrenProps> = ({ children }) => {
   return <Header color="secondary">{children}</Header>
 }

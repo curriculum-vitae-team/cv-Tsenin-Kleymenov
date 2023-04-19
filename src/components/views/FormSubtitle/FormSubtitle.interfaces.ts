@@ -1,3 +1,5 @@
-export interface IFormSubtitleProps {
+import { IBaseChildrenProps } from "@/appTypes/IBaseChildrenProps.interfaces";
+
+export interface IFormSubtitleProps extends IBaseChildrenProps {
   children: string
 }
