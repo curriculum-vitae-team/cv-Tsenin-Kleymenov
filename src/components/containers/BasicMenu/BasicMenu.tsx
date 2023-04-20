@@ -1,19 +1,13 @@
-import { Children, FC, useState } from 'react'
+import { Children, FC } from 'react'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import { IconButton, Menu } from '@mui/material'
+
+import { useMenu } from '@/hooks/useMenu'
 
 import { IBasicMenuProps } from './BasicMenu.interfaces'
 
 export const BasicMenu: FC<IBasicMenuProps> = ({ children }) => {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
-
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
-    setAnchorEl(event.currentTarget)
-  }
-
-  const handleClose = (): void => {
-    setAnchorEl(null)
-  }
+  const { anchorEl, handleClick, handleClose } = useMenu()
 
   return (
     <div>

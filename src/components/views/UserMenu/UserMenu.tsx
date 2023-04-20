@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
 import { Logout } from '@mui/icons-material'
@@ -11,6 +11,7 @@ import { USER_MENU_ITEMS } from '@/constants/userMenuItems'
 import { authService } from '@/graphql/auth/authService'
 import { FETCH_POLICY } from '@/graphql/fetchPolicy'
 import { USER } from '@/graphql/user/userQuery'
+import { useMenu } from '@/hooks/useMenu'
 import { useUser } from '@/hooks/useUser'
 import { AppNavigationRoutes } from '@/router/paths'
 
@@ -21,20 +22,12 @@ export const UserMenu: FC = () => {
 
   const navigate = useNavigate()
 
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+  const { anchorEl, handleClick, handleClose } = useMenu()
 
   const { data } = useQuery<IUserResult>(USER, {
     variables: { id: user?.id },
     fetchPolicy: FETCH_POLICY.cacheOnly
   })
-
-  const handleOpen = (event: React.MouseEvent<HTMLElement>): void => {
-    setAnchorEl(event.currentTarget)
-  }
-
-  const handleClose = (): void => {
-    setAnchorEl(null)
-  }
 
   const handleLogout = async (): Promise<void> => {
     await authService.clearStorage()
@@ -43,7 +36,7 @@ export const UserMenu: FC = () => {
 
   return (
     <MenuContainer>
-      <UserMenuInfo onClick={handleOpen}>
+      <UserMenuInfo onClick={handleClick}>
         <Typography variant="h5">{data?.user.profile.full_name || data?.user.email}</Typography>
         <UserAvatar user={data?.user} />
       </UserMenuInfo>
