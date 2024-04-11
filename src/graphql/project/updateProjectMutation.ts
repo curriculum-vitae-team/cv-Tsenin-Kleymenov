@@ -13,7 +13,9 @@ export const UPDATE_PROJECT = gql`
       team_size
       tech_stack {
         id
+        created_at
         name
+        category
       }
     }
   }

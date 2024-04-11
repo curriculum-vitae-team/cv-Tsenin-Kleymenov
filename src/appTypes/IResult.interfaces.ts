@@ -45,3 +45,7 @@ export interface ICVsResult {
 export interface ICVResult {
   cv: ICV
 }
+
+export interface ISkillCategories {
+  skillCategories: string[]
+}

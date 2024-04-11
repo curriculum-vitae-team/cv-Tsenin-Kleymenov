@@ -39,11 +39,11 @@ export const EmployeeLanguagesProfile: FC = () => {
       )}
       <Divider sx={{ my: 2 }} />
       {userData?.user?.profile.languages.length ? (
-        <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
+        <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr' }}>
           {userData?.user?.profile?.languages.map(item => (
             <LanguageItem
-              key={item.language_name}
-              languageName={item.language_name}
+              key={item.name}
+              languageName={item.name}
               languageProficiency={item.proficiency}
             />
           ))}

@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react'
+import { FC, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { useMutation, useQuery } from '@apollo/client'
@@ -15,6 +15,7 @@ import { FORM_PROFILE_SCHEMA } from '@/constants/schemaOptions'
 import { TOAST_TYPES } from '@/constants/toastTypes'
 import { DEPARTMENTS } from '@/graphql/departments/departmentsQuery'
 import { POSITIONS } from '@/graphql/positions/positionsQuery'
+import { UPDATE_PROFILE } from '@/graphql/profile/updateProfileMutation'
 import { UPDATE_USER } from '@/graphql/user/updateUserMutation'
 import { USER } from '@/graphql/user/userQuery'
 import { useUser } from '@/hooks/useUser'
@@ -40,20 +41,25 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
     refetchQueries: () => [{ query: USER, variables: { id: currentUser?.id } }]
   })
 
+  const [updateProfile] = useMutation(UPDATE_PROFILE, {
+    refetchQueries: () => [{ query: USER, variables: { id: currentUser?.id } }]
+  })
+
   const { t } = useTranslation()
+
+  const [userInfo, setUserInfo] = useState<IProfileFormValues>({
+    [FORM_PROFILE_KEYS.firstName]: currentUser?.profile.first_name || '',
+    [FORM_PROFILE_KEYS.lastName]: currentUser?.profile.last_name || '',
+    [FORM_PROFILE_KEYS.position]: currentUser?.position?.id || '',
+    [FORM_PROFILE_KEYS.department]: currentUser?.department?.id || ''
+  })
 
   const {
     register,
     handleSubmit,
-    reset,
-    formState: { errors, isDirty, isValid, isSubmitSuccessful }
+    formState: { errors, isDirty, isValid }
   } = useForm<IProfileFormValues>({
-    defaultValues: {
-      [FORM_PROFILE_KEYS.firstName]: currentUser?.profile.first_name || '',
-      [FORM_PROFILE_KEYS.lastName]: currentUser?.profile.last_name || '',
-      [FORM_PROFILE_KEYS.position]: currentUser?.position?.id || '',
-      [FORM_PROFILE_KEYS.department]: currentUser?.department?.id || ''
-    },
+    defaultValues: userInfo,
     mode: 'onSubmit',
     resolver: yupResolver(FORM_PROFILE_SCHEMA)
   })
@@ -61,14 +67,22 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
   const onSubmit: SubmitHandler<IProfileFormValues> = async formData => {
     await updateUser({
       variables: {
-        id: currentUser?.id,
         user: {
-          profile: {
-            first_name: formData[FORM_PROFILE_KEYS.firstName],
-            last_name: formData[FORM_PROFILE_KEYS.lastName]
-          },
+          userId: currentUser?.id,
+          cvsIds: currentUser?.cvs?.map(cv => cv.id) ?? [],
           departmentId: formData[FORM_PROFILE_KEYS.department],
-          positionId: formData[FORM_PROFILE_KEYS.position]
+          positionId: formData[FORM_PROFILE_KEYS.position],
+          role: currentUser?.role
+        }
+      }
+    })
+
+    await updateProfile({
+      variables: {
+        profile: {
+          userId: currentUser?.id,
+          first_name: formData[FORM_PROFILE_KEYS.firstName],
+          last_name: formData[FORM_PROFILE_KEYS.lastName]
         }
       }
     })
@@ -76,13 +90,17 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
     toastMessage(t('Successfully updated'), TOAST_TYPES.success)
   }
 
-  useEffect(() => {
-    reset({
-      [FORM_PROFILE_KEYS.position]: currentUser?.position?.id,
-      [FORM_PROFILE_KEYS.department]: currentUser?.department?.id
+  const handleUserState = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    key: FORM_PROFILE_KEYS
+  ): void => {
+    setUserInfo(prevState => {
+      return {
+        ...prevState,
+        [key]: event.target.value
+      }
     })
-  }, [isSubmitSuccessful])
-
+  }
   return (
     <Container maxWidth="md">
       <EmployeeAvatarUpload />
@@ -112,13 +130,14 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
               />
               <AppSelect
                 variant="outlined"
+                value={userInfo[FORM_PROFILE_KEYS.department]}
                 label={t('Department')}
-                defaultValue={''}
                 loading={departmentsLoading}
                 items={departmentsData?.departments}
                 error={!!errors[FORM_PROFILE_KEYS.department]}
                 helperText={t(errors?.[FORM_PROFILE_KEYS.department]?.message as string)}
                 {...register(FORM_PROFILE_KEYS.department)}
+                onChange={event => handleUserState(event, FORM_PROFILE_KEYS.department)}
               />
             </Grid>
             <Grid item xs={6}>
@@ -133,13 +152,14 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
               />
               <AppSelect
                 variant="outlined"
+                value={userInfo[FORM_PROFILE_KEYS.position]}
                 label={t('Position')}
-                defaultValue={''}
                 loading={positionsLoading}
                 items={positionsData?.positions}
                 error={!!errors[FORM_PROFILE_KEYS.position]}
                 helperText={t(errors?.[FORM_PROFILE_KEYS.position]?.message as string)}
                 {...register(FORM_PROFILE_KEYS.position)}
+                onChange={event => handleUserState(event, FORM_PROFILE_KEYS.position)}
               />
               <Button
                 type="submit"

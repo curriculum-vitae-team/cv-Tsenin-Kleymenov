@@ -11,7 +11,6 @@ export const UNBIND_CV = gql`
         id
         email
       }
-      is_template
     }
   }
 `

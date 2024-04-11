@@ -12,12 +12,18 @@ export const tableColumns: IColumn<ILanguage>[] = [
   },
   {
     id: 2,
+    header: 'Native name',
+    field: 'native_name',
+    sortable: false
+  },
+  {
+    id: 3,
     header: 'ISO2',
     field: 'iso2',
     sortable: true
   },
   {
-    id: 3,
+    id: 4,
     header: '',
     render: item => <LanguageDropdown language={item} />,
     sortable: false

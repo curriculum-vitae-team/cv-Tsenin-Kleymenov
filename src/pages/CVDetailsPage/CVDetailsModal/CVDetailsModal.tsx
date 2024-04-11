@@ -1,9 +1,9 @@
 import { FC } from 'react'
-import { Controller, SubmitHandler, useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { useMutation } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Checkbox, Container, FormControlLabel } from '@mui/material'
+import { Container } from '@mui/material'
 
 import { Button } from '@/components/views/Button/Button'
 import { Input } from '@/components/views/Input/Input'
@@ -31,13 +31,11 @@ export const CVDetailsModal: FC<ICVDetailsModalProps> = ({ CVData, onClose }) =>
   const {
     register,
     handleSubmit,
-    control,
     formState: { errors, isValid, isDirty }
   } = useForm<ICVDetailsFormValues>({
     defaultValues: {
       [FORM_PROFILE_CVS_KEYS.name]: CVData?.name || '',
-      [FORM_PROFILE_CVS_KEYS.description]: CVData?.description || '',
-      [FORM_PROFILE_CVS_KEYS.template]: CVData?.is_template || false
+      [FORM_PROFILE_CVS_KEYS.description]: CVData?.description || ''
     },
     mode: 'onSubmit',
     resolver: yupResolver(FORM_PROFILE_CVS_SCHEMA)
@@ -55,8 +53,7 @@ export const CVDetailsModal: FC<ICVDetailsModalProps> = ({ CVData, onClose }) =>
           userId: CVData?.user.id,
           projectsIds: createProjectsIdArray(CVData?.projects),
           skills: createSkillsArray(CVData?.skills),
-          languages: createLanguagesArray(CVData?.languages),
-          is_template: formData[FORM_PROFILE_CVS_KEYS.template]
+          languages: createLanguagesArray(CVData?.languages)
         }
       }
     })
@@ -83,16 +80,6 @@ export const CVDetailsModal: FC<ICVDetailsModalProps> = ({ CVData, onClose }) =>
             error={!!errors[FORM_PROFILE_CVS_KEYS.description]}
             helperText={t(errors?.[FORM_PROFILE_CVS_KEYS.description]?.message as string)}
             {...register(FORM_PROFILE_CVS_KEYS.description)}
-          />
-          <Controller
-            control={control}
-            name={FORM_PROFILE_CVS_KEYS.template}
-            render={({ field: { value, onChange, onBlur } }) => (
-              <FormControlLabel
-                label="Template"
-                control={<Checkbox checked={value} onChange={onChange} onBlur={onBlur} />}
-              />
-            )}
           />
           <Button
             type="submit"

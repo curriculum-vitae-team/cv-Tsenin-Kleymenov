@@ -2,7 +2,7 @@ import { gql } from '@apollo/client'
 
 export const USER = gql`
   query User($id: ID!) {
-    user(id: $id) {
+    user(userId: $id) {
       id
       created_at
       email
@@ -15,11 +15,12 @@ export const USER = gql`
         full_name
         avatar
         skills {
-          skill_name
+          name
+          category
           mastery
         }
         languages {
-          language_name
+          name
           proficiency
         }
       }
@@ -27,6 +28,7 @@ export const USER = gql`
         id
         created_at
         name
+        education
         description
         user {
           id
@@ -34,7 +36,23 @@ export const USER = gql`
         }
         projects {
           id
-          created_at
+          project {
+            id
+            created_at
+            name
+            internal_name
+            description
+            domain
+            start_date
+            end_date
+            team_size
+            tech_stack {
+              id
+              created_at
+              name
+              category
+            }
+          }
           name
           internal_name
           description
@@ -42,21 +60,18 @@ export const USER = gql`
           start_date
           end_date
           team_size
-          tech_stack {
-            id
-            created_at
-            name
-          }
+          roles
+          responsibilities
         }
         skills {
-          skill_name
+          name
+          category
           mastery
         }
         languages {
-          language_name
+          name
           proficiency
         }
-        is_template
       }
       department {
         id

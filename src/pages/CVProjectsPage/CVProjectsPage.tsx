@@ -10,7 +10,7 @@ import { Button } from '@/components/views/Button/Button'
 import { CommonTable } from '@/components/views/CommonTable/CommonTable'
 import { InputWithIcon } from '@/components/views/Input/Input'
 import { CV } from '@/graphql/cv/CVQuery'
-import { IProject } from '@/graphql/interfaces/IProject.interfaces'
+import { ICVProject } from '@/graphql/interfaces/ICv.interfaces'
 import { useBooleanState } from '@/hooks/useBooleanState'
 import { useUser } from '@/hooks/useUser'
 
@@ -72,7 +72,7 @@ export const CVProjectsPage: FC = () => {
         )}
       </Box>
       <Divider />
-      <CommonTable<IProject>
+      <CommonTable<ICVProject>
         label="projects"
         data={requestSearch}
         tableColumns={tableColumns}

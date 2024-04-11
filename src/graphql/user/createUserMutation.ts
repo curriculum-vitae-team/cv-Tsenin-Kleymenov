@@ -14,11 +14,12 @@ export const CREATE_USER = gql`
         full_name
         avatar
         skills {
-          skill_name
+          name
+          category
           mastery
         }
         languages {
-          language_name
+          name
           proficiency
         }
       }

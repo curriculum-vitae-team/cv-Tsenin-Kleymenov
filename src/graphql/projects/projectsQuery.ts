@@ -16,6 +16,7 @@ export const GET_PROJECTS = gql`
         id
         created_at
         name
+        category
       }
     }
   }

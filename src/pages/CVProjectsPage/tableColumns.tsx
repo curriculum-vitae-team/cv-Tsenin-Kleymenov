@@ -1,7 +1,7 @@
 import { IColumn } from '@/appTypes/Column.interfaces'
-import { IProject } from '@/graphql/interfaces/IProject.interfaces'
+import { ICVProject } from '@/graphql/interfaces/ICv.interfaces'
 
-export const tableColumns: IColumn<IProject>[] = [
+export const tableColumns: IColumn<ICVProject>[] = [
   {
     id: 1,
     header: 'Name',

@@ -53,8 +53,7 @@ export const CVProjectsModal: FC<ICVProjectsModalProps> = ({ CVData, onClose }) 
           userId: CVData?.user.id,
           projectsIds: createProjectsIdArray(formData[FORM_CV_PROJECTS_KEYS.projects]),
           skills: createSkillsArray(CVData?.skills),
-          languages: createLanguagesArray(CVData?.languages),
-          is_template: CVData?.is_template
+          languages: createLanguagesArray(CVData?.languages)
         }
       }
     })

@@ -1,5 +1,5 @@
 import { IBaseModalProps } from '@/appTypes/IBaseModalProps.interfaces'
-import { ICV } from '@/graphql/interfaces/ICV.interfaces'
+import { ICV } from '@/graphql/interfaces/ICv.interfaces'
 import { IProject } from '@/graphql/interfaces/IProject.interfaces'
 
 export interface ICVProjectsModalProps extends IBaseModalProps {

@@ -12,9 +12,8 @@ import { AppSelect } from '@/components/views/Select/Select'
 import { PROFICIENCY_ARRAY } from '@/constants/proficiency'
 import { FORM_PROFILE_LANGUAGES_SCHEMA } from '@/constants/schemaOptions'
 import { TOAST_TYPES } from '@/constants/toastTypes'
+import { ADD_PROFILE_LANGUAGE } from '@/graphql/language/profile_language/addProfileLanguageMutation'
 import { LANGUAGES } from '@/graphql/languages/languagesQuery'
-import { UPDATE_USER } from '@/graphql/user/updateUserMutation'
-import { createLanguagesArray } from '@/utils/createLanguagesArray'
 import { toastMessage } from '@/utils/toastMessage'
 
 import {
@@ -26,11 +25,11 @@ import {
 export const LanguagesModal: FC<ILanguagesModalProps> = ({ userData, onClose }) => {
   const { loading: loadingLanguages, data: languagesData } = useQuery<ILanguagesResult>(LANGUAGES)
 
-  const [updateUser, { loading: userLoading }] = useMutation(UPDATE_USER)
+  const [addProfileLanguage, { loading: userLoading }] = useMutation(ADD_PROFILE_LANGUAGE)
 
   const { t } = useTranslation()
 
-  const languagesNameArray = userData?.profile.languages.map(item => item.language_name)
+  const languagesNameArray = userData?.profile.languages.map(item => item.name)
   const filteredLanguagesArray = languagesData?.languages
     .filter(element => !languagesNameArray?.includes(element.name))
     .map(language => {
@@ -55,23 +54,12 @@ export const LanguagesModal: FC<ILanguagesModalProps> = ({ userData, onClose }) 
   })
 
   const onSubmit: SubmitHandler<IProfileLanguagesFormValues> = async formData => {
-    await updateUser({
+    await addProfileLanguage({
       variables: {
-        id: userData?.id,
-        user: {
-          profile: {
-            first_name: userData?.profile.first_name || '',
-            last_name: userData?.profile.last_name || '',
-            languages: [
-              {
-                language_name: formData[FORM_PROFILE_LANGUAGES_KEYS.languages],
-                proficiency: formData[FORM_PROFILE_LANGUAGES_KEYS.proficiency]
-              },
-              ...createLanguagesArray(userData?.profile.languages)
-            ]
-          },
-          departmentId: userData?.department?.id || '',
-          positionId: userData?.position?.id || ''
+        language: {
+          userId: userData?.id,
+          name: formData[FORM_PROFILE_LANGUAGES_KEYS.languages],
+          proficiency: formData[FORM_PROFILE_LANGUAGES_KEYS.proficiency]
         }
       }
     })
@@ -95,7 +83,7 @@ export const LanguagesModal: FC<ILanguagesModalProps> = ({ userData, onClose }) 
           <AppSelect
             variant="outlined"
             label={t('Languages')}
-            defaultValue={''}
+            defaultValue=""
             loading={loadingLanguages}
             items={filteredLanguagesArray}
             error={!!errors[FORM_PROFILE_LANGUAGES_KEYS.languages]}
@@ -105,7 +93,7 @@ export const LanguagesModal: FC<ILanguagesModalProps> = ({ userData, onClose }) 
           <AppSelect
             variant="outlined"
             label={t('Proficiency')}
-            defaultValue={''}
+            defaultValue=""
             items={PROFICIENCY_ARRAY}
             error={!!errors[FORM_PROFILE_LANGUAGES_KEYS.proficiency]}
             helperText={t(errors?.[FORM_PROFILE_LANGUAGES_KEYS.proficiency]?.message as string)}

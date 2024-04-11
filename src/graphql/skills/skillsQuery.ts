@@ -6,6 +6,7 @@ export const SKILLS = gql`
       id
       created_at
       name
+      category
     }
   }
 `

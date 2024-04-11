@@ -1,7 +1,7 @@
 export enum SKILLS_MASTERY {
-  NOVICE = 'novice',
-  ADVANCED = 'advanced',
-  COMPETENT = 'competent',
-  PROFICIENT = 'proficient',
-  EXPERT = 'expert'
+  NOVICE = 'Novice',
+  ADVANCED = 'Advanced',
+  COMPETENT = 'Competent',
+  PROFICIENT = 'Proficient',
+  EXPERT = 'Expert'
 }

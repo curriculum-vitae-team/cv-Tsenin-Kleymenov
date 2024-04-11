@@ -2,10 +2,11 @@ import { gql } from '@apollo/client'
 
 export const CV = gql`
   query Cv($id: ID!) {
-    cv(id: $id) {
+    cv(cvId: $id) {
       id
       created_at
       name
+      education
       description
       user {
         id
@@ -19,24 +20,42 @@ export const CV = gql`
           avatar
         }
       }
-      skills {
-        skill_name
-        mastery
-      }
-      languages {
-        language_name
-        proficiency
-      }
       projects {
         id
+        project {
+          id
+          name
+          internal_name
+          description
+          domain
+          start_date
+          end_date
+          team_size
+          tech_stack {
+            id
+            name
+            category
+          }
+        }
         name
         internal_name
+        description
         domain
         start_date
         end_date
-        description
+        team_size
+        roles
+        responsibilities
       }
-      is_template
+      skills {
+        name
+        category
+        mastery
+      }
+      languages {
+        name
+        proficiency
+      }
     }
   }
 `

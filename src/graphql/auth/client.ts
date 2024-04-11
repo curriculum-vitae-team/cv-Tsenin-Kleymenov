@@ -10,7 +10,7 @@ import { toastMessage } from '@/utils/toastMessage'
 import { authService } from './authService'
 
 const httpLink = new HttpLink({
-  uri: process.env.GRAPHQL_API_URL
+  uri: import.meta.env.VITE_GRAPHQL_API_URL
 })
 
 const authLink = setContext((_, { headers }) => {

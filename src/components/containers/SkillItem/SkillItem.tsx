@@ -1,16 +1,13 @@
 import { FC } from 'react'
 import { useParams } from 'react-router-dom'
-import { useMutation, useQuery } from '@apollo/client'
+import { useMutation } from '@apollo/client'
 import ClearIcon from '@mui/icons-material/Clear'
 import { Box, Typography } from '@mui/material'
 
-import { IUserResult } from '@/appTypes/IResult.interfaces'
 import { LoadingOverlay } from '@/components/views/LoadingOverlay/LoadingOverlay'
 import { MASTERY_COLORS } from '@/constants/mastery'
-import { UPDATE_USER } from '@/graphql/user/updateUserMutation'
-import { USER } from '@/graphql/user/userQuery'
+import { DELETE_PROFILE_SKILL } from '@/graphql/skill/profile_skill/deleteProfileSkillMutation'
 import { useUser } from '@/hooks/useUser'
-import { createSkillsArray } from '@/utils/createSkillsArray'
 
 import { ISkillItemProps } from './SkillItem.interfaces'
 import { MasteryBox, SkillBox, SkillItemContainer } from './SkillItem.styles'
@@ -20,28 +17,14 @@ export const SkillItem: FC<ISkillItemProps> = ({ skillName, skillMastery }) => {
   const { user, isAdmin } = useUser()
   const userCheck = userId === user?.id
 
-  const { data: userData } = useQuery<IUserResult>(USER, {
-    variables: { id: userId }
-  })
+  const [deleteProfileSkill, { loading: userLoading }] = useMutation(DELETE_PROFILE_SKILL)
 
-  const [updateUser, { loading: userLoading }] = useMutation(UPDATE_USER, {
-    refetchQueries: () => [{ query: USER, variables: { id: userId } }]
-  })
-
-  const handleDelete = (skill_name: string, mastery: string): void => {
-    updateUser({
+  const handleDelete = (skill_name: string): void => {
+    deleteProfileSkill({
       variables: {
-        id: userId,
-        user: {
-          profile: {
-            first_name: userData?.user.profile.first_name || '',
-            last_name: userData?.user.profile.last_name || '',
-            skills: createSkillsArray(userData?.user.profile.skills).filter(
-              elem => elem.skill_name !== skill_name || elem.mastery !== mastery
-            )
-          },
-          departmentId: userData?.user?.department?.id || '',
-          positionId: userData?.user?.position?.id || ''
+        skill: {
+          userId,
+          name: skill_name
         }
       }
     })
@@ -56,7 +39,7 @@ export const SkillItem: FC<ISkillItemProps> = ({ skillName, skillMastery }) => {
         </MasteryBox>
       </SkillBox>
       {(userCheck || isAdmin) && (
-        <Box onClick={() => handleDelete(skillName, skillMastery)}>
+        <Box onClick={() => handleDelete(skillName)}>
           <LoadingOverlay active={userLoading} position="static">
             <ClearIcon sx={{ '&:hover': { cursor: 'pointer' } }} />
           </LoadingOverlay>

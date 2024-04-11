@@ -11,7 +11,6 @@ export const UPDATE_CV = gql`
         id
         email
       }
-      is_template
     }
   }
 `

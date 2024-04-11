@@ -7,10 +7,12 @@ export interface ISkillsModalProps extends IBaseModalProps {
 
 export enum FORM_PROFILE_SKILLS_KEYS {
   skills = 'skills',
-  mastery = 'mastery'
+  mastery = 'mastery',
+  category = 'category'
 }
 
 export interface IProfileSkillFormValues {
   [FORM_PROFILE_SKILLS_KEYS.skills]: string
   [FORM_PROFILE_SKILLS_KEYS.mastery]: string
+  [FORM_PROFILE_SKILLS_KEYS.category]: string
 }

@@ -9,7 +9,7 @@ export const SkillRow: FC<ISkillRowProps> = ({ skills }) => {
   return (
     <Box>
       {skills.map(item => (
-        <SkillItem key={item.skill_name} skillName={item.skill_name} skillMastery={item.mastery} />
+        <SkillItem key={item.name} skillName={item.name} skillMastery={item.mastery} />
       ))}
     </Box>
   )

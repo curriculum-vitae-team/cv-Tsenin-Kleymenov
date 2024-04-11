@@ -5,11 +5,11 @@ export interface ICreateCVModal {
 export enum FORM_CREATE_CV_KEYS {
   name = 'name',
   description = 'description',
-  isTemplate = 'is_template'
+  education = 'education'
 }
 
 export interface ICreateCVFormValues {
   [FORM_CREATE_CV_KEYS.name]: string
   [FORM_CREATE_CV_KEYS.description]: string
-  [FORM_CREATE_CV_KEYS.isTemplate]: boolean
+  [FORM_CREATE_CV_KEYS.education]: string
 }

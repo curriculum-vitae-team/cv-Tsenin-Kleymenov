@@ -10,11 +10,11 @@ export interface ICVsModalProps extends IBaseModalProps {
 export enum FORM_PROFILE_CVS_KEYS {
   name = 'name',
   description = 'description',
-  template = 'template'
+  education = 'education'
 }
 
 export interface IProfileCVsFormValues {
   [FORM_PROFILE_CVS_KEYS.name]: string
   [FORM_PROFILE_CVS_KEYS.description]: string
-  [FORM_PROFILE_CVS_KEYS.template]: boolean
+  [FORM_PROFILE_CVS_KEYS.education]: string
 }

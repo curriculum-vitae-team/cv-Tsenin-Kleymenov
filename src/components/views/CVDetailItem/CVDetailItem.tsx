@@ -23,8 +23,8 @@ export const CVDetailItem: FC<ICVDetailItemProps> = ({ CVData }) => {
               sx={{ m: 0.5, fontWeight: '700' }}
               color="primary"
               variant="outlined"
-              key={skill.skill_name}
-              label={skill.skill_name}
+              key={skill.name}
+              label={skill.name}
             />
           ))
         ) : (
@@ -42,8 +42,8 @@ export const CVDetailItem: FC<ICVDetailItemProps> = ({ CVData }) => {
               sx={{ m: 0.5, fontWeight: '700' }}
               color="primary"
               variant="outlined"
-              key={language.language_name}
-              label={language.language_name}
+              key={language.name}
+              label={language.name}
             />
           ))
         ) : (

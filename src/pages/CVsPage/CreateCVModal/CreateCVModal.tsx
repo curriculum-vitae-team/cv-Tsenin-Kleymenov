@@ -1,9 +1,9 @@
 import { FC } from 'react'
-import { Controller, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { useMutation, useQuery } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Checkbox, Container, FormControlLabel } from '@mui/material'
+import { Container } from '@mui/material'
 
 import { IUserResult } from '@/appTypes/IResult.interfaces'
 import { ICVsModalProps } from '@/components/containers/EmployeeCVsProfile/CVsModal/CVsModal.interfaces'
@@ -19,8 +19,6 @@ import { FETCH_POLICY, MUTATION_FETCH_POLICY } from '@/graphql/fetchPolicy'
 import { ICV } from '@/graphql/interfaces/ICv.interfaces'
 import { USER } from '@/graphql/user/userQuery'
 import { useUser } from '@/hooks/useUser'
-import { createLanguagesArray } from '@/utils/createLanguagesArray'
-import { createSkillsArray } from '@/utils/createSkillsArray'
 import { toastMessage } from '@/utils/toastMessage'
 
 import { FORM_CREATE_CV_KEYS, ICreateCVFormValues } from './CreateCVModal.interfaces'
@@ -40,14 +38,13 @@ export const CreateCVModal: FC<ICVsModalProps> = ({ onClose }) => {
 
   const {
     register,
-    control,
     handleSubmit,
     formState: { errors, isValid, isDirty }
   } = useForm<ICreateCVFormValues>({
     defaultValues: {
       [FORM_CREATE_CV_KEYS.name]: '',
       [FORM_CREATE_CV_KEYS.description]: '',
-      [FORM_CREATE_CV_KEYS.isTemplate]: false
+      [FORM_CREATE_CV_KEYS.education]: ''
     },
     mode: 'onSubmit',
     resolver: yupResolver(FORM_PROFILE_CVS_SCHEMA)
@@ -59,11 +56,10 @@ export const CreateCVModal: FC<ICVsModalProps> = ({ onClose }) => {
     await createCV({
       variables: {
         cv: {
-          ...formData,
-          userId: userData?.user.id,
-          skills: createSkillsArray(userData?.user.profile.skills),
-          languages: createLanguagesArray(userData?.user.profile.languages),
-          projectsIds: []
+          name: formData[FORM_CREATE_CV_KEYS.name],
+          education: formData[FORM_CREATE_CV_KEYS.education],
+          description: formData[FORM_CREATE_CV_KEYS.description],
+          userId: userData?.user.id
         }
       }
     })
@@ -75,7 +71,7 @@ export const CreateCVModal: FC<ICVsModalProps> = ({ onClose }) => {
 
   return (
     <LoadingOverlay active={createCVLoading}>
-      <ModalWindow onClose={onClose}>
+      <ModalWindow onClose={onClose} title="Create CV">
         <Container sx={{ minWidth: '500px' }}>
           <Input
             label={t('Name')}
@@ -84,20 +80,16 @@ export const CreateCVModal: FC<ICVsModalProps> = ({ onClose }) => {
             helperText={t(errors?.[FORM_CREATE_CV_KEYS.name]?.message as string)}
           />
           <Input
+            label={t('Education')}
+            error={!!errors[FORM_CREATE_CV_KEYS.education]}
+            {...register(FORM_CREATE_CV_KEYS.education)}
+            helperText={t(errors?.[FORM_CREATE_CV_KEYS.education]?.message as string)}
+          />
+          <Input
             label={t('Description')}
             error={!!errors[FORM_CREATE_CV_KEYS.description]}
             {...register(FORM_CREATE_CV_KEYS.description)}
             helperText={t(errors?.[FORM_CREATE_CV_KEYS.description]?.message as string)}
-          />
-          <Controller
-            control={control}
-            name="is_template"
-            render={({ field: { value, onChange, onBlur } }) => (
-              <FormControlLabel
-                label={t('Template')}
-                control={<Checkbox checked={!!value} onChange={onChange} onBlur={onBlur} />}
-              />
-            )}
           />
           <Button
             type="submit"

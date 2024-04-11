@@ -1,18 +1,4 @@
-import {
-  Dialog as MuiDialog,
-  DialogContent as MuiDialogContent,
-  IconButton,
-  styled
-} from '@mui/material'
-
-export const Dialog = styled(MuiDialog)(({ theme }) => ({
-  '& .MuiDialogContent-root': {
-    padding: theme.spacing(2)
-  },
-  '& .MuiDialogActions-root': {
-    padding: theme.spacing(1)
-  }
-}))
+import { DialogContent as MuiDialogContent, IconButton, styled } from '@mui/material'
 
 export const DialogContent = styled(MuiDialogContent)(() => ({
   display: 'flex',
@@ -20,5 +6,18 @@ export const DialogContent = styled(MuiDialogContent)(() => ({
 }))
 
 export const CloseButton = styled(IconButton)(() => ({
-  alignSelf: 'flex-end'
+  margin: '-8px'
+}))
+
+export const ModalTitle = styled('h2')(() => ({
+  whiteSpace: 'nowrap',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  maxWidth: '500px'
+}))
+
+export const ModalHeader = styled('div')(() => ({
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center'
 }))

@@ -1,4 +1,5 @@
 export interface ISkillMastery {
-  skill_name: string
+  name: string
   mastery: string
+  category: string
 }

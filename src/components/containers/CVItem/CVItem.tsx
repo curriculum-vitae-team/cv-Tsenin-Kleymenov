@@ -41,6 +41,7 @@ export const CVItem: FC<ICVsItemProps> = ({ CV, handleSetCurrentCV }) => {
         <Box sx={{ color: 'inherit' }}>
           <Typography>{`${t('Name')}: ${CV.name}`}</Typography>
           <Typography>{`${t('Description')}: ${CV.description}`}</Typography>
+          <Typography>{`${t('Education')}: ${CV.education}`}</Typography>
         </Box>
         <ButtonContainer>
           <Button variant="contained" onClick={() => handleSetCurrentCV(CV)}>

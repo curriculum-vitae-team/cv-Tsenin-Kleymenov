@@ -52,8 +52,8 @@ export const EmployeeAvatarUpload: FC = () => {
       const base64File = await convertBase64(file)
       await uploadAvatarMutation({
         variables: {
-          id: userData?.user.profile.id,
           avatar: {
+            userId: userData?.user.profile.id,
             base64: base64File,
             size: file.size,
             type: file.type
@@ -66,7 +66,9 @@ export const EmployeeAvatarUpload: FC = () => {
   const handleFileRemove = async (): Promise<void> => {
     await deleteAvatarMutation({
       variables: {
-        id: userData?.user.profile.id
+        avatar: {
+          userId: userData?.user.profile.id
+        }
       }
     })
   }

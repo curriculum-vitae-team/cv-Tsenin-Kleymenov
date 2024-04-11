@@ -12,6 +12,12 @@ export const tableColumns: IColumn<ISkill>[] = [
   },
   {
     id: 2,
+    header: 'Category',
+    field: 'category',
+    sortable: true
+  },
+  {
+    id: 3,
     header: '',
     render: item => <SkillDropdown skill={item} />,
     sortable: false

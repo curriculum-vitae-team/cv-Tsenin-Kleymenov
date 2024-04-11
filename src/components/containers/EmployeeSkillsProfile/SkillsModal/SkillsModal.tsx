@@ -1,20 +1,20 @@
-import { FC, useEffect } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { useMutation, useQuery } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Container } from '@mui/material'
 
-import { ISkillsResult } from '@/appTypes/IResult.interfaces'
+import { ISkillCategories, ISkillsResult } from '@/appTypes/IResult.interfaces'
 import { Button } from '@/components/views/Button/Button'
 import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
 import { AppSelect } from '@/components/views/Select/Select'
 import { MASTERY_ARRAY } from '@/constants/mastery'
 import { FORM_PROFILE_SKILLS_SCHEMA } from '@/constants/schemaOptions'
 import { TOAST_TYPES } from '@/constants/toastTypes'
+import { SKILL_CATEGORIES } from '@/graphql/skill/categories/skillCategoriesQuery'
+import { ADD_PROFILE_SKILL } from '@/graphql/skill/profile_skill/addProfileSkillMutation'
 import { SKILLS } from '@/graphql/skills/skillsQuery'
-import { UPDATE_USER } from '@/graphql/user/updateUserMutation'
-import { createSkillsArray } from '@/utils/createSkillsArray'
 import { toastMessage } from '@/utils/toastMessage'
 
 import {
@@ -25,12 +25,17 @@ import {
 
 export const SkillsModal: FC<ISkillsModalProps> = ({ userData, onClose }) => {
   const { loading: loadingSkills, data: skillsData } = useQuery<ISkillsResult>(SKILLS)
+  const { loading: loadingSkillCategories, data: skillCategoriesData } =
+    useQuery<ISkillCategories>(SKILL_CATEGORIES)
 
-  const [updateUser, { loading: userLoading }] = useMutation(UPDATE_USER)
+  const [category, setCategory] = useState<string>('')
+  const [selectedSkill, setSelectedSkill] = useState<string>('')
+
+  const [addProfileSkill, { loading: userLoading }] = useMutation(ADD_PROFILE_SKILL)
 
   const { t } = useTranslation()
 
-  const skillsNameArray = userData?.profile.skills.map(item => item.skill_name)
+  const skillsNameArray = userData?.profile.skills.map(item => item.name)
   const filteredSkillsArray = skillsData?.skills
     .filter(element => !skillsNameArray?.includes(element.name))
     .map(skill => {
@@ -39,6 +44,21 @@ export const SkillsModal: FC<ISkillsModalProps> = ({ userData, onClose }) => {
         id: skill.name
       }
     })
+
+  useEffect(() => {
+    const skill = skillsData?.skills.find(skillItem => {
+      return skillItem.name === selectedSkill
+    })
+
+    if (skill) setCategory(skill?.category || '')
+  }, [selectedSkill, skillsData?.skills])
+
+  const skillCategories = skillCategoriesData?.skillCategories.map(categoryItem => {
+    return {
+      name: categoryItem,
+      id: categoryItem
+    }
+  })
 
   const {
     register,
@@ -55,23 +75,13 @@ export const SkillsModal: FC<ISkillsModalProps> = ({ userData, onClose }) => {
   })
 
   const onSubmit: SubmitHandler<IProfileSkillFormValues> = async formData => {
-    await updateUser({
+    await addProfileSkill({
       variables: {
-        id: userData?.id,
-        user: {
-          profile: {
-            first_name: userData?.profile.first_name || '',
-            last_name: userData?.profile.last_name || '',
-            skills: [
-              {
-                skill_name: formData[FORM_PROFILE_SKILLS_KEYS.skills],
-                mastery: formData[FORM_PROFILE_SKILLS_KEYS.mastery]
-              },
-              ...createSkillsArray(userData?.profile.skills)
-            ]
-          },
-          departmentId: userData?.department?.id || '',
-          positionId: userData?.position?.id || ''
+        skill: {
+          userId: userData?.id,
+          name: formData[FORM_PROFILE_SKILLS_KEYS.skills],
+          category: selectedSkill ? category : '',
+          mastery: formData[FORM_PROFILE_SKILLS_KEYS.mastery]
         }
       }
     })
@@ -95,17 +105,28 @@ export const SkillsModal: FC<ISkillsModalProps> = ({ userData, onClose }) => {
           <AppSelect
             variant="outlined"
             label={t('Skills')}
-            defaultValue={''}
+            defaultValue=""
             loading={loadingSkills}
             items={filteredSkillsArray}
             error={!!errors[FORM_PROFILE_SKILLS_KEYS.skills]}
             helperText={t(errors?.[FORM_PROFILE_SKILLS_KEYS.skills]?.message as string)}
             {...register(FORM_PROFILE_SKILLS_KEYS.skills)}
+            onChange={e => setSelectedSkill(e.target.value)}
+          />
+          <AppSelect
+            value={category}
+            variant="outlined"
+            label={t('Category')}
+            disabled
+            items={skillCategories}
+            loading={loadingSkillCategories}
+            {...register(FORM_PROFILE_SKILLS_KEYS.category)}
           />
           <AppSelect
             variant="outlined"
             label={t('Mastery')}
-            defaultValue={''}
+            disabled={!!!selectedSkill}
+            defaultValue=""
             items={MASTERY_ARRAY}
             error={!!errors[FORM_PROFILE_SKILLS_KEYS.mastery]}
             helperText={t(errors?.[FORM_PROFILE_SKILLS_KEYS.mastery]?.message as string)}
