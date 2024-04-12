@@ -36,13 +36,13 @@ export const EmployeeDropdown: FC<IEmployeeDropdownProps> = ({ employee }) => {
       variables: { id: employee.id }
     })
 
-    toastMessage(t('Successfully deleted'), TOAST_TYPES.success)
+    toastMessage(t('successfullyDeleted'), TOAST_TYPES.success)
   }
 
   return (
     <BasicMenu>
-      <MenuItem onClick={handleOpenEmployee}>{t('Profile')}</MenuItem>
-      {isAdmin && <MenuItem onClick={handleUserDelete}>{t('Delete')}</MenuItem>}
+      <MenuItem onClick={handleOpenEmployee}>{t('profile')}</MenuItem>
+      {isAdmin && <MenuItem onClick={handleUserDelete}>{t('delete')}</MenuItem>}
     </BasicMenu>
   )
 }

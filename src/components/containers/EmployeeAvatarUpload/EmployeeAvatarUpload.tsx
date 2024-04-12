@@ -104,11 +104,9 @@ export const EmployeeAvatarUpload: FC = () => {
             <Typography variant="h6">
               <Box sx={{ display: 'flex' }}>
                 <FileUploadIcon sx={{ mr: 1 }} />
-                <Typography sx={{ textTransform: 'uppercase' }}>
-                  {t('Upload avatar image')}
-                </Typography>
+                <Typography sx={{ textTransform: 'uppercase' }}>{t('uploadAvatar')}</Typography>
               </Box>
-              <Typography>png, jpg or gif {t('no more than')} 0.5MB</Typography>
+              <Typography>png, jpg or gif {t('noMoreThan')} 0.5MB</Typography>
             </Typography>
           </DropZone>
           {fileRejections.length > 0 && (

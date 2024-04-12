@@ -11,12 +11,12 @@ export const CVDetailItem: FC<ICVDetailItemProps> = ({ CVData }) => {
 
   return (
     <>
-      <RowInfo title="Name" info={CVData?.name} />
-      <RowInfo title="Description" info={CVData?.description} />
-      <RowInfo title="User" info={CVData?.user?.profile?.full_name} />
-      <RowInfo title="User position" info={CVData?.user?.position_name} />
+      <RowInfo title="name" info={CVData?.name} />
+      <RowInfo title="description" info={CVData?.description} />
+      <RowInfo title="user" info={CVData?.user?.profile?.full_name} />
+      <RowInfo title="userPosition" info={CVData?.user?.position_name} />
       <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}>
-        <Typography sx={{ my: 1, fontSize: '24px' }}>{t('Skills')}:</Typography>
+        <Typography sx={{ my: 1, fontSize: '24px' }}>{t('skills')}:</Typography>
         {CVData?.skills.length ? (
           CVData?.skills.map(skill => (
             <Chip
@@ -35,7 +35,7 @@ export const CVDetailItem: FC<ICVDetailItemProps> = ({ CVData }) => {
       </Box>
       <Divider />
       <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}>
-        <Typography sx={{ my: 1, fontSize: '24px' }}>{t('Languages')}:</Typography>
+        <Typography sx={{ my: 1, fontSize: '24px' }}>{t('languages')}:</Typography>
         {CVData?.languages.length ? (
           CVData?.languages.map(language => (
             <Chip

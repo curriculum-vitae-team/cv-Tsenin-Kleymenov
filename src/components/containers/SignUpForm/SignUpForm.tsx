@@ -44,21 +44,21 @@ export const SignUpForm: FC<ISignUpFormProps> = ({ signUp }) => {
     <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
       <Input
         type="email"
-        label={t('Email')}
-        placeholder={t('Enter your email') as string}
+        label={t('email')}
+        placeholder={t('enterEmail') as string}
         error={!!errors[FORM_SIGNUP_KEYS.email]}
         helperText={t(errors?.[FORM_SIGNUP_KEYS.email]?.message as string)}
         {...register(FORM_SIGNUP_KEYS.email)}
       />
       <PasswordInput
-        label={t('Password')}
-        placeholder={t('Enter your password') as string}
+        label={t('password')}
+        placeholder={t('enterPassword') as string}
         error={!!errors[FORM_SIGNUP_KEYS.password]}
         helperText={t(errors?.[FORM_SIGNUP_KEYS.password]?.message as string)}
         {...register(FORM_SIGNUP_KEYS.password)}
       />
       <Button type="submit" variant="contained">
-        {t('Sign up')}
+        {t('signUp')}
       </Button>
     </form>
   )

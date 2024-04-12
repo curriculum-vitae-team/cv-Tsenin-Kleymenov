@@ -30,15 +30,15 @@ export const DepartmentDropdown: FC<IDepartmentDropdownProps> = ({ department })
       variables: { id: department.id }
     })
 
-    toastMessage(t('Successfully deleted'), TOAST_TYPES.success)
+    toastMessage(t('successfullyDeleted'), TOAST_TYPES.success)
   }
 
   return (
     <Box style={{ display: 'flex', justifyContent: 'flex-end' }}>
       {isAdmin && (
         <BasicMenu>
-          <MenuItem onClick={toggleVisibility}>{t('Update')}</MenuItem>
-          <MenuItem onClick={handleDepartmentDelete}>{t('Delete')}</MenuItem>
+          <MenuItem onClick={toggleVisibility}>{t('update')}</MenuItem>
+          <MenuItem onClick={handleDepartmentDelete}>{t('delete')}</MenuItem>
         </BasicMenu>
       )}
       {isVisible && <DepartmentUpdateModal department={department} onClose={toggleVisibility} />}

@@ -66,7 +66,7 @@ export const LanguagesModal: FC<ILanguagesModalProps> = ({ userData, onClose }) 
 
     onClose()
 
-    toastMessage(t('Successfully added'), TOAST_TYPES.success)
+    toastMessage(t('successfullyAdded'), TOAST_TYPES.success)
   }
 
   useEffect(() => {
@@ -77,12 +77,12 @@ export const LanguagesModal: FC<ILanguagesModalProps> = ({ userData, onClose }) 
   }, [isSubmitSuccessful])
 
   return (
-    <ModalWindow onClose={onClose}>
+    <ModalWindow onClose={onClose} title={t('addLanguage') ?? ''}>
       <Container sx={{ minWidth: '500px' }}>
         <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
           <AppSelect
             variant="outlined"
-            label={t('Languages')}
+            label={t('languages')}
             defaultValue=""
             loading={loadingLanguages}
             items={filteredLanguagesArray}
@@ -92,7 +92,7 @@ export const LanguagesModal: FC<ILanguagesModalProps> = ({ userData, onClose }) 
           />
           <AppSelect
             variant="outlined"
-            label={t('Proficiency')}
+            label={t('proficiency')}
             defaultValue=""
             items={PROFICIENCY_ARRAY}
             error={!!errors[FORM_PROFILE_LANGUAGES_KEYS.proficiency]}
@@ -100,7 +100,7 @@ export const LanguagesModal: FC<ILanguagesModalProps> = ({ userData, onClose }) 
             {...register(FORM_PROFILE_LANGUAGES_KEYS.proficiency)}
           />
           <Button loading={userLoading} type="submit" variant="contained" disabled={!isValid}>
-            {t('Save')}
+            {t('save')}
           </Button>
         </form>
       </Container>

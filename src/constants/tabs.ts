@@ -7,47 +7,47 @@ export interface ITab {
 
 export const PROFILE_TABS: ITab[] = [
   {
-    label: 'Profile',
+    label: 'profile',
     path: AppNavigationRoutes.PROFILE
   },
   {
-    label: 'Skills',
+    label: 'skills',
     path: AppNavigationRoutes.SKILLS
   },
 
   {
-    label: 'Languages',
+    label: 'languages',
     path: AppNavigationRoutes.LANGUAGES
   },
   {
-    label: 'CVs',
+    label: 'cvs',
     path: AppNavigationRoutes.CVS
   }
 ]
 
 export const CV_TABS: ITab[] = [
   {
-    label: 'Details',
+    label: 'details',
     path: AppNavigationRoutes.DETAILS
   },
   {
-    label: 'Projects',
+    label: 'projects',
     path: AppNavigationRoutes.PROJECTS
   },
 
   {
-    label: 'Preview',
+    label: 'preview',
     path: AppNavigationRoutes.PREVIEW
   }
 ]
 
 export const HEADER_TABS: ITab[] = [
   {
-    label: 'Login',
+    label: 'login',
     path: AppNavigationRoutes.LOGIN
   },
   {
-    label: 'SignUp',
+    label: 'signUpForm',
     path: AppNavigationRoutes.SIGN_UP
   }
 ]

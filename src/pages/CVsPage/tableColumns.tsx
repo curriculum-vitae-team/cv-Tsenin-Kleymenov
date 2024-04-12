@@ -5,19 +5,19 @@ import { CVDropdown } from '@/pages/CVsPage/CVDropdown/CVDropdown'
 export const tableColumns: IColumn<ICV>[] = [
   {
     id: 1,
-    header: 'Name',
+    header: 'name',
     field: 'name',
     sortable: true
   },
   {
     id: 2,
-    header: 'Description',
+    header: 'description',
     field: 'description',
     sortable: false
   },
   {
     id: 3,
-    header: 'Employee',
+    header: 'employee',
     field: 'user.email',
     sortable: true
   },

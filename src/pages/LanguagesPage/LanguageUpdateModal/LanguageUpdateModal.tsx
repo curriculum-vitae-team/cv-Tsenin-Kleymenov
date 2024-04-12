@@ -58,7 +58,7 @@ export const LanguageUpdateModal: FC<ILanguageUpdateModalProps> = ({ language, o
 
     onClose()
 
-    toastMessage(t('Successfully updated'), TOAST_TYPES.success)
+    toastMessage(t('successfullyUpdated'), TOAST_TYPES.success)
   }
 
   return (
@@ -67,7 +67,7 @@ export const LanguageUpdateModal: FC<ILanguageUpdateModalProps> = ({ language, o
         <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
           <Input
             variant="outlined"
-            label={t('Name')}
+            label={t('name')}
             error={!!errors[FORM_LANGUAGE_KEYS.name]}
             helperText={t(errors?.[FORM_LANGUAGE_KEYS.name]?.message as string)}
             {...register(FORM_LANGUAGE_KEYS.name)}
@@ -81,7 +81,7 @@ export const LanguageUpdateModal: FC<ILanguageUpdateModalProps> = ({ language, o
           />
           <Input
             variant="outlined"
-            label={t('Native name')}
+            label={t('nativeName')}
             error={!!errors[FORM_LANGUAGE_KEYS.native_name]}
             helperText={t(errors?.[FORM_LANGUAGE_KEYS.native_name]?.message as string)}
             {...register(FORM_LANGUAGE_KEYS.native_name)}
@@ -92,7 +92,7 @@ export const LanguageUpdateModal: FC<ILanguageUpdateModalProps> = ({ language, o
             loading={updateLanguageLoading}
             disabled={!isDirty && isValid}
           >
-            {t('Update')}
+            {t('update')}
           </Button>
         </form>
       </Container>

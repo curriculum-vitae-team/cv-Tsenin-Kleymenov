@@ -11,32 +11,32 @@ import { AppNavigationRoutes } from '@/router/paths'
 
 export const SIDE_MENU_ITEMS: IMenuItems = {
   employees: {
-    text: 'Employees',
+    text: 'employees',
     route: AppNavigationRoutes.EMPLOYEES,
     icon: PeopleAltIcon
   },
   projects: {
-    text: 'Projects',
+    text: 'projects',
     route: AppNavigationRoutes.PROJECTS,
     icon: FolderCopyIcon
   },
   CVs: {
-    text: 'CVs',
+    text: 'cvs',
     route: AppNavigationRoutes.CVS,
     icon: InsertDriveFileIcon
   },
   departments: {
-    text: 'Departments',
+    text: 'departments',
     route: AppNavigationRoutes.DEPARTMENTS,
     icon: Groups3Icon
   },
   positions: {
-    text: 'Positions',
+    text: 'positions',
     route: AppNavigationRoutes.POSITIONS,
     icon: FormatListNumberedRtlIcon
   },
   skills: {
-    text: 'Skills',
+    text: 'skills',
     route: AppNavigationRoutes.SKILLS,
     icon: ManageAccountsIcon
   },

@@ -30,15 +30,15 @@ export const PositionDropdown: FC<IPositionDropdownProps> = ({ position }) => {
       variables: { id: position.id }
     })
 
-    toastMessage(t('Successfully deleted'), TOAST_TYPES.success)
+    toastMessage(t('successfullyDeleted'), TOAST_TYPES.success)
   }
 
   return (
     <Box style={{ display: 'flex', justifyContent: 'flex-end' }}>
       {isAdmin && (
         <BasicMenu>
-          <MenuItem onClick={toggleVisibility}>{t('Update')}</MenuItem>
-          <MenuItem onClick={handlePositionDelete}>{t('Delete')}</MenuItem>
+          <MenuItem onClick={toggleVisibility}>{t('update')}</MenuItem>
+          <MenuItem onClick={handlePositionDelete}>{t('delete')}</MenuItem>
         </BasicMenu>
       )}
       {isVisible && <PositionUpdateModal position={position} onClose={toggleVisibility} />}

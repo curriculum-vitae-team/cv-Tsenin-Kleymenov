@@ -66,7 +66,7 @@ export const CVsModal: FC<ICVsModalProps> = ({ currentCVData, onClose }) => {
 
     onClose()
 
-    toastMessage(t('Successfully updated'), TOAST_TYPES.success)
+    toastMessage(t('successfullyUpdated'), TOAST_TYPES.success)
   }
 
   return (
@@ -76,14 +76,14 @@ export const CVsModal: FC<ICVsModalProps> = ({ currentCVData, onClose }) => {
           <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
             <Input
               variant="outlined"
-              label={t('Name')}
+              label={t('name')}
               error={!!errors[FORM_PROFILE_CVS_KEYS.name]}
               helperText={t(errors?.[FORM_PROFILE_CVS_KEYS.name]?.message as string)}
               {...register(FORM_PROFILE_CVS_KEYS.name)}
             />
             <Input
               variant="outlined"
-              label={t('Description')}
+              label={t('description')}
               error={!!errors[FORM_PROFILE_CVS_KEYS.description]}
               helperText={t(errors?.[FORM_PROFILE_CVS_KEYS.description]?.message as string)}
               {...register(FORM_PROFILE_CVS_KEYS.description)}
@@ -94,7 +94,7 @@ export const CVsModal: FC<ICVsModalProps> = ({ currentCVData, onClose }) => {
               loading={updateCVLoading}
               disabled={!isDirty && isValid}
             >
-              {t('Save')}
+              {t('save')}
             </Button>
           </form>
         </Container>

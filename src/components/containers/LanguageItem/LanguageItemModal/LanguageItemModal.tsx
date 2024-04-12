@@ -2,12 +2,13 @@ import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { useMutation } from '@apollo/client'
-import { Container } from '@mui/material'
+import { Checkbox, Container, FormControlLabel } from '@mui/material'
 
 import { Button } from '@/components/views/Button/Button'
 import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
 import { AppSelect } from '@/components/views/Select/Select'
 import { PROFICIENCY_ARRAY } from '@/constants/proficiency'
+import { DELETE_PROFILE_LANGUAGE } from '@/graphql/language/profile_language/deleteProfileLanguageMutation'
 import { UPDATE_PROFILE_LANGUAGE } from '@/graphql/language/profile_language/updateProfileLanguageMutation'
 
 import {
@@ -17,26 +18,34 @@ import {
 
 import { ILanguageItemModalProps } from './LanguageItemModal.interfaces'
 
-const LanguageItemModal: FC<ILanguageItemModalProps> = ({ userData, onClose }) => {
+const LanguageItemModal: FC<ILanguageItemModalProps> = ({ userData, languageInfo, onClose }) => {
   const { t } = useTranslation()
 
   const [updateProfileLang, { loading: profileLangLoading }] = useMutation(UPDATE_PROFILE_LANGUAGE)
 
-  const currentLanguage = userData?.profile.languages.find(
-    (item, index) => item.name === userData?.profile.languages[index].name
-  )
+  const { language, setLanguage } = languageInfo
+
+  const languagesItems = userData?.languages.map(languageItem => {
+    return {
+      name: languageItem.name,
+      id: languageItem.name
+    }
+  })
 
   const {
     handleSubmit,
     register,
+    watch,
     formState: { isDirty }
   } = useForm<IProfileLanguagesFormValues>({
     defaultValues: {
-      [FORM_PROFILE_LANGUAGES_KEYS.languages]: currentLanguage?.name,
-      [FORM_PROFILE_LANGUAGES_KEYS.proficiency]: currentLanguage?.proficiency
+      [FORM_PROFILE_LANGUAGES_KEYS.languages]: language?.name,
+      [FORM_PROFILE_LANGUAGES_KEYS.proficiency]: language?.proficiency
     },
     mode: 'onSubmit'
   })
+
+  const watchProficiency = watch(FORM_PROFILE_LANGUAGES_KEYS.proficiency)
 
   const onSubmit: SubmitHandler<IProfileLanguagesFormValues> = async formData => {
     await updateProfileLang({
@@ -49,39 +58,44 @@ const LanguageItemModal: FC<ILanguageItemModalProps> = ({ userData, onClose }) =
       }
     })
 
+    setLanguage({
+      name: formData[FORM_PROFILE_LANGUAGES_KEYS.languages],
+      proficiency: formData[FORM_PROFILE_LANGUAGES_KEYS.proficiency]
+    })
+
     onClose()
   }
 
   return (
-    <div>
-      <ModalWindow onClose={onClose} title="Update language">
-        <Container sx={{ minWidth: '500px' }}>
-          <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
-            <AppSelect
-              variant="outlined"
-              value={currentLanguage?.name}
-              label={t('Languages')}
-              disabled
-              {...register(FORM_PROFILE_LANGUAGES_KEYS.languages)}
-            />
-            <AppSelect
-              variant="outlined"
-              label={t('Proficiency')}
-              items={PROFICIENCY_ARRAY}
-              {...register(FORM_PROFILE_LANGUAGES_KEYS.proficiency)}
-            />
-            <Button
-              loading={profileLangLoading}
-              type="submit"
-              variant="contained"
-              disabled={!isDirty}
-            >
-              {t('Update')}
-            </Button>
-          </form>
-        </Container>
-      </ModalWindow>
-    </div>
+    <ModalWindow onClose={onClose} title="updateLanguage">
+      <Container sx={{ minWidth: '500px' }}>
+        <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
+          <AppSelect
+            variant="outlined"
+            value={language?.name || ''}
+            label={t('languages')}
+            items={languagesItems}
+            disabled
+            {...register(FORM_PROFILE_LANGUAGES_KEYS.languages)}
+          />
+          <AppSelect
+            variant="outlined"
+            label={t('proficiency')}
+            value={watchProficiency || ''}
+            items={PROFICIENCY_ARRAY}
+            {...register(FORM_PROFILE_LANGUAGES_KEYS.proficiency)}
+          />
+          <Button
+            loading={profileLangLoading}
+            type="submit"
+            variant="contained"
+            disabled={!isDirty}
+          >
+            {t('update')}
+          </Button>
+        </form>
+      </Container>
+    </ModalWindow>
   )
 }
 

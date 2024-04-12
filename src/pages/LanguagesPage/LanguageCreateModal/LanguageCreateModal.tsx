@@ -51,7 +51,7 @@ export const LanguageCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
 
     onClose()
 
-    toastMessage(t('Successfully created'), TOAST_TYPES.success)
+    toastMessage(t('successfullyCreated'), TOAST_TYPES.success)
   }
 
   return (
@@ -60,7 +60,7 @@ export const LanguageCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
         <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
           <Input
             variant="outlined"
-            label={t('Name')}
+            label={t('name')}
             error={!!errors[FORM_LANGUAGE_KEYS.name]}
             helperText={t(errors?.[FORM_LANGUAGE_KEYS.name]?.message as string)}
             {...register(FORM_LANGUAGE_KEYS.name)}
@@ -74,7 +74,7 @@ export const LanguageCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
           />
           <Input
             variant="outlined"
-            label={t('Native name')}
+            label={t('nativeName')}
             error={!!errors[FORM_LANGUAGE_KEYS.native_name]}
             helperText={t(errors?.[FORM_LANGUAGE_KEYS.native_name]?.message as string)}
             {...register(FORM_LANGUAGE_KEYS.native_name)}
@@ -85,7 +85,7 @@ export const LanguageCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
             loading={createLanguageLoading}
             disabled={!isDirty && isValid}
           >
-            {t('Create')}
+            {t('create')}
           </Button>
         </form>
       </Container>

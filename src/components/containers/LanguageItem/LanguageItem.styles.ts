@@ -1,15 +1,18 @@
-import { Box, IconButton, styled, Typography } from '@mui/material'
-
-import { Button } from '@/components/views/Button/Button'
+import { Box, Card, IconButton, styled, Typography } from '@mui/material'
 
 import { IBadgeStyled } from './LanguageItem.interfaces'
 
-export const LanguageButton = styled(Button)(({ theme }) => ({
+export const LanguageCard = styled(Card)(({ theme }) => ({
+  display: 'flex',
+  height: 'fit-content',
+  alignItems: 'center',
   color: theme.palette.info.main,
   margin: 0,
-  borderRadius: 0,
-  justifyContent: 'start',
-  padding: '8px 16px'
+  borderRadius: '5px',
+  justifyContent: 'space-between',
+  padding: '16px',
+  backgroundColor: '#f5f5f7',
+  boxShadow: 'none'
 }))
 
 export const LanguageItemContainer = styled(Box)(() => ({
@@ -17,7 +20,8 @@ export const LanguageItemContainer = styled(Box)(() => ({
   gridTemplateColumns: 'auto',
   gridAutoFlow: 'column',
   textTransform: 'initial',
-  gridGap: '30px'
+  gridGap: '30px',
+  width: 'fit-content'
 }))
 
 export const CloseButton = styled(IconButton)(({ theme }) => ({

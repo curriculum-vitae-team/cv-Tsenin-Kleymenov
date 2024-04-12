@@ -43,7 +43,7 @@ export const SkillCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
 
     onClose()
 
-    toastMessage(t('Successfully created'), TOAST_TYPES.success)
+    toastMessage(t('successfullyCreated'), TOAST_TYPES.success)
   }
 
   return (
@@ -52,7 +52,7 @@ export const SkillCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
         <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
           <Input
             variant="outlined"
-            label={t('Name')}
+            label={t('name')}
             error={!!errors[FORM_SKILL_KEYS.name]}
             helperText={t(errors?.[FORM_SKILL_KEYS.name]?.message as string)}
             {...register(FORM_SKILL_KEYS.name)}
@@ -63,7 +63,7 @@ export const SkillCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
             loading={createSkillLoading}
             disabled={!isDirty && isValid}
           >
-            {t('Create')}
+            {t('create')}
           </Button>
         </form>
       </Container>

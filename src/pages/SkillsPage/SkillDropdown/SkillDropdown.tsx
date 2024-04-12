@@ -30,15 +30,15 @@ export const SkillDropdown: FC<ISkillDropdownProps> = ({ skill }) => {
       variables: { id: skill.id }
     })
 
-    toastMessage(t('Successfully deleted'), TOAST_TYPES.success)
+    toastMessage(t('successfullyDeleted'), TOAST_TYPES.success)
   }
 
   return (
     <Box style={{ display: 'flex', justifyContent: 'flex-end' }}>
       {isAdmin && (
         <BasicMenu>
-          <MenuItem onClick={toggleVisibility}>{t('Update')}</MenuItem>
-          <MenuItem onClick={handleSkillDelete}>{t('Delete')}</MenuItem>
+          <MenuItem onClick={toggleVisibility}>{t('update')}</MenuItem>
+          <MenuItem onClick={handleSkillDelete}>{t('delete')}</MenuItem>
         </BasicMenu>
       )}
       {isVisible && <SkillUpdateModal skill={skill} onClose={toggleVisibility} />}

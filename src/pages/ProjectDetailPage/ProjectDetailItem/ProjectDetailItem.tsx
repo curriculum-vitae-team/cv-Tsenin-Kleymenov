@@ -8,13 +8,13 @@ import { IProjectDetailItemProps } from './ProjectDetailItem.interfaces'
 export const ProjectDetailItem: FC<IProjectDetailItemProps> = ({ project }) => {
   return (
     <Box>
-      <RowInfo title="Name" info={project?.name} />
-      <RowInfo title="Internal name" info={project?.internal_name} />
-      <RowInfo title="Description" info={project?.description} />
-      <RowInfo title="Domain" info={project?.domain} />
-      <RowInfo title="Team size" info={project?.team_size} />
-      <RowInfo title="Start date" info={project?.start_date} />
-      <RowInfo title="End date" info={project?.end_date} />
+      <RowInfo title="name" info={project?.name} />
+      <RowInfo title="internalName" info={project?.internal_name} />
+      <RowInfo title="description" info={project?.description} />
+      <RowInfo title="domain" info={project?.domain} />
+      <RowInfo title="teamSize" info={project?.team_size} />
+      <RowInfo title="startDate" info={project?.start_date} />
+      <RowInfo title="endDate" info={project?.end_date} />
     </Box>
   )
 }

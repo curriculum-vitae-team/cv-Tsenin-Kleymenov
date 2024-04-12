@@ -66,48 +66,48 @@ export const ProjectUpdateModal: FC<IProjectUpdateModalProps> = ({ project, onCl
         <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
           <Input
             variant="outlined"
-            label={t('Name')}
+            label={t('name')}
             error={!!errors[FORM_PROJECT_KEYS.name]}
             helperText={t(errors?.[FORM_PROJECT_KEYS.name]?.message as string)}
             {...register(FORM_PROJECT_KEYS.name)}
           />
           <Input
             variant="outlined"
-            label={t('Internal name')}
+            label={t('internalName')}
             error={!!errors[FORM_PROJECT_KEYS.internal_name]}
             helperText={t(errors?.[FORM_PROJECT_KEYS.internal_name]?.message as string)}
             {...register(FORM_PROJECT_KEYS.internal_name)}
           />
           <Input
             variant="outlined"
-            label={t('Description')}
+            label={t('description')}
             error={!!errors[FORM_PROJECT_KEYS.description]}
             helperText={t(errors?.[FORM_PROJECT_KEYS.description]?.message as string)}
             {...register(FORM_PROJECT_KEYS.description)}
           />
           <Input
             variant="outlined"
-            label={t('Domain')}
+            label={t('domain')}
             error={!!errors[FORM_PROJECT_KEYS.domain]}
             helperText={t(errors?.[FORM_PROJECT_KEYS.domain]?.message as string)}
             {...register(FORM_PROJECT_KEYS.domain)}
           />
           <Input
             variant="outlined"
-            label={t('Team size')}
+            label={t('teamSize')}
             error={!!errors[FORM_PROJECT_KEYS.team_size]}
             helperText={t(errors?.[FORM_PROJECT_KEYS.team_size]?.message as string)}
             {...register(FORM_PROJECT_KEYS.team_size)}
           />
-          <DatePicker label="Start date" name={FORM_PROJECT_KEYS.start_date} control={control} />
-          <DatePicker label="End date" name={FORM_PROJECT_KEYS.end_date} control={control} />
+          <DatePicker label="startDate" name={FORM_PROJECT_KEYS.start_date} control={control} />
+          <DatePicker label="endDate" name={FORM_PROJECT_KEYS.end_date} control={control} />
           <Button
             type="submit"
             variant="contained"
             loading={updateProjectLoading}
             disabled={!isDirty && !isValid}
           >
-            {t('Update')}
+            {t('update')}
           </Button>
         </form>
       </Container>

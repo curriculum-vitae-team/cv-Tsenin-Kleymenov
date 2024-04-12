@@ -56,7 +56,7 @@ export const UserMenu: FC = () => {
           return <UserMenuItem key={text} route={route} text={text} Icon={Icon} />
         })}
         <Divider />
-        <UserMenuItem onClick={handleLogout} text="Logout" Icon={Logout} />
+        <UserMenuItem onClick={handleLogout} text="logout" Icon={Logout} />
       </Menu>
     </MenuContainer>
   )

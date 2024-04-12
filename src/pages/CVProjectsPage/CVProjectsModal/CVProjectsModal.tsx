@@ -60,7 +60,7 @@ export const CVProjectsModal: FC<ICVProjectsModalProps> = ({ CVData, onClose }) 
 
     onClose()
 
-    toastMessage(t('Successfully updated'), TOAST_TYPES.success)
+    toastMessage(t('successfullyUpdated'), TOAST_TYPES.success)
   }
 
   return (
@@ -97,7 +97,7 @@ export const CVProjectsModal: FC<ICVProjectsModalProps> = ({ CVData, onClose }) 
                     fullWidth
                     inputRef={ref}
                     variant="outlined"
-                    label={t('Projects')}
+                    label={t('projects')}
                   />
                 )}
               />
@@ -109,7 +109,7 @@ export const CVProjectsModal: FC<ICVProjectsModalProps> = ({ CVData, onClose }) 
             loading={updateCVLoading}
             disabled={!isDirty && isValid}
           >
-            {t('Save')}
+            {t('save')}
           </Button>
         </form>
       </Container>

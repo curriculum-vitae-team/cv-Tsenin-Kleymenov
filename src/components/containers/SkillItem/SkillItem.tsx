@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { useMutation } from '@apollo/client'
 import ClearIcon from '@mui/icons-material/Clear'
@@ -14,6 +15,7 @@ import { MasteryBox, SkillBox, SkillItemContainer } from './SkillItem.styles'
 
 export const SkillItem: FC<ISkillItemProps> = ({ skillName, skillMastery }) => {
   const { id: userId } = useParams()
+  const { t } = useTranslation()
   const { user, isAdmin } = useUser()
   const userCheck = userId === user?.id
 
@@ -35,7 +37,7 @@ export const SkillItem: FC<ISkillItemProps> = ({ skillName, skillMastery }) => {
       <SkillBox>
         <Typography fontSize="24px">{skillName}</Typography>
         <MasteryBox mastery_color={MASTERY_COLORS[skillMastery]}>
-          <Typography fontSize="15px">{skillMastery}</Typography>
+          <Typography fontSize="15px">{t(skillMastery)}</Typography>
         </MasteryBox>
       </SkillBox>
       {(userCheck || isAdmin) && (

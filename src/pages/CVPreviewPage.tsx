@@ -38,7 +38,7 @@ export const CVPreviewPage: FC = () => {
         variant="contained"
         onClick={handlePrintClick}
       >
-        {t('Print')}
+        {t('print')}
       </Button>
       <Divider sx={{ my: 2 }} />
       <LoadingOverlay active={CVLoading}>
@@ -52,15 +52,15 @@ export const CVPreviewPage: FC = () => {
                   <Typography variant="h3">{getFirstChars(profile?.full_name || email)}</Typography>
                 </Avatar>
               )}
-              <RowInfo title="Name" info={profile?.full_name} />
-              <RowInfo title="Email" info={email} />
-              <RowInfo title="Position" info={position_name} />
-              <RowInfo title="Department" info={department_name} />
+              <RowInfo title="name" info={profile?.full_name} />
+              <RowInfo title="email" info={email} />
+              <RowInfo title="position" info={position_name} />
+              <RowInfo title="department" info={department_name} />
             </Box>
             <Divider sx={{ mx: 2 }} orientation="vertical" flexItem />
             <Box sx={{ alignSelf: 'flex-start' }}>
               <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}>
-                <Typography sx={{ my: 1, fontSize: '24px' }}>{t('Skills')}:</Typography>
+                <Typography sx={{ my: 1, fontSize: '24px' }}>{t('skills')}:</Typography>
                 {CVData?.cv?.skills.length ? (
                   CVData?.cv.skills.map(skill => (
                     <Chip
@@ -78,7 +78,7 @@ export const CVPreviewPage: FC = () => {
                 )}
               </Box>
               <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}>
-                <Typography sx={{ my: 1, fontSize: '24px' }}>{t('Languages')}:</Typography>
+                <Typography sx={{ my: 1, fontSize: '24px' }}>{t('languages')}:</Typography>
                 {CVData?.cv?.languages.length ? (
                   CVData?.cv.languages.map(language => (
                     <Chip
@@ -99,17 +99,17 @@ export const CVPreviewPage: FC = () => {
           </Box>
           <Divider sx={{ mx: 2 }} orientation="horizontal" flexItem />
           <>
-            <Typography sx={{ mt: 3, fontSize: '1.5rem' }}>{t('Projects')}</Typography>
+            <Typography sx={{ mt: 3, fontSize: '1.5rem' }}>{t('projects')}</Typography>
             {CVData?.cv?.projects?.map(project => (
               <Card sx={{ my: 1, p: 2, display: 'flex' }} key={project.internal_name}>
                 <Box>
-                  <RowInfo title="Project name" info={project.name.toUpperCase()} />
-                  <RowInfo title="Start date" info={project?.start_date} />
-                  <RowInfo title="End date" info={project?.end_date || 'Now'} />
-                  <RowInfo title="Domain" info={project?.domain} />
+                  <RowInfo title="projectName" info={project.name.toUpperCase()} />
+                  <RowInfo title="startDate" info={project?.start_date} />
+                  <RowInfo title="endDate" info={project?.end_date || 'Now'} />
+                  <RowInfo title="domain" info={project?.domain} />
                 </Box>
                 <Divider sx={{ mx: 2 }} orientation="vertical" flexItem />
-                <RowInfo title="Description" info={project?.description} />
+                <RowInfo title="description" info={project?.description} />
               </Card>
             ))}
           </>

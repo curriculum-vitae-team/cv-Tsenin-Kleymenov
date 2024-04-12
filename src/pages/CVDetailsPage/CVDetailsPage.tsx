@@ -41,7 +41,7 @@ export const CVDetailsPage: FC = () => {
                 variant="contained"
                 onClick={toggleVisibility}
               >
-                {t('Edit')}
+                {t('edit')}
               </Button>
               <Divider sx={{ my: 2 }} />
             </>

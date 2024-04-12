@@ -16,10 +16,10 @@ export const SignUpPage: FC = () => {
   const { t } = useTranslation()
 
   return (
-    <AuthFormContainer title={t('Register now')} subtitle={t('Welcome! Sign up to continue.')}>
+    <AuthFormContainer title={t('registerNow')} subtitle={t('welcomeSignUp')}>
       <SignUpForm signUp={signUp} />
       <Button component={Link} to={`/${AppNavigationRoutes.LOGIN}`} variant="text">
-        {t('I have an account')}
+        {t('haveAccount')}
       </Button>
     </AuthFormContainer>
   )

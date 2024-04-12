@@ -6,13 +6,13 @@ import { LanguageDropdown } from './LanguageDropdown/LanguageDropdown'
 export const tableColumns: IColumn<ILanguage>[] = [
   {
     id: 1,
-    header: 'Language',
+    header: 'language',
     field: 'name',
     sortable: true
   },
   {
     id: 2,
-    header: 'Native name',
+    header: 'nativeName',
     field: 'native_name',
     sortable: false
   },

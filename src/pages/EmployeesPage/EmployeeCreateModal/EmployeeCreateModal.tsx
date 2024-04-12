@@ -68,7 +68,7 @@ export const EmployeeCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
 
     onClose()
 
-    toastMessage(t('Successfully created'), TOAST_TYPES.success)
+    toastMessage(t('successfullyCreated'), TOAST_TYPES.success)
   }
 
   return (
@@ -77,34 +77,34 @@ export const EmployeeCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
         <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
           <Input
             variant="outlined"
-            label={t('Email')}
+            label={t('email')}
             error={!!errors[FORM_EMPLOYEES_KEYS.email]}
             helperText={t(errors?.[FORM_EMPLOYEES_KEYS.email]?.message as string)}
             {...register(FORM_EMPLOYEES_KEYS.email)}
           />
           <PasswordInput
-            label={t('Password')}
+            label={t('password')}
             error={!!errors[FORM_EMPLOYEES_KEYS.password]}
             helperText={t(errors?.[FORM_EMPLOYEES_KEYS.password]?.message as string)}
             {...register(FORM_EMPLOYEES_KEYS.password)}
           />
           <Input
             variant="outlined"
-            label={t('First name')}
+            label={t('firstName')}
             error={!!errors[FORM_EMPLOYEES_KEYS.first_name]}
             helperText={t(errors?.[FORM_EMPLOYEES_KEYS.first_name]?.message as string)}
             {...register(FORM_EMPLOYEES_KEYS.first_name)}
           />
           <Input
             variant="outlined"
-            label={t('Last name')}
+            label={t('lastName')}
             error={!!errors[FORM_EMPLOYEES_KEYS.last_name]}
             helperText={t(errors?.[FORM_EMPLOYEES_KEYS.last_name]?.message as string)}
             {...register(FORM_EMPLOYEES_KEYS.last_name)}
           />
           <AppSelect
             variant="outlined"
-            label={t('Department')}
+            label={t('department')}
             defaultValue=""
             loading={departmentsLoading}
             items={departmentsData?.departments}
@@ -114,7 +114,7 @@ export const EmployeeCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
           />
           <AppSelect
             variant="outlined"
-            label={t('Position')}
+            label={t('position')}
             defaultValue=""
             loading={positionsLoading}
             items={positionsData?.positions}
@@ -124,7 +124,7 @@ export const EmployeeCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
           />
           <AppSelect
             variant="outlined"
-            label={t('Role')}
+            label={t('role')}
             defaultValue=""
             items={ROLE_ARRAY}
             error={!!errors[FORM_EMPLOYEES_KEYS.role]}
@@ -137,7 +137,7 @@ export const EmployeeCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
             loading={createUserLoading}
             disabled={!isDirty && isValid}
           >
-            {t('Create')}
+            {t('create')}
           </Button>
         </form>
       </Container>

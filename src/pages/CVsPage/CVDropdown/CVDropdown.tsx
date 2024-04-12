@@ -35,13 +35,13 @@ export const CVDropdown: FC<ICVDropdownProps> = ({ CV }) => {
       variables: { id: CV.id }
     })
 
-    toastMessage(t('Successfully deleted'), TOAST_TYPES.success)
+    toastMessage(t('successfullyDeleted'), TOAST_TYPES.success)
   }
 
   return (
     <BasicMenu>
-      <MenuItem onClick={handleOpenCv}>{t('Details')}</MenuItem>
-      {(userCheck || isAdmin) && <MenuItem onClick={handleCVDelete}>{t('Delete')}</MenuItem>}
+      <MenuItem onClick={handleOpenCv}>{t('details')}</MenuItem>
+      {(userCheck || isAdmin) && <MenuItem onClick={handleCVDelete}>{t('delete')}</MenuItem>}
     </BasicMenu>
   )
 }

@@ -6,12 +6,12 @@ import { AppNavigationRoutes } from '@/router/paths'
 
 export const USER_MENU_ITEMS: IMenuItems = {
   profile: {
-    text: 'Profile',
+    text: 'profile',
     route: AppNavigationRoutes.PROFILE,
     icon: AccountCircleIcon
   },
   settings: {
-    text: 'Settings',
+    text: 'settings',
     route: AppNavigationRoutes.SETTINGS,
     icon: Settings
   }

@@ -34,12 +34,12 @@ export const EmployeeLanguagesProfile: FC = () => {
           variant="contained"
           onClick={toggleVisibility}
         >
-          {t('Add languages')}
+          {t('addLanguage')}
         </Button>
       )}
       <Divider sx={{ my: 2 }} />
       {userData?.user?.profile.languages.length ? (
-        <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr' }}>
+        <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '15px' }}>
           {userData?.user?.profile?.languages.map(item => (
             <LanguageItem
               key={item.name}
@@ -50,7 +50,7 @@ export const EmployeeLanguagesProfile: FC = () => {
         </Box>
       ) : (
         <Typography sx={{ my: 2 }} variant="h5">
-          {t('No languages')}
+          {t('noLanguages')}
         </Typography>
       )}
       {isVisible && <LanguagesModal userData={userData?.user} onClose={toggleVisibility} />}

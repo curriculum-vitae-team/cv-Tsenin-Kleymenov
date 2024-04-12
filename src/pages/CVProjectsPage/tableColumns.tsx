@@ -4,31 +4,31 @@ import { ICVProject } from '@/graphql/interfaces/ICv.interfaces'
 export const tableColumns: IColumn<ICVProject>[] = [
   {
     id: 1,
-    header: 'Name',
+    header: 'name',
     field: 'name',
     sortable: true
   },
   {
     id: 2,
-    header: 'Internal name',
+    header: 'internalName',
     field: 'internal_name',
     sortable: true
   },
   {
     id: 3,
-    header: 'Domain',
+    header: 'domain',
     field: 'domain',
     sortable: true
   },
   {
     id: 4,
-    header: 'Start date',
+    header: 'startDate',
     field: 'start_date',
     sortable: true
   },
   {
     id: 5,
-    header: 'End date',
+    header: 'endDate',
     field: 'end_date',
     sortable: true
   }

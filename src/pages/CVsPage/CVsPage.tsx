@@ -49,10 +49,10 @@ export const CVsPage: FC = () => {
           size="small"
           value={searchedName}
           onChange={handleSearchUser}
-          placeholder={t('Search') as string}
+          placeholder={t('search') as string}
         />
         <Button sx={{ maxWidth: 100 }} variant="contained" onClick={toggleVisibility}>
-          {t('Create')}
+          {t('create')}
         </Button>
       </CvsTableToolBar>
       <CommonTable<ICV>

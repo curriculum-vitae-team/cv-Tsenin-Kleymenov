@@ -54,7 +54,7 @@ export const PositionUpdateModal: FC<IPositionUpdateModalProps> = ({ position, o
 
     onClose()
 
-    toastMessage(t('Successfully updated'), TOAST_TYPES.success)
+    toastMessage(t('successfullyUpdated'), TOAST_TYPES.success)
   }
 
   return (
@@ -63,7 +63,7 @@ export const PositionUpdateModal: FC<IPositionUpdateModalProps> = ({ position, o
         <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
           <Input
             variant="outlined"
-            label={t('Name')}
+            label={t('name')}
             error={!!errors[FORM_POSITION_KEYS.name]}
             helperText={t(errors?.[FORM_POSITION_KEYS.name]?.message as string)}
             {...register(FORM_POSITION_KEYS.name)}
@@ -74,7 +74,7 @@ export const PositionUpdateModal: FC<IPositionUpdateModalProps> = ({ position, o
             loading={updatePositionLoading}
             disabled={!isDirty && isValid}
           >
-            {t('Update')}
+            {t('update')}
           </Button>
         </form>
       </Container>

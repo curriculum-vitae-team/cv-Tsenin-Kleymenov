@@ -5,7 +5,7 @@ import { PositionDropdown } from '@/pages/PositionsPage/PositionDropdown/Positio
 export const tableColumns: IColumn<IPosition>[] = [
   {
     id: 1,
-    header: 'Position name',
+    header: 'positionName',
     field: 'name',
     sortable: true
   },

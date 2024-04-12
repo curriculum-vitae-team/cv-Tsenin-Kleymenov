@@ -63,11 +63,11 @@ export const CVProjectsPage: FC = () => {
           style={{ marginBottom: '20px' }}
           value={searchedName}
           onChange={handleSearchUser}
-          placeholder={t('Search') as string}
+          placeholder={t('search') as string}
         />
         {(userCheck || isAdmin) && (
           <Button sx={{ maxWidth: 150 }} variant="contained" onClick={toggleVisibility}>
-            {t('Update')}
+            {t('update')}
           </Button>
         )}
       </Box>

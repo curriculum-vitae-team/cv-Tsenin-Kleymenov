@@ -6,15 +6,25 @@ import { Dialog } from '@mui/material'
 import { IModalWindowProps } from './ModalWindow.interfaces'
 import { CloseButton, DialogContent, ModalHeader, ModalTitle } from './ModalWindow.styles'
 
-export const ModalWindow: FC<IModalWindowProps> = ({ children, title, onClose }) => {
+export const ModalWindow: FC<IModalWindowProps> = ({ children, title, onClose, ...rest }) => {
   const { t } = useTranslation()
 
+  const onModalClose = (event: {}, reason: 'backdropClick' | 'escapeKeyDown'): void => {
+    if (reason && reason === 'backdropClick') return
+
+    if (onClose && reason === 'escapeKeyDown') onClose(event, 'escapeKeyDown')
+  }
+
+  const handleClose = (event: React.MouseEvent): void => {
+    onModalClose(event, 'escapeKeyDown')
+  }
+
   return (
-    <Dialog open onClose={onClose}>
+    <Dialog {...rest} open onClose={handleClose}>
       <DialogContent>
         <ModalHeader>
-          <ModalTitle>{t(title ?? '')}</ModalTitle>
-          <CloseButton onClick={onClose}>
+          <ModalTitle variant="h2">{t(title ?? '')}</ModalTitle>
+          <CloseButton onClick={handleClose}>
             <ClearIcon />
           </CloseButton>
         </ModalHeader>

@@ -7,7 +7,9 @@ export const theme = responsiveFontSizes(
     typography: {
       fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
       fontSize: 16,
-
+      h2: {
+        fontSize: '1.5rem'
+      },
       h5: {
         fontSize: '16px'
       }
@@ -39,6 +41,7 @@ export const theme = responsiveFontSizes(
             fontSize: '14px',
             fontWeight: 400,
             boxShadow: 'none',
+            textTransform: 'none',
 
             '&:hover': {
               boxShadow: 'none'
@@ -96,6 +99,15 @@ export const theme = responsiveFontSizes(
         styleOverrides: {
           root: {
             fontSize: '14px'
+          }
+        }
+      },
+      MuiDialog: {
+        styleOverrides: {
+          root: {
+            '.MuiDialogContent-root': {
+              padding: '25px'
+            }
           }
         }
       }

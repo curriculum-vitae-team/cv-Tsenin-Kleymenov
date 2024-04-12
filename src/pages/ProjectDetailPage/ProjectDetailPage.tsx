@@ -40,7 +40,7 @@ export const ProjectDetailPage: FC = () => {
             variant="contained"
             onClick={toggleVisibility}
           >
-            {t('Update')}
+            {t('update')}
           </Button>
           <Divider sx={{ my: 2 }} />
         </Box>

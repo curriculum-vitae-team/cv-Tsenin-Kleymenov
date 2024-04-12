@@ -51,7 +51,7 @@ export const DepartmentUpdateModal: FC<IDepartmentUpdateModalProps> = ({ departm
 
     onClose()
 
-    toastMessage(t('Successfully updated'), TOAST_TYPES.success)
+    toastMessage(t('successfullyUpdated'), TOAST_TYPES.success)
   }
 
   return (
@@ -60,7 +60,7 @@ export const DepartmentUpdateModal: FC<IDepartmentUpdateModalProps> = ({ departm
         <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
           <Input
             variant="outlined"
-            label={t('Name')}
+            label={t('name')}
             error={!!errors[FORM_DEPARTMENT_KEYS.name]}
             helperText={t(errors?.[FORM_DEPARTMENT_KEYS.name]?.message as string)}
             {...register(FORM_DEPARTMENT_KEYS.name)}
@@ -71,7 +71,7 @@ export const DepartmentUpdateModal: FC<IDepartmentUpdateModalProps> = ({ departm
             loading={updateUpdateLoading}
             disabled={!isDirty && isValid}
           >
-            {t('Update')}
+            {t('update')}
           </Button>
         </form>
       </Container>

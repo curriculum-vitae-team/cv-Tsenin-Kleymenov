@@ -60,9 +60,7 @@ export const AppBreadcrumbs: FC<IAppBreadcrumbsProps> = ({ id }) => {
             style={{ pointerEvents: index === arr.length - 1 ? 'none' : 'auto' }}
             color={index === arr.length - 1 ? 'info' : 'primary'}
           >
-            {item === id && index === arr.length - 1
-              ? data?.project.name
-              : t(item.charAt(0).toUpperCase() + item.slice(1, item.length))}
+            {item === id && index === arr.length - 1 ? data?.project.name : t(item)}
           </BreadcrumbsLink>
         )
       })}

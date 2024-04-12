@@ -28,9 +28,6 @@ export const SkillsModal: FC<ISkillsModalProps> = ({ userData, onClose }) => {
   const { loading: loadingSkillCategories, data: skillCategoriesData } =
     useQuery<ISkillCategories>(SKILL_CATEGORIES)
 
-  const [category, setCategory] = useState<string>('')
-  const [selectedSkill, setSelectedSkill] = useState<string>('')
-
   const [addProfileSkill, { loading: userLoading }] = useMutation(ADD_PROFILE_SKILL)
 
   const { t } = useTranslation()
@@ -45,26 +42,21 @@ export const SkillsModal: FC<ISkillsModalProps> = ({ userData, onClose }) => {
       }
     })
 
-  useEffect(() => {
-    const skill = skillsData?.skills.find(skillItem => {
-      return skillItem.name === selectedSkill
-    })
-
-    if (skill) setCategory(skill?.category || '')
-  }, [selectedSkill, skillsData?.skills])
-
   const skillCategories = skillCategoriesData?.skillCategories.map(categoryItem => {
     return {
       name: categoryItem,
       id: categoryItem
     }
   })
+  console.log('🚀 ~ skillCategories ~ skillCategories:', skillCategories)
 
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitSuccessful, isValid }
+    formState: { errors, isSubmitSuccessful, isValid },
+    watch,
+    setValue
   } = useForm<IProfileSkillFormValues>({
     defaultValues: {
       [FORM_PROFILE_SKILLS_KEYS.skills]: '',
@@ -74,13 +66,16 @@ export const SkillsModal: FC<ISkillsModalProps> = ({ userData, onClose }) => {
     resolver: yupResolver(FORM_PROFILE_SKILLS_SCHEMA)
   })
 
+  const watchSkill = watch(FORM_PROFILE_SKILLS_KEYS.skills)
+  const watchCategory = watch(FORM_PROFILE_SKILLS_KEYS.category)
+
   const onSubmit: SubmitHandler<IProfileSkillFormValues> = async formData => {
     await addProfileSkill({
       variables: {
         skill: {
           userId: userData?.id,
           name: formData[FORM_PROFILE_SKILLS_KEYS.skills],
-          category: selectedSkill ? category : '',
+          category: watchSkill ? watchCategory : '',
           mastery: formData[FORM_PROFILE_SKILLS_KEYS.mastery]
         }
       }
@@ -88,8 +83,16 @@ export const SkillsModal: FC<ISkillsModalProps> = ({ userData, onClose }) => {
 
     onClose()
 
-    toastMessage(t('Successfully added'), TOAST_TYPES.success)
+    toastMessage(t('successfullyAdded'), TOAST_TYPES.success)
   }
+
+  useEffect(() => {
+    const skill = skillsData?.skills.find(skillItem => {
+      return skillItem.name === watchSkill
+    })
+
+    if (skill) setValue(FORM_PROFILE_SKILLS_KEYS.category, skill?.category)
+  }, [watchSkill, skillsData?.skills])
 
   useEffect(() => {
     reset({
@@ -104,19 +107,19 @@ export const SkillsModal: FC<ISkillsModalProps> = ({ userData, onClose }) => {
         <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
           <AppSelect
             variant="outlined"
-            label={t('Skills')}
+            label={t('skills')}
             defaultValue=""
             loading={loadingSkills}
             items={filteredSkillsArray}
             error={!!errors[FORM_PROFILE_SKILLS_KEYS.skills]}
             helperText={t(errors?.[FORM_PROFILE_SKILLS_KEYS.skills]?.message as string)}
             {...register(FORM_PROFILE_SKILLS_KEYS.skills)}
-            onChange={e => setSelectedSkill(e.target.value)}
+            onChange={e => setValue(FORM_PROFILE_SKILLS_KEYS.skills, e.target.value)}
           />
           <AppSelect
-            value={category}
+            value={watchCategory ?? ''}
             variant="outlined"
-            label={t('Category')}
+            label={t('category')}
             disabled
             items={skillCategories}
             loading={loadingSkillCategories}
@@ -124,8 +127,8 @@ export const SkillsModal: FC<ISkillsModalProps> = ({ userData, onClose }) => {
           />
           <AppSelect
             variant="outlined"
-            label={t('Mastery')}
-            disabled={!!!selectedSkill}
+            label={t('mastery')}
+            disabled={!!!watchSkill}
             defaultValue=""
             items={MASTERY_ARRAY}
             error={!!errors[FORM_PROFILE_SKILLS_KEYS.mastery]}
@@ -133,7 +136,7 @@ export const SkillsModal: FC<ISkillsModalProps> = ({ userData, onClose }) => {
             {...register(FORM_PROFILE_SKILLS_KEYS.mastery)}
           />
           <Button loading={userLoading} type="submit" variant="contained" disabled={!isValid}>
-            {t('Save')}
+            {t('save')}
           </Button>
         </form>
       </Container>

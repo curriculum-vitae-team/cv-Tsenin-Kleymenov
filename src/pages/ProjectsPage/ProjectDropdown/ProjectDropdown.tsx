@@ -35,8 +35,8 @@ export const ProjectDropdown: FC<IProjectDropdownProps> = ({ project }) => {
 
   return (
     <BasicMenu>
-      <MenuItem onClick={handleOpenProject}>{t('Details')}</MenuItem>
-      {isAdmin && <MenuItem onClick={handleProjectDelete}>{t('Delete')}</MenuItem>}
+      <MenuItem onClick={handleOpenProject}>{t('details')}</MenuItem>
+      {isAdmin && <MenuItem onClick={handleProjectDelete}>{t('delete')}</MenuItem>}
     </BasicMenu>
   )
 }

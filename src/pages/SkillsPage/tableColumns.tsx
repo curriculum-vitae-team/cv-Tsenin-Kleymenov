@@ -6,13 +6,13 @@ import { SkillDropdown } from './SkillDropdown/SkillDropdown'
 export const tableColumns: IColumn<ISkill>[] = [
   {
     id: 1,
-    header: 'Skill name',
+    header: 'skillName',
     field: 'name',
     sortable: true
   },
   {
     id: 2,
-    header: 'Category',
+    header: 'category',
     field: 'category',
     sortable: true
   },

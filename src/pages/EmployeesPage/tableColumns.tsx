@@ -12,31 +12,31 @@ export const tableColumns: IColumn<IUser>[] = [
   },
   {
     id: 2,
-    header: 'First name',
+    header: 'firstName',
     field: 'profile.first_name',
     sortable: true
   },
   {
     id: 3,
-    header: 'Last name',
+    header: 'lastName',
     field: 'profile.last_name',
     sortable: true
   },
   {
     id: 4,
-    header: 'Email',
+    header: 'email',
     field: 'email',
     sortable: true
   },
   {
     id: 5,
-    header: 'Department',
+    header: 'department',
     field: 'department_name',
     sortable: true
   },
   {
     id: 6,
-    header: 'Position',
+    header: 'position',
     field: 'position_name',
     sortable: true
   },

@@ -39,13 +39,13 @@ export const CVItem: FC<ICVsItemProps> = ({ CV, handleSetCurrentCV }) => {
       </AccordionSummary>
       <AccordionDetails>
         <Box sx={{ color: 'inherit' }}>
-          <Typography>{`${t('Name')}: ${CV.name}`}</Typography>
-          <Typography>{`${t('Description')}: ${CV.description}`}</Typography>
-          <Typography>{`${t('Education')}: ${CV.education}`}</Typography>
+          <Typography>{`${t('name')}: ${CV.name}`}</Typography>
+          <Typography>{`${t('description')}: ${CV.description}`}</Typography>
+          <Typography>{`${t('education')}: ${CV.education}`}</Typography>
         </Box>
         <ButtonContainer>
           <Button variant="contained" onClick={() => handleSetCurrentCV(CV)}>
-            {t('Edit')}
+            {t('edit')}
           </Button>
           <Button variant="contained" onClick={() => unbindCV(CV.id)}>
             {t('Unassign')}

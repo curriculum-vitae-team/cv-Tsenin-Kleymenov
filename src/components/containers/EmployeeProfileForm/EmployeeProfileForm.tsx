@@ -87,7 +87,7 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
       }
     })
 
-    toastMessage(t('Successfully updated'), TOAST_TYPES.success)
+    toastMessage(t('successfullyUpdated'), TOAST_TYPES.success)
   }
 
   const handleUserState = (
@@ -106,11 +106,11 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
       <EmployeeAvatarUpload />
       <Box sx={{ minHeight: 150, marginTop: '20px' }}>
         <LoadingOverlay active={userLoading}>
-          <Typography>{`${t('Full name')}: ${currentUser?.profile.full_name || '-'}`}</Typography>
-          <Typography>{`${t('Email')}: ${currentUser?.email || '-'}`}</Typography>
-          <Typography>{`${t('Department')}: ${currentUser?.department_name || '-'}`}</Typography>
-          <Typography>{`${t('Position')}: ${currentUser?.position_name || '-'}`}</Typography>
-          <Typography>{`${t('A member since')}: ${convertCreatedAtDate(
+          <Typography>{`${t('fullName')}: ${currentUser?.profile.full_name || '-'}`}</Typography>
+          <Typography>{`${t('email')}: ${currentUser?.email || '-'}`}</Typography>
+          <Typography>{`${t('department')}: ${currentUser?.department_name || '-'}`}</Typography>
+          <Typography>{`${t('position')}: ${currentUser?.position_name || '-'}`}</Typography>
+          <Typography>{`${t('memberSince')}: ${convertCreatedAtDate(
             currentUser?.created_at
           )}`}</Typography>
         </LoadingOverlay>
@@ -122,8 +122,8 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
               <Input
                 type="text"
                 variant="outlined"
-                label={t('First name')}
-                placeholder={t('Enter your first name') as string}
+                label={t('firstName')}
+                placeholder={t('enterFirstName') as string}
                 error={!!errors[FORM_PROFILE_KEYS.firstName]}
                 helperText={t(errors?.[FORM_PROFILE_KEYS.firstName]?.message as string)}
                 {...register(FORM_PROFILE_KEYS.firstName)}
@@ -131,7 +131,7 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
               <AppSelect
                 variant="outlined"
                 value={userInfo[FORM_PROFILE_KEYS.department]}
-                label={t('Department')}
+                label={t('department')}
                 loading={departmentsLoading}
                 items={departmentsData?.departments}
                 error={!!errors[FORM_PROFILE_KEYS.department]}
@@ -144,8 +144,8 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
               <Input
                 type="text"
                 variant="outlined"
-                label={t('Last name')}
-                placeholder={t('Enter your last name') as string}
+                label={t('lastName')}
+                placeholder={t('enterLastName') as string}
                 error={!!errors[FORM_PROFILE_KEYS.lastName]}
                 helperText={t(errors?.[FORM_PROFILE_KEYS.lastName]?.message as string)}
                 {...register(FORM_PROFILE_KEYS.lastName)}
@@ -153,7 +153,7 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
               <AppSelect
                 variant="outlined"
                 value={userInfo[FORM_PROFILE_KEYS.position]}
-                label={t('Position')}
+                label={t('position')}
                 loading={positionsLoading}
                 items={positionsData?.positions}
                 error={!!errors[FORM_PROFILE_KEYS.position]}
@@ -167,7 +167,7 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
                 loading={userLoading}
                 disabled={!isDirty && isValid}
               >
-                {t('Confirm')}
+                {t('confirm')}
               </Button>
             </Grid>
           </Grid>

@@ -5,7 +5,7 @@ import { DepartmentDropdown } from '@/pages/DepartmentsPage/DepartmentDropdown/D
 export const tableColumns: IColumn<IDepartment>[] = [
   {
     id: 1,
-    header: 'Department name',
+    header: 'departmentName',
     field: 'name',
     sortable: true
   },

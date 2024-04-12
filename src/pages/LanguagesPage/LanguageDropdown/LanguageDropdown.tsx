@@ -30,15 +30,15 @@ export const LanguageDropdown: FC<ILanguageDropdownProps> = ({ language }) => {
       variables: { id: language.id }
     })
 
-    toastMessage(t('Successfully deleted'), TOAST_TYPES.success)
+    toastMessage(t('successfullyDeleted'), TOAST_TYPES.success)
   }
 
   return (
     <Box style={{ display: 'flex', justifyContent: 'flex-end' }}>
       {isAdmin && (
         <BasicMenu>
-          <MenuItem onClick={toggleVisibility}>{t('Update')}</MenuItem>
-          <MenuItem onClick={handleLanguageDelete}>{t('Delete')}</MenuItem>
+          <MenuItem onClick={toggleVisibility}>{t('update')}</MenuItem>
+          <MenuItem onClick={handleLanguageDelete}>{t('delete')}</MenuItem>
         </BasicMenu>
       )}
       {isVisible && <LanguageUpdateModal language={language} onClose={toggleVisibility} />}

@@ -14,6 +14,7 @@ import { useBooleanState } from '@/hooks/useBooleanState'
 import { useUser } from '@/hooks/useUser'
 
 import { SkillsModal } from './SkillsModal/SkillsModal'
+import { AddAction } from './EmployeeSkillsProfile.styles'
 
 export const EmployeeSkillsProfile: FC = () => {
   const { id: userId } = useParams()
@@ -38,13 +39,9 @@ export const EmployeeSkillsProfile: FC = () => {
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
       {(userCheck || isAdmin) && (
-        <Button
-          sx={{ maxWidth: 170, alignSelf: 'flex-end' }}
-          variant="contained"
-          onClick={toggleVisibility}
-        >
-          {t('Add skills')}
-        </Button>
+        <AddAction sx={{}} variant="contained" onClick={toggleVisibility}>
+          {t('addSkill')}
+        </AddAction>
       )}
       <Divider sx={{ my: 2 }} />
       {userData?.user?.profile.skills.length ? (
@@ -53,7 +50,7 @@ export const EmployeeSkillsProfile: FC = () => {
         })
       ) : (
         <Typography sx={{ my: 2 }} variant="h5">
-          {t('No skills')}
+          {t('noSkills')}
         </Typography>
       )}
       {isVisible && <SkillsModal userData={userData?.user} onClose={toggleVisibility} />}

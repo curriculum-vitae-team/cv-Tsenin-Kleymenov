@@ -6,3 +6,8 @@ export interface ILanguageItemProps {
 export interface IBadgeStyled {
   proficiency_color?: string
 }
+
+export interface ILanguageInfo {
+  name: string
+  proficiency: string
+}

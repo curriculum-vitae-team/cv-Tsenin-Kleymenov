@@ -66,7 +66,7 @@ export const CreateCVModal: FC<ICVsModalProps> = ({ onClose }) => {
 
     onClose()
 
-    toastMessage(t('Successfully created'), TOAST_TYPES.success)
+    toastMessage(t('successfullyCreated'), TOAST_TYPES.success)
   })
 
   return (
@@ -74,19 +74,19 @@ export const CreateCVModal: FC<ICVsModalProps> = ({ onClose }) => {
       <ModalWindow onClose={onClose} title="Create CV">
         <Container sx={{ minWidth: '500px' }}>
           <Input
-            label={t('Name')}
+            label={t('name')}
             error={!!errors[FORM_CREATE_CV_KEYS.name]}
             {...register(FORM_CREATE_CV_KEYS.name)}
             helperText={t(errors?.[FORM_CREATE_CV_KEYS.name]?.message as string)}
           />
           <Input
-            label={t('Education')}
+            label={t('education')}
             error={!!errors[FORM_CREATE_CV_KEYS.education]}
             {...register(FORM_CREATE_CV_KEYS.education)}
             helperText={t(errors?.[FORM_CREATE_CV_KEYS.education]?.message as string)}
           />
           <Input
-            label={t('Description')}
+            label={t('description')}
             error={!!errors[FORM_CREATE_CV_KEYS.description]}
             {...register(FORM_CREATE_CV_KEYS.description)}
             helperText={t(errors?.[FORM_CREATE_CV_KEYS.description]?.message as string)}
@@ -98,7 +98,7 @@ export const CreateCVModal: FC<ICVsModalProps> = ({ onClose }) => {
             loading={createCVLoading}
             disabled={!isDirty && isValid}
           >
-            {t('Create')}
+            {t('create')}
           </Button>
         </Container>
       </ModalWindow>

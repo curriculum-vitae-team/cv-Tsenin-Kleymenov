@@ -45,7 +45,7 @@ export const EmployeeCVsProfile: FC = () => {
             ))
           ) : (
             <Typography sx={{ my: 2 }} variant="h5">
-              {t('No CVs')}
+              {t('noCvs')}
             </Typography>
           )}
           {isVisible && <CVsModal onClose={toggleVisibility} currentCVData={selectedCV} />}

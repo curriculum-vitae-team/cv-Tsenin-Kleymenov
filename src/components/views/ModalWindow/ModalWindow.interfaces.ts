@@ -1,8 +1,8 @@
 import { ReactNode } from 'react'
+import { DialogProps } from '@mui/material'
 
-import { IBaseModalProps } from '@/appTypes/IBaseModalProps.interfaces'
-
-export interface IModalWindowProps extends IBaseModalProps {
+export interface IModalWindowProps extends Omit<DialogProps, 'open'> {
   title?: string
   children: ReactNode
+  open?: boolean
 }
