@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
-import { Box, Container, Divider } from '@mui/material'
+import { Box, Divider } from '@mui/material'
 
 import { Button } from '@/components/views/Button/Button'
 import { LoadingOverlay } from '@/components/views/LoadingOverlay/LoadingOverlay'
@@ -27,7 +27,7 @@ export const ProjectDetailPage: FC = () => {
   const { t } = useTranslation()
 
   return (
-    <Container maxWidth="lg">
+    <>
       {isAdmin && (
         <Box
           sx={{
@@ -49,6 +49,6 @@ export const ProjectDetailPage: FC = () => {
         <ProjectDetailItem project={projectData?.project} />
       </LoadingOverlay>
       {isVisible && <ProjectUpdateModal project={projectData} onClose={toggleVisibility} />}
-    </Container>
+    </>
   )
 }

@@ -2,14 +2,14 @@ import { FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
-import MoreVertIcon from '@mui/icons-material/MoreVert'
-import { IconButton, MenuItem, Typography } from '@mui/material'
+import { MenuItem, Typography } from '@mui/material'
 
 import { IUserResult } from '@/appTypes/IResult.interfaces'
 import { PROFICIENCY_COLORS } from '@/constants/proficiency'
 import { ILanguageProficiency } from '@/graphql/interfaces/ILanguageProficiency.interfaces'
 import { USER } from '@/graphql/user/userQuery'
 import { useBooleanState } from '@/hooks/useBooleanState'
+import { useUser } from '@/hooks/useUser'
 
 import { BasicMenu } from '../BasicMenu/BasicMenu'
 
@@ -22,6 +22,9 @@ export const LanguageItem: FC<ILanguageItemProps> = ({ languageName, languagePro
   const { id: userId } = useParams()
 
   const { t } = useTranslation()
+
+  const { user, isAdmin } = useUser()
+  const userCheck = userId === user?.id
 
   const { isVisible, toggleVisibility } = useBooleanState()
 
@@ -48,10 +51,12 @@ export const LanguageItem: FC<ILanguageItemProps> = ({ languageName, languagePro
           </ProficiencyBadge>
           <Typography>{language.name}</Typography>
         </LanguageItemContainer>
-        <BasicMenu>
-          <MenuItem onClick={toggleVisibility}>{t('update')}</MenuItem>
-          <MenuItem onClick={toggleDelete}>{t('remove')}</MenuItem>
-        </BasicMenu>
+        {(userCheck || isAdmin) && (
+          <BasicMenu>
+            <MenuItem onClick={toggleVisibility}>{t('update')}</MenuItem>
+            <MenuItem onClick={toggleDelete}>{t('remove')}</MenuItem>
+          </BasicMenu>
+        )}
       </LanguageCard>
       {isVisible && (
         <LanguageItemModal

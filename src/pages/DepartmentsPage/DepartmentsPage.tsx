@@ -59,7 +59,6 @@ export const DepartmentsPage: FC = () => {
           </Button>
         )}
       </Box>
-      <Divider sx={{ my: 2 }} />
       <CommonTable<IDepartment>
         label="departments"
         data={requestSearch}

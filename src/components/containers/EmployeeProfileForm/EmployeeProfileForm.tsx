@@ -1,9 +1,9 @@
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { useMutation, useQuery } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Box, Container, Grid, Typography } from '@mui/material'
+import { Box, Grid, Typography } from '@mui/material'
 
 import { IDepartmentResult, IPositionResult } from '@/appTypes/IResult.interfaces'
 import { EmployeeAvatarUpload } from '@/components/containers/EmployeeAvatarUpload/EmployeeAvatarUpload'
@@ -27,6 +27,7 @@ import {
   IEmployeeProfileFormProps,
   IProfileFormValues
 } from './EmployeeProfileForm.interfaces'
+import { ProfileInfoItem } from './EmployeeProfileForm.styles'
 
 export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser }) => {
   const { user, isAdmin } = useUser()
@@ -47,22 +48,25 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
 
   const { t } = useTranslation()
 
-  const [userInfo, setUserInfo] = useState<IProfileFormValues>({
-    [FORM_PROFILE_KEYS.firstName]: currentUser?.profile.first_name || '',
-    [FORM_PROFILE_KEYS.lastName]: currentUser?.profile.last_name || '',
-    [FORM_PROFILE_KEYS.position]: currentUser?.position?.id || '',
-    [FORM_PROFILE_KEYS.department]: currentUser?.department?.id || ''
-  })
-
   const {
     register,
     handleSubmit,
+    watch,
+    reset,
     formState: { errors, isDirty, isValid }
   } = useForm<IProfileFormValues>({
-    defaultValues: userInfo,
+    defaultValues: {
+      [FORM_PROFILE_KEYS.firstName]: currentUser?.profile.first_name || '',
+      [FORM_PROFILE_KEYS.lastName]: currentUser?.profile.last_name || '',
+      [FORM_PROFILE_KEYS.position]: currentUser?.position?.id || '',
+      [FORM_PROFILE_KEYS.department]: currentUser?.department?.id || ''
+    },
     mode: 'onSubmit',
     resolver: yupResolver(FORM_PROFILE_SCHEMA)
   })
+
+  const watchDepartment = watch(FORM_PROFILE_KEYS.department)
+  const watchPosition = watch(FORM_PROFILE_KEYS.position)
 
   const onSubmit: SubmitHandler<IProfileFormValues> = async formData => {
     await updateUser({
@@ -87,32 +91,40 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
       }
     })
 
+    reset({
+      [FORM_PROFILE_KEYS.firstName]: formData[FORM_PROFILE_KEYS.firstName],
+      [FORM_PROFILE_KEYS.lastName]: formData[FORM_PROFILE_KEYS.lastName],
+      [FORM_PROFILE_KEYS.position]: formData[FORM_PROFILE_KEYS.position],
+      [FORM_PROFILE_KEYS.department]: formData[FORM_PROFILE_KEYS.department]
+    })
+
     toastMessage(t('successfullyUpdated'), TOAST_TYPES.success)
   }
 
-  const handleUserState = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    key: FORM_PROFILE_KEYS
-  ): void => {
-    setUserInfo(prevState => {
-      return {
-        ...prevState,
-        [key]: event.target.value
-      }
-    })
-  }
   return (
-    <Container maxWidth="md">
+    <div>
       <EmployeeAvatarUpload />
-      <Box sx={{ minHeight: 150, marginTop: '20px' }}>
+      <Box sx={{ margin: '20px 0' }}>
         <LoadingOverlay active={userLoading}>
-          <Typography>{`${t('fullName')}: ${currentUser?.profile.full_name || '-'}`}</Typography>
-          <Typography>{`${t('email')}: ${currentUser?.email || '-'}`}</Typography>
-          <Typography>{`${t('department')}: ${currentUser?.department_name || '-'}`}</Typography>
-          <Typography>{`${t('position')}: ${currentUser?.position_name || '-'}`}</Typography>
-          <Typography>{`${t('memberSince')}: ${convertCreatedAtDate(
-            currentUser?.created_at
-          )}`}</Typography>
+          <Typography>
+            {t('fullName')}:{' '}
+            <ProfileInfoItem>{`${currentUser?.profile.full_name || '-'}`}</ProfileInfoItem>
+          </Typography>
+          <Typography>
+            {t('email')}: <ProfileInfoItem>{`${currentUser?.email || '-'}`}</ProfileInfoItem>
+          </Typography>
+          <Typography>
+            {t('department')}:{' '}
+            <ProfileInfoItem>{`${currentUser?.department_name || '-'}`}</ProfileInfoItem>
+          </Typography>
+          <Typography>
+            {t('position')}:{' '}
+            <ProfileInfoItem>{`${currentUser?.position_name || '-'}`}</ProfileInfoItem>
+          </Typography>
+          <Typography>
+            {t('memberSince')}:{' '}
+            <ProfileInfoItem>{`${convertCreatedAtDate(currentUser?.created_at)}`}</ProfileInfoItem>
+          </Typography>
         </LoadingOverlay>
       </Box>
       {(userCheck || isAdmin) && (
@@ -130,14 +142,13 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
               />
               <AppSelect
                 variant="outlined"
-                value={userInfo[FORM_PROFILE_KEYS.department]}
+                value={watchDepartment}
                 label={t('department')}
                 loading={departmentsLoading}
                 items={departmentsData?.departments}
                 error={!!errors[FORM_PROFILE_KEYS.department]}
                 helperText={t(errors?.[FORM_PROFILE_KEYS.department]?.message as string)}
                 {...register(FORM_PROFILE_KEYS.department)}
-                onChange={event => handleUserState(event, FORM_PROFILE_KEYS.department)}
               />
             </Grid>
             <Grid item xs={6}>
@@ -152,14 +163,13 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
               />
               <AppSelect
                 variant="outlined"
-                value={userInfo[FORM_PROFILE_KEYS.position]}
+                value={watchPosition}
                 label={t('position')}
                 loading={positionsLoading}
                 items={positionsData?.positions}
                 error={!!errors[FORM_PROFILE_KEYS.position]}
                 helperText={t(errors?.[FORM_PROFILE_KEYS.position]?.message as string)}
                 {...register(FORM_PROFILE_KEYS.position)}
-                onChange={event => handleUserState(event, FORM_PROFILE_KEYS.position)}
               />
               <Button
                 type="submit"
@@ -173,6 +183,6 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
           </Grid>
         </form>
       )}
-    </Container>
+    </div>
   )
 }

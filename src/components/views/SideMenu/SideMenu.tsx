@@ -1,45 +1,36 @@
 import { FC } from 'react'
-import CloseIcon from '@mui/icons-material/Close'
-import MenuIcon from '@mui/icons-material/Menu'
-import { AppBar, Divider, Drawer, List } from '@mui/material'
+import { useLocation } from 'react-router'
+import { List } from '@mui/material'
 
 import { SideMenuItem } from '@/components/views/SideMenuItem/SideMenuItem'
 import { SIDE_MENU_ITEMS } from '@/constants/sideMenuItems'
-import { useBooleanState } from '@/hooks/useBooleanState'
 
-import { AppSideMenu, SideMenuBurgerButton, SideMenuCloseButton } from './SideMenu.styles'
+import { Sidebar } from './SideMenu.styles'
 
 export const SideMenu: FC = () => {
-  const { isVisible, toggleVisibility } = useBooleanState()
+  const { pathname } = useLocation()
+
+  const pathnameArray = pathname.split('/').filter(item => item)
 
   return (
-    <>
-      <SideMenuBurgerButton color="primary" onClick={toggleVisibility}>
-        <MenuIcon />
-      </SideMenuBurgerButton>
-      <Drawer onClose={toggleVisibility} anchor="left" open={isVisible}>
-        <AppSideMenu>
-          <AppBar color="secondary" position="static">
-            <SideMenuCloseButton color="primary" onClick={toggleVisibility}>
-              <CloseIcon />
-            </SideMenuCloseButton>
-          </AppBar>
-          <List>
+    <Sidebar>
+      <div className="wrapper">
+        <div className="list">
+          <List sx={{ p: 0 }}>
             {Object.values(SIDE_MENU_ITEMS).map(({ text, route, icon: Icon }) => {
               return (
                 <SideMenuItem
                   key={text}
-                  onClick={toggleVisibility}
                   text={text}
                   route={route}
                   Icon={Icon}
+                  isActive={pathnameArray[0] === route}
                 />
               )
             })}
           </List>
-          <Divider />
-        </AppSideMenu>
-      </Drawer>
-    </>
+        </div>
+      </div>
+    </Sidebar>
   )
 }

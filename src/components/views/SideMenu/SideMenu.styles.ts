@@ -1,10 +1,10 @@
-import { Box, styled } from '@mui/material'
+import { styled } from '@mui/material'
 import { IconButton } from '@mui/material'
 
-export const AppSideMenu = styled(Box)({
-  width: '250px',
-  display: 'flex',
-  flexDirection: 'column'
+export const Sidebar = styled('div')({
+  position: 'relative',
+  minWidth: '300px',
+  backgroundColor: '#fff'
 })
 
 export const SideMenuCloseButton = styled(IconButton)({

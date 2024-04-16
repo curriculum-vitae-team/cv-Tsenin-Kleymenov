@@ -1,6 +1,6 @@
 import { FC, useEffect } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
-import { Card, Container } from '@mui/material'
+import { Card } from '@mui/material'
 
 import { NavigationTabs } from '@/components/views/NavigationTabs/NavigationTabs'
 import { PROFILE_TABS } from '@/constants/tabs'
@@ -27,11 +27,9 @@ export const ProfilePage: FC = () => {
         locationState={AppNavigationRoutes.EMPLOYEES}
         defaultValue={AppNavigationRoutes.PROFILE}
       />
-      <Container maxWidth="lg">
-        <Card sx={{ p: 2, m: 2 }}>
-          <Outlet />
-        </Card>
-      </Container>
+      <Card sx={{ p: 2 }}>
+        <Outlet />
+      </Card>
     </>
   )
 }

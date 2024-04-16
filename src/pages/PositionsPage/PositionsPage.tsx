@@ -2,7 +2,7 @@ import { FC, useDeferredValue, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useQuery } from '@apollo/client'
 import SearchIcon from '@mui/icons-material/Search'
-import { Box, Divider } from '@mui/material'
+import { Box } from '@mui/material'
 
 import { IPositionResult } from '@/appTypes/IResult.interfaces'
 import { Button } from '@/components/views/Button/Button'
@@ -59,7 +59,6 @@ export const PositionsPage: FC = () => {
           </Button>
         )}
       </Box>
-      <Divider sx={{ my: 2 }} />
       <CommonTable<IPosition>
         label="positions"
         data={requestSearch}

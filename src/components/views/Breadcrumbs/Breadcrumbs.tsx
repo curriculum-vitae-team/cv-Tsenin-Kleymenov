@@ -28,7 +28,7 @@ export const AppBreadcrumbs: FC<IAppBreadcrumbsProps> = ({ id }) => {
   const cvLink = `/${AppNavigationRoutes.CVS}/${id}/${AppNavigationRoutes.DETAILS}`
 
   return (
-    <Breadcrumbs sx={{ my: 2 }} color="secondary" separator={<NavigateNextIcon />}>
+    <Breadcrumbs sx={{ marginBottom: '16px' }} color="secondary" separator={<NavigateNextIcon />}>
       <BreadcrumbsLink to={AppNavigationRoutes.EMPLOYEES}>
         <HomeIcon sx={{ mr: 1 }} />
         {t('Home')}

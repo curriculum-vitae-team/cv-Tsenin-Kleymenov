@@ -5,16 +5,16 @@ import { ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/mater
 
 import { ISideMenuItemProps } from './SideMenuItem.interfaces'
 
-export const SideMenuItem: FC<ISideMenuItemProps> = ({ onClick, Icon, route, text }) => {
+export const SideMenuItem: FC<ISideMenuItemProps> = ({ Icon, route, text, isActive }) => {
   const { t } = useTranslation()
 
   return (
-    <ListItem onClick={onClick} key={text} disablePadding>
+    <ListItem key={text} disablePadding>
       <ListItemButton component={Link} to={route}>
         <ListItemIcon>
           <Icon />
         </ListItemIcon>
-        <ListItemText>{t(text)}</ListItemText>
+        <ListItemText sx={{ color: isActive ? '#c63031' : '' }}>{t(text)}</ListItemText>
       </ListItemButton>
     </ListItem>
   )

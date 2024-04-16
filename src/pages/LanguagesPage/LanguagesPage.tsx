@@ -59,7 +59,6 @@ export const LanguagesPage: FC = () => {
           </Button>
         )}
       </Box>
-      <Divider sx={{ my: 2 }} />
       <CommonTable<ILanguage>
         label="languages"
         data={requestSearch}

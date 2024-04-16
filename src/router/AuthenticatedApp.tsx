@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { Navigate, Outlet, Route, Routes } from 'react-router'
 
+import Layout from '@/components/wrappers/layout/Layout'
 import { CVDetailsPage } from '@/pages/CVDetailsPage/CVDetailsPage'
 import { CVPage } from '@/pages/CVPage'
 import { CVPreviewPage } from '@/pages/CVPreviewPage'
@@ -24,50 +25,52 @@ import { AppNavigationRoutes } from './paths'
 
 const AuthenticatedApp: FC = () => {
   return (
-    <Routes>
-      <Route path={AppNavigationRoutes.INDEX} element={<AppLayout />}>
-        <Route index element={<Navigate to={`/${AppNavigationRoutes.EMPLOYEES}`} replace />} />
+    <Layout>
+      <Routes>
+        <Route path={AppNavigationRoutes.INDEX} element={<AppLayout />}>
+          <Route index element={<Navigate to={`/${AppNavigationRoutes.EMPLOYEES}`} replace />} />
 
-        <Route path={AppNavigationRoutes.EMPLOYEES} element={<Outlet />}>
-          <Route index element={<EmployeesPage />} />
+          <Route path={AppNavigationRoutes.EMPLOYEES} element={<Outlet />}>
+            <Route index element={<EmployeesPage />} />
 
-          <Route path=":id" element={<ProfilePage />}>
-            <Route index element={<ProfilePage />} />
-            <Route path={AppNavigationRoutes.PROFILE} element={<ProfileEmployeePage />} />
-            <Route path={AppNavigationRoutes.SKILLS} element={<ProfileSkillsPage />} />
-            <Route path={AppNavigationRoutes.LANGUAGES} element={<ProfileLanguagePage />} />
-            <Route path={AppNavigationRoutes.CVS} element={<ProfileCVsPage />} />
+            <Route path=":id" element={<ProfilePage />}>
+              <Route index element={<ProfilePage />} />
+              <Route path={AppNavigationRoutes.PROFILE} element={<ProfileEmployeePage />} />
+              <Route path={AppNavigationRoutes.SKILLS} element={<ProfileSkillsPage />} />
+              <Route path={AppNavigationRoutes.LANGUAGES} element={<ProfileLanguagePage />} />
+              <Route path={AppNavigationRoutes.CVS} element={<ProfileCVsPage />} />
+            </Route>
           </Route>
-        </Route>
 
-        <Route path={AppNavigationRoutes.PROJECTS} element={<Outlet />}>
-          <Route index element={<ProjectsPage />} />
+          <Route path={AppNavigationRoutes.PROJECTS} element={<Outlet />}>
+            <Route index element={<ProjectsPage />} />
 
-          <Route path=":id" element={<ProjectDetailPage />}>
-            <Route index element={<ProjectDetailPage />} />
+            <Route path=":id" element={<ProjectDetailPage />}>
+              <Route index element={<ProjectDetailPage />} />
+            </Route>
           </Route>
-        </Route>
 
-        <Route path={AppNavigationRoutes.CVS} element={<Outlet />}>
-          <Route index element={<CVsPage />} />
+          <Route path={AppNavigationRoutes.CVS} element={<Outlet />}>
+            <Route index element={<CVsPage />} />
 
-          <Route path=":id" element={<CVPage />}>
-            <Route index element={<CVPage />} />
-            <Route path={AppNavigationRoutes.DETAILS} element={<CVDetailsPage />} />
-            <Route path={AppNavigationRoutes.PROJECTS} element={<CVProjectsPage />} />
-            <Route path={AppNavigationRoutes.PREVIEW} element={<CVPreviewPage />} />
+            <Route path=":id" element={<CVPage />}>
+              <Route index element={<CVPage />} />
+              <Route path={AppNavigationRoutes.DETAILS} element={<CVDetailsPage />} />
+              <Route path={AppNavigationRoutes.PROJECTS} element={<CVProjectsPage />} />
+              <Route path={AppNavigationRoutes.PREVIEW} element={<CVPreviewPage />} />
+            </Route>
           </Route>
-        </Route>
 
-        <Route path={AppNavigationRoutes.PROJECTS} element={<ProjectsPage />} />
-        <Route path={AppNavigationRoutes.CVS} element={<CVsPage />} />
-        <Route path={AppNavigationRoutes.POSITIONS} element={<PositionsPage />} />
-        <Route path={AppNavigationRoutes.DEPARTMENTS} element={<DepartmentsPage />} />
-        <Route path={AppNavigationRoutes.LANGUAGES} element={<LanguagesPage />} />
-        <Route path={AppNavigationRoutes.SKILLS} element={<SkillsPage />} />
-      </Route>
-      <Route path="*" element={<Navigate to={`/${AppNavigationRoutes.EMPLOYEES}`} replace />} />
-    </Routes>
+          <Route path={AppNavigationRoutes.PROJECTS} element={<ProjectsPage />} />
+          <Route path={AppNavigationRoutes.CVS} element={<CVsPage />} />
+          <Route path={AppNavigationRoutes.POSITIONS} element={<PositionsPage />} />
+          <Route path={AppNavigationRoutes.DEPARTMENTS} element={<DepartmentsPage />} />
+          <Route path={AppNavigationRoutes.LANGUAGES} element={<LanguagesPage />} />
+          <Route path={AppNavigationRoutes.SKILLS} element={<SkillsPage />} />
+        </Route>
+        <Route path="*" element={<Navigate to={`/${AppNavigationRoutes.EMPLOYEES}`} replace />} />
+      </Routes>
+    </Layout>
   )
 }
 

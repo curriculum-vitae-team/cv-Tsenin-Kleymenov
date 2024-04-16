@@ -1,11 +1,10 @@
 import { FC } from 'react'
 import { Outlet, useParams } from 'react-router-dom'
-import { Container } from '@mui/material'
 
-import { HeaderAuthenticated } from '@/components/containers/HeaderAuthenticated/HeaderAuthenticated'
 import { AppBreadcrumbs } from '@/components/views/Breadcrumbs/Breadcrumbs'
-import { ContentWrapper } from '@/components/views/ContentWrapper/ContentWrapper'
 import { useUser } from '@/hooks/useUser'
+
+import { Content, ContentWrapper } from './AppLayoutAuth.styles'
 
 export const AppLayout: FC = () => {
   const { id } = useParams()
@@ -13,14 +12,11 @@ export const AppLayout: FC = () => {
   const currentId = id || user?.id
 
   return (
-    <>
-      <HeaderAuthenticated />
+    <Content>
+      <AppBreadcrumbs id={currentId} />
       <ContentWrapper>
-        <Container maxWidth="xl">
-          <AppBreadcrumbs id={currentId} />
-          <Outlet />
-        </Container>
+        <Outlet />
       </ContentWrapper>
-    </>
+    </Content>
   )
 }

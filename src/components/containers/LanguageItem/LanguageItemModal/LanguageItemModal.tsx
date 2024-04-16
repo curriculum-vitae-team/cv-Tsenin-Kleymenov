@@ -2,13 +2,12 @@ import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { useMutation } from '@apollo/client'
-import { Checkbox, Container, FormControlLabel } from '@mui/material'
+import { Container } from '@mui/material'
 
 import { Button } from '@/components/views/Button/Button'
 import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
 import { AppSelect } from '@/components/views/Select/Select'
 import { PROFICIENCY_ARRAY } from '@/constants/proficiency'
-import { DELETE_PROFILE_LANGUAGE } from '@/graphql/language/profile_language/deleteProfileLanguageMutation'
 import { UPDATE_PROFILE_LANGUAGE } from '@/graphql/language/profile_language/updateProfileLanguageMutation'
 
 import {

@@ -4,7 +4,6 @@ import {
   Table as MuiTable,
   TableBody,
   TableCell,
-  TableContainer,
   TableHead,
   TableRow,
   TableSortLabel
@@ -14,7 +13,7 @@ import get from 'lodash/get'
 import { LoadingOverlay } from '@/components/views/LoadingOverlay/LoadingOverlay'
 
 import { ICommonTableProps } from './CommonTable.interfaces'
-import { StyledTableRow } from './CommonTable.styles'
+import { StyledTableContainer, StyledTableRow } from './CommonTable.styles'
 
 const Table = <T extends { id: string }>({
   label,
@@ -55,7 +54,7 @@ const Table = <T extends { id: string }>({
 
   return (
     <LoadingOverlay active={isLoading}>
-      <TableContainer>
+      <StyledTableContainer>
         <MuiTable aria-label={`${label.toLowerCase()} table`}>
           <TableHead>
             <TableRow>
@@ -105,7 +104,7 @@ const Table = <T extends { id: string }>({
             )}
           </TableBody>
         </MuiTable>
-      </TableContainer>
+      </StyledTableContainer>
     </LoadingOverlay>
   )
 }
