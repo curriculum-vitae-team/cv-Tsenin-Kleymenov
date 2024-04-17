@@ -71,7 +71,7 @@ export const CreateCVModal: FC<ICVsModalProps> = ({ onClose }) => {
 
   return (
     <LoadingOverlay active={createCVLoading}>
-      <ModalWindow onClose={onClose} title="Create CV">
+      <ModalWindow onClose={onClose} title="createCv">
         <Container sx={{ minWidth: '500px' }}>
           <Input
             label={t('name')}

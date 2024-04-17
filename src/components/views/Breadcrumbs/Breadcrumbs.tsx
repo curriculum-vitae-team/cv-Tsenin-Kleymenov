@@ -31,7 +31,7 @@ export const AppBreadcrumbs: FC<IAppBreadcrumbsProps> = ({ id }) => {
     <Breadcrumbs sx={{ marginBottom: '16px' }} color="secondary" separator={<NavigateNextIcon />}>
       <BreadcrumbsLink to={AppNavigationRoutes.EMPLOYEES}>
         <HomeIcon sx={{ mr: 1 }} />
-        {t('Home')}
+        {t('home')}
       </BreadcrumbsLink>
       {pathnameArray.map((item, index, arr) => {
         if (item === id && index !== arr.length - 1) {

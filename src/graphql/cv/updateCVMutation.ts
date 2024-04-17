@@ -1,11 +1,12 @@
 import { gql } from '@apollo/client'
 
 export const UPDATE_CV = gql`
-  mutation UpdateCV($id: ID!, $cv: CvInput!) {
-    updateCv(id: $id, cv: $cv) {
+  mutation UpdateCV($cv: UpdateCvInput!) {
+    updateCv(cv: $cv) {
       id
       created_at
       name
+      education
       description
       user {
         id

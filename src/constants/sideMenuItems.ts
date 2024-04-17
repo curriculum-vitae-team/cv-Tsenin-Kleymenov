@@ -41,7 +41,7 @@ export const SIDE_MENU_ITEMS: IMenuItems = {
     icon: ManageAccountsIcon
   },
   Languages: {
-    text: 'Languages',
+    text: 'languages',
     route: AppNavigationRoutes.LANGUAGES,
     icon: TranslateIcon
   }

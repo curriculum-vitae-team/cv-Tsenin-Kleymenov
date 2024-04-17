@@ -5,7 +5,6 @@ import { useQuery } from '@apollo/client'
 import { Box, Divider, Typography } from '@mui/material'
 
 import { IUserResult } from '@/appTypes/IResult.interfaces'
-import { Button } from '@/components/views/Button/Button'
 import { SkillRow } from '@/components/views/SkillRow/SkillRow'
 import { MASTERY_ARRAY } from '@/constants/mastery'
 import { ISkillMastery } from '@/graphql/interfaces/ISkillMastery.interfaces'

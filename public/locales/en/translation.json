@@ -8,6 +8,7 @@
   "confirmRemoveLanguage": "Are you sure you want to remove language?",
   "confirmRemoveLanguageMessage": "If you remove the language, you will lose all the information related to it. Are you sure you want to remove the language?",
   "create": "Create",
+  "createCv": "Create CV",
   "cvs": "CVs",
   "delete": "Delete",
   "domain": "Domain",

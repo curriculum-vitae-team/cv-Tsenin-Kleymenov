@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
 import SearchIcon from '@mui/icons-material/Search'
-import { Box, Divider } from '@mui/material'
+import { Box } from '@mui/material'
 
 import { ICVResult } from '@/appTypes/IResult.interfaces'
 import { Button } from '@/components/views/Button/Button'
@@ -71,7 +71,6 @@ export const CVProjectsPage: FC = () => {
           </Button>
         )}
       </Box>
-      <Divider />
       <CommonTable<ICVProject>
         label="projects"
         data={requestSearch}

@@ -26,7 +26,9 @@ export const CVPage: FC = () => {
         locationState={AppNavigationRoutes.CVS}
         defaultValue={AppNavigationRoutes.DETAILS}
       />
-      <Card sx={{ p: 2 }}>
+      <Card
+        sx={{ p: 2, height: '100%', overflow: 'auto', display: 'flex', flexDirection: 'column' }}
+      >
         <Outlet />
       </Card>
     </>
