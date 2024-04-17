@@ -32,7 +32,11 @@ export const CVDropdown: FC<ICVDropdownProps> = ({ CV }) => {
 
   const handleCVDelete = (): void => {
     deleteCVMutation({
-      variables: { id: CV.id }
+      variables: {
+        cv: {
+          cvId: CV.id
+        }
+      }
     })
 
     toastMessage(t('successfullyDeleted'), TOAST_TYPES.success)

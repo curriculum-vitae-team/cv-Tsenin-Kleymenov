@@ -6,25 +6,18 @@ import SearchIcon from '@mui/icons-material/Search'
 import { Box } from '@mui/material'
 
 import { ICVResult } from '@/appTypes/IResult.interfaces'
-import { Button } from '@/components/views/Button/Button'
 import { CommonTable } from '@/components/views/CommonTable/CommonTable'
 import { InputWithIcon } from '@/components/views/Input/Input'
 import { CV } from '@/graphql/cv/CVQuery'
 import { ICVProject } from '@/graphql/interfaces/ICv.interfaces'
-import { useBooleanState } from '@/hooks/useBooleanState'
-import { useUser } from '@/hooks/useUser'
 
-import { CVProjectsModal } from './CVProjectsModal/CVProjectsModal'
 import { tableColumns } from './tableColumns'
 
 export const CVProjectsPage: FC = () => {
   const { id: CVId } = useParams()
 
-  const { isVisible, toggleVisibility } = useBooleanState()
-
   const [searchedName, setSearchedName] = useState<string>('')
 
-  const { user, isAdmin } = useUser()
   const {
     data: CVData,
     loading: CVLoading,
@@ -32,8 +25,6 @@ export const CVProjectsPage: FC = () => {
   } = useQuery<ICVResult>(CV, {
     variables: { id: CVId }
   })
-
-  const userCheck = CVData?.cv?.user?.id === user?.id
 
   const { t } = useTranslation()
 
@@ -65,11 +56,6 @@ export const CVProjectsPage: FC = () => {
           onChange={handleSearchUser}
           placeholder={t('search') as string}
         />
-        {(userCheck || isAdmin) && (
-          <Button sx={{ maxWidth: 150 }} variant="contained" onClick={toggleVisibility}>
-            {t('update')}
-          </Button>
-        )}
       </Box>
       <CommonTable<ICVProject>
         label="projects"
@@ -78,7 +64,6 @@ export const CVProjectsPage: FC = () => {
         isLoading={CVLoading}
         error={CVError}
       />
-      {isVisible && <CVProjectsModal onClose={toggleVisibility} CVData={CVData?.cv} />}
     </>
   )
 }

@@ -71,7 +71,6 @@ export const FORM_PROFILE_CVS_SCHEMA = yup.object().shape({
 export const FORM_PROJECT_SCHEMA = yup.object().shape({
   [FORM_PROJECT_KEYS.name]: yup.string().required('nameRequired'),
   [FORM_PROJECT_KEYS.internal_name]: yup.string().required('internalNameRequired'),
-  [FORM_PROJECT_KEYS.description]: yup.string().required('descriptionRequired'),
   [FORM_PROJECT_KEYS.domain]: yup.string().required('domainRequired'),
   [FORM_PROJECT_KEYS.team_size]: yup
     .number()
@@ -81,6 +80,9 @@ export const FORM_PROJECT_SCHEMA = yup.object().shape({
   [FORM_PROJECT_KEYS.start_date]: yup.date().required('startDateRequired'),
   [FORM_PROJECT_KEYS.end_date]: yup
     .date()
+    .notRequired()
+    .nullable()
+    .transform((curr, orig) => (orig === '' ? null : curr))
     .min(yup.ref(FORM_PROJECT_KEYS.start_date), 'endDateInvalid')
 })
 

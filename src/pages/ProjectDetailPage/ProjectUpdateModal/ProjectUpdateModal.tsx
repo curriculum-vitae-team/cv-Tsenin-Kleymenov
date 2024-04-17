@@ -43,16 +43,15 @@ export const ProjectUpdateModal: FC<IProjectUpdateModalProps> = ({ project, onCl
   const onSubmit: SubmitHandler<IProjectFormValues> = async formData => {
     await updateProjectMutation({
       variables: {
-        id: project?.project?.id,
         project: {
+          projectId: project?.project?.id,
           name: formData[FORM_PROJECT_KEYS.name],
           internal_name: formData[FORM_PROJECT_KEYS.internal_name],
           description: formData[FORM_PROJECT_KEYS.description],
           domain: formData[FORM_PROJECT_KEYS.domain],
           start_date: convertDate(formData[FORM_PROJECT_KEYS.start_date]),
           end_date: convertDate(formData[FORM_PROJECT_KEYS.end_date]),
-          team_size: formData[FORM_PROJECT_KEYS.team_size],
-          skillsIds: []
+          team_size: formData[FORM_PROJECT_KEYS.team_size]
         }
       }
     })

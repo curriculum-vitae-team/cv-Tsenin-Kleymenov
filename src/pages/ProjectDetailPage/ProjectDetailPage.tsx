@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
-import { Box, Divider } from '@mui/material'
+import { Box } from '@mui/material'
 
 import { Button } from '@/components/views/Button/Button'
 import { LoadingOverlay } from '@/components/views/LoadingOverlay/LoadingOverlay'
@@ -42,7 +42,6 @@ export const ProjectDetailPage: FC = () => {
           >
             {t('update')}
           </Button>
-          <Divider sx={{ my: 2 }} />
         </Box>
       )}
       <LoadingOverlay active={projectLoading}>

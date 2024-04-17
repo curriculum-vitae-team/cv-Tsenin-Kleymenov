@@ -27,7 +27,7 @@ export const ProfilePage: FC = () => {
         locationState={AppNavigationRoutes.EMPLOYEES}
         defaultValue={AppNavigationRoutes.PROFILE}
       />
-      <Card sx={{ p: 2, height: 'auto', overflow: 'auto' }}>
+      <Card sx={{ p: 2, height: '100%', overflow: 'auto' }}>
         <Outlet />
       </Card>
     </>
