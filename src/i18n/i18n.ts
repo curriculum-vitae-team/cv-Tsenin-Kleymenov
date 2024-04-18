@@ -28,7 +28,7 @@ i18n
       caches: ['cookie']
     },
     backend: {
-      loadPath: '/assets/locales/{{lng}}/translation.json'
+      loadPath: '/translations/{{lng}}.json'
     },
     interpolation: {
       escapeValue: false

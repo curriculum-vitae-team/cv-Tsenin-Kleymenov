@@ -9,6 +9,7 @@ import { FORM_PROFILE_CVS_SCHEMA } from '@/constants/schemaOptions'
 import { TOAST_TYPES } from '@/constants/toastTypes'
 import { CV } from '@/graphql/cv/CVQuery'
 import { UPDATE_CV } from '@/graphql/cv/updateCVMutation'
+import { useUser } from '@/hooks/useUser'
 import { toastMessage } from '@/utils/toastMessage'
 
 import { Button } from '../Button/Button'
@@ -18,6 +19,9 @@ import { ICVDetailItemProps, ICVDetailsFormValues } from './CVDetailItem.interfa
 
 export const CVDetailItem: FC<ICVDetailItemProps> = ({ CVData }) => {
   const { t } = useTranslation()
+
+  const { user, isAdmin } = useUser()
+  const userCheck = CVData?.user.id === user?.id
 
   const [updateCVMutation, { loading: updateCVLoading }] = useMutation(UPDATE_CV, {
     refetchQueries: [{ query: CV, variables: { id: CVData?.id } }]
@@ -77,21 +81,24 @@ export const CVDetailItem: FC<ICVDetailItemProps> = ({ CVData }) => {
           {...register(FORM_PROFILE_CVS_KEYS.education)}
         />
         <Input
+          multiline
+          rows={8}
           variant="outlined"
           label={t('description')}
           error={!!errors[FORM_PROFILE_CVS_KEYS.description]}
           helperText={t(errors?.[FORM_PROFILE_CVS_KEYS.description]?.message as string)}
           {...register(FORM_PROFILE_CVS_KEYS.description)}
         />
-
-        <Button
-          type="submit"
-          variant="contained"
-          loading={updateCVLoading}
-          disabled={!isDirty && isValid}
-        >
-          {t('update')}
-        </Button>
+        {(userCheck || isAdmin) && (
+          <Button
+            type="submit"
+            variant="contained"
+            loading={updateCVLoading}
+            disabled={!isDirty && isValid}
+          >
+            {t('update')}
+          </Button>
+        )}
       </form>
     </>
   )

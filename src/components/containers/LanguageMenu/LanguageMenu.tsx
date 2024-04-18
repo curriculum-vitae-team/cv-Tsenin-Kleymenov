@@ -39,8 +39,8 @@ export const LanguageMenu: FC = () => {
           horizontal: 'right'
         }}
       >
-        <MenuItem onClick={() => changeLanguage(LANGUAGES.EN)}>EN</MenuItem>
-        <MenuItem onClick={() => changeLanguage(LANGUAGES.RU)}>RU</MenuItem>
+        <MenuItem onClick={() => changeLanguage(LANGUAGES.EN)}>English</MenuItem>
+        <MenuItem onClick={() => changeLanguage(LANGUAGES.RU)}>Русский</MenuItem>
       </Menu>
     </LanguageMenuWrapper>
   )

@@ -31,11 +31,6 @@ export const CV_TABS: ITab[] = [
     path: AppNavigationRoutes.DETAILS
   },
   {
-    label: 'projects',
-    path: AppNavigationRoutes.PROJECTS
-  },
-
-  {
     label: 'preview',
     path: AppNavigationRoutes.PREVIEW
   }

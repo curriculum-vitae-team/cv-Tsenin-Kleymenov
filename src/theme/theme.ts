@@ -11,7 +11,7 @@ export const theme = responsiveFontSizes(
         fontSize: '1.5rem'
       },
       h5: {
-        fontSize: '16px'
+        fontSize: '1rem'
       }
     },
     palette: {

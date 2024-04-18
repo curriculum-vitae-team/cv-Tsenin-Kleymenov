@@ -3,13 +3,14 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { useMutation, useQuery } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Box, Grid, Typography } from '@mui/material'
+import { Box, Grid } from '@mui/material'
 
 import { IDepartmentResult, IPositionResult } from '@/appTypes/IResult.interfaces'
 import { EmployeeAvatarUpload } from '@/components/containers/EmployeeAvatarUpload/EmployeeAvatarUpload'
 import { Button } from '@/components/views/Button/Button'
 import { Input } from '@/components/views/Input/Input'
 import { LoadingOverlay } from '@/components/views/LoadingOverlay/LoadingOverlay'
+import { RowInfo } from '@/components/views/RowInfo/RowInfo'
 import { AppSelect } from '@/components/views/Select/Select'
 import { FORM_PROFILE_SCHEMA } from '@/constants/schemaOptions'
 import { TOAST_TYPES } from '@/constants/toastTypes'
@@ -27,7 +28,6 @@ import {
   IEmployeeProfileFormProps,
   IProfileFormValues
 } from './EmployeeProfileForm.interfaces'
-import { ProfileInfoItem } from './EmployeeProfileForm.styles'
 
 export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser }) => {
   const { user, isAdmin } = useUser()
@@ -102,29 +102,15 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
   }
 
   return (
-    <div>
+    <>
       <EmployeeAvatarUpload />
       <Box sx={{ margin: '20px 0' }}>
         <LoadingOverlay active={userLoading}>
-          <Typography>
-            {t('fullName')}:{' '}
-            <ProfileInfoItem>{`${currentUser?.profile.full_name || '-'}`}</ProfileInfoItem>
-          </Typography>
-          <Typography>
-            {t('email')}: <ProfileInfoItem>{`${currentUser?.email || '-'}`}</ProfileInfoItem>
-          </Typography>
-          <Typography>
-            {t('department')}:{' '}
-            <ProfileInfoItem>{`${currentUser?.department_name || '-'}`}</ProfileInfoItem>
-          </Typography>
-          <Typography>
-            {t('position')}:{' '}
-            <ProfileInfoItem>{`${currentUser?.position_name || '-'}`}</ProfileInfoItem>
-          </Typography>
-          <Typography>
-            {t('memberSince')}:{' '}
-            <ProfileInfoItem>{`${convertCreatedAtDate(currentUser?.created_at)}`}</ProfileInfoItem>
-          </Typography>
+          <RowInfo title="fullName" info={currentUser?.profile.full_name} />
+          <RowInfo title="email" info={currentUser?.email} />
+          <RowInfo title="department" info={currentUser?.department_name} />
+          <RowInfo title="position" info={currentUser?.position_name} />
+          <RowInfo title="memberSince" info={convertCreatedAtDate(currentUser?.created_at)} />
         </LoadingOverlay>
       </Box>
       {(userCheck || isAdmin) && (
@@ -183,6 +169,6 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
           </Grid>
         </form>
       )}
-    </div>
+    </>
   )
 }

@@ -86,6 +86,8 @@ export const CreateCVModal: FC<ICVsModalProps> = ({ onClose }) => {
             helperText={t(errors?.[FORM_CREATE_CV_KEYS.education]?.message as string)}
           />
           <Input
+            multiline
+            rows={4}
             label={t('description')}
             error={!!errors[FORM_CREATE_CV_KEYS.description]}
             {...register(FORM_CREATE_CV_KEYS.description)}

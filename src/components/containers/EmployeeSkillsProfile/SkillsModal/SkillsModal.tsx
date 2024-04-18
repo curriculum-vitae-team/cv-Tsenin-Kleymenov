@@ -102,12 +102,12 @@ export const SkillsModal: FC<ISkillsModalProps> = ({ userData, onClose }) => {
   }, [isSubmitSuccessful])
 
   return (
-    <ModalWindow onClose={onClose}>
+    <ModalWindow onClose={onClose} title="addSkill">
       <Container sx={{ minWidth: '500px' }}>
         <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
           <AppSelect
             variant="outlined"
-            label={t('skills')}
+            label={t('skill')}
             defaultValue=""
             loading={loadingSkills}
             items={filteredSkillsArray}
