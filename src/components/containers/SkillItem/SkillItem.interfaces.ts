@@ -1,6 +1,7 @@
+import { ISkillMastery } from '@/graphql/interfaces/ISkillMastery.interfaces'
+
 export interface ISkillItemProps {
-  skillName: string
-  skillMastery: string
+  skill: ISkillMastery
 }
 
 export interface IBadgeStyled {

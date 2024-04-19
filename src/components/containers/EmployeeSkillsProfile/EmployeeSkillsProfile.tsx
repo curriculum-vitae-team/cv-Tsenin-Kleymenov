@@ -5,12 +5,12 @@ import { useQuery } from '@apollo/client'
 import { Box, Divider, Typography } from '@mui/material'
 
 import { IUserResult } from '@/appTypes/IResult.interfaces'
+import { useDeleteModal } from '@/components/views/DeleteModal/hook/useDeleteModal'
 import { SkillRow } from '@/components/views/SkillRow/SkillRow'
-import { MASTERY_ARRAY } from '@/constants/mastery'
-import { ISkillMastery } from '@/graphql/interfaces/ISkillMastery.interfaces'
 import { USER } from '@/graphql/user/userQuery'
 import { useBooleanState } from '@/hooks/useBooleanState'
 import { useUser } from '@/hooks/useUser'
+import { groupedSkills } from '@/utils/groupData'
 
 import { SkillsModal } from './SkillsModal/SkillsModal'
 import { AddAction } from './EmployeeSkillsProfile.styles'
@@ -28,24 +28,21 @@ export const EmployeeSkillsProfile: FC = () => {
 
   const { t } = useTranslation()
 
-  const masteryObject = MASTERY_ARRAY.reduce((acc: { [key: string]: ISkillMastery[] }, item) => {
-    acc[item.name] =
-      userData?.user?.profile?.skills.filter(skill => skill.mastery === item.name) || []
+  const group = groupedSkills(userData?.user?.profile.skills ?? [])
 
-    return acc
-  }, {})
+  const { isDelete, toggleDelete } = useDeleteModal()
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
       {(userCheck || isAdmin) && (
-        <AddAction sx={{}} variant="contained" onClick={toggleVisibility}>
+        <AddAction variant="contained" onClick={toggleVisibility}>
           {t('addSkill')}
         </AddAction>
       )}
       <Divider sx={{ my: 2 }} />
       {userData?.user?.profile.skills.length ? (
-        Object.keys(masteryObject).map(key => {
-          return <SkillRow key={key} skills={masteryObject[key]} />
+        Object.entries(group).map(([category, skills], index) => {
+          return <SkillRow key={`${category}-${index}`} category={category} skills={skills} />
         })
       ) : (
         <Typography sx={{ my: 2 }} variant="h5">

@@ -1,8 +1,7 @@
 import { FC, ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Typography } from '@mui/material'
 
-import { DocumentItemTitle, Item } from './DocumentItem.styles'
+import { DocumentItemTitle, DocumentSubTitle, Item } from './DocumentItem.styles'
 
 interface IDocumentItemProps {
   key?: string
@@ -17,7 +16,7 @@ export const DocumentItem: FC<IDocumentItemProps> = ({ title, description, child
   return (
     <Item>
       <DocumentItemTitle>{t(title) ?? title}</DocumentItemTitle>
-      <Typography>{description ? description : children}</Typography>
+      <DocumentSubTitle>{description ? description : children}</DocumentSubTitle>
     </Item>
   )
 }

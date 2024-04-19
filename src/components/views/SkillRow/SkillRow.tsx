@@ -1,16 +1,19 @@
 import { FC } from 'react'
-import { Box } from '@mui/material'
 
 import { SkillItem } from '@/components/containers/SkillItem/SkillItem'
 
 import { ISkillRowProps } from './SkillRow.interfaces'
+import { CategoryTitle, SkillCard } from './SkillRow.styles'
 
-export const SkillRow: FC<ISkillRowProps> = ({ skills }) => {
+export const SkillRow: FC<ISkillRowProps> = ({ category, skills }) => {
   return (
-    <Box>
-      {skills.map(item => (
-        <SkillItem key={item.name} skillName={item.name} skillMastery={item.mastery} />
-      ))}
-    </Box>
+    <SkillCard>
+      <CategoryTitle>{category}</CategoryTitle>
+      <div>
+        {skills.map(skill => {
+          return <SkillItem key={skill.name} skill={skill} />
+        })}
+      </div>
+    </SkillCard>
   )
 }

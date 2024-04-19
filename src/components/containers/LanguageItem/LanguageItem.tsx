@@ -5,6 +5,8 @@ import { useQuery } from '@apollo/client'
 import { MenuItem, Typography } from '@mui/material'
 
 import { IUserResult } from '@/appTypes/IResult.interfaces'
+import DeleteModal from '@/components/views/DeleteModal/DeleteModal'
+import { useDeleteModal } from '@/components/views/DeleteModal/hook/useDeleteModal'
 import { PROFICIENCY_COLORS } from '@/constants/proficiency'
 import { ILanguageProficiency } from '@/graphql/interfaces/ILanguageProficiency.interfaces'
 import { USER } from '@/graphql/user/userQuery'
@@ -13,8 +15,8 @@ import { useUser } from '@/hooks/useUser'
 
 import { BasicMenu } from '../BasicMenu/BasicMenu'
 
+import { useDeleteLanguage } from './hook/useDeleteLanguage'
 import LanguageItemModal from './LanguageItemModal/LanguageItemModal'
-import LanguageItemDeleteModal from './LanguagesDeleteModal/LanguagesDeleteModal'
 import { ILanguageInfo, ILanguageItemProps } from './LanguageItem.interfaces'
 import { LanguageCard, LanguageItemContainer, ProficiencyBadge } from './LanguageItem.styles'
 
@@ -27,20 +29,24 @@ export const LanguageItem: FC<ILanguageItemProps> = ({ languageName, languagePro
   const userCheck = userId === user?.id
 
   const { isVisible, toggleVisibility } = useBooleanState()
+  const { isDelete, toggleDelete } = useDeleteModal()
 
-  const [isDelete, setIsDelete] = useState<boolean>(false)
   const [language, setLanguage] = useState<ILanguageInfo>({
     name: languageName,
     proficiency: languageProficiency
   })
 
-  const toggleDelete = (): void => {
-    setIsDelete(prev => !prev)
-  }
-
   const { data: userData } = useQuery<IUserResult>(USER, {
     variables: { id: userId }
   })
+
+  const { onSubmit, deleteProfileLangLoading } = useDeleteLanguage(
+    {
+      id: userId as string,
+      languageName: language.name
+    },
+    toggleDelete
+  )
 
   return (
     <>
@@ -72,11 +78,11 @@ export const LanguageItem: FC<ILanguageItemProps> = ({ languageName, languagePro
         />
       )}
       {isDelete && (
-        <LanguageItemDeleteModal
-          userData={{
-            id: userId as string,
-            name: language.name
-          }}
+        <DeleteModal
+          isLoading={deleteProfileLangLoading}
+          title={t('confirmRemoveLanguage')}
+          message={t('confirmRemoveLanguageMessage')}
+          onSubmit={onSubmit}
           onClose={toggleDelete}
         />
       )}

@@ -3,14 +3,15 @@ import { SKILLS_MASTERY } from '@/components/containers/EmployeeSkillsProfile/Em
 interface IMastery {
   id: string
   name: string
+  value?: number
 }
 
 export const MASTERY_ARRAY: IMastery[] = [
-  { id: SKILLS_MASTERY.NOVICE, name: SKILLS_MASTERY.NOVICE },
-  { id: SKILLS_MASTERY.ADVANCED, name: SKILLS_MASTERY.ADVANCED },
-  { id: SKILLS_MASTERY.COMPETENT, name: SKILLS_MASTERY.COMPETENT },
-  { id: SKILLS_MASTERY.PROFICIENT, name: SKILLS_MASTERY.PROFICIENT },
-  { id: SKILLS_MASTERY.EXPERT, name: SKILLS_MASTERY.EXPERT }
+  { id: SKILLS_MASTERY.NOVICE, name: SKILLS_MASTERY.NOVICE, value: 20 },
+  { id: SKILLS_MASTERY.ADVANCED, name: SKILLS_MASTERY.ADVANCED, value: 40 },
+  { id: SKILLS_MASTERY.COMPETENT, name: SKILLS_MASTERY.COMPETENT, value: 60 },
+  { id: SKILLS_MASTERY.PROFICIENT, name: SKILLS_MASTERY.PROFICIENT, value: 80 },
+  { id: SKILLS_MASTERY.EXPERT, name: SKILLS_MASTERY.EXPERT, value: 100 }
 ]
 
 interface IMasteryColors {

@@ -8,3 +8,8 @@ export const DocumentItemTitle = styled(Typography)(() => ({
 export const Item = styled('div')(() => ({
   marginBottom: '16px'
 }))
+
+export const DocumentSubTitle = styled(Typography)(() => ({
+  overflow: 'hidden',
+  textOverflow: 'ellipsis'
+}))

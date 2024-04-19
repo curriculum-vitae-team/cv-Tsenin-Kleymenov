@@ -4,6 +4,7 @@ import { ILanguage } from '@/graphql/interfaces/ILanguage.interfaces'
 import { IPosition } from '@/graphql/interfaces/IPosition.interfaces'
 import { IProject } from '@/graphql/interfaces/IProject.interfaces'
 import { ISkill } from '@/graphql/interfaces/ISkill.interfaces'
+import { ISkillMastery } from '@/graphql/interfaces/ISkillMastery.interfaces'
 import { IUser } from '@/graphql/interfaces/IUser.interfaces'
 
 export interface IUserResult {
@@ -52,4 +53,11 @@ export interface ICVResult {
 
 export interface ISkillCategories {
   skillCategories: string[]
+}
+
+export interface ICVSkillsResult {
+  cv: {
+    id: string
+    skills: ISkillMastery[]
+  }
 }

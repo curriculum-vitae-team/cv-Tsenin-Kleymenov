@@ -1,7 +1,7 @@
 import { ISkillMastery } from '@/graphql/interfaces/ISkillMastery.interfaces'
 
 export interface ISkillGroup {
-  [category: string]: string[]
+  [category: string]: ISkillMastery[]
 }
 
 export const groupedSkills = (skills: ISkillMastery[]): ISkillGroup => {
@@ -12,7 +12,7 @@ export const groupedSkills = (skills: ISkillMastery[]): ISkillGroup => {
       acc[category] = []
     }
 
-    acc[category].push(cur.name)
+    acc[category].push(cur)
 
     return acc
   }, {} as ISkillGroup)

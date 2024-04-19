@@ -6,33 +6,33 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { Container } from '@mui/material'
 
 import { ISkillCategories, ISkillsResult } from '@/appTypes/IResult.interfaces'
+import {
+  FORM_PROFILE_SKILLS_KEYS,
+  IProfileSkillFormValues
+} from '@/components/containers/EmployeeSkillsProfile/SkillsModal/SkillsModal.interfaces'
 import { Button } from '@/components/views/Button/Button'
 import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
 import { AppSelect } from '@/components/views/Select/Select'
 import { MASTERY_ARRAY } from '@/constants/mastery'
 import { FORM_PROFILE_SKILLS_SCHEMA } from '@/constants/schemaOptions'
 import { TOAST_TYPES } from '@/constants/toastTypes'
+import { ADD_CV_SKILL } from '@/graphql/cv/cvSkills/addCvSkillsMutation'
 import { SKILL_CATEGORIES } from '@/graphql/skill/categories/skillCategoriesQuery'
-import { ADD_PROFILE_SKILL } from '@/graphql/skill/profile_skill/addProfileSkillMutation'
 import { SKILLS } from '@/graphql/skills/skillsQuery'
 import { toastMessage } from '@/utils/toastMessage'
 
-import {
-  FORM_PROFILE_SKILLS_KEYS,
-  IProfileSkillFormValues,
-  ISkillsModalProps
-} from './SkillsModal.interfaces'
+import { ICVSkillsModalProps } from './CVSkillsModal.interfaces'
 
-export const SkillsModal: FC<ISkillsModalProps> = ({ userData, onClose }) => {
+export const CVSkillsModal: FC<ICVSkillsModalProps> = ({ cv, onClose }) => {
   const { loading: loadingSkills, data: skillsData } = useQuery<ISkillsResult>(SKILLS)
   const { loading: loadingSkillCategories, data: skillCategoriesData } =
     useQuery<ISkillCategories>(SKILL_CATEGORIES)
 
-  const [addProfileSkill, { loading: userLoading }] = useMutation(ADD_PROFILE_SKILL)
+  const [addCvSkill, { loading: userLoading }] = useMutation(ADD_CV_SKILL)
 
   const { t } = useTranslation()
 
-  const skillsNameArray = userData?.profile.skills.map(item => item.name)
+  const skillsNameArray = cv.skills.map(item => item.name)
   const filteredSkillsArray = skillsData?.skills
     .filter(element => !skillsNameArray?.includes(element.name))
     .map(skill => {
@@ -69,10 +69,10 @@ export const SkillsModal: FC<ISkillsModalProps> = ({ userData, onClose }) => {
   const watchCategory = watch(FORM_PROFILE_SKILLS_KEYS.category)
 
   const onSubmit: SubmitHandler<IProfileSkillFormValues> = async formData => {
-    await addProfileSkill({
+    await addCvSkill({
       variables: {
         skill: {
-          userId: userData?.id,
+          cvId: cv.id,
           name: formData[FORM_PROFILE_SKILLS_KEYS.skills],
           category: watchSkill ? watchCategory : '',
           mastery: formData[FORM_PROFILE_SKILLS_KEYS.mastery]
@@ -107,7 +107,6 @@ export const SkillsModal: FC<ISkillsModalProps> = ({ userData, onClose }) => {
           <AppSelect
             variant="outlined"
             label={t('skill')}
-            defaultValue=""
             loading={loadingSkills}
             items={filteredSkillsArray}
             error={!!errors[FORM_PROFILE_SKILLS_KEYS.skills]}
@@ -128,7 +127,6 @@ export const SkillsModal: FC<ISkillsModalProps> = ({ userData, onClose }) => {
             variant="outlined"
             label={t('mastery')}
             disabled={!!!watchSkill}
-            defaultValue=""
             items={MASTERY_ARRAY}
             error={!!errors[FORM_PROFILE_SKILLS_KEYS.mastery]}
             helperText={t(errors?.[FORM_PROFILE_SKILLS_KEYS.mastery]?.message as string)}
