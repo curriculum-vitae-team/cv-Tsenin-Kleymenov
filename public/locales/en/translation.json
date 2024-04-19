@@ -9,6 +9,8 @@
   "confirmRemoveLanguageMessage": "If you remove the language, you will lose all the information related to it. Are you sure you want to remove the language?",
   "confirmRemoveSkill": "Are you sure you want to remove skill?",
   "confirmRemoveSkillMessage": "If you remove the skill, you will lose all the information related to it. Are you sure you want to remove the skill?",
+  "confirmRemoveCv": "Are you sure you want to remove CV?",
+  "confirmRemoveCvMessage": "If you remove the CV, you will lose all the information related to it. Are you sure you want to remove the CV?",
   "create": "Create",
   "createCv": "Create CV",
   "cvs": "CVs",

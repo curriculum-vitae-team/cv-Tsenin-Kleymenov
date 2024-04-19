@@ -4,18 +4,17 @@ import { useQuery } from '@apollo/client'
 import { Logout } from '@mui/icons-material'
 import { Divider, Menu, Typography } from '@mui/material'
 
-import { IUserResult } from '@/appTypes/IResult.interfaces'
+import { IProfileResult } from '@/appTypes/IResult.interfaces'
 import { UserAvatar } from '@/components/views/UserAvatar/UserAvatar'
 import { UserMenuItem } from '@/components/views/UserMenuItem/UserMenuItem'
 import { USER_MENU_ITEMS } from '@/constants/userMenuItems'
 import { authService } from '@/graphql/auth/authService'
-import { FETCH_POLICY } from '@/graphql/fetchPolicy'
-import { USER } from '@/graphql/user/userQuery'
+import { PROFILE } from '@/graphql/profile/profileQuery'
 import { useMenu } from '@/hooks/useMenu'
 import { useUser } from '@/hooks/useUser'
 import { AppNavigationRoutes } from '@/router/paths'
 
-import { MenuContainer, PaperPropsUserMenu, UserMenuInfo } from './UserMenu.styles'
+import { MenuContainer, UserMenuInfo } from './UserMenu.styles'
 
 export const UserMenu: FC = () => {
   const { user } = useUser()
@@ -24,13 +23,12 @@ export const UserMenu: FC = () => {
 
   const { anchorEl, handleClick, handleClose } = useMenu()
 
-  const { data } = useQuery<IUserResult>(USER, {
-    variables: { id: user?.id },
-    fetchPolicy: FETCH_POLICY.cacheOnly
+  const { data } = useQuery<IProfileResult>(PROFILE, {
+    variables: { id: user?.id }
   })
 
-  const handleLogout = async (): Promise<void> => {
-    await authService.clearStorage()
+  const handleLogout = (): void => {
+    authService.clearStorage()
     navigate(`/${AppNavigationRoutes.LOGIN}`)
   }
 
@@ -38,17 +36,13 @@ export const UserMenu: FC = () => {
     <MenuContainer>
       <UserMenuInfo onClick={handleClick}>
         <Typography variant="h5">{data?.user.profile.full_name || data?.user.email}</Typography>
-        <UserAvatar user={data?.user} />
+        <UserAvatar profile={data?.user.profile} />
       </UserMenuInfo>
       <Menu
         anchorEl={anchorEl}
         open={!!anchorEl}
         onClose={handleClose}
         onClick={handleClose}
-        PaperProps={{
-          elevation: 0,
-          sx: PaperPropsUserMenu
-        }}
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >

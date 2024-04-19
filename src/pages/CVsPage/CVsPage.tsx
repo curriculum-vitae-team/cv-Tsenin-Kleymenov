@@ -40,6 +40,7 @@ export const CVsPage: FC = () => {
     [data?.cvs, deferredValue]
   )
 
+  console.log('🚀 ~ requestSearch:', requestSearch)
   return (
     <>
       <CvsTableToolBar>

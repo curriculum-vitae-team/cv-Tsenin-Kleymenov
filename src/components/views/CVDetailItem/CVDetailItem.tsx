@@ -64,42 +64,40 @@ export const CVDetailItem: FC<ICVDetailItemProps> = ({ CVData }) => {
   }
 
   return (
-    <>
-      <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
-        <Input
-          variant="outlined"
-          label={t('name')}
-          error={!!errors[FORM_PROFILE_CVS_KEYS.name]}
-          helperText={t(errors?.[FORM_PROFILE_CVS_KEYS.name]?.message as string)}
-          {...register(FORM_PROFILE_CVS_KEYS.name)}
-        />
-        <Input
-          variant="outlined"
-          label={t('education')}
-          error={!!errors[FORM_PROFILE_CVS_KEYS.education]}
-          helperText={t(errors?.[FORM_PROFILE_CVS_KEYS.education]?.message as string)}
-          {...register(FORM_PROFILE_CVS_KEYS.education)}
-        />
-        <Input
-          multiline
-          rows={8}
-          variant="outlined"
-          label={t('description')}
-          error={!!errors[FORM_PROFILE_CVS_KEYS.description]}
-          helperText={t(errors?.[FORM_PROFILE_CVS_KEYS.description]?.message as string)}
-          {...register(FORM_PROFILE_CVS_KEYS.description)}
-        />
-        {(userCheck || isAdmin) && (
-          <Button
-            type="submit"
-            variant="contained"
-            loading={updateCVLoading}
-            disabled={!isDirty && isValid}
-          >
-            {t('update')}
-          </Button>
-        )}
-      </form>
-    </>
+    <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
+      <Input
+        variant="outlined"
+        label={t('name')}
+        error={!!errors[FORM_PROFILE_CVS_KEYS.name]}
+        helperText={t(errors?.[FORM_PROFILE_CVS_KEYS.name]?.message as string)}
+        {...register(FORM_PROFILE_CVS_KEYS.name)}
+      />
+      <Input
+        variant="outlined"
+        label={t('education')}
+        error={!!errors[FORM_PROFILE_CVS_KEYS.education]}
+        helperText={t(errors?.[FORM_PROFILE_CVS_KEYS.education]?.message as string)}
+        {...register(FORM_PROFILE_CVS_KEYS.education)}
+      />
+      <Input
+        multiline
+        rows={8}
+        variant="outlined"
+        label={t('description')}
+        error={!!errors[FORM_PROFILE_CVS_KEYS.description]}
+        helperText={t(errors?.[FORM_PROFILE_CVS_KEYS.description]?.message as string)}
+        {...register(FORM_PROFILE_CVS_KEYS.description)}
+      />
+      {(userCheck || isAdmin) && (
+        <Button
+          type="submit"
+          variant="contained"
+          loading={updateCVLoading}
+          disabled={!isDirty && isValid}
+        >
+          {t('update')}
+        </Button>
+      )}
+    </form>
   )
 }

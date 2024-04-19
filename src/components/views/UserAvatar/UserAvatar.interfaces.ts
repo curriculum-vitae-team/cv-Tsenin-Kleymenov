@@ -1,6 +1,7 @@
-import { IUser } from '@/graphql/interfaces/IUser.interfaces'
+import { AvatarProps } from '@mui/material'
 
-export interface IUserAvatarProps {
-  handleClick?: (event: React.MouseEvent<HTMLElement>) => void
-  user?: IUser
+import { IProfileResult } from '@/appTypes/IResult.interfaces'
+
+export interface IUserAvatarProps extends AvatarProps {
+  profile?: IProfileResult['user']['profile']
 }

@@ -5,6 +5,8 @@ import { useMutation } from '@apollo/client'
 import { MenuItem } from '@mui/material'
 
 import { BasicMenu } from '@/components/containers/BasicMenu/BasicMenu'
+import DeleteModal from '@/components/views/DeleteModal/DeleteModal'
+import { useDeleteModal } from '@/components/views/DeleteModal/hook/useDeleteModal'
 import { TOAST_TYPES } from '@/constants/toastTypes'
 import { DELETE_CV } from '@/graphql/cv/deleteCVMutation'
 import { GET_CVS } from '@/graphql/cvs/cvsQuery'
@@ -20,14 +22,15 @@ export const CVDropdown: FC<ICVDropdownProps> = ({ CV }) => {
   const { user, isAdmin } = useUser()
   const userCheck = CV?.user?.id === user?.id
 
-  const [deleteCVMutation] = useMutation(DELETE_CV, {
+  const [deleteCVMutation, { loading: loadingCv }] = useMutation(DELETE_CV, {
     refetchQueries: [{ query: GET_CVS }]
   })
 
   const { t } = useTranslation()
 
   const handleOpenCv = (): void => {
-    navigate(`${CV?.id}/${AppNavigationRoutes.DETAILS}`, { state: AppNavigationRoutes.CVS })
+    const newUrl = `/${AppNavigationRoutes.CVS}/${CV?.id}/${AppNavigationRoutes.DETAILS}`
+    navigate(newUrl, { replace: true, state: AppNavigationRoutes.CVS })
   }
 
   const handleCVDelete = (): void => {
@@ -42,10 +45,23 @@ export const CVDropdown: FC<ICVDropdownProps> = ({ CV }) => {
     toastMessage(t('successfullyDeleted'), TOAST_TYPES.success)
   }
 
+  const { isDelete, toggleDelete } = useDeleteModal()
+
   return (
-    <BasicMenu>
-      <MenuItem onClick={handleOpenCv}>{t('details')}</MenuItem>
-      {(userCheck || isAdmin) && <MenuItem onClick={handleCVDelete}>{t('delete')}</MenuItem>}
-    </BasicMenu>
+    <>
+      <BasicMenu>
+        <MenuItem onClick={handleOpenCv}>{t('details')}</MenuItem>
+        {(userCheck || isAdmin) && <MenuItem onClick={toggleDelete}>{t('delete')}</MenuItem>}
+      </BasicMenu>
+      {isDelete && (
+        <DeleteModal
+          isLoading={loadingCv}
+          title={t('confirmRemoveCv')}
+          message={t('confirmRemoveCvMessage')}
+          onSubmit={handleCVDelete}
+          onClose={toggleDelete}
+        />
+      )}
+    </>
   )
 }

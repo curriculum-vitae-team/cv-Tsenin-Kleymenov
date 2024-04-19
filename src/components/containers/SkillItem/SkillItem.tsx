@@ -25,6 +25,7 @@ export const SkillItem: FC<ISkillItemProps> = ({ skill }) => {
   const { id: userId } = useParams()
   const { t } = useTranslation()
   const { user, isAdmin } = useUser()
+  const userCheck = userId === user?.id
 
   const [skillInfo, setSkillInfo] = useState(skill)
 
@@ -52,7 +53,7 @@ export const SkillItem: FC<ISkillItemProps> = ({ skill }) => {
           <LinearProgress variant="determinate" value={value} color={color} />
           <SkillName>{skill.name}</SkillName>
         </SkillInfo>
-        {(user || isAdmin) && (
+        {(userCheck || isAdmin) && (
           <BasicMenu>
             <MenuItem onClick={toggleVisibility}>{t('update')}</MenuItem>
             <MenuItem onClick={toggleDelete}>{t('remove')}</MenuItem>

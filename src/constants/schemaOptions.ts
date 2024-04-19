@@ -29,25 +29,17 @@ export const FORM_EMPLOYEES_SCHEMA = yup.object({
   [FORM_EMPLOYEES_KEYS.first_name]: yup
     .string()
     .matches(/^([^0-9]*)$/, 'firstNameNoNumbers')
-    .matches(/^\S+$/, 'firstNameNoSpaces')
-    .required('First nameRequired'),
+    .required('firstNameRequired'),
   [FORM_EMPLOYEES_KEYS.last_name]: yup
     .string()
     .matches(/^([^0-9]*)$/, 'lastNameNoNumbers')
-    .matches(/^\S+$/, 'lastNameNoSpaces')
-    .required('Last nameRequired'),
+    .required('lastNameRequired'),
   [FORM_EMPLOYEES_KEYS.role]: yup.string().required('roleRequired')
 })
 
 export const FORM_PROFILE_SCHEMA = yup.object().shape({
-  [FORM_PROFILE_KEYS.firstName]: yup
-    .string()
-    .matches(/^([^0-9]*)$/, 'firstNameNoNumbers')
-    .matches(/^\S+$/, 'firstNameNoSpaces'),
-  [FORM_PROFILE_KEYS.lastName]: yup
-    .string()
-    .matches(/^([^0-9]*)$/, 'lastNameNoNumbers')
-    .matches(/^\S+$/, 'lastNameNoSpaces'),
+  [FORM_PROFILE_KEYS.firstName]: yup.string().matches(/^([^0-9]*)$/, 'firstNameNoNumbers'),
+  [FORM_PROFILE_KEYS.lastName]: yup.string().matches(/^([^0-9]*)$/, 'lastNameNoNumbers'),
   [FORM_PROFILE_KEYS.department]: yup.string().required('departmentRequired'),
   [FORM_PROFILE_KEYS.position]: yup.string().required('positionRequired')
 })

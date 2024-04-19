@@ -58,6 +58,21 @@ export interface ISkillCategories {
 export interface ICVSkillsResult {
   cv: {
     id: string
+    user?: {
+      id: string
+    }
     skills: ISkillMastery[]
+  }
+}
+
+export interface IProfileResult {
+  user: {
+    id: string
+    email: string
+    profile: {
+      id: string
+      full_name: string
+      avatar: string
+    }
   }
 }

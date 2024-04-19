@@ -18,12 +18,10 @@ export const CVDetailsPage: FC = () => {
   })
 
   return (
-    <>
-      <LoadingOverlay active={CVLoading}>
-        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-          <CVDetailItem CVData={CVData?.cv} />
-        </Box>
-      </LoadingOverlay>
-    </>
+    <LoadingOverlay active={CVLoading}>
+      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+        <CVDetailItem CVData={CVData?.cv} />
+      </Box>
+    </LoadingOverlay>
   )
 }

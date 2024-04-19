@@ -1,4 +1,4 @@
-import { styled, TableContainer, TableRow } from '@mui/material'
+import { styled, TableCell, TableContainer, TableRow } from '@mui/material'
 
 export const StyledTableRow = styled(TableRow)(() => ({
   '&:nth-of-type(odd)': {
@@ -12,4 +12,11 @@ export const StyledTableRow = styled(TableRow)(() => ({
 export const StyledTableContainer = styled(TableContainer)(() => ({
   overflow: 'auto',
   height: '100%'
+}))
+
+export const StyledTableCell = styled(TableCell)(() => ({
+  whiteSpace: 'nowrap',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  maxWidth: '200px'
 }))

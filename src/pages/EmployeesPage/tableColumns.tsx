@@ -7,7 +7,15 @@ export const tableColumns: IColumn<IUser>[] = [
   {
     id: 1,
     header: '',
-    render: item => <UserAvatar user={item} />,
+    render: item => (
+      <UserAvatar
+        profile={{
+          avatar: item.profile.avatar ?? '',
+          full_name: item.profile.full_name ?? '',
+          id: item.profile.id
+        }}
+      />
+    ),
     sortable: false
   },
   {

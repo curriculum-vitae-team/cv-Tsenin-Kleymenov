@@ -13,7 +13,7 @@ import get from 'lodash/get'
 import { LoadingOverlay } from '@/components/views/LoadingOverlay/LoadingOverlay'
 
 import { ICommonTableProps } from './CommonTable.interfaces'
-import { StyledTableContainer, StyledTableRow } from './CommonTable.styles'
+import { StyledTableCell, StyledTableContainer, StyledTableRow } from './CommonTable.styles'
 
 const Table = <T extends { id: string }>({
   label,
@@ -90,13 +90,13 @@ const Table = <T extends { id: string }>({
                 <StyledTableRow key={item.id}>
                   {tableColumns.map(column => {
                     return (
-                      <TableCell key={column.id}>
+                      <StyledTableCell key={column.id}>
                         {column.render
                           ? column.render(item)
                           : column.field &&
                             typeof get(item, column.field) !== 'object' &&
                             get(item, column.field)}
-                      </TableCell>
+                      </StyledTableCell>
                     )
                   })}
                 </StyledTableRow>

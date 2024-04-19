@@ -1,18 +1,14 @@
 import { FC } from 'react'
 
+import { useUser } from '@/hooks/useUser'
 import { getFirstChars } from '@/utils/getFirstChar'
 
 import { IUserAvatarProps } from './UserAvatar.interfaces'
 import { Avatar } from './UserAvatar.styles'
 
-export const UserAvatar: FC<IUserAvatarProps> = ({ handleClick, user }) => {
+export const UserAvatar: FC<IUserAvatarProps> = ({ profile }) => {
+  const { user } = useUser()
   return (
-    <>
-      {user?.profile.avatar ? (
-        <Avatar onClick={handleClick} src={user?.profile.avatar} />
-      ) : (
-        <Avatar>{getFirstChars(user?.profile?.full_name || user?.email)}</Avatar>
-      )}
-    </>
+    <Avatar src={profile?.avatar ?? ''}>{getFirstChars(profile?.full_name ?? user?.email)}</Avatar>
   )
 }
