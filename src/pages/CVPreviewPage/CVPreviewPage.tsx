@@ -16,7 +16,7 @@ import { prepareHtml } from '@/utils/prepareHtml'
 
 import { Container, Document, ExportButton } from './CVPreviewPage.styles'
 
-export const CVPreviewPage: FC = () => {
+const CVPreviewPage: FC = () => {
   const { id: CVId } = useParams()
 
   const componentRef = useRef<HTMLDivElement | null>(null)
@@ -96,3 +96,5 @@ export const CVPreviewPage: FC = () => {
     </Document>
   )
 }
+
+export default CVPreviewPage

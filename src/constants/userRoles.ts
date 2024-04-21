@@ -1,6 +1,6 @@
 export enum ROLE {
-  admin = 'admin',
-  employee = 'employee'
+  admin = 'Admin',
+  employee = 'Employee'
 }
 
 export const ROLE_ARRAY = [

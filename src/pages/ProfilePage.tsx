@@ -6,7 +6,7 @@ import { NavigationTabs } from '@/components/views/NavigationTabs/NavigationTabs
 import { PROFILE_TABS } from '@/constants/tabs'
 import { AppNavigationRoutes } from '@/router/paths'
 
-export const ProfilePage: FC = () => {
+const ProfilePage: FC = () => {
   const location = useLocation()
   const navigate = useNavigate()
 
@@ -33,3 +33,5 @@ export const ProfilePage: FC = () => {
     </>
   )
 }
+
+export default ProfilePage

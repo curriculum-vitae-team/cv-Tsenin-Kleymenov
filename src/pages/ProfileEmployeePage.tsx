@@ -7,7 +7,7 @@ import { EmployeeProfileForm } from '@/components/containers/EmployeeProfileForm
 import { LoadingOverlay } from '@/components/views/LoadingOverlay/LoadingOverlay'
 import { USER } from '@/graphql/user/userQuery'
 
-export const ProfileEmployeePage: FC = () => {
+const ProfileEmployeePage: FC = () => {
   const { id } = useParams<string>()
 
   const { loading: loadingUser, data: userData } = useQuery<IUserResult>(USER, {
@@ -20,3 +20,5 @@ export const ProfileEmployeePage: FC = () => {
     </LoadingOverlay>
   )
 }
+
+export default ProfileEmployeePage

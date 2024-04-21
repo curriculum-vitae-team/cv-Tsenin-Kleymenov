@@ -6,7 +6,7 @@ import { useUser } from '@/hooks/useUser'
 
 import { Content, ContentWrapper } from './AppLayoutAuth.styles'
 
-export const AppLayout: FC = () => {
+const AppLayout: FC = () => {
   const { id } = useParams()
   const { user } = useUser()
   const currentId = id || user?.id
@@ -20,3 +20,5 @@ export const AppLayout: FC = () => {
     </Content>
   )
 }
+
+export default AppLayout

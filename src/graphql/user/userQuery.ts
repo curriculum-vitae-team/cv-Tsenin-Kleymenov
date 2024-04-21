@@ -89,3 +89,15 @@ export const USER = gql`
     }
   }
 `
+
+export const USER_FOR_BREADCRUMBS = gql`
+  query User($id: ID!) {
+    user(userId: $id) {
+      id
+      email
+      profile {
+        full_name
+      }
+    }
+  }
+`

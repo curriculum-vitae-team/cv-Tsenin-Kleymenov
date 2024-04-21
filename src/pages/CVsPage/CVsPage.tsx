@@ -16,18 +16,16 @@ import { CreateCVModal } from '@/pages/CVsPage/CreateCVModal/CreateCVModal'
 import { CvsTableToolBar } from './CVsPage.styles'
 import { tableColumns } from './tableColumns'
 
-export const CVsPage: FC = () => {
+const CVsPage: FC = () => {
   const { isVisible, toggleVisibility } = useBooleanState()
 
   const [searchedName, setSearchedName] = useState<string>('')
   const deferredValue = useDeferredValue(searchedName)
-
   const { data, loading, error } = useQuery<ICVsResult>(GET_CVS, {
-    fetchPolicy: FETCH_POLICY.networkOnly
+    fetchPolicy: FETCH_POLICY.NETWORK_ONLY
   })
 
   const { t } = useTranslation()
-
   const handleSearchUser = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setSearchedName(event.target.value)
   }
@@ -40,7 +38,6 @@ export const CVsPage: FC = () => {
     [data?.cvs, deferredValue]
   )
 
-  console.log('🚀 ~ requestSearch:', requestSearch)
   return (
     <>
       <CvsTableToolBar>
@@ -67,3 +64,5 @@ export const CVsPage: FC = () => {
     </>
   )
 }
+
+export default CVsPage

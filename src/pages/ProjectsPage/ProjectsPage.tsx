@@ -16,7 +16,7 @@ import { useUser } from '@/hooks/useUser'
 import { ProjectCreateModal } from './ProjectCreateModal/ProjectCreateModal'
 import { tableColumns } from './tableColumns'
 
-export const ProjectsPage: FC = () => {
+const ProjectsPage: FC = () => {
   const { isAdmin } = useUser()
 
   const { isVisible, toggleVisibility } = useBooleanState()
@@ -72,3 +72,5 @@ export const ProjectsPage: FC = () => {
     </>
   )
 }
+
+export default ProjectsPage

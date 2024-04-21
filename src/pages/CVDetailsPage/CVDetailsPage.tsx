@@ -9,7 +9,7 @@ import { LoadingOverlay } from '@/components/views/LoadingOverlay/LoadingOverlay
 import { CV } from '@/graphql/cv/CVQuery'
 import { FETCH_POLICY } from '@/graphql/fetchPolicy'
 
-export const CVDetailsPage: FC = () => {
+const CVDetailsPage: FC = () => {
   const { id: CVId } = useParams()
 
   const { data: CVData, loading: CVLoading } = useQuery<ICVResult>(CV, {
@@ -25,3 +25,5 @@ export const CVDetailsPage: FC = () => {
     </LoadingOverlay>
   )
 }
+
+export default CVDetailsPage

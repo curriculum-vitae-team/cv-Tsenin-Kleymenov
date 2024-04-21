@@ -7,7 +7,7 @@ import HomeIcon from '@mui/icons-material/Home'
 import NavigateNextIcon from '@mui/icons-material/NavigateNext'
 import { Breadcrumbs } from '@mui/material'
 
-import { USER } from '@/graphql/user/userQuery'
+import { USER_FOR_BREADCRUMBS } from '@/graphql/user/userQuery'
 import { AppNavigationRoutes } from '@/router/paths'
 
 import { IAppBreadcrumbsProps } from './Breadcrumbs.interfaces'
@@ -17,7 +17,7 @@ import { BreadcrumbsQuery } from './queries'
 export const AppBreadcrumbs: FC<IAppBreadcrumbsProps> = ({ id }) => {
   const location = useLocation()
 
-  const { data } = useQuery(BreadcrumbsQuery[location.state] || USER, {
+  const { data } = useQuery(BreadcrumbsQuery[location.state] || USER_FOR_BREADCRUMBS, {
     variables: { id }
   })
 

@@ -13,7 +13,7 @@ import { useUser } from '@/hooks/useUser'
 import { ProjectDetailItem } from './ProjectDetailItem/ProjectDetailItem'
 import { ProjectUpdateModal } from './ProjectUpdateModal/ProjectUpdateModal'
 
-export const ProjectDetailPage: FC = () => {
+const ProjectDetailPage: FC = () => {
   const { id: projectId } = useParams()
 
   const { isAdmin } = useUser()
@@ -51,3 +51,5 @@ export const ProjectDetailPage: FC = () => {
     </>
   )
 }
+
+export default ProjectDetailPage

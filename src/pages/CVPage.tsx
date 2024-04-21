@@ -6,7 +6,7 @@ import { NavigationTabs } from '@/components/views/NavigationTabs/NavigationTabs
 import { CV_TABS } from '@/constants/tabs'
 import { AppNavigationRoutes } from '@/router/paths'
 
-export const CVPage: FC = () => {
+const CVPage: FC = () => {
   const location = useLocation()
   const navigate = useNavigate()
 
@@ -34,3 +34,5 @@ export const CVPage: FC = () => {
     </>
   )
 }
+
+export default CVPage
