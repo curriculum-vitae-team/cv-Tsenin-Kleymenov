@@ -48,7 +48,7 @@ export const UserMenu: FC = () => {
     settings: {
       text: 'settings',
       onClick: () => {
-        navigate(`/${baseProfileRoute}/${AppNavigationRoutes.SETTINGS}`)
+        navigate(`/${AppNavigationRoutes.SETTINGS}`)
       },
       icon: Settings
     }

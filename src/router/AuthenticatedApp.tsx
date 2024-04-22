@@ -1,6 +1,8 @@
 import { FC, lazy } from 'react'
 import { Navigate, Outlet, Route, Routes } from 'react-router'
 
+import SettingsPage from '@/pages/SettingsPage/SettingsPage'
+
 import { AppNavigationRoutes } from './paths'
 
 const EmployeesPage = lazy(() => import('@/pages/EmployeesPage/EmployeesPage'))
@@ -63,6 +65,7 @@ const AuthenticatedApp: FC = () => {
           <Route path={AppNavigationRoutes.DEPARTMENTS} element={<DepartmentsPage />} />
           <Route path={AppNavigationRoutes.LANGUAGES} element={<LanguagesPage />} />
           <Route path={AppNavigationRoutes.SKILLS} element={<SkillsPage />} />
+          <Route path={AppNavigationRoutes.SETTINGS} element={<SettingsPage />} />
         </Route>
         <Route path="*" element={<Navigate to={`/${AppNavigationRoutes.EMPLOYEES}`} replace />} />
       </Routes>
