@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom'
 import { useMutation, useQuery } from '@apollo/client'
 import CloseIcon from '@mui/icons-material/Close'
 import FileUploadIcon from '@mui/icons-material/FileUpload'
-import { Avatar, Box, Grid, IconButton, Typography } from '@mui/material'
+import { Box, Grid, IconButton, Typography } from '@mui/material'
 
 import { IUserResult } from '@/appTypes/IResult.interfaces'
 import { EmployeeAvatarAlert } from '@/components/views/EmployeeAvatarAlert/EmployeeAvatarAlert'
@@ -19,7 +19,7 @@ import { convertBase64 } from '@/utils/convertBase64'
 import { getFirstChars } from '@/utils/getFirstChar'
 
 import { ErrorUploadMessage } from './ErrorUploadMessage/ErrorUploadMessage'
-import { AvatarWrapper, DropZone } from './EmployeeAvatarUpload.styles'
+import { AvatarWrapper, DropZone, EmployeeAvatar } from './EmployeeAvatarUpload.styles'
 
 export const EmployeeAvatarUpload: FC = () => {
   const { id: userId } = useParams()
@@ -79,7 +79,7 @@ export const EmployeeAvatarUpload: FC = () => {
         <AvatarWrapper>
           {userData?.user.profile.avatar ? (
             <>
-              <Avatar src={userData?.user.profile.avatar} sx={{ width: 200, height: 200 }} />
+              <EmployeeAvatar src={userData?.user.profile.avatar} />
               {userCheck && (
                 <IconButton onClick={handleFileRemove}>
                   <CloseIcon />
@@ -87,13 +87,13 @@ export const EmployeeAvatarUpload: FC = () => {
               )}
             </>
           ) : (
-            <Avatar sx={{ width: 200, height: 200 }}>
+            <EmployeeAvatar>
               <LoadingOverlay active={uploadLoading} position="static">
                 <Typography variant="h3">
                   {getFirstChars(userData?.user.profile.full_name || userData?.user.email)}
                 </Typography>
               </LoadingOverlay>
-            </Avatar>
+            </EmployeeAvatar>
           )}
         </AvatarWrapper>
       </Grid>

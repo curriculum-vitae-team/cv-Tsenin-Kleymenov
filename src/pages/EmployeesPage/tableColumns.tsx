@@ -14,6 +14,7 @@ export const tableColumns: IColumn<IUser>[] = [
           full_name: item.profile.full_name ?? '',
           id: item.profile.id
         }}
+        style={{ backgroundColor: '#bdbdbd' }}
       />
     ),
     sortable: false

@@ -4,8 +4,19 @@ import { Loader } from '@/components/views/Loader/Loader'
 
 import { ILoadingOverlayProps } from './LoadingOverlay.interfaces'
 
-export const LoadingOverlay: FC<ILoadingOverlayProps> = ({ active, position, children }) => {
+export const LoadingOverlay: FC<ILoadingOverlayProps> = ({
+  active,
+  position,
+  children,
+  ...props
+}) => {
   return (
-    <>{active ? <Loader sx={{ position: `${position}` }} color="primary" /> : <>{children}</>} </>
+    <>
+      {active ? (
+        <Loader sx={{ position: `${position}` }} color="primary" {...props} />
+      ) : (
+        <>{children}</>
+      )}
+    </>
   )
 }

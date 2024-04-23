@@ -1,4 +1,4 @@
-import { Box, Paper, styled } from '@mui/material'
+import { Avatar, Box, Paper, styled } from '@mui/material'
 
 export const DropZone = styled(Paper)({
   '&:hover': {
@@ -12,3 +12,8 @@ export const AvatarWrapper = styled(Box)({
   justifyContent: 'flex-start',
   position: 'relative'
 })
+
+export const EmployeeAvatar = styled(Avatar)(() => ({
+  width: 200,
+  height: 200
+}))
