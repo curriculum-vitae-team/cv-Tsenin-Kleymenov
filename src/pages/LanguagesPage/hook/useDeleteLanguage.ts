@@ -3,22 +3,22 @@ import { useMutation } from '@apollo/client'
 
 import { IUseDeleteModal } from '@/appTypes/IBaseModalProps.interfaces'
 import { TOAST_TYPES } from '@/constants/toastTypes'
-import { DELETE_CV } from '@/graphql/cv/deleteCVMutation'
-import { GET_CVS } from '@/graphql/cvs/cvsQuery'
+import { DELETE_LANGUAGE } from '@/graphql/language/deleteLanguageMutation'
+import { LANGUAGES } from '@/graphql/languages/languagesQuery'
 import { toastMessage } from '@/utils/toastMessage'
 
-export const useDeleteCV = (cvId: string, onClose: () => void): IUseDeleteModal => {
+export const useDeleteLanguage = (languageId: string, onClose: () => void): IUseDeleteModal => {
   const { t } = useTranslation()
 
-  const [deleteCVMutation, { loading }] = useMutation(DELETE_CV, {
-    refetchQueries: [{ query: GET_CVS }]
+  const [deleteLanguageMutation, { loading }] = useMutation(DELETE_LANGUAGE, {
+    refetchQueries: [{ query: LANGUAGES }]
   })
 
   const onSubmit = async (): Promise<void> => {
-    await deleteCVMutation({
+    await deleteLanguageMutation({
       variables: {
-        cv: {
-          cvId
+        language: {
+          languageId
         }
       }
     })

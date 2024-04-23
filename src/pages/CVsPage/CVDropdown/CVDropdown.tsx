@@ -26,7 +26,7 @@ export const CVDropdown: FC<ICVDropdownProps> = ({ CV }) => {
     navigate(newUrl, { replace: true, state: AppNavigationRoutes.CVS })
   }
 
-  const { onSubmit, loadingCv } = useDeleteCV(CV.id, toggleDelete)
+  const { onSubmit, loading: loadingCv } = useDeleteCV(CV.id, toggleDelete)
 
   return (
     <>

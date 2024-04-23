@@ -40,7 +40,7 @@ export const LanguageItem: FC<ILanguageItemProps> = ({ languageName, languagePro
     variables: { id: userId }
   })
 
-  const { onSubmit, deleteProfileLangLoading } = useDeleteLanguage(
+  const { onSubmit, loading: deleteProfileLangLoading } = useDeleteLanguage(
     {
       id: userId as string,
       languageName: language.name

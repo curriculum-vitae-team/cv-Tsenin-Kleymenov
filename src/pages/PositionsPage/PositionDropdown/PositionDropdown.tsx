@@ -1,16 +1,15 @@
 import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useMutation } from '@apollo/client'
 import { Box, MenuItem } from '@mui/material'
 
 import { BasicMenu } from '@/components/containers/BasicMenu/BasicMenu'
-import { TOAST_TYPES } from '@/constants/toastTypes'
-import { DELETE_POSITION } from '@/graphql/position/deletePositionMutation'
-import { POSITIONS } from '@/graphql/positions/positionsQuery'
+import DeleteModal from '@/components/views/DeleteModal/DeleteModal'
+import { useDeleteModal } from '@/components/views/DeleteModal/hook/useDeleteModal'
 import { useBooleanState } from '@/hooks/useBooleanState'
 import { useUser } from '@/hooks/useUser'
 import { PositionUpdateModal } from '@/pages/PositionsPage/PositionUpdateModal/PositionUpdateModal'
-import { toastMessage } from '@/utils/toastMessage'
+
+import { useDeletePosition } from '../hook/useDeletePosition'
 
 import { IPositionDropdownProps } from './PositionDropdown.interfaces'
 
@@ -19,33 +18,30 @@ export const PositionDropdown: FC<IPositionDropdownProps> = ({ position }) => {
 
   const { isVisible, toggleVisibility } = useBooleanState()
 
-  const [deletePositionMutation] = useMutation(DELETE_POSITION, {
-    refetchQueries: [{ query: POSITIONS }]
-  })
-
   const { t } = useTranslation()
 
-  const handlePositionDelete = (): void => {
-    deletePositionMutation({
-      variables: {
-        position: {
-          positionId: position.id
-        }
-      }
-    })
+  const { isDelete, toggleDelete } = useDeleteModal()
 
-    toastMessage(t('successfullyDeleted'), TOAST_TYPES.success)
-  }
+  const { onSubmit, loading: loadingPosition } = useDeletePosition(position.id, toggleDelete)
 
   return (
     <Box style={{ display: 'flex', justifyContent: 'flex-end' }}>
       {isAdmin && (
         <BasicMenu>
           <MenuItem onClick={toggleVisibility}>{t('update')}</MenuItem>
-          <MenuItem onClick={handlePositionDelete}>{t('delete')}</MenuItem>
+          <MenuItem onClick={toggleDelete}>{t('delete')}</MenuItem>
         </BasicMenu>
       )}
       {isVisible && <PositionUpdateModal position={position} onClose={toggleVisibility} />}
+      {isDelete && (
+        <DeleteModal
+          isLoading={loadingPosition}
+          title={t('confirmRemovePosition')}
+          message={t('confirmRemovePositionMessage')}
+          onSubmit={onSubmit}
+          onClose={toggleDelete}
+        />
+      )}
     </Box>
   )
 }

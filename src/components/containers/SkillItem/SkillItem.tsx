@@ -35,7 +35,7 @@ export const SkillItem: FC<ISkillItemProps> = ({ skill }) => {
   const { isVisible, toggleVisibility } = useBooleanState()
   const { isDelete, toggleDelete } = useDeleteModal()
 
-  const { onSubmit, deleteProfileSkillLoading } = useDeleteSkill(
+  const { onSubmit, loading: deleteProfileSkillLoading } = useDeleteSkill(
     {
       id: userId as string,
       skillName: skill.name

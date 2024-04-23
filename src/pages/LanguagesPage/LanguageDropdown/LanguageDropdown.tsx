@@ -1,16 +1,15 @@
 import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useMutation } from '@apollo/client'
 import { Box, MenuItem } from '@mui/material'
 
 import { BasicMenu } from '@/components/containers/BasicMenu/BasicMenu'
-import { TOAST_TYPES } from '@/constants/toastTypes'
-import { DELETE_LANGUAGE } from '@/graphql/language/deleteLanguageMutation'
-import { LANGUAGES } from '@/graphql/languages/languagesQuery'
+import DeleteModal from '@/components/views/DeleteModal/DeleteModal'
+import { useDeleteModal } from '@/components/views/DeleteModal/hook/useDeleteModal'
 import { useBooleanState } from '@/hooks/useBooleanState'
 import { useUser } from '@/hooks/useUser'
 import { LanguageUpdateModal } from '@/pages/LanguagesPage/LanguageUpdateModal/LanguageUpdateModal'
-import { toastMessage } from '@/utils/toastMessage'
+
+import { useDeleteLanguage } from '../hook/useDeleteLanguage'
 
 import { ILanguageDropdownProps } from './LanguageDropdown.interfaces'
 
@@ -19,33 +18,30 @@ export const LanguageDropdown: FC<ILanguageDropdownProps> = ({ language }) => {
 
   const { isVisible, toggleVisibility } = useBooleanState()
 
-  const [deleteLanguageMutation] = useMutation(DELETE_LANGUAGE, {
-    refetchQueries: [{ query: LANGUAGES }]
-  })
-
   const { t } = useTranslation()
 
-  const handleLanguageDelete = (): void => {
-    deleteLanguageMutation({
-      variables: {
-        language: {
-          languageId: language.id
-        }
-      }
-    })
+  const { isDelete, toggleDelete } = useDeleteModal()
 
-    toastMessage(t('successfullyDeleted'), TOAST_TYPES.success)
-  }
+  const { onSubmit, loading: loadingLanguage } = useDeleteLanguage(language.id, toggleDelete)
 
   return (
     <Box style={{ display: 'flex', justifyContent: 'flex-end' }}>
       {isAdmin && (
         <BasicMenu>
           <MenuItem onClick={toggleVisibility}>{t('update')}</MenuItem>
-          <MenuItem onClick={handleLanguageDelete}>{t('delete')}</MenuItem>
+          <MenuItem onClick={toggleDelete}>{t('delete')}</MenuItem>
         </BasicMenu>
       )}
       {isVisible && <LanguageUpdateModal language={language} onClose={toggleVisibility} />}
+      {isDelete && (
+        <DeleteModal
+          isLoading={loadingLanguage}
+          title={t('confirmRemoveLanguage')}
+          message={t('confirmRemoveLanguageMessage')}
+          onSubmit={onSubmit}
+          onClose={toggleDelete}
+        />
+      )}
     </Box>
   )
 }

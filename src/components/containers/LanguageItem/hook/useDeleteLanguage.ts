@@ -1,5 +1,6 @@
 import { useMutation } from '@apollo/client'
 
+import { IUseDeleteModal } from '@/appTypes/IBaseModalProps.interfaces'
 import { DELETE_PROFILE_LANGUAGE } from '@/graphql/language/profile_language/deleteProfileLanguageMutation'
 
 interface ILanguageItemProps {
@@ -7,17 +8,11 @@ interface ILanguageItemProps {
   languageName: string
 }
 
-interface IUseDeleteLanguage {
-  onSubmit: () => Promise<void>
-  deleteProfileLangLoading: boolean
-}
-
 export const useDeleteLanguage = (
   userData: ILanguageItemProps,
   onClose: () => void
-): IUseDeleteLanguage => {
-  const [deleteProfileLanguage, { loading: deleteProfileLangLoading }] =
-    useMutation(DELETE_PROFILE_LANGUAGE)
+): IUseDeleteModal => {
+  const [deleteProfileLanguage, { loading }] = useMutation(DELETE_PROFILE_LANGUAGE)
 
   const onSubmit = async (): Promise<void> => {
     await deleteProfileLanguage({
@@ -32,5 +27,5 @@ export const useDeleteLanguage = (
     onClose()
   }
 
-  return { onSubmit, deleteProfileLangLoading }
+  return { onSubmit, loading }
 }

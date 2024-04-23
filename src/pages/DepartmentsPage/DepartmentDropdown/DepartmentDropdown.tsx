@@ -1,16 +1,15 @@
 import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useMutation } from '@apollo/client'
 import { Box, MenuItem } from '@mui/material'
 
 import { BasicMenu } from '@/components/containers/BasicMenu/BasicMenu'
-import { TOAST_TYPES } from '@/constants/toastTypes'
-import { DELETE_DEPARTMENT } from '@/graphql/department/deleteDepartmentMutation'
-import { DEPARTMENTS } from '@/graphql/departments/departmentsQuery'
+import DeleteModal from '@/components/views/DeleteModal/DeleteModal'
+import { useDeleteModal } from '@/components/views/DeleteModal/hook/useDeleteModal'
 import { useBooleanState } from '@/hooks/useBooleanState'
 import { useUser } from '@/hooks/useUser'
 import { DepartmentUpdateModal } from '@/pages/DepartmentsPage/DepartmentUpdateModal/DepartmentUpdateModal'
-import { toastMessage } from '@/utils/toastMessage'
+
+import { useDeleteDepartment } from '../hook/useDeleteDepartment'
 
 import { IDepartmentDropdownProps } from './DepartmentDropdown.interfaces'
 
@@ -19,33 +18,30 @@ export const DepartmentDropdown: FC<IDepartmentDropdownProps> = ({ department })
 
   const { isVisible, toggleVisibility } = useBooleanState()
 
-  const [deleteDepartmentMutation] = useMutation(DELETE_DEPARTMENT, {
-    refetchQueries: [{ query: DEPARTMENTS }]
-  })
-
   const { t } = useTranslation()
 
-  const handleDepartmentDelete = (): void => {
-    deleteDepartmentMutation({
-      variables: {
-        department: {
-          departmentId: department.id
-        }
-      }
-    })
+  const { isDelete, toggleDelete } = useDeleteModal()
 
-    toastMessage(t('successfullyDeleted'), TOAST_TYPES.success)
-  }
+  const { onSubmit, loading: loadingDepartment } = useDeleteDepartment(department.id, toggleDelete)
 
   return (
     <Box style={{ display: 'flex', justifyContent: 'flex-end' }}>
       {isAdmin && (
         <BasicMenu>
           <MenuItem onClick={toggleVisibility}>{t('update')}</MenuItem>
-          <MenuItem onClick={handleDepartmentDelete}>{t('delete')}</MenuItem>
+          <MenuItem onClick={toggleDelete}>{t('delete')}</MenuItem>
         </BasicMenu>
       )}
       {isVisible && <DepartmentUpdateModal department={department} onClose={toggleVisibility} />}
+      {isDelete && (
+        <DeleteModal
+          isLoading={loadingDepartment}
+          title={t('confirmRemoveDepartment')}
+          message={t('confirmRemoveDepartmentMessage')}
+          onSubmit={onSubmit}
+          onClose={toggleDelete}
+        />
+      )}
     </Box>
   )
 }

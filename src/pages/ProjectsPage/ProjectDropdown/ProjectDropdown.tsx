@@ -1,14 +1,15 @@
 import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { useMutation } from '@apollo/client'
 import { MenuItem } from '@mui/material'
 
 import { BasicMenu } from '@/components/containers/BasicMenu/BasicMenu'
-import { DELETE_PROJECT } from '@/graphql/project/deleteProjectMutation'
-import { GET_PROJECTS } from '@/graphql/projects/projectsQuery'
+import DeleteModal from '@/components/views/DeleteModal/DeleteModal'
+import { useDeleteModal } from '@/components/views/DeleteModal/hook/useDeleteModal'
 import { useUser } from '@/hooks/useUser'
 import { AppNavigationRoutes } from '@/router/paths'
+
+import { useDeleteProject } from '../hook/useDeleteProject'
 
 import { IProjectDropdownProps } from './ProjectDropdown.interfaces'
 
@@ -17,30 +18,31 @@ export const ProjectDropdown: FC<IProjectDropdownProps> = ({ project }) => {
 
   const { isAdmin } = useUser()
 
-  const [deleteProjectMutation] = useMutation(DELETE_PROJECT, {
-    refetchQueries: [{ query: GET_PROJECTS }]
-  })
-
   const { t } = useTranslation()
+
+  const { isDelete, toggleDelete } = useDeleteModal()
 
   const handleOpenProject = (): void => {
     navigate(`${project?.id}`, { state: AppNavigationRoutes.PROJECTS })
   }
 
-  const handleProjectDelete = (): void => {
-    deleteProjectMutation({
-      variables: {
-        project: {
-          projectId: project.id
-        }
-      }
-    })
-  }
+  const { onSubmit, loading: loadingProject } = useDeleteProject(project.id, toggleDelete)
 
   return (
-    <BasicMenu>
-      <MenuItem onClick={handleOpenProject}>{t('details')}</MenuItem>
-      {isAdmin && <MenuItem onClick={handleProjectDelete}>{t('delete')}</MenuItem>}
-    </BasicMenu>
+    <>
+      <BasicMenu>
+        <MenuItem onClick={handleOpenProject}>{t('details')}</MenuItem>
+        {isAdmin && <MenuItem onClick={toggleDelete}>{t('delete')}</MenuItem>}
+      </BasicMenu>
+      {isDelete && (
+        <DeleteModal
+          isLoading={loadingProject}
+          title={t('confirmRemoveProject')}
+          message={t('confirmRemoveProjectMessage')}
+          onSubmit={onSubmit}
+          onClose={toggleDelete}
+        />
+      )}
+    </>
   )
 }

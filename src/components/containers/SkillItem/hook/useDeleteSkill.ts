@@ -1,5 +1,6 @@
 import { useMutation } from '@apollo/client'
 
+import { IUseDeleteModal } from '@/appTypes/IBaseModalProps.interfaces'
 import { DELETE_PROFILE_SKILL } from '@/graphql/skill/profile_skill/deleteProfileSkillMutation'
 
 interface ISkillItemProps {
@@ -7,14 +8,8 @@ interface ISkillItemProps {
   skillName: string
 }
 
-interface IUseDeleteSkill {
-  onSubmit: () => Promise<void>
-  deleteProfileSkillLoading: boolean
-}
-
-export const useDeleteSkill = (userData: ISkillItemProps, onClose: () => void): IUseDeleteSkill => {
-  const [deleteProfileSkill, { loading: deleteProfileSkillLoading }] =
-    useMutation(DELETE_PROFILE_SKILL)
+export const useDeleteSkill = (userData: ISkillItemProps, onClose: () => void): IUseDeleteModal => {
+  const [deleteProfileSkill, { loading }] = useMutation(DELETE_PROFILE_SKILL)
 
   const onSubmit = async (): Promise<void> => {
     await deleteProfileSkill({
@@ -29,5 +24,5 @@ export const useDeleteSkill = (userData: ISkillItemProps, onClose: () => void): 
     onClose()
   }
 
-  return { onSubmit, deleteProfileSkillLoading }
+  return { onSubmit, loading }
 }

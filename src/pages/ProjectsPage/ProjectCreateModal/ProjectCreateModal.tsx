@@ -11,10 +11,12 @@ import { DatePicker } from '@/components/views/DatePicker/DatePicker'
 import { Input } from '@/components/views/Input/Input'
 import { ModalWindow } from '@/components/views/ModalWindow/ModalWindow'
 import { FORM_PROJECT_SCHEMA } from '@/constants/schemaOptions'
+import { TOAST_TYPES } from '@/constants/toastTypes'
 import { CREATE_PROJECT } from '@/graphql/project/createProjectMutation'
 import { GET_PROJECTS } from '@/graphql/projects/projectsQuery'
 import { FORM_PROJECT_KEYS, IProjectFormValues } from '@/pages/ProjectsPage/ProjectsPage.interfaces'
 import { convertDate } from '@/utils/dateHelper'
+import { toastMessage } from '@/utils/toastMessage'
 
 export const ProjectCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
   const [createProjectMutation, { loading: createProjectLoading }] = useMutation(CREATE_PROJECT, {
@@ -49,6 +51,8 @@ export const ProjectCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
     })
 
     onClose()
+
+    toastMessage(t('successfullyCreated'), TOAST_TYPES.success)
   }
 
   return (
