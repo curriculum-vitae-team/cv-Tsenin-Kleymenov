@@ -30,7 +30,6 @@ const CVsPage: FC = () => {
     setSearchedName(event.target.value)
   }
 
-  console.log('🚀 ~ CVsPage - data:', data)
   const requestSearch = useMemo(
     () =>
       deferredValue === ''

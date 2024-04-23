@@ -46,6 +46,7 @@ export const SkillItem: FC<ISkillItemProps> = ({ skill }) => {
   const color = getMasteryColor(skill.mastery)
 
   const value = MASTERY_ARRAY.find(mastery => mastery.id === skill.mastery)?.value
+
   return (
     <>
       <SkillCard>
@@ -73,10 +74,10 @@ export const SkillItem: FC<ISkillItemProps> = ({ skill }) => {
       {isDelete && (
         <DeleteModal
           isLoading={deleteProfileSkillLoading}
+          title="confirmRemoveSkill"
           message="confirmRemoveSkillMessage"
           onClose={toggleDelete}
           onSubmit={onSubmit}
-          title="confirmRemoveSkill"
         />
       )}
     </>

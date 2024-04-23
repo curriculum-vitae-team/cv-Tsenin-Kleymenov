@@ -16,7 +16,8 @@ import { ICVDropdownProps } from './CVDropdown.interfaces'
 export const CVDropdown: FC<ICVDropdownProps> = ({ CV }) => {
   const navigate = useNavigate()
 
-  const { isAdmin } = useUser()
+  const { user, isAdmin } = useUser()
+  const userCheck = CV?.user?.id === user?.id
 
   const { t } = useTranslation()
   const { isDelete, toggleDelete } = useDeleteModal()
@@ -32,7 +33,7 @@ export const CVDropdown: FC<ICVDropdownProps> = ({ CV }) => {
     <>
       <BasicMenu>
         <MenuItem onClick={handleOpenCv}>{t('details')}</MenuItem>
-        {isAdmin && <MenuItem onClick={toggleDelete}>{t('delete')}</MenuItem>}
+        {(userCheck || isAdmin) && <MenuItem onClick={toggleDelete}>{t('delete')}</MenuItem>}
       </BasicMenu>
       {isDelete && (
         <DeleteModal
