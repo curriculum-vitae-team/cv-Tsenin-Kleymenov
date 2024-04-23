@@ -27,7 +27,11 @@ export const SkillDropdown: FC<ISkillDropdownProps> = ({ skill }) => {
 
   const handleSkillDelete = (): void => {
     deleteSkillMutation({
-      variables: { id: skill.id }
+      variables: {
+        skill: {
+          skillId: skill.id
+        }
+      }
     })
 
     toastMessage(t('successfullyDeleted'), TOAST_TYPES.success)

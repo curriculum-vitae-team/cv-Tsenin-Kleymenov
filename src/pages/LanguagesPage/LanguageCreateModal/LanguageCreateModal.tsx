@@ -55,7 +55,7 @@ export const LanguageCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
   }
 
   return (
-    <ModalWindow onClose={onClose}>
+    <ModalWindow onClose={onClose} title="createLanguage">
       <Container sx={{ minWidth: '500px' }}>
         <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
           <Input

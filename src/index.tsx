@@ -2,10 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import { ApolloProvider } from '@apollo/client'
-import { ThemeProvider } from '@mui/material'
 
 import { client } from '@/graphql/auth/client'
-import { theme } from '@/theme/theme'
 
 import './i18n/i18n'
 
@@ -19,9 +17,7 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <ApolloProvider client={client}>
-        <ThemeProvider theme={theme}>
-          <App />
-        </ThemeProvider>
+        <App />
       </ApolloProvider>
     </BrowserRouter>
   </React.StrictMode>

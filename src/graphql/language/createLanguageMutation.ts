@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 
 export const CREATE_LANGUAGE = gql`
-  mutation CreateLanguage($language: LanguageInput!) {
+  mutation CreateLanguage($language: CreateLanguageInput!) {
     createLanguage(language: $language) {
       id
       iso2

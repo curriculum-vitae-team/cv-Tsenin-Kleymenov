@@ -54,9 +54,7 @@ export const EmployeeCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
           },
           profile: {
             first_name: formData[FORM_EMPLOYEES_KEYS.first_name],
-            last_name: formData[FORM_EMPLOYEES_KEYS.last_name],
-            skills: [],
-            languages: []
+            last_name: formData[FORM_EMPLOYEES_KEYS.last_name]
           },
           departmentId: formData[FORM_EMPLOYEES_KEYS.department],
           positionId: formData[FORM_EMPLOYEES_KEYS.position],
@@ -72,7 +70,7 @@ export const EmployeeCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
   }
 
   return (
-    <ModalWindow onClose={onClose}>
+    <ModalWindow onClose={onClose} title="createEmployee">
       <Container sx={{ minWidth: '500px' }}>
         <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
           <Input

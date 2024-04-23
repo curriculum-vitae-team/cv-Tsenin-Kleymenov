@@ -29,7 +29,11 @@ export const ProjectDropdown: FC<IProjectDropdownProps> = ({ project }) => {
 
   const handleProjectDelete = (): void => {
     deleteProjectMutation({
-      variables: { id: project.id }
+      variables: {
+        project: {
+          projectId: project.id
+        }
+      }
     })
   }
 

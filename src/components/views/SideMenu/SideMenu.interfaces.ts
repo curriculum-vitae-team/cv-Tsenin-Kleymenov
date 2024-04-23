@@ -6,5 +6,6 @@ export interface IMenuItems {
     onClick?: () => void
     icon: React.ComponentType<SvgIconProps>
     isActive?: boolean
+    route?: string
   }
 }

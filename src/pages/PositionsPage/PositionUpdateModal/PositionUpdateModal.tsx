@@ -45,8 +45,8 @@ export const PositionUpdateModal: FC<IPositionUpdateModalProps> = ({ position, o
   const onSubmit: SubmitHandler<IPositionFormValues> = async formData => {
     await updatePositionMutation({
       variables: {
-        id: position?.id,
         position: {
+          positionId: position?.id,
           name: formData[FORM_POSITION_KEYS.name]
         }
       }

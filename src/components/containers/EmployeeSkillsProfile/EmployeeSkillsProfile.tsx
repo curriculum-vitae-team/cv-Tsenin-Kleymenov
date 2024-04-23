@@ -5,7 +5,6 @@ import { useQuery } from '@apollo/client'
 import { Box, Divider, Typography } from '@mui/material'
 
 import { IUserResult } from '@/appTypes/IResult.interfaces'
-import { useDeleteModal } from '@/components/views/DeleteModal/hook/useDeleteModal'
 import { SkillRow } from '@/components/views/SkillRow/SkillRow'
 import { USER } from '@/graphql/user/userQuery'
 import { useBooleanState } from '@/hooks/useBooleanState'
@@ -29,8 +28,6 @@ export const EmployeeSkillsProfile: FC = () => {
   const { t } = useTranslation()
 
   const group = groupedSkills(userData?.user?.profile.skills ?? [])
-
-  const { isDelete, toggleDelete } = useDeleteModal()
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column' }}>

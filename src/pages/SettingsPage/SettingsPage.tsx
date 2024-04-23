@@ -1,14 +1,53 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
+import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
 import { AppSelect } from '@/components/views/Select/Select'
+import { Theme } from '@/constants/theme'
+import useTheme from '@/hooks/useTheme'
+
+import { SETTINGS_FORM_KEYS } from './SettingsPage.interfaces'
+import { SettingsWrapper } from './SettingsPage.styles'
 
 const SettingsPage: FC = () => {
   const { t } = useTranslation()
+
+  const { theme, setTheme } = useTheme()
+
+  const themeOptions = Object.values(Theme).map(item => {
+    const convertedItem = item.toLowerCase()
+
+    return {
+      id: convertedItem,
+      name: t(convertedItem)
+    }
+  })
+
+  const { register, watch } = useForm({
+    defaultValues: {
+      [SETTINGS_FORM_KEYS.Theme]: theme || Theme.LIGHT
+    },
+    mode: 'onChange'
+  })
+
+  const watchTheme = watch(SETTINGS_FORM_KEYS.Theme)
+
+  useEffect(() => {
+    setTheme(watchTheme as Theme)
+  }, [watchTheme])
+
   return (
-    <div>
-      <AppSelect variant="outlined" label={t('appearance')} />
-    </div>
+    <SettingsWrapper>
+      <form>
+        <AppSelect
+          variant="outlined"
+          value={watchTheme ?? Theme.LIGHT}
+          label={t('appearance')}
+          items={themeOptions}
+          {...register(SETTINGS_FORM_KEYS.Theme)}
+        />
+      </form>
+    </SettingsWrapper>
   )
 }
 

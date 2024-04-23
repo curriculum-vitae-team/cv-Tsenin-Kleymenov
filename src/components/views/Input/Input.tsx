@@ -3,7 +3,7 @@ import { InputAdornment, TextField, TextFieldProps } from '@mui/material'
 
 import { IInputWithIcon } from './Input.interfaces'
 
-export const Input: FC<TextFieldProps> = forwardRef((props, ref) => {
+export const Input = forwardRef<HTMLDivElement, TextFieldProps>((props, ref) => {
   return (
     <TextField
       variant="outlined"

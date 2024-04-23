@@ -42,8 +42,8 @@ export const DepartmentUpdateModal: FC<IDepartmentUpdateModalProps> = ({ departm
   const onSubmit: SubmitHandler<IDepartmentFormValues> = async formData => {
     await updateUpdateMutation({
       variables: {
-        id: department?.id,
         department: {
+          departmentId: department?.id,
           name: formData[FORM_DEPARTMENT_KEYS.name]
         }
       }

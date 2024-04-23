@@ -39,8 +39,8 @@ export const SkillUpdateModal: FC<ISkillUpdateModalProps> = ({ skill, onClose })
   const onSubmit: SubmitHandler<ISkillFormValues> = async formData => {
     await updateSkillMutation({
       variables: {
-        id: skill?.id,
         skill: {
+          skillId: skill?.id,
           name: formData[FORM_SKILL_KEYS.name]
         }
       }

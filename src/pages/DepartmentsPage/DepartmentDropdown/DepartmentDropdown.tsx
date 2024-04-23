@@ -27,7 +27,11 @@ export const DepartmentDropdown: FC<IDepartmentDropdownProps> = ({ department })
 
   const handleDepartmentDelete = (): void => {
     deleteDepartmentMutation({
-      variables: { id: department.id }
+      variables: {
+        department: {
+          departmentId: department.id
+        }
+      }
     })
 
     toastMessage(t('successfullyDeleted'), TOAST_TYPES.success)

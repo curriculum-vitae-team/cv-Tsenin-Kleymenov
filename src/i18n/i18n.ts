@@ -4,9 +4,8 @@ import LanguageDetector from 'i18next-browser-languagedetector'
 import HttpApi from 'i18next-http-backend'
 
 import { LANGUAGES } from '@/constants/languages'
-
-import en from '../../public/locales/en/translation.json'
-import ru from '../../public/locales/ru/translation.json'
+import en from '@/locales/en/translation.json'
+import ru from '@/locales/ru/translation.json'
 
 i18n
   .use(HttpApi)

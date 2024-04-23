@@ -27,7 +27,11 @@ export const LanguageDropdown: FC<ILanguageDropdownProps> = ({ language }) => {
 
   const handleLanguageDelete = (): void => {
     deleteLanguageMutation({
-      variables: { id: language.id }
+      variables: {
+        language: {
+          languageId: language.id
+        }
+      }
     })
 
     toastMessage(t('successfullyDeleted'), TOAST_TYPES.success)

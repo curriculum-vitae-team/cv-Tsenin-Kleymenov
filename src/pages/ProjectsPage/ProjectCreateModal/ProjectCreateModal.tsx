@@ -43,8 +43,7 @@ export const ProjectCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
           domain: formData[FORM_PROJECT_KEYS.domain],
           start_date: convertDate(formData[FORM_PROJECT_KEYS.start_date]),
           end_date: convertDate(formData[FORM_PROJECT_KEYS.end_date]),
-          team_size: formData[FORM_PROJECT_KEYS.team_size],
-          skillsIds: []
+          team_size: formData[FORM_PROJECT_KEYS.team_size]
         }
       }
     })
@@ -53,7 +52,7 @@ export const ProjectCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
   }
 
   return (
-    <ModalWindow onClose={onClose}>
+    <ModalWindow onClose={onClose} title="createProject">
       <Container sx={{ minWidth: '500px' }}>
         <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
           <Input

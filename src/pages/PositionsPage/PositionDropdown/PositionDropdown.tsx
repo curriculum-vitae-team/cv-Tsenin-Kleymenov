@@ -27,7 +27,11 @@ export const PositionDropdown: FC<IPositionDropdownProps> = ({ position }) => {
 
   const handlePositionDelete = (): void => {
     deletePositionMutation({
-      variables: { id: position.id }
+      variables: {
+        position: {
+          positionId: position.id
+        }
+      }
     })
 
     toastMessage(t('successfullyDeleted'), TOAST_TYPES.success)

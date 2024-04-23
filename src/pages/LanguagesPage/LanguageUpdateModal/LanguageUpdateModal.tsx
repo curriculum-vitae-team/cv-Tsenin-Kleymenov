@@ -47,8 +47,8 @@ export const LanguageUpdateModal: FC<ILanguageUpdateModalProps> = ({ language, o
   const onSubmit: SubmitHandler<ILanguageFormValues> = async formData => {
     await updateLanguageMutation({
       variables: {
-        id: language?.id,
         language: {
+          languageId: language?.id,
           name: formData[FORM_LANGUAGE_KEYS.name],
           iso2: formData[FORM_LANGUAGE_KEYS.iso2],
           native_name: formData[FORM_LANGUAGE_KEYS.native_name]

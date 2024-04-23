@@ -1,6 +1,5 @@
-import { IStorageKeys } from '@/appTypes/IStorageKeys.interfaces'
-
-export const LOCAL_STORAGE_KEYS: IStorageKeys = {
-  user: 'user',
-  accessToken: 'access_token'
+export enum LocalStorageKeys {
+  User = 'user',
+  AccessToken = 'access_token',
+  Theme = 'theme'
 }

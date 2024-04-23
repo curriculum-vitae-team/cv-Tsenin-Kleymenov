@@ -53,7 +53,7 @@ export const PositionCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
   }
 
   return (
-    <ModalWindow onClose={onClose}>
+    <ModalWindow onClose={onClose} title="createPosition">
       <Container sx={{ minWidth: '500px' }}>
         <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
           <Input

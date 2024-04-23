@@ -8,10 +8,6 @@ export const GET_PROFILE_CVS = gql`
         id
         name
         description
-        user {
-          id
-          email
-        }
       }
     }
   }
