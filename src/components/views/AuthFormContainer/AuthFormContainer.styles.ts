@@ -1,6 +1,6 @@
 import { styled } from '@mui/material'
 
-export const FormContainer = styled('div')({
+export const FormContainer = styled('div')(({ theme }) => ({
   maxWidth: '550px',
   display: 'flex',
   flexDirection: 'column',
@@ -9,5 +9,6 @@ export const FormContainer = styled('div')({
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  textAlign: 'center'
-})
+  textAlign: 'center',
+  color: theme.palette.text.primary
+}))

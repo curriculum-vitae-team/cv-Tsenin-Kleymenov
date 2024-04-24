@@ -6,12 +6,12 @@ export const LanguageCard = styled(Card)(({ theme }) => ({
   display: 'flex',
   height: 'fit-content',
   alignItems: 'center',
-  color: theme.palette.info.main,
+  color: theme.palette.info.light,
   margin: 0,
   borderRadius: '5px',
   justifyContent: 'space-between',
   padding: '16px',
-  backgroundColor: '#f5f5f7',
+  backgroundColor: theme.palette.grey[200],
   boxShadow: 'none'
 }))
 

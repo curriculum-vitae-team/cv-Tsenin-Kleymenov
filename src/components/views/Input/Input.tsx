@@ -1,7 +1,8 @@
 import { FC, forwardRef } from 'react'
-import { InputAdornment, TextField, TextFieldProps } from '@mui/material'
+import { TextField, TextFieldProps } from '@mui/material'
 
 import { IInputWithIcon } from './Input.interfaces'
+import { InputAdornment } from './Input.styles'
 
 export const Input = forwardRef<HTMLDivElement, TextFieldProps>((props, ref) => {
   return (

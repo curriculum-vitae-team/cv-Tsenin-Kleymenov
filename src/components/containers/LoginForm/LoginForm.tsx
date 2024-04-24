@@ -39,14 +39,12 @@ export const SignInForm: FC<ILoginFormProps> = ({ login }) => {
       <Input
         type="email"
         label={t('email')}
-        placeholder={t('enterEmail') as string}
         error={!!errors[FORM_LOGIN_KEYS.email]}
         helperText={t(errors?.[FORM_LOGIN_KEYS.email]?.message as string)}
         {...register(FORM_LOGIN_KEYS.email)}
       />
       <PasswordInput
         label={t('password')}
-        placeholder={t('enterPassword') as string}
         error={!!errors[FORM_LOGIN_KEYS.password]}
         helperText={t(errors?.[FORM_LOGIN_KEYS.password]?.message as string)}
         {...register(FORM_LOGIN_KEYS.password)}

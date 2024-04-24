@@ -106,57 +106,54 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
       <EmployeeAvatarUpload />
       <Box sx={{ margin: '20px 0' }}>
         <LoadingOverlay active={userLoading}>
-          <RowInfo title="fullName" info={currentUser?.profile.full_name} />
           <RowInfo title="email" info={currentUser?.email} />
-          <RowInfo title="department" info={currentUser?.department_name} />
-          <RowInfo title="position" info={currentUser?.position_name} />
           <RowInfo title="memberSince" info={convertCreatedAtDate(currentUser?.created_at)} />
         </LoadingOverlay>
       </Box>
-      {(userCheck || isAdmin) && (
-        <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
-          <Grid container spacing={2}>
-            <Grid item xs={6}>
-              <Input
-                type="text"
-                variant="outlined"
-                label={t('firstName')}
-                placeholder={t('enterFirstName') as string}
-                error={!!errors[FORM_PROFILE_KEYS.firstName]}
-                helperText={t(errors?.[FORM_PROFILE_KEYS.firstName]?.message as string)}
-                {...register(FORM_PROFILE_KEYS.firstName)}
-              />
-              <AppSelect
-                variant="outlined"
-                value={watchDepartment}
-                label={t('department')}
-                loading={departmentsLoading}
-                items={departmentsData?.departments}
-                error={!!errors[FORM_PROFILE_KEYS.department]}
-                helperText={t(errors?.[FORM_PROFILE_KEYS.department]?.message as string)}
-                {...register(FORM_PROFILE_KEYS.department)}
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <Input
-                type="text"
-                variant="outlined"
-                label={t('lastName')}
-                placeholder={t('enterLastName') as string}
-                error={!!errors[FORM_PROFILE_KEYS.lastName]}
-                helperText={t(errors?.[FORM_PROFILE_KEYS.lastName]?.message as string)}
-                {...register(FORM_PROFILE_KEYS.lastName)}
-              />
-              <AppSelect
-                variant="outlined"
-                value={watchPosition}
-                label={t('position')}
-                loading={positionsLoading}
-                items={positionsData?.positions}
-                error={!!errors[FORM_PROFILE_KEYS.position]}
-                helperText={t(errors?.[FORM_PROFILE_KEYS.position]?.message as string)}
-                {...register(FORM_PROFILE_KEYS.position)}
-              />
+      <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <Input
+              type="text"
+              variant="outlined"
+              label={t('firstName')}
+              placeholder={t('enterFirstName') as string}
+              error={!!errors[FORM_PROFILE_KEYS.firstName]}
+              helperText={t(errors?.[FORM_PROFILE_KEYS.firstName]?.message as string)}
+              {...register(FORM_PROFILE_KEYS.firstName)}
+            />
+            <AppSelect
+              variant="outlined"
+              value={watchDepartment}
+              label={t('department')}
+              loading={departmentsLoading}
+              items={departmentsData?.departments}
+              error={!!errors[FORM_PROFILE_KEYS.department]}
+              helperText={t(errors?.[FORM_PROFILE_KEYS.department]?.message as string)}
+              {...register(FORM_PROFILE_KEYS.department)}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <Input
+              type="text"
+              variant="outlined"
+              label={t('lastName')}
+              placeholder={t('enterLastName') as string}
+              error={!!errors[FORM_PROFILE_KEYS.lastName]}
+              helperText={t(errors?.[FORM_PROFILE_KEYS.lastName]?.message as string)}
+              {...register(FORM_PROFILE_KEYS.lastName)}
+            />
+            <AppSelect
+              variant="outlined"
+              value={watchPosition}
+              label={t('position')}
+              loading={positionsLoading}
+              items={positionsData?.positions}
+              error={!!errors[FORM_PROFILE_KEYS.position]}
+              helperText={t(errors?.[FORM_PROFILE_KEYS.position]?.message as string)}
+              {...register(FORM_PROFILE_KEYS.position)}
+            />
+            {(userCheck || isAdmin) && (
               <Button
                 type="submit"
                 variant="contained"
@@ -165,10 +162,10 @@ export const EmployeeProfileForm: FC<IEmployeeProfileFormProps> = ({ currentUser
               >
                 {t('confirm')}
               </Button>
-            </Grid>
+            )}
           </Grid>
-        </form>
-      )}
+        </Grid>
+      </form>
     </>
   )
 }

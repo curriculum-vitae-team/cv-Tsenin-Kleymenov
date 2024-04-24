@@ -21,6 +21,7 @@ export const PasswordInput = forwardRef<HTMLInputElement, TextFieldProps>((props
         endAdornment: (
           <InputAdornment position="end">
             <IconButton
+              color="info"
               onClick={handleClickShowPassword}
               onMouseDown={handleMouseDownPassword}
               edge="end"

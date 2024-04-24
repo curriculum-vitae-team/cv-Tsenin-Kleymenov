@@ -22,7 +22,7 @@ export const SideMenu: FC = () => {
                 <SideMenuItem
                   key={text}
                   text={text}
-                  route={route}
+                  route={route ?? '/'}
                   Icon={Icon}
                   isActive={pathnameArray[0] === route}
                 />

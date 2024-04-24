@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 
 import { AppSelect } from '@/components/views/Select/Select'
 import { Theme } from '@/constants/theme'
-import useTheme from '@/hooks/useTheme'
+import { useThemeContext } from '@/context/ThemeContext'
 
 import { SETTINGS_FORM_KEYS } from './SettingsPage.interfaces'
 import { SettingsWrapper } from './SettingsPage.styles'
@@ -12,7 +12,7 @@ import { SettingsWrapper } from './SettingsPage.styles'
 const SettingsPage: FC = () => {
   const { t } = useTranslation()
 
-  const { theme, setTheme } = useTheme()
+  const { theme, setTheme } = useThemeContext()
 
   const themeOptions = Object.values(Theme).map(item => {
     const convertedItem = item.toLowerCase()

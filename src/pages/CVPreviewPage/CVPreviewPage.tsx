@@ -82,10 +82,10 @@ const CVPreviewPage: FC = () => {
             <DocumentItem title={CVData?.cv.name ?? ''} description={CVData?.cv.description} />
             {Object.entries(group).map(([category, skills], index) => (
               <DocumentItem key={`${category}-${index}`} title={category}>
-                {skills.map((skill, index) => (
-                  <span key={`${skill}-${index}`}>
+                {skills.map((skill, skillIndex) => (
+                  <span key={`${skill}-${skillIndex}`}>
                     {skill.name}
-                    {index !== skills.length - 1 && ', '}
+                    {skillIndex !== skills.length - 1 && ', '}
                   </span>
                 ))}
               </DocumentItem>

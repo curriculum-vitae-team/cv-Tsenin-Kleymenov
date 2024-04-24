@@ -45,14 +45,12 @@ export const SignUpForm: FC<ISignUpFormProps> = ({ signUp }) => {
       <Input
         type="email"
         label={t('email')}
-        placeholder={t('enterEmail') as string}
         error={!!errors[FORM_SIGNUP_KEYS.email]}
         helperText={t(errors?.[FORM_SIGNUP_KEYS.email]?.message as string)}
         {...register(FORM_SIGNUP_KEYS.email)}
       />
       <PasswordInput
         label={t('password')}
-        placeholder={t('enterPassword') as string}
         error={!!errors[FORM_SIGNUP_KEYS.password]}
         helperText={t(errors?.[FORM_SIGNUP_KEYS.password]?.message as string)}
         {...register(FORM_SIGNUP_KEYS.password)}

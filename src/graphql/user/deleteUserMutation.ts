@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client'
 
 export const DELETE_USER = gql`
-  mutation DeleteUser($id: ID!) {
-    deleteUser(id: $id) {
+  mutation DeleteUser($userId: ID!) {
+    deleteUser(userId: $userId) {
       affected
     }
   }

@@ -7,6 +7,7 @@ import { client } from '@/graphql/auth/client'
 
 import './i18n/i18n'
 
+import { ThemeContextProvider } from './context/ThemeContext'
 import App from './App'
 
 import './styles/index.css'
@@ -17,7 +18,9 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <ApolloProvider client={client}>
-        <App />
+        <ThemeContextProvider>
+          <App />
+        </ThemeContextProvider>
       </ApolloProvider>
     </BrowserRouter>
   </React.StrictMode>

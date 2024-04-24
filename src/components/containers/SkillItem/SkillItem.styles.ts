@@ -1,12 +1,12 @@
 import { LinearProgress as MuiLinearProgress, styled } from '@mui/material'
 
-export const SkillCard = styled('div')(() => ({
+export const SkillCard = styled('div')(({ theme }) => ({
   padding: '8px 16px',
   display: 'grid',
   gridTemplateColumns: '1fr auto',
   alignItems: 'center',
   margin: '10px 0',
-  border: '1px solid #e0e0e0',
+  border: `1px solid ${theme.palette.divider}`,
   gap: '12px'
 }))
 
