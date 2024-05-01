@@ -1,11 +1,13 @@
-import { DialogContent as MuiDialogContent, IconButton, styled, Typography } from '@mui/material'
+import { DialogContent as MuiDialogContent, styled, Typography } from '@mui/material'
+
+import { CloseButton as MuiCloseButton } from '@/components/views/CloseButton/CloseButton'
 
 export const DialogContent = styled(MuiDialogContent)(() => ({
   display: 'flex',
   flexDirection: 'column'
 }))
 
-export const CloseButton = styled(IconButton)(() => ({
+export const CloseButton = styled(MuiCloseButton)(() => ({
   margin: '-8px'
 }))
 

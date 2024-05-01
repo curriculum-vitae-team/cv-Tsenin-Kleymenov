@@ -7,6 +7,7 @@ import { Box, Divider, Typography } from '@mui/material'
 import { IUserResult } from '@/appTypes/IResult.interfaces'
 import { LanguageItem } from '@/components/containers/LanguageItem/LanguageItem'
 import { Button } from '@/components/views/Button/Button'
+import { LoadingOverlay } from '@/components/views/LoadingOverlay/LoadingOverlay'
 import { USER } from '@/graphql/user/userQuery'
 import { useBooleanState } from '@/hooks/useBooleanState'
 import { useUser } from '@/hooks/useUser'
@@ -20,7 +21,7 @@ export const EmployeeLanguagesProfile: FC = () => {
 
   const { isVisible, toggleVisibility } = useBooleanState()
 
-  const { data: userData } = useQuery<IUserResult>(USER, {
+  const { data: userData, loading } = useQuery<IUserResult>(USER, {
     variables: { id: userId }
   })
 
@@ -38,21 +39,23 @@ export const EmployeeLanguagesProfile: FC = () => {
         </Button>
       )}
       <Divider sx={{ my: 2 }} />
-      {userData?.user?.profile.languages.length ? (
-        <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '15px' }}>
-          {userData?.user?.profile?.languages.map(item => (
-            <LanguageItem
-              key={item.name}
-              languageName={item.name}
-              languageProficiency={item.proficiency}
-            />
-          ))}
-        </Box>
-      ) : (
-        <Typography sx={{ my: 2 }} variant="h5">
-          {t('noLanguages')}
-        </Typography>
-      )}
+      <LoadingOverlay active={loading}>
+        {userData?.user?.profile.languages.length ? (
+          <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '15px' }}>
+            {userData?.user?.profile?.languages.map(item => (
+              <LanguageItem
+                key={item.name}
+                languageName={item.name}
+                languageProficiency={item.proficiency}
+              />
+            ))}
+          </Box>
+        ) : (
+          <Typography sx={{ my: 2 }} variant="h5">
+            {t('noLanguages')}
+          </Typography>
+        )}
+      </LoadingOverlay>
       {isVisible && <LanguagesModal userData={userData?.user} onClose={toggleVisibility} />}
     </Box>
   )

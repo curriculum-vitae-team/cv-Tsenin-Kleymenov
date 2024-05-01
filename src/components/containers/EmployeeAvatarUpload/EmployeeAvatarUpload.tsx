@@ -3,11 +3,11 @@ import { useDropzone } from 'react-dropzone'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { useMutation, useQuery } from '@apollo/client'
-import CloseIcon from '@mui/icons-material/Close'
 import FileUploadIcon from '@mui/icons-material/FileUpload'
-import { Box, Grid, IconButton, Typography } from '@mui/material'
+import { Box, Grid, Typography } from '@mui/material'
 
 import { IUserResult } from '@/appTypes/IResult.interfaces'
+import { CloseButton } from '@/components/views/CloseButton/CloseButton'
 import { EmployeeAvatarAlert } from '@/components/views/EmployeeAvatarAlert/EmployeeAvatarAlert'
 import { LoadingOverlay } from '@/components/views/LoadingOverlay/LoadingOverlay'
 import { DROP_ZONE_ACCEPT_FILES } from '@/constants/dropZoneAcceptFile'
@@ -80,11 +80,7 @@ export const EmployeeAvatarUpload: FC = () => {
           {userData?.user.profile.avatar ? (
             <>
               <EmployeeAvatar src={userData?.user.profile.avatar} />
-              {userCheck && (
-                <IconButton onClick={handleFileRemove}>
-                  <CloseIcon />
-                </IconButton>
-              )}
+              {userCheck && <CloseButton onClick={handleFileRemove} />}
             </>
           ) : (
             <EmployeeAvatar>

@@ -1,9 +1,18 @@
-import { forwardRef } from 'react'
-import { InputAdornment, MenuItem, TextField, TextFieldProps } from '@mui/material'
+import { forwardRef, ReactElement } from 'react'
+import { ExpandMore } from '@mui/icons-material'
+import { MenuItem, TextField, TextFieldProps } from '@mui/material'
 
 import { Loader } from '@/components/views/Loader/Loader'
 
 import { IAppSelectItemProps, IAppSelectProps } from './Select.interfaces'
+
+const SelectLoader = (): ReactElement => (
+  <Loader
+    size={20}
+    sx={{ position: 'absolute', left: 'auto', right: '12px', top: 'auto' }}
+    color="primary"
+  />
+)
 
 export const AppSelect = forwardRef<
   HTMLInputElement,
@@ -17,16 +26,8 @@ export const AppSelect = forwardRef<
       fullWidth
       inputRef={ref}
       {...props}
-      InputProps={{
-        endAdornment: loading && (
-          <InputAdornment position="end">
-            <Loader
-              size={20}
-              sx={{ position: 'static', backgroundColor: 'white' }}
-              color="primary"
-            />
-          </InputAdornment>
-        )
+      SelectProps={{
+        IconComponent: loading ? SelectLoader : ExpandMore
       }}
     >
       <MenuItem disabled>{props.label}</MenuItem>

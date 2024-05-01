@@ -5,6 +5,7 @@ import { useQuery } from '@apollo/client'
 import { Box, Divider, Typography } from '@mui/material'
 
 import { IUserResult } from '@/appTypes/IResult.interfaces'
+import { LoadingOverlay } from '@/components/views/LoadingOverlay/LoadingOverlay'
 import { SkillRow } from '@/components/views/SkillRow/SkillRow'
 import { USER } from '@/graphql/user/userQuery'
 import { useBooleanState } from '@/hooks/useBooleanState'
@@ -21,7 +22,7 @@ export const EmployeeSkillsProfile: FC = () => {
 
   const { isVisible, toggleVisibility } = useBooleanState()
 
-  const { data: userData } = useQuery<IUserResult>(USER, {
+  const { data: userData, loading } = useQuery<IUserResult>(USER, {
     variables: { id: userId }
   })
 
@@ -37,15 +38,17 @@ export const EmployeeSkillsProfile: FC = () => {
         </AddAction>
       )}
       <Divider sx={{ my: 2 }} />
-      {userData?.user?.profile.skills.length ? (
-        Object.entries(group).map(([category, skills], index) => {
-          return <SkillRow key={`${category}-${index}`} category={category} skills={skills} />
-        })
-      ) : (
-        <Typography sx={{ my: 2 }} variant="h5">
-          {t('noSkills')}
-        </Typography>
-      )}
+      <LoadingOverlay active={loading}>
+        {userData?.user?.profile.skills.length ? (
+          Object.entries(group).map(([category, skills], index) => {
+            return <SkillRow key={`${category}-${index}`} category={category} skills={skills} />
+          })
+        ) : (
+          <Typography sx={{ my: 2 }} variant="h5">
+            {t('noSkills')}
+          </Typography>
+        )}
+      </LoadingOverlay>
       {isVisible && <SkillsModal userData={userData?.user} onClose={toggleVisibility} />}
     </Box>
   )

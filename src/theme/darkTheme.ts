@@ -35,7 +35,9 @@ export const darkTheme: ThemeOptions = responsiveFontSizes(
         secondary: '#808080'
       },
       grey: {
-        200: 'rgb(0, 0, 0, 0.15)'
+        200: 'rgb(0, 0, 0, 0.15)',
+        300: '#454545',
+        400: '#c3c3c3'
       },
       divider: '#808080'
     },
@@ -103,13 +105,6 @@ export const darkTheme: ThemeOptions = responsiveFontSizes(
 
             '&:nth-of-type(odd)': {
               backgroundColor: '#565656'
-            },
-            '&:last-child td, &:last-child th': {
-              border: 0
-            },
-            '&.MuiTableRow-head': {
-              backgroundColor: '#454545',
-              borderBottom: '1px solid rgb(122 122 122)'
             }
           }
         }
@@ -138,13 +133,30 @@ export const darkTheme: ThemeOptions = responsiveFontSizes(
           }
         }
       },
+      MuiInputLabel: {
+        styleOverrides: {
+          root: {
+            '&.Mui-disabled': {
+              color: '#565656'
+            }
+          }
+        }
+      },
       MuiTextField: {
         styleOverrides: {
           root: {
             borderColor: '#808080',
+            color: '#fff',
 
             '& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
               borderColor: '#808080'
+            },
+            '& .Mui-disabled .MuiOutlinedInput-notchedOutline': {
+              borderColor: '#565656!important'
+            },
+            '& .Mui-disabled': {
+              color: '#565656!important',
+              '-webkit-text-fill-color': '#565656!important'
             }
           }
         }
@@ -155,6 +167,13 @@ export const darkTheme: ThemeOptions = responsiveFontSizes(
             '.MuiBreadcrumbs-separator ': {
               color: '#808080'
             }
+          }
+        }
+      },
+      MuiSelect: {
+        styleOverrides: {
+          icon: {
+            color: '#808080'
           }
         }
       }

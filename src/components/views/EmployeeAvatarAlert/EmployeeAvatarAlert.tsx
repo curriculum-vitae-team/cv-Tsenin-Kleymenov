@@ -1,8 +1,9 @@
 import { FC } from 'react'
-import CloseIcon from '@mui/icons-material/Close'
-import { Alert, Collapse, IconButton } from '@mui/material'
+import { Alert, Collapse } from '@mui/material'
 
 import { useBooleanState } from '@/hooks/useBooleanState'
+
+import { CloseButton } from '../CloseButton/CloseButton'
 
 import { IEmployeeAvatarAlertProps } from './EmployeeAvatarAlert.interfaces'
 
@@ -11,15 +12,7 @@ export const EmployeeAvatarAlert: FC<IEmployeeAvatarAlertProps> = ({ children })
 
   return (
     <Collapse in={isVisible}>
-      <Alert
-        action={
-          <IconButton onClick={setInvisible}>
-            <CloseIcon fontSize="inherit" />
-          </IconButton>
-        }
-        variant="filled"
-        severity="error"
-      >
+      <Alert action={<CloseButton onClick={setInvisible} />} variant="filled" severity="error">
         {children}
       </Alert>
     </Collapse>

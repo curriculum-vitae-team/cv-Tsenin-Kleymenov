@@ -14,5 +14,6 @@ export const ContentWrapper = styled('div')(() => ({
   flexDirection: 'column',
   gap: '20px',
   height: '100%',
-  overflow: 'auto'
+  overflow: 'auto',
+  position: 'relative'
 }))

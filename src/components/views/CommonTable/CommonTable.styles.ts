@@ -11,3 +11,8 @@ export const StyledTableCell = styled(TableCell)(() => ({
   textOverflow: 'ellipsis',
   maxWidth: '200px'
 }))
+
+export const StyledTableHeaderCell = styled(TableCell)(({ theme }) => ({
+  backgroundColor: theme.palette.grey[300],
+  borderBottom: `1px solid ${theme.palette.grey[400]}`
+}))

@@ -33,7 +33,9 @@ export const lightTheme: ThemeOptions = responsiveFontSizes(
         primary: '#2e2e2e'
       },
       grey: {
-        200: '#f5f5f7'
+        200: '#f5f5f7',
+        300: '#fafafa',
+        400: '#c3c3c3'
       },
       divider: '#e2e2e2'
     },
@@ -96,17 +98,10 @@ export const lightTheme: ThemeOptions = responsiveFontSizes(
       MuiTableRow: {
         styleOverrides: {
           root: {
-            backgroundColor: '#fff',
+            backgroundColor: '#fafafa',
 
             '&:nth-of-type(odd)': {
-              backgroundColor: '#f9f9f9'
-            },
-            '&:last-child td, &:last-child th': {
-              border: 0
-            },
-            '&.MuiTableRow-head': {
-              backgroundColor: '#fff',
-              borderBottom: '1px solid rgba(224, 224, 224, 1)'
+              backgroundColor: '#fff'
             }
           }
         }

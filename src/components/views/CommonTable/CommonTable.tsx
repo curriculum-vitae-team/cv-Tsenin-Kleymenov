@@ -13,7 +13,7 @@ import get from 'lodash/get'
 import { LoadingOverlay } from '@/components/views/LoadingOverlay/LoadingOverlay'
 
 import { ICommonTableProps } from './CommonTable.interfaces'
-import { StyledTableCell, StyledTableContainer } from './CommonTable.styles'
+import { StyledTableCell, StyledTableContainer, StyledTableHeaderCell } from './CommonTable.styles'
 
 const Table = <T extends { id: string }>({
   label,
@@ -55,11 +55,11 @@ const Table = <T extends { id: string }>({
   return (
     <LoadingOverlay active={isLoading}>
       <StyledTableContainer>
-        <MuiTable aria-label={`${label.toLowerCase()} table`}>
+        <MuiTable stickyHeader aria-label={`${label.toLowerCase()} table`}>
           <TableHead>
             <TableRow>
               {tableColumns.map(column => (
-                <TableCell key={column.id} sx={{ fontWeight: '700' }}>
+                <StyledTableHeaderCell key={column.id} sx={{ fontWeight: '700' }}>
                   {!column.sortable ? (
                     t(column.header as string)
                   ) : (
@@ -71,7 +71,7 @@ const Table = <T extends { id: string }>({
                       {t(column.header as string)}
                     </TableSortLabel>
                   )}
-                </TableCell>
+                </StyledTableHeaderCell>
               ))}
             </TableRow>
           </TableHead>

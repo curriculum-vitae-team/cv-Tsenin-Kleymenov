@@ -1,6 +1,5 @@
 import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import ClearIcon from '@mui/icons-material/Clear'
 import { Dialog } from '@mui/material'
 
 import { IModalWindowProps } from './ModalWindow.interfaces'
@@ -24,9 +23,7 @@ export const ModalWindow: FC<IModalWindowProps> = ({ children, title, onClose, .
       <DialogContent>
         <ModalHeader>
           <ModalTitle variant="h2">{t(title ?? '')}</ModalTitle>
-          <CloseButton onClick={handleClose}>
-            <ClearIcon />
-          </CloseButton>
+          <CloseButton onClick={handleClose} />
         </ModalHeader>
         {children}
       </DialogContent>

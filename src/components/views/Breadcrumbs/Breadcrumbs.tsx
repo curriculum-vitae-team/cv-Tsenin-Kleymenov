@@ -10,6 +10,8 @@ import { Breadcrumbs } from '@mui/material'
 import { USER_FOR_BREADCRUMBS } from '@/graphql/user/userQuery'
 import { AppNavigationRoutes } from '@/router/paths'
 
+import { LoadingOverlay } from '../LoadingOverlay/LoadingOverlay'
+
 import { IAppBreadcrumbsProps } from './Breadcrumbs.interfaces'
 import { BreadcrumbsLink, UserBreadcrumbText } from './Breadcrumbs.styles'
 import { BreadcrumbsQuery } from './queries'
@@ -17,7 +19,7 @@ import { BreadcrumbsQuery } from './queries'
 export const AppBreadcrumbs: FC<IAppBreadcrumbsProps> = ({ id }) => {
   const location = useLocation()
 
-  const { data } = useQuery(BreadcrumbsQuery[location.state] || USER_FOR_BREADCRUMBS, {
+  const { data, loading } = useQuery(BreadcrumbsQuery[location.state] || USER_FOR_BREADCRUMBS, {
     variables: { id }
   })
 
@@ -41,18 +43,21 @@ export const AppBreadcrumbs: FC<IAppBreadcrumbsProps> = ({ id }) => {
               to={data?.user ? profileLink : cvLink}
               state={data?.user ? AppNavigationRoutes.EMPLOYEES : AppNavigationRoutes.CVS}
             >
-              <UserBreadcrumbText>
-                {data?.user && (
-                  <>
-                    <AccountCircleIcon sx={{ mr: 1 }} />
-                    {data?.user?.profile.full_name || data?.user?.email}
-                  </>
-                )}
-                {data?.cv && data?.cv?.name}
-              </UserBreadcrumbText>
+              <LoadingOverlay active={loading} size={20} sx={{ top: '-9px', left: '-9px' }}>
+                <UserBreadcrumbText>
+                  {data?.user && (
+                    <>
+                      <AccountCircleIcon sx={{ mr: 1 }} />
+                      {data?.user?.profile.full_name || data?.user?.email}
+                    </>
+                  )}
+                  {data?.cv && data?.cv?.name}
+                </UserBreadcrumbText>
+              </LoadingOverlay>
             </BreadcrumbsLink>
           )
         }
+
         return (
           <BreadcrumbsLink
             key={item}
