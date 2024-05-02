@@ -11,3 +11,6 @@ export interface ISideMenuItemProps {
 export interface IListItemTextProps extends ListItemTextProps {
   isActive?: boolean
 }
+export interface IListItemProps extends ListItemTextProps {
+  isActive?: boolean
+}

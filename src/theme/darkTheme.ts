@@ -156,7 +156,7 @@ export const darkTheme: ThemeOptions = responsiveFontSizes(
             },
             '& .Mui-disabled': {
               color: '#565656!important',
-              '-webkit-text-fill-color': '#565656!important'
+              WebkitTextFillColor: '#565656!important'
             }
           }
         }
