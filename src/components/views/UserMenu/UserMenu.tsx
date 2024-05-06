@@ -79,7 +79,7 @@ export const UserMenu: FC = () => {
             return <UserMenuItem key={text} onClick={onClick} text={text} Icon={Icon} />
           })}
           <Divider />
-          <UserMenuItem onClick={handleLogout} text="logout" Icon={Logout} />
+          <UserMenuItem onClick={handleLogout} text="logout" Icon={Logout} iconColor="primary" />
         </Menu>
       )}
     </MenuContainer>

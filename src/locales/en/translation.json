@@ -75,7 +75,7 @@
   "lastNameNoNumbers": "Last name should not contain numbers",
   "lastNameNoSpaces": "Last name should not contain spaces",
   "login": "Login",
-  "logout": "Logout",
+  "logout": "Log out",
   "light": "Light",
   "mastery": "Mastery",
   "masteryRequired": "Mastery is a required field",
