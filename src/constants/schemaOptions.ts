@@ -91,11 +91,14 @@ export const FORM_SKILL_SCHEMA = yup.object().shape({
 })
 
 export const FORM_LANGUAGE_SCHEMA = yup.object().shape({
-  [FORM_LANGUAGE_KEYS.name]: yup.string().required('nameRequired').matches(/^\S+$/, 'nameNoSpaces'),
+  [FORM_LANGUAGE_KEYS.name]: yup
+    .string()
+    .required('nameRequired')
+    .matches(/^(?! *$).*$/, 'nameNoSpaces'),
   [FORM_LANGUAGE_KEYS.native_name]: yup
     .string()
     .required('nativeNameRequired')
-    .matches(/^\S+$/, 'nativeNameNoSpaces'),
+    .matches(/^(?! *$).*$/, 'nativeNameNoSpaces'),
   [FORM_LANGUAGE_KEYS.iso2]: yup
     .string()
     .max(2)
