@@ -20,7 +20,10 @@ export const LOGIN_SCHEMA = yup.object().shape({
 
 export const SIGNUP_SCHEMA = yup.object().shape({
   [FORM_SIGNUP_KEYS.email]: yup.string().required('emailRequired').email('invalidEmailFormat'),
-  [FORM_SIGNUP_KEYS.password]: yup.string().required('passwordRequired')
+  [FORM_SIGNUP_KEYS.password]: yup
+    .string()
+    .required('passwordRequired')
+    .min(5, 'passwordMinCharacters')
 })
 
 export const FORM_EMPLOYEES_SCHEMA = yup.object({

@@ -25,12 +25,12 @@ const authLink = setContext((_, { headers }) => {
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
     graphQLErrors.forEach(({ message }) => {
-      if (message === INVALID_CREDENTIALS) {
-        toastMessage(i18n.t(message), TOAST_TYPES.error)
+      if (message === 'Invalid credentials') {
+        toastMessage(i18n.t(INVALID_CREDENTIALS), TOAST_TYPES.error)
       }
-      if (message === UNAUTHORIZED) {
+      if (message === 'Unauthorized') {
         authService.clearStorage()
-        toastMessage(i18n.t(message), TOAST_TYPES.error)
+        toastMessage(i18n.t(UNAUTHORIZED), TOAST_TYPES.error)
       }
     })
   }

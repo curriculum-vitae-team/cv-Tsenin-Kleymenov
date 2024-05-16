@@ -36,7 +36,7 @@ export const SignUpForm: FC<ISignUpFormProps> = ({ signUp }) => {
         navigate(`/${AppNavigationRoutes.EMPLOYEES}`)
       }
     } catch (error) {
-      error instanceof Error && toastMessage(t('This user already exists'), TOAST_TYPES.error)
+      error instanceof Error && toastMessage(t('userAlreadyExist'), TOAST_TYPES.error)
     }
   }
 
