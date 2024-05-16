@@ -126,7 +126,7 @@ export const EmployeeCreateModal: FC<IBaseModalProps> = ({ onClose }) => {
             defaultValue=""
             items={ROLE_ARRAY}
             error={!!errors[FORM_EMPLOYEES_KEYS.role]}
-            helperText={errors?.[FORM_EMPLOYEES_KEYS.role]?.message}
+            helperText={t(errors?.[FORM_EMPLOYEES_KEYS.role]?.message as string)}
             {...register(FORM_EMPLOYEES_KEYS.role)}
           />
           <Button
